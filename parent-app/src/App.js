@@ -1,5 +1,7 @@
 import './App.css';
 import HomePage from './components/Pages/HomePage/HomePage';
+import MyNav from './components/generalComponents/MyNav/MyNav';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,9 +11,7 @@ import {
 function App() {
   return (
     <Router>
-      <div className="Nav">
-        Nav
-      </div>
+        <MyNav />
       <div className="Body">
         <Routes>
           <Route path="/" element={<HomePage />} />
