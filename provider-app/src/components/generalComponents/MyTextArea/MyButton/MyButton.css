@@ -8,3 +8,10 @@
     transition: ease-in-out, .2s;
     opacity: 80%;
 }
+.MyButton-external.MyButton-disabled:hover {
+    cursor: not-allowed;
+    opacity: 40%;
+}
+.MyButton-external.MyButton-disabled{
+    opacity: 40%;
+}
