@@ -11,14 +11,16 @@
     display: flex;
     flex-direction: column;
     margin: 0px 0px 21px 0px;
+    gap: 6px
 }
 
 .myTextBox-txt-internal input {
+    background-color: #F4F5F6;
     margin: 0px;
     padding: 10px;
     font-size: 18px;
-    border: 2px solid rgba(0, 0, 0, 0.30);
-    border-radius: 42px;
+    border: 0px solid rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
     -webkit-transition: 0.5s;
     transition: 0.5s;
     line-height: 1px;
