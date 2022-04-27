@@ -26,6 +26,7 @@
     /* width: 330px; */
 
     /* min-height: 400px; */
+    resize: none;
 }
 .txt-area-internal input:focus {
     border-color: rgba(0, 0, 0, 0.70);
