@@ -7,7 +7,6 @@ const MyNav = () =>
 		<div className="MyNav-external">
             <div className="MyNav-internal">
                 <div className="MyNav-Logo">
-                    LOGO
                 </div>
                 <div className="MyNav-items">
                     <div className="MyNav-menu">

@@ -1,7 +1,7 @@
 .MyNav-external {
-    background-color: #C4C4C4;
+    background-color: #ffffff;
     padding: 15px;
-    
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
 }
 
 .MyNav-internal {
@@ -10,9 +10,10 @@
 }
 
 .MyNav-Logo {
-    font-size: 19px;
-    padding: 15px 40px;
-    background-color: #40BDC5;
+    background: url("../../../images/TEL-LOGO.svg") no-repeat center center;
+    width: 142px;
+    height: 44px;
+    background-size: 156px 153px;
 }
 .MyNav-items {
     display: flex;
@@ -27,13 +28,11 @@
 }
 
 .MyNav-items ul li{
-    padding: 10px 70px;
-    background-color: #5B5B5B;
-    color: white;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+    padding: 10px 50px;
+    background-color: white;
+    color: black;
     border-right-width: 0px;
+    border: 0;
 }
 .MyNav-items ul li:last-child{
     border-right-width: 1px;
