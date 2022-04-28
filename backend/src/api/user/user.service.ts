@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
+  async create(createUserDto: CreateUserDto) {
+    return await this.userRepository.insert(createUserDto);
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll(query: PaginationQueryDto) {
+    const [result, total] = await this.userRepository.findAndCount({
+      where: {},
+      take: query.limit || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.offset || 0, //? DefaultValues.PAGINATION_OFFSET,
+    });
+    return { result, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userRepository.findOne(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  async findOneByUsername(username: string) {
+    return await this.userRepository.findOne({
+      where: {
+        username,
+      },
+    });
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} user`;
   }
 }

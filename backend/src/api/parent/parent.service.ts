@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { Repository } from 'typeorm';
+import { User } from '../user/entities/user.entity';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
+import { Parent } from './entities/parent.entity';
 
 @Injectable()
 export class ParentService {
-  create(createParentDto: CreateParentDto) {
-    return 'This action adds a new parent';
+  constructor(
+    @InjectRepository(Parent)
+    private readonly parentRepository: Repository<Parent>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+  ) {}
+
+  async create(id: string, createParentDto: CreateParentDto) {
+    const user = await this.userRepository.findOne(id);
+
+    return await this.parentRepository.save({ user, ...createParentDto });
   }
 
-  findAll() {
-    return `This action returns all parent`;
+  async findAll(query: PaginationQueryDto) {
+    const [result, total] = await this.parentRepository.findAndCount({
+      where: {},
+      take: query.limit || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.offset || 0, //? DefaultValues.PAGINATION_OFFSET,
+    });
+    return { result, total };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} parent`;
+  async findOne(id: string) {
+    return await this.parentRepository.findOne(id);
   }
 
-  update(id: number, updateParentDto: UpdateParentDto) {
-    return `This action updates a #${id} parent`;
+  async update(id: string, updateParentDto: UpdateParentDto) {
+    return await this.parentRepository.update(id, updateParentDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} parent`;
+  async remove(id: string) {
+    return await this.parentRepository.delete(id);
   }
 }

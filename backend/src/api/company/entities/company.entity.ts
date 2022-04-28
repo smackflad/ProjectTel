@@ -1,11 +1,10 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Event } from 'src/api/event/entities/event.entity';
 import { Location } from 'src/api/location/entities/location.entity';
-import { Base } from 'src/infastructure/database/entities/base.entity';
 import { Employee } from 'src/api/employee/entities/employee.entity';
 
 @Entity()
-export class Company extends Base {
+export class Company extends Location {
   @Column()
   name: string;
 
@@ -29,8 +28,4 @@ export class Company extends Base {
 
   @OneToMany(() => Employee, (employee) => employee.company)
   employees: Employee[];
-
-  @OneToOne(() => Location)
-  @JoinColumn()
-  location: Location;
 }

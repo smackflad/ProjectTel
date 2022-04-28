@@ -8,9 +8,16 @@ import { OrderModule } from './api/order/order.module';
 import { EventModule } from './api/event/event.module';
 import { LocationModule } from './api/location/location.module';
 import { EmployeeModule } from './api/employee/employee.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { configService } from './config/config.service';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
+    AuthModule,
     UserModule,
     ParentModule,
     CompanyModule,
@@ -20,6 +27,12 @@ import { EmployeeModule } from './api/employee/employee.module';
     EmployeeModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -2,12 +2,12 @@ import { Base } from 'src/infastructure/database/entities/base.entity';
 import { Column, Entity } from 'typeorm';
 
 @Entity()
-export class Location extends Base {
+export abstract class Location extends Base {
   @Column()
   address: string;
 
   @Column()
-  address_num: string;
+  addressNum: string;
 
   @Column()
   city: string;
@@ -19,8 +19,11 @@ export class Location extends Base {
   country: string;
 
   @Column()
+  postalCode: string;
+
+  @Column({ nullable: true })
   longtitude: string;
 
-  @Column()
+  @Column({ nullable: true })
   latitude: string;
 }

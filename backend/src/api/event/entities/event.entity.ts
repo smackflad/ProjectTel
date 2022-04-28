@@ -19,7 +19,7 @@ export class Event extends Base {
   @Column()
   description: string;
 
-  @Column('double')
+  @Column()
   price: number;
 
   @Column('int')
