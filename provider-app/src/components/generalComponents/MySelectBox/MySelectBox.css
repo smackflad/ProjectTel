@@ -1,0 +1,21 @@
+.MySelectBox-select {
+    
+}
+
+.MySelectBox-select select {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    opacity: 1;
+    width: 137px;
+    height: 30px;
+    padding: 5px;
+    /* background-color: #EBEDED; */
+    background: url("keyboard_arrow_down_FILL0_wght400_GRAD0_opsz48.png") no-repeat right #EBEDED;
+    font: normal normal normal 16px/20px;
+    appearance: none;
+}
+
+.MySelectBox-select select option:checked {
+    background-color: lightblue;
+}

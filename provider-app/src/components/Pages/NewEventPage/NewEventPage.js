@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import MyTextBox from '../../sharedComponents/MyTextBox/MyTextBox'
 import MyTextArea from "../../generalComponents/MyTextArea/MyTextArea";
 import { useState } from "react";
-import MyButton from "../../generalComponents/MyTextArea/MyButton/MyButton";
+import MyButton from "../../generalComponents/MyButton/MyButton";
 const NewEventPage = () => {
 	const [file_name, setFile_name] = useState("test");
 	const [link, setLink] = useState();
