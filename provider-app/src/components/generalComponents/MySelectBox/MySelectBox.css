@@ -7,9 +7,10 @@
     border: none;
     border-radius: 10px;
     opacity: 1;
+    text-align: center;
     width: 137px;
     height: 30px;
-    padding: 5px;
+    padding: 5px 10px;
     /* background-color: #EBEDED; */
     background: url("keyboard_arrow_down_FILL0_wght400_GRAD0_opsz48.png") no-repeat right #EBEDED;
     font: normal normal normal 16px/20px;

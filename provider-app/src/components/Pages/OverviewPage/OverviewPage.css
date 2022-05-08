@@ -11,87 +11,89 @@
     /* background-color: lightblue; */
     padding: 50px;
     border-radius: 10px;
+    gap: 30px;
     box-shadow: 0px 8px 40px #00000029; 
 
-
 }
-.OverviewPage-first{
+
+.OverviewPage-top {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content:space-between;
-    align-items: center;
-}
-.OverviewPage-third{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-    gap: 30px;
-}
-
-.OverviewPage-fifth {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.OverviewPage-fourth {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 15px;
-}
-
-
-.OverviewPage-fourth-left-FC {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-}
-
-.OverviewPage-fourth-left-FC > .OverviewPage-fileName-FC{
-    margin-right: 15px;
-}
-
-.OverviewPage-fourth-left-FC > .OverviewPage-file-FC > label {
-    display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+.OverviewPage-top-div{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.OverviewPage-middle {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* gap: 40px; */
+}
+
+.OverviewPage-middle-inner{
+    width: 200px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    /* width: fit-content; */
+    /* background-color: lightblue; */
+    padding: 10px;
+    border-radius: 10px;
+    gap: 15px;
+    box-shadow: 0px 8px 40px #00000029; 
+}
+
+.OverviewPage-middle-bot{
+    width: 100%;
+    text-align: center;
+}
+
+.OverviewPage-bot {
+    width: 1000px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* width: fit-content; */
+    /* background-color: lightblue; */
+    padding: 40px;
+    border-radius: 10px;
     gap: 30px;
-    padding: 5px 15px;
-    border: 1px solid lightgray;
+    box-shadow: 0px 8px 40px #00000029; 
+}
+
+.OverviewPage-bot-inner{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    gap: 20px;
+}
+
+.OverviewPage-bot-left{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
     border-radius: 10px;
-    font-size: 12px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: normal;
-    cursor: pointer;
+    gap: 15px;
+    box-shadow: 0px 8px 40px #00000029;
 }
 
-.OverviewPage-disabled-file-input{
-    background-color: rgb(236, 236, 236);
-    border-color: rgb(175, 175, 175);
-    opacity: 80%;
-    cursor: not-allowed !important;
-}
-.OverviewPage-disabled-file-input > * {
-    cursor: not-allowed;
-}
-
-.OverviewPage-fourth-right {
-    flex: 1;
-    background-color: #F4F5F6;
+.OverviewPage-bot-right{
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
     border-radius: 10px;
-}
-
-.OverviewPage-upload-icon{
-    font-size: 50px;
-}
-
-.OverviewPage-fifth {
-    margin-top: 21px;
-
+    gap: 15px;
+    box-shadow: 0px 8px 40px #00000029;
 }

@@ -20,13 +20,39 @@ const OverviewPage = () => {
 				<div className="OverviewPage-wrapper">
 					<div className="OverviewPage-top">
 						<span>Show data for: </span>
-						<MySelectBox />
+						<div className="OverviewPage-top-div">
+							<MySelectBox />
+							<MySelectBox />
+						</div>
 					</div>
 					<div className="OverviewPage-middle">
-
+						<div className="OverviewPage-middle-inner">
+							<div className="OverviewPage-middle-top">
+								Revenue
+							</div>
+							<div className="OverviewPage-middle-bot">
+								$000000
+							</div>
+						</div>
+						<div className="OverviewPage-middle-inner">
+							<div className="OverviewPage-middle-top">
+								Orders
+							</div>
+							<div className="OverviewPage-middle-bot">
+								000000
+							</div>
+						</div>
 					</div>
 					<div className="OverviewPage-bot">
-
+						<span>Event Statistics</span>
+						<div className="OverviewPage-bot-inner">
+							<div className="OverviewPage-bot-left">
+								
+							</div>
+							<div className="OverviewPage-bot-right">
+								
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
