@@ -11,18 +11,18 @@ import {
 
 function App() {
   return (
-    <Router>
-        <MyNav />
-      <div className="Body">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/event" element={<EventPage />} />
-        </Routes>
-      </div>
-      <div className="Footer">
-        Footer
-      </div>
-    </Router>
+      <Router>
+          <MyNav />
+        <div className="Body">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/event" element={<EventPage />} />
+          </Routes>
+        </div>
+        <div className="Footer">
+          Footer
+        </div>
+      </Router>
   );
 }
 
