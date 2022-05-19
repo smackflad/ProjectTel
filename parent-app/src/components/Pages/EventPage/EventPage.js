@@ -4,13 +4,11 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import MyButton from "../../SharedComponents/MyButton/MyButton";
-import PopupComplete from "./components/PopupComplete/PopupComplete";
-import PopupSuccess from "./components/PopupSuccess/PopupSuccess";
 import Popup from "./components/Popup/Popup";
 
 const EventPage = () => {	
 	const [startDate, setStartDate] = useState(new Date());
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
 		if(isOpen){

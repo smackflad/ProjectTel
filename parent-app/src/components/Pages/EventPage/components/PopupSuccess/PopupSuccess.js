@@ -1,4 +1,3 @@
-import MyButton from "../../../../SharedComponents/MyButton/MyButton";
 import "./PopupSuccess.css";
 
 const PopupSuccess = ({}) => {	

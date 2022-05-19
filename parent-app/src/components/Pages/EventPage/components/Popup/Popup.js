@@ -1,5 +1,4 @@
 import { useState } from "react";
-import MyButton from "../../../../SharedComponents/MyButton/MyButton";
 import PopupComplete from "../PopupComplete/PopupComplete";
 import PopupSuccess from "../PopupSuccess/PopupSuccess";
 import "./Popup.css";
