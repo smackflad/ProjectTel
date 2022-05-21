@@ -1,6 +1,8 @@
 import './MyNav.css';
 import { useState } from "react";
-
+import {
+    Link
+  } from "react-router-dom";
 const MyNav = () => 
 {
     return (
@@ -12,7 +14,7 @@ const MyNav = () =>
                     <div className="MyNav-menu">
                         <ul>
                             <li>About Us</li>
-                            <li>Register</li>
+                            <li> <Link to="/Register">Register</Link></li>
                             <li>Login</li>
                         </ul>
                     </div>

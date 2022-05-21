@@ -1,6 +1,8 @@
 import './App.css';
 import HomePage from './components/Pages/HomePage/HomePage';
 import MyNav from './components/generalComponents/MyNav/MyNav';
+import CommonLogReg from './components/Pages/Register-Login-Pages/CommonLogReg/CommonLogReg';
+import Register from './components/Pages/Register-Login-Pages/Register/Register';
 
 import {
   BrowserRouter as Router,
@@ -15,6 +17,7 @@ function App() {
       <div className="Body">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/Register" element={<CommonLogReg><Register/></CommonLogReg> }/>
         </Routes>
       </div>
       <div className="Footer">
