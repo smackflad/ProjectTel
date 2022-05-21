@@ -12,13 +12,13 @@ const Register = () =>
         <span class="material-icons-outlined">
           mail
         </span>
-        <input type="text"  placeholder='Διεύθυνση ηλεκτρονικού ταχυδρομείου'></input>
+        <input type="email" name='email' id='email' placeholder='Διεύθυνση ηλεκτρονικού ταχυδρομείου'></input>
       </div>
       <div className='password-wrap'>
         <span class="material-icons-outlined">
           lock
         </span>
-        <input type="password" placeholder='Κωδικός πρόσβασης'></input>
+        <input type="password" id='password' name='password' placeholder='Κωδικός πρόσβασης'></input>
       </div>
       <div className='terms'>
         <span className='chkTerms'>

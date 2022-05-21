@@ -80,7 +80,7 @@
 .already-registered{
     margin-top: 30px;
 }
-input[type=checkbox]{
+.Register-external input[type=checkbox]{
     -moz-appearance: none;
     -webkit-appearance: none;
     -o-appearance: none;
@@ -89,7 +89,7 @@ input[type=checkbox]{
     width: 28px;
     height: 28px;
 }
-input[type=checkbox]:before{
+.Register-external input[type=checkbox]:before{
     font-size: 14px;
     content: "✔";
     color: transparent !important;
@@ -104,7 +104,7 @@ input[type=checkbox]:before{
     box-sizing: border-box;
     line-height: 23px;
 }
-input[type=checkbox]:checked:before{
+.Register-external input[type=checkbox]:checked:before{
     color: #1AABBF !important;
 }
 .termsLink{

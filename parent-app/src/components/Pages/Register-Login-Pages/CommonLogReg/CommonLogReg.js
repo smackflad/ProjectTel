@@ -1,5 +1,4 @@
 import './CommonLogReg.css';
-import Register from '../Register/Register';
 import logo from '../../../../images/TEL-LOGO.svg'
 import { useState } from "react";
 
