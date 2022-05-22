@@ -1,18 +1,22 @@
 import './App.css';
+import HomePage from './components/Pages/HomePage/HomePage';
+import MyNav from './components/generalComponents/MyNav/MyNav';
+import ProviderProfilePage from './components/Pages/ProviderProfilePage/ProviderProfilePage';
+
 import {
   BrowserRouter as Router,
-  Routes
+  Routes,
+  Route
 } from "react-router-dom";
+
 
 function App() {
   return (
     <Router>
-      <div className="Nav">
-        Nav
-      </div>
+        <MyNav />
       <div className="Body">
         <Routes>
-          {/* <Route path="/" element={<bodycomponent>} /> */}
+          <Route path="/" element={<ProviderProfilePage />} />
         </Routes>
       </div>
       <div className="Footer">

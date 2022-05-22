@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './components/Pages/HomePage/HomePage';
 import MyNav from './components/generalComponents/MyNav/MyNav';
-
+import ParentProfilePage from './components/Pages/ParentProfilePage/ParentProfilePage';
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,7 +14,7 @@ function App() {
         <MyNav />
       <div className="Body">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ParentProfilePage />} />
         </Routes>
       </div>
       <div className="Footer">

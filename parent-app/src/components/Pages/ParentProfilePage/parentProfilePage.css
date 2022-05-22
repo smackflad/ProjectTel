@@ -7,6 +7,7 @@ body{
     background: white;
 }
 .container{
+    display: flex;
     position: relative;
     max-width: 900px;
     width: 100%;
@@ -16,6 +17,30 @@ body{
     background-color: rgb(204, 204, 204);
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
+/* f5f7f7 container background
+/*.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 60vh;
+    border: 1px solid black;  
+    padding: 10px 5px;
+    box-sizing: border-box;
+  }
+  .container * {
+    width: calc(50% - 10px);
+    margin: 0 5px;
+    box-sizing: border-box;
+  }
+    
+ 
+  .container  {   
+      display:-webkit-flex;
+    display:flex;
+    list-style-type:none;
+    padding:0;
+    justify-content:flex-end;
+    } */
 .container header{
 
 
@@ -27,7 +52,25 @@ body{
        
 }
 
+.myForm {
+    
+    margin-left:0%;
+    order: 2;
+    width: 35%;
+    margin:5%
+  }
 
+
+.myForm2 {
+    margin-left:100%;
+    background: white;
+    border-radius: 40px;
+    padding: 30px;
+    order: 2;
+    width: 35%;
+    margin:5%
+    
+  }
 .container  .fields{
     display: flex;
     align-items: center;
@@ -37,11 +80,28 @@ body{
 }
  .fields .input-field{
     display: flex;
-    width: calc(100% / 3 - 15px);
+    width: 100%;
     flex-direction: column;
     margin: 4px 0;
 }
+.myForm2 .label-field{
+    
+    padding: 15px;
+    background: none;
+    border: none;
+    width: 100%;
+   
+  
+}
 
+.label-field label{
+    
+    font-size: 14px;
+    font-weight: 500;
+    color: #2e2e2e;
+   
+  
+}
 
 .input-field label{
     font-size: 12px;
@@ -58,16 +118,7 @@ body{
     opacity: 1;
     height: 40px;
 }
-.input-field input[type="text2"], select{
-    width: calc(50%);
-    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #FAFAFA 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 10px;
-    opacity: 1;
-    height: 40px;
-}
+
 
 .input-field input :focus,
 .input-field select:focus{
@@ -87,14 +138,23 @@ body{
     color: #000000;
     opacity: 1;
 }
+
+
 .container  .btnText{
     font-size: 12px;
     font-weight: 400;
 }
  button:hover{
-    background-color: #1282b6;
+    color: #1282b6;
+    cursor: pointer;
 }
-
+.myForm2 button{
+    padding-left: 25px;
+    font-size: 12;
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+}
  
  .buttons{
     display: flex;

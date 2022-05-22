@@ -1,6 +1,8 @@
 import "./parentProfilePage.css";
 import { Navigate } from "react-router-dom";
 
+const btn = document.getElementById('btnPayment');
+
 const ParentProfilePage = () => {
     return (
         <div className="ParentProfilePage -external">
@@ -47,9 +49,7 @@ const ParentProfilePage = () => {
                         </div>
 
                     </div>
-
                     <div class="myForm2">
-
                         <div class="label-field">
                             <label>Current Balance: </label>
                             <label>$$</label>
@@ -93,9 +93,9 @@ const ParentProfilePage = () => {
                         </button>
                     </div>
 
-
+                    
                 </div>
-
+      
             </body>
         </div>
     );
