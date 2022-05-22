@@ -8,7 +8,7 @@
 }
 .Account-inputs {
   font-size: 16px;
-  padding: 0 40px 0 40px;
+  padding: 0 10px 0 10px;
   border-top: none;
   border-right: none;
   border-left: none;
@@ -25,7 +25,46 @@
   outline-width: 0;
 }
 .Account-info {
-  width: 50%;
+  width: auto;
   display: flex;
   flex-direction: column;
+}
+.Account-password button {
+  margin-top: 15px;
+  border: 0;
+  border-radius: 10px;
+  height: 36px;
+  width: 50%;
+}
+.Account-password h4 {
+  color: #5f6061;
+  text-align: center;
+}
+.Account-password {
+  display: flex;
+  flex-direction: column;
+  margin-left: 70px;
+}
+.password-change {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.password-change input {
+  font-size: 16px;
+  padding: 0 10px 0 10px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 10px;
+  height: 45px;
+  background-color: #fff;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  outline-width: 0;
 }
