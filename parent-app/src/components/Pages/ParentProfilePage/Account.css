@@ -68,3 +68,6 @@
   margin-bottom: 15px;
   outline-width: 0;
 }
+.Account-password button:hover {
+  cursor: pointer;
+}
