@@ -1,38 +1,122 @@
-import './Register.css';
+import "./Register.css";
 import { useState } from "react";
-import MyButton from "../../../SharedComponents/MyButton/MyButton"
-const Register = () => 
-{
-    return (
-		<div className="Register-external">
-      <span className='Header-Register'>Εγγραφή</span>
-      <span className='simple-text'>Καλώς ήρθες στην πλατφόρμα μας.</span>
-      <span className='simple-text'>Συμπλήρωσε τα παρακάτω πεδία για να ξεκινήσεις!</span>
-      <div className='email-wrap'>
-        <span class="material-icons-outlined">
-          mail
+import { http } from "../../../../util/http-common";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const Register = ({ loading, setLoading }) => {
+  const [passVisibility, setPassVisibility] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    setLoading(true);
+    http
+      .post("/register", { form })
+      .then((res) => {
+        setLoading(false);
+        if (res.status == 201) {
+          // alert successfull
+        } else if (res.status == 409) {
+          // alert email is taken
+        }
+      })
+      .catch((err) => {
+        toast.error(`Error message: ${err.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setLoading(false);
+        //alert server error
+      });
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  return (
+    <>
+      <div className="Register-external">
+        <span className="Header-Register">Εγγραφή</span>
+        <span className="simple-text">Καλώς ήρθες στην πλατφόρμα μας.</span>
+        <span className="simple-text">
+          Συμπλήρωσε τα παρακάτω πεδία για να ξεκινήσεις!
         </span>
-        <input type="email" name='email' id='email' placeholder='Διεύθυνση ηλεκτρονικού ταχυδρομείου'></input>
+        <form className="Register-Login-form" onSubmit={handleSubmit}>
+          <div className="email-wrap">
+            <span className="material-icons-outlined">mail</span>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required={true}
+              placeholder="Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+              value={form.email}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="password-wrap">
+            <span className="material-icons-outlined">lock</span>
+            <input
+              type={passVisibility ? "text" : "password"}
+              id="password"
+              name="password"
+              required={true}
+              placeholder="Κωδικός πρόσβασης"
+              value={form.password}
+              onChange={handleChange}
+            ></input>
+            <span
+              className="material-icons-outlined show-icon"
+              onClick={(e) => setPassVisibility(!passVisibility)}
+            >
+              {passVisibility ? "visibility" : "visibility_off"}
+            </span>
+          </div>
+          <div className="terms">
+            <span className="chkTerms">
+              <input type="checkbox" required={true} />
+            </span>
+            <span className="termsLabel">Αποδέχομαι τους </span>
+            <a className="termsLink" target="_blank" href="/terms.pdf">
+              Όρους Χρήσης
+            </a>
+          </div>
+          <a className="already-registered" href="/Login">
+            Έχεις ήδη λογαριασμό;
+          </a>
+          <button
+            className="reg-log-submit-button"
+            type="submit"
+            style={{
+              backgroundColor: "#1AABBF",
+              color: "#ffffff",
+              fontSize: "16px",
+            }}
+          >
+            Εγγραφή
+          </button>
+        </form>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
-      <div className='password-wrap'>
-        <span class="material-icons-outlined">
-          lock
-        </span>
-        <input type="password" id='password' name='password' placeholder='Κωδικός πρόσβασης'></input>
-      </div>
-      <div className='terms'>
-        <span className='chkTerms'>
-          <input type='checkbox'/>
-        </span>
-        <span className='termsLabel'>Αποδέχομαι τους </span>
-        <a className='termsLink' href='/'>Όρους Χρήσης</a>       
-      </div>
-      <a className='already-registered' href='/Login'>Έχεις ήδη λογαριασμό;</a>
-      <div className='reg-log-submit-button'>
-        <MyButton labelTxt='Εγγραφή' bgColor='#1AABBF' ftColor='#ffffff'/>
-      </div>
-    </div>
-	);
+    </>
+  );
 };
 
 export default Register;

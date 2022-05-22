@@ -1,33 +1,42 @@
-.CommonLogReg-external{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: calc(100vh - 100px); /* need change after footer is DONE   !!!!!!!!*/ 
+.CommonLogReg-external {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: calc(100vh - 100px); /* need change after footer is DONE   !!!!!!!!*/
 }
-.CommonLogReg-wrapper{
-    width: 485px;
-    height: 668px;
-    border-radius: 10px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 8px 40px #00000029;
-    position: relative;
+.CommonLogReg-wrapper {
+  width: 485px;
+  height: 668px;
+  border-radius: 10px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 8px 40px #00000029;
+  position: relative;
 }
-.Logo-panel{
-    height: 90px;
-    background-color: #1F263A;
-    width: 485px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    text-align: center;
+.Logo-panel {
+  height: 90px;
+  background-color: #1f263a;
+  width: 485px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  text-align: center;
 }
-.site-logo{
-    filter: brightness(0) invert(1);
-    width: 100%;
-    position: absolute;
-    top: -35px;
-    height: 162px;
-    left: 0;
-    right: 0;
+.site-logo {
+  filter: brightness(0) invert(1);
+  width: 100%;
+  position: absolute;
+  top: -35px;
+  height: 162px;
+  left: 0;
+  right: 0;
+}
+.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  background-color: #fafafa;
+  cursor: wait !important;
 }
