@@ -14,7 +14,6 @@ const MyNav = () => {
             <ul>
               <li>About Us</li>
               <li>
-                {" "}
                 <Link to="/Register">Register</Link>
               </li>
               <li>
@@ -23,9 +22,11 @@ const MyNav = () => {
             </ul>
           </div>
           <div className="MyNav-icon">
-            <span className="material-icons-outlined md-40">
-              account_circle
-            </span>
+            <Link to="/my-profile">
+              <span className="material-icons-outlined md-40">
+                account_circle
+              </span>
+            </Link>
           </div>
         </div>
       </div>

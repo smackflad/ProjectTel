@@ -5,6 +5,7 @@ import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/C
 import Register from "./components/Pages/Register-Login-Pages/Register/Register";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
+import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -39,6 +40,7 @@ function App() {
               </CommonLogReg>
             }
           />
+          <Route path="/my-profile" element={<ParentProfilePage />} />
         </Routes>
       </div>
       <div className="Footer">Footer</div>

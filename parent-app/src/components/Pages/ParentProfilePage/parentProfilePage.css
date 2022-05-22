@@ -1,177 +1,36 @@
-
-body{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
+.ParentProfilePage-external {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 30px;
 }
-.container{
-    display: flex;
-    position: relative;
-    max-width: 900px;
-    width: 100%;
-    border-radius: 50px;
-    padding: 30px;
-    margin: 0 15px;
-    background-color: rgb(204, 204, 204);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+.container-selection {
+  min-width: 400px;
+  min-height: 300px;
+  background-color: #f5f7f7;
+  margin-left: 50px;
 }
-/* f5f7f7 container background
-/*.container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 60vh;
-    border: 1px solid black;  
-    padding: 10px 5px;
-    box-sizing: border-box;
-  }
-  .container * {
-    width: calc(50% - 10px);
-    margin: 0 5px;
-    box-sizing: border-box;
-  }
-    
- 
-  .container  {   
-      display:-webkit-flex;
-    display:flex;
-    list-style-type:none;
-    padding:0;
-    justify-content:flex-end;
-    } */
-.container header{
-
-
-    font-size: 25px;
-    text-align: center;
-    font-weight: 600;
-    color: #333;
-    margin:  10px 0;
-       
+.mini-profile-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #f5f7f7;
 }
-
-.myForm {
-    
-    margin-left:0%;
-    order: 2;
-    width: 35%;
-    margin:5%
-  }
-
-
-.myForm2 {
-    margin-left:100%;
-    background: white;
-    border-radius: 40px;
-    padding: 30px;
-    order: 2;
-    width: 35%;
-    margin:5%
-    
-  }
-.container  .fields{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    
+.mini-profile-menu h4 {
+  font: normal normal bold 20px/25px;
+  color: #5f6061;
 }
- .fields .input-field{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    margin: 4px 0;
+.profile-selections ul li {
+  display: flex;
+  padding-bottom: 15px;
+  justify-content: flex-start;
 }
-.myForm2 .label-field{
-    
-    padding: 15px;
-    background: none;
-    border: none;
-    width: 100%;
-   
-  
+.profile-selections ul {
+  padding: 0px 20px 0 20px;
 }
-
-.label-field label{
-    
-    font-size: 14px;
-    font-weight: 500;
-    color: #2e2e2e;
-   
-  
+.profile-selections ul li:hover {
+  color: #1aa8bf;
+  cursor: pointer;
 }
-
-.input-field label{
-    font-size: 12px;
-    font-weight: 500;
-    color: #2e2e2e;
-}
-.input-field input, select{
-
-    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #FAFAFA 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 10px;
-    opacity: 1;
-    height: 40px;
-}
-
-
-.input-field input :focus,
-.input-field select:focus{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
-}
-
-.container  button{
-
-    padding: 0;
-    border: none;
-    background: none;
-    color: var(--unnamed-color-76cdd9);
-    text-align: right;
-    text-decoration: underline;
-    font: normal normal normal 16px/16px Averta PE;
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 1;
-}
-
-
-.container  .btnText{
-    font-size: 12px;
-    font-weight: 400;
-}
- button:hover{
-    color: #1282b6;
-    cursor: pointer;
-}
-.myForm2 button{
-    padding-left: 25px;
-    font-size: 12;
-    text-decoration: none;
-    width: 100%;
-    text-align: left;
-}
- 
- .buttons{
-    display: flex;
-    align-items: center;
-}
-
-@media (max-width: 750px) {
-   
-  
-     .fields .input-field{
-        width: calc(100% / 2 - 15px);
-    }
-}
-
-@media (max-width: 550px) {
-     .fields .input-field{
-        width: 100%;
-    }
-}
-
