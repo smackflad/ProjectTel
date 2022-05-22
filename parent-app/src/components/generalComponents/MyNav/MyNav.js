@@ -15,7 +15,7 @@ const MyNav = () =>
                         <ul>
                             <li>About Us</li>
                             <li> <Link to="/Register">Register</Link></li>
-                            <li>Login</li>
+                            <li><Link to="/Login">Login</Link></li>
                         </ul>
                     </div>
                     <div className="MyNav-icon">

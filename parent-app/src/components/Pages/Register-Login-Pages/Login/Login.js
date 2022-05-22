@@ -1,13 +1,13 @@
-import './Register.css';
+import './Login.css';
 import { useState } from "react";
 import MyButton from "../../../SharedComponents/MyButton/MyButton"
-const Register = () => 
+const Login = () => 
 {
     return (
-		<div className="Register-external">
-      <span className='Header-Register'>Εγγραφή</span>
+		<div className="Login-external">
+      <span className='Header-Register'>Σύνδεση</span>
       <span className='simple-text'>Καλώς ήρθες στην πλατφόρμα μας.</span>
-      <span className='simple-text'>Συμπλήρωσε τα παρακάτω πεδία για να ξεκινήσεις!</span>
+      <span className='simple-text'>Συμπλήρωσε τα παρακάτω πεδία για να συνδεθείς!</span>
       <div className='email-wrap'>
         <span class="material-icons-outlined">
           mail
@@ -20,19 +20,12 @@ const Register = () =>
         </span>
         <input type="password" id='password' name='password' placeholder='Κωδικός πρόσβασης'></input>
       </div>
-      <div className='terms'>
-        <span className='chkTerms'>
-          <input type='checkbox'/>
-        </span>
-        <span className='termsLabel'>Αποδέχομαι τους </span>
-        <a className='termsLink' href='/'>Όρους Χρήσης</a>       
-      </div>
-      <a className='already-registered' href='/Login'>Έχεις ήδη λογαριασμό;</a>
+      <a className='already-registered' href='/Register'>Δεν έχεις λογαριασμό;</a>
       <div className='reg-log-submit-button'>
-        <MyButton labelTxt='Εγγραφή' bgColor='#1AABBF' ftColor='#ffffff'/>
+        <MyButton labelTxt='Σύνδεση' bgColor='#1AABBF' ftColor='#ffffff'/>
       </div>
     </div>
 	);
 };
 
-export default Register;
+export default Login;

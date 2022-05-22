@@ -124,3 +124,6 @@
 .already-registered:hover {
     text-decoration: underline;
 }
+.reg-log-submit-button{
+    margin-top: 15px;
+}
