@@ -1,5 +1,6 @@
 import "./ParentProfilePage.css";
 import Account from "./Account";
+import Wallet from "./Wallet";
 const ParentProfilePage = () => {
   return (
     <div className="ParentProfilePage-external">
@@ -7,7 +8,7 @@ const ParentProfilePage = () => {
         <h4>Ο Λογαριασμός μου</h4>
         <div className="profile-selections">
           <ul>
-            <li>
+            <li className="mini-menu-selected">
               <span class="material-icons-outlined">manage_accounts</span>
               <span>Προσωπικά στοιχεία</span>
             </li>
@@ -25,7 +26,7 @@ const ParentProfilePage = () => {
         </div>
       </div>
       <div className="container-selection">
-        <Account />
+        <Wallet />
       </div>
     </div>
   );

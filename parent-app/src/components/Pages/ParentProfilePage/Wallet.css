@@ -1,0 +1,129 @@
+.Wallet-balance-container {
+  display: flex;
+  align-items: center;
+}
+.Wallet-balance-text {
+  font-size: 20px;
+  margin-left: 20px;
+  color: #1aa8bf;
+}
+.Wallet-external {
+  width: 100%;
+}
+.Wallet-external h4,
+.Wallet-external h5 {
+  color: #5f6061;
+}
+.Wallet-wrap-amounts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+.Wallet-wrap-amounts button span {
+  color: #fff;
+  width: auto;
+}
+.Wallet-wrap-amounts button {
+  border: 0;
+  border-radius: 50%;
+  background-color: #1aa8bf;
+  margin-left: 20px;
+  height: 34px;
+  width: 36px;
+  cursor: pointer;
+}
+.Wallet-wrap-amounts button:hover {
+  background-color: #76cdd9;
+}
+.Wallet-wrap-amounts span {
+  font-size: 25px;
+  width: 68px;
+}
+.Wallet-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.Wallet-total .total-amount {
+  font-size: 20px;
+  color: #1aa8bf;
+  margin-left: 20px;
+}
+.Wallet-recharge {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 15px;
+}
+.Wallet-cards {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 15px;
+  margin-top: 20px;
+}
+.Wallet-card-button {
+  border-radius: 10px;
+  border: 0;
+  background-color: #1aa8bf;
+  color: #fff;
+  height: 36px;
+  cursor: pointer;
+}
+.Wallet-myCard:focus-visible {
+  outline: 0;
+}
+.Wallet-myCard {
+  border: 0;
+  background-color: #f5f7f7;
+  height: 36px;
+  border-radius: 10px;
+  padding: 0 10px 0 10px;
+}
+.Wallet-card-change {
+  display: flex;
+  justify-content: space-between;
+}
+.button-disabled {
+  background-color: #cfd1d1;
+  opacity: 0.8;
+  cursor: default;
+}
+.Wallet-newCard-details input {
+  border: 0;
+  background-color: #f5f7f7;
+  height: 36px;
+  border-radius: 10px;
+  padding: 0 10px 0 10px;
+}
+.Wallet-newCard-details input:focus-visible {
+  outline: 0;
+}
+.Wallet-AddCard {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  align-items: center;
+}
+.Wallet-AddCard input {
+  margin-bottom: 20px;
+  padding: 0 15px 0 15px;
+  width: 60%;
+}
+.Wallet-newCard-details {
+  display: flex;
+  justify-content: center;
+}
+.Wallet-newCard-details input {
+  width: 30%;
+  padding: 0 15px 0 15px;
+  margin: 5px;
+}
+.Wallet-add-button-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 20px;
+}

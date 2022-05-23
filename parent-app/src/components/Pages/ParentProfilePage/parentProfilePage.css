@@ -35,6 +35,9 @@
   padding: 0px 20px 0 20px;
 }
 .profile-selections ul li:hover {
-  color: #1aa8bf;
+  color: #a0a3a3;
   cursor: pointer;
+}
+.mini-menu-selected {
+  color: #1aa8bf;
 }
