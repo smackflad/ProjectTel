@@ -1,0 +1,46 @@
+.MyNav-external {
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
+}
+
+.MyNav-internal {
+    display: flex;
+    justify-content: space-between;
+}
+
+.MyNav-Logo {
+    background: url("../../../images/TEL-LOGO.svg") no-repeat center center;
+    width: 142px;
+    height: 44px;
+    background-size: 156px 153px;
+}
+.MyNav-items {
+    display: flex;
+    align-items: center;
+}
+.MyNav-items ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.MyNav-items ul li{
+    padding: 10px 50px;
+    background-color: white;
+    color: black;
+    border-right-width: 0px;
+    border: 0;
+}
+.MyNav-items ul li:last-child{
+    border-right-width: 1px;
+}
+.MyNav-icon {
+    margin-left: 10px;
+}
+
+.MyNav-icon .md-40 {
+    font-size: 40px !important;
+}

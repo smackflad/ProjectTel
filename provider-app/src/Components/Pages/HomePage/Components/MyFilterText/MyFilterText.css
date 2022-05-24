@@ -1,0 +1,34 @@
+.MyFilterText-txt-top > span {
+    font-size: 12px;
+    font-weight: 600;
+}
+#star {
+    color: #be0000;
+
+}
+
+.MyFilterText-txt-internal {
+    display: flex;
+    flex-direction: column;
+}
+
+.MyFilterText-txt-internal input {
+    margin: 0px;
+    padding: 10px;
+    font-size: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.30);
+    border-radius: 42px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    line-height: 1px;
+    outline: none;
+    /* width: 330px; */
+}
+.MyFilterText-txt-internal input:disabled {
+    cursor: not-allowed;
+    background-color: rgb(236, 236, 236);
+    border-color: rgb(175, 175, 175);
+}
+.MyFilterText-txt-internal input:focus {
+    border-color: rgba(0, 0, 0, 0.70);
+}
