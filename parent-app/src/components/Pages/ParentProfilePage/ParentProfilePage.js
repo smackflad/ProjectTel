@@ -1,6 +1,7 @@
 import "./ParentProfilePage.css";
 import Account from "./Account";
 import Wallet from "./Wallet";
+import History from "./History";
 const ParentProfilePage = () => {
   return (
     <div className="ParentProfilePage-external">
@@ -26,7 +27,7 @@ const ParentProfilePage = () => {
         </div>
       </div>
       <div className="container-selection">
-        <Wallet />
+        <History />
       </div>
     </div>
   );
