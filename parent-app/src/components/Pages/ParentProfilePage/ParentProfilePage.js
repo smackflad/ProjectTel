@@ -1,15 +1,29 @@
 import "./ParentProfilePage.css";
-import Account from "./Account";
-import Wallet from "./Wallet";
-import History from "./History";
+import tabs from "./Tabs";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 const ParentProfilePage = () => {
+  const [tabIndex, setTabIndex] = useState(2);
+
   return (
     <div className="ParentProfilePage-external">
       <div className="mini-profile-menu">
         <h4>Ο Λογαριασμός μου</h4>
         <div className="profile-selections">
           <ul>
-            <li className="mini-menu-selected">
+            {tabs.map((tab, i) => {
+              return (
+                <li
+                  key={uuidv4()}
+                  onClick={() => setTabIndex(i)}
+                  className={tabIndex === i ? "mini-menu-selected" : ""}
+                >
+                  {tab.display}
+                </li>
+              );
+            })}
+            {/* <li className="mini-menu-selected">
               <span class="material-icons-outlined">manage_accounts</span>
               <span>Προσωπικά στοιχεία</span>
             </li>
@@ -22,13 +36,11 @@ const ParentProfilePage = () => {
                 account_balance_wallet
               </span>
               <span>Πορτοφόλι</span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
-      <div className="container-selection">
-        <History />
-      </div>
+      <div className="container-selection">{tabs[tabIndex].component}</div>
     </div>
   );
 };

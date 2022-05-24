@@ -1,0 +1,43 @@
+.Inside_Middle_Component-external {
+  padding: 6px;
+  width: 300px;
+}
+.Inside_Middle_Component-elementClick {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px -1px 12px 10px rgb(0 0 0 / 4%);
+  border-radius: 5px;
+  margin: 10px 10px 20px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+.Inside_Middle_Component-elementClick:hover {
+  box-shadow: 0 12px 25px 0 rgb(0 0 0 / 20%);
+  transform: translate(0, -4px);
+}
+.Inside_Middle_Component-info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 13px 6px 13px;
+}
+.Inside_Middle_Component-date {
+  color: #1b99c3;
+  font-size: 15px;
+  line-height: 24px;
+}
+.Inside_Middle_Component-title {
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 60px;
+  overflow-wrap: break-word;
+}
+.Inside_Middle_Component-venue {
+  margin-top: 22px;
+  color: #666a73;
+  font-size: 13px;
+}
+.Inside-Middle-Component-image {
+  height: 180px;
+}

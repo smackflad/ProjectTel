@@ -19,11 +19,14 @@
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .Wallet-wrap-amounts button span {
   color: #fff;
   width: auto;
+}
+.Wallet-plus-minus-wrap {
+  margin-left: 25px;
 }
 .Wallet-wrap-amounts button {
   border: 0;
@@ -31,8 +34,11 @@
   background-color: #1aa8bf;
   margin-left: 20px;
   height: 34px;
-  width: 36px;
+  width: 34px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .Wallet-wrap-amounts button:hover {
   background-color: #76cdd9;
@@ -41,14 +47,23 @@
   font-size: 25px;
   width: 68px;
 }
-.Wallet-total {
+.Wallet-recharge-total {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-left: 5px;
 }
-.Wallet-total .total-amount {
+.Wallet-recharge-total div {
+  display: flex;
+  align-items: center;
+}
+.Wallet-recharge-total button {
+  height: 26px;
+  margin-left: 20px;
+}
+.Wallet-recharge-total .total-amount {
   font-size: 20px;
   color: #1aa8bf;
   margin-left: 20px;
