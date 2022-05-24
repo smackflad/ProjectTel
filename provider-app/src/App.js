@@ -1,23 +1,19 @@
 import './App.css';
+import EventsPage from './components/generalComponents/pages/eventsPage/EventsPage';
+// import MyNav from './components/generalComponents/MyNav/MyNav';
 import {
   BrowserRouter as Router,
-  Routes
+  Routes, Route
 } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <div className="Nav">
-        Nav
-      </div>
-      <div className="Body">
-        <Routes>
-          {/* <Route path="/" element={<bodycomponent>} /> */}
+      <Routes>
+          { /* <Route path="/" element={<bodycomponent>} /> */
+          <Route path="/" element={<EventsPage />} />
+          }
         </Routes>
-      </div>
-      <div className="Footer">
-        Footer
-      </div>
     </Router>
   );
 }
