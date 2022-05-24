@@ -20,3 +20,17 @@ export class Base {
   @VersionColumn()
   version: number;
 }
+
+export class BaseWithoutId {
+  // @PrimaryGeneratedColumn('uuid')
+  // id: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @VersionColumn()
+  version: number;
+}

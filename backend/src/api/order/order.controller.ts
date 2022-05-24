@@ -6,37 +6,49 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
 
-@Controller('order')
+@ApiTags('parents/orders')
+@Controller('parents/:parentId/orders')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @Post()
-  create(@Body() createOrderDto: CreateOrderDto) {
-    return this.orderService.create(createOrderDto);
+  async create(
+    @Param('parentId') parentId: string,
+    @Body() createOrderDto: CreateOrderDto,
+  ) {
+    return await this.orderService.create(parentId, createOrderDto);
   }
 
   @Get()
-  findAll() {
-    return this.orderService.findAll();
+  async findAll(
+    @Param('parentId') parentId: string,
+    @Query() query: PaginationQueryDto,
+  ) {
+    return await this.orderService.findAll(parentId, query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.orderService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.orderService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.orderService.update(+id, updateOrderDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateOrderDto: UpdateOrderDto,
+  // ) {
+  //   return await this.orderService.update(parentId, id, updateOrderDto);
+  // }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.orderService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.orderService.remove(id);
   }
 }

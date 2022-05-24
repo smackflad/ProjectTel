@@ -12,7 +12,9 @@ import { ParentService } from './parent.service';
 import { CreateParentDto } from './dto/create-parent.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
 import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('parents')
 @Controller('parents')
 export class ParentController {
   constructor(private readonly parentService: ParentService) {}

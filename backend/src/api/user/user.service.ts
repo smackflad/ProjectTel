@@ -20,13 +20,13 @@ export class UserService {
   async findAll(query: PaginationQueryDto) {
     const [result, total] = await this.userRepository.findAndCount({
       where: {},
-      take: query.limit || 25, //? DefaultValues.PAGINATION_LIMIT,
-      skip: query.offset || 0, //? DefaultValues.PAGINATION_OFFSET,
+      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
     return { result, total };
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.userRepository.findOne(id);
   }
 
@@ -38,11 +38,11 @@ export class UserService {
     });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }

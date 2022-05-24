@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Event extends Base {
+export class Event extends Location {
   @Column()
   title: string;
 
@@ -35,7 +35,7 @@ export class Event extends Base {
   @ManyToOne(() => Company, (company) => company.events)
   company: Company;
 
-  @OneToOne(() => Location)
-  @JoinColumn()
-  location: Location;
+  // @OneToOne(() => LocationWithId)
+  // @JoinColumn()
+  // location: LocationWithId;
 }

@@ -25,8 +25,8 @@ export class ParentService {
   async findAll(query: PaginationQueryDto) {
     const [result, total] = await this.parentRepository.findAndCount({
       where: {},
-      take: query.limit || 25, //? DefaultValues.PAGINATION_LIMIT,
-      skip: query.offset || 0, //? DefaultValues.PAGINATION_OFFSET,
+      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
     return { result, total };
   }

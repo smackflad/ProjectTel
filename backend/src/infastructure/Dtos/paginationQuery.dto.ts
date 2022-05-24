@@ -7,11 +7,11 @@ export class PaginationQueryDto {
   @Type((type) => Number)
   @IsOptional()
   @IsPositive()
-  limit: number;
+  pageSize: number;
 
   @ApiProperty()
   @Type((type) => Number)
   @IsOptional()
   @IsPositive()
-  offset: number;
+  pageNumber: number;
 }

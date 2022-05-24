@@ -1,3 +1,4 @@
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -14,6 +15,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
 import { Public } from 'src/infastructure/Decorators/public.decorator';
 
+@ApiBearerAuth()
+@ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -31,7 +34,7 @@ export class UserController {
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
-  //   return this.userService.findOne(+id);
+  //   return this.userService.findOne(id);
   // }
 
   // @Patch(':id')
@@ -41,6 +44,6 @@ export class UserController {
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {
-  //   return this.userService.remove(+id);
+  //   return this.userService.remove(id);
   // }
 }
