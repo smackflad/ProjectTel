@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
 import { Repository } from 'typeorm';
 import { EmployeeService } from '../employee/employee.service';
@@ -20,17 +20,18 @@ export class CompanyService {
   ) {}
 
   async create(createCompanyDto: CreateCompanyDto) {
+    console.log(createCompanyDto);
     // create admin
-    const { admin, ...company } = createCompanyDto;
-    const result = await this.companyRepository.save(company);
-    // admin.company = result;
-    await this.employeeService.create({
-      // result: company,
-      // ...admin,
-      role: UserRole.ADMIN,
-    });
+    // const { admin, ...company } = createCompanyDto;
+    // const result = await this.companyRepository.save(company);
+    // // admin.company = result;
+    // await this.employeeService.create({
+    //   // result: company,
+    //   // ...admin,
+    //   role: UserRole.ADMIN,
+    // });
 
-    return result;
+    // return result;
   }
 
   async findAll(query: PaginationQueryDto) {

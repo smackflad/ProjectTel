@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateParentDto } from './dto/create-parent.dto';
@@ -16,10 +16,9 @@ export class ParentService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(id: string, createParentDto: CreateParentDto) {
-    const user = await this.userRepository.findOne(id);
-
-    return await this.parentRepository.save({ user, ...createParentDto });
+  async create(createParentDto: CreateParentDto) {
+    // const user = await this.userRepository.findOne(id);
+    // return await this.parentRepository.save({ user, ...createParentDto });
   }
 
   async findAll(query: PaginationQueryDto) {

@@ -11,7 +11,7 @@ import {
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 
 @ApiTags('parents/orders')
 @Controller('parents/:parentId/orders')

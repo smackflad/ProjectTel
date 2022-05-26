@@ -12,7 +12,7 @@ import {
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 
 @ApiTags('companies')
 @Controller('company')

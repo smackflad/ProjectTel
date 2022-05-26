@@ -15,5 +15,6 @@ import { Employee } from 'src/api/employee/entities/employee.entity';
   ],
   controllers: [CompanyController],
   providers: [CompanyService],
+  exports: [CompanyService],
 })
 export class CompanyModule {}

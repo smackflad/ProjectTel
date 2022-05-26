@@ -8,10 +8,14 @@ import { jwtConstants } from './auth.constants';
 import { LocalStrategy } from './strategies/local.strategy';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserModule } from 'src/api/user/user.module';
+import { ParentModule } from 'src/api/parent/parent.module';
+import { CompanyModule } from 'src/api/company/company.module';
 
 @Module({
   imports: [
     UserModule,
+    ParentModule,
+    CompanyModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

@@ -1,10 +1,10 @@
 import { Order } from 'src/api/order/entities/order.entity';
 import { User } from 'src/api/user/entities/user.entity';
-import { LocationWithoutId } from 'src/api/location/entities/location.entity';
 import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { BaseWithoutId } from 'src/infastructure/database/entities/base.entity';
 
 @Entity()
-export class Parent extends LocationWithoutId {
+export class Parent extends BaseWithoutId {
   @Column()
   phone: string;
 
@@ -13,6 +13,9 @@ export class Parent extends LocationWithoutId {
 
   @Column()
   lastName: string;
+
+  @Column({ type: 'date' })
+  birthDate: string;
 
   @OneToMany(() => Order, (order) => order.parent)
   orders: Order[];

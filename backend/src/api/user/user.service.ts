@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -14,7 +14,8 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    return await this.userRepository.insert(createUserDto);
+    console.log(createUserDto);
+    // return await this.userRepository.insert(createUserDto);
   }
 
   async findAll(query: PaginationQueryDto) {

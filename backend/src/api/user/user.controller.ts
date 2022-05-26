@@ -12,8 +12,8 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
-import { Public } from 'src/infastructure/Decorators/public.decorator';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
+import { Public } from 'src/infastructure/decorators/public.decorator';
 
 @ApiBearerAuth()
 @ApiTags('users')

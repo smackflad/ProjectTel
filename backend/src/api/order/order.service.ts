@@ -5,7 +5,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Parent } from '../parent/entities/parent.entity';
-import { PaginationQueryDto } from 'src/infastructure/Dtos/paginationQuery.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 
 @Injectable()
 export class OrderService {
