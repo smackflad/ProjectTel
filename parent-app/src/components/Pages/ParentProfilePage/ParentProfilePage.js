@@ -24,15 +24,15 @@ const ParentProfilePage = () => {
               );
             })}
             {/* <li className="mini-menu-selected">
-              <span class="material-icons-outlined">manage_accounts</span>
+              <span className="material-icons-outlined">manage_accounts</span>
               <span>Προσωπικά στοιχεία</span>
             </li>
             <li>
-              <span class="material-icons-outlined">history</span>
+              <span className="material-icons-outlined">history</span>
               <span>Ιστορικό παραγγελιών</span>
             </li>
             <li>
-              <span class="material-icons-outlined">
+              <span className="material-icons-outlined">
                 account_balance_wallet
               </span>
               <span>Πορτοφόλι</span>

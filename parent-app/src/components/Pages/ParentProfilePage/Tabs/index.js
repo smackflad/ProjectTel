@@ -7,7 +7,7 @@ const tabs = [
   {
     display: (
       <>
-        <span class="material-icons-outlined">manage_accounts</span>
+        <span className="material-icons-outlined">manage_accounts</span>
         <span>Προσωπικά στοιχεία</span>
       </>
     ),
@@ -16,7 +16,7 @@ const tabs = [
   {
     display: (
       <>
-        <span class="material-icons-outlined">history</span>
+        <span className="material-icons-outlined">history</span>
         <span>Ιστορικό παραγγελιών</span>
       </>
     ),
@@ -25,7 +25,7 @@ const tabs = [
   {
     display: (
       <>
-        <span class="material-icons-outlined">account_balance_wallet</span>
+        <span className="material-icons-outlined">account_balance_wallet</span>
         <span>Πορτοφόλι</span>
       </>
     ),

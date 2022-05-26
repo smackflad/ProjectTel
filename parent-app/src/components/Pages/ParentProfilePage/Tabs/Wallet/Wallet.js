@@ -8,6 +8,7 @@ const Wallet = () => {
   const [balance, setBalance] = useState(0);
   const [rechargeAmmount, setRechargeAmmount] = useState(0);
 
+  console.log("ok");
   const increaseRechargeAmmount = (increaseAmmount) => {
     setRechargeAmmount(rechargeAmmount + increaseAmmount);
   };
@@ -40,10 +41,10 @@ const Wallet = () => {
               <span>{`$${rechargePrice}`}</span>
               <div className="Wallet-plus-minus-wrap">
                 <button onClick={() => decreaseRechargeAmmount(rechargePrice)}>
-                  <span class="material-icons-outlined">remove</span>
+                  <span className="material-icons-outlined">remove</span>
                 </button>
                 <button onClick={() => increaseRechargeAmmount(rechargePrice)}>
-                  <span class="material-icons-outlined">add</span>
+                  <span className="material-icons-outlined">add</span>
                 </button>
               </div>
             </div>
