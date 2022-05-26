@@ -10,7 +10,7 @@
 }
 
 .MyNav-Logo {
-    background: url("../../../images/TEL-LOGO.svg") no-repeat center center;
+    /* background: url("../../../images/TEL-LOGO.svg") no-repeat center center; */
     width: 142px;
     height: 44px;
     background-size: 156px 153px;

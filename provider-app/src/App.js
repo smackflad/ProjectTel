@@ -1,6 +1,7 @@
 import './App.css';
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
-// import MyNav from './components/generalComponents/MyNav/MyNav';
+// import EventPage from "./components/Pages/EventPage/EventPage";
+import MyNav from './components/GeneralComponents/MyNav/MyNav';
 import {
   BrowserRouter as Router,
   Routes, Route
@@ -8,11 +9,18 @@ import {
 
 function App() {
   return (
+    
     <Router>
-      <Routes>
-        <Route path="/" element={<EventsPage />} />
-      </Routes>
-   
+      <MyNav />
+      <div className="Body">
+        <Routes>
+          <Route path="/" element={<EventsPage />} />
+          {/* <Route path="/event" element={<EventPage />} /> */}
+        </Routes>
+      </div>
+      <div className="Footer">
+        Footer
+      </div>
     </Router>
   );
 }
