@@ -5,31 +5,10 @@ import { useState } from "react";
 import MyButton from "../../SharedComponents/MyButton/MyButton";
 
 
-function myFunction() {
-	// Declare variables 
-		var input, filter, table, tr, td, i;
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("myTable");
-		tr = table.getElementsByTagName("tr");
-	
-		// Loop through all table rows, and hide those who don't match the search 
-		for (i = 0; i < tr.length; i++) {
-	td = tr[i].getElementsByTagName("td")[0];
-	if (td) {
-		if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		tr[i].style.display = "";
-		} else {
-		tr[i].style.display = "none";
-		}
-		} 
-	}
-	}
-
 
 const EventsPage = () => {	
 	return (
-		<div>
+		<>
 			<span className="EventsPage_top">
 				<span className="EventsPage-top-title">
 					Events
@@ -43,12 +22,12 @@ const EventsPage = () => {
 							<tr>
 								<th>
 									Event Name
-									<input type="text" id="myInput" className="EventsPage-table-title-search" onkeyup="myFunction()" placeholder="Search"></input>
+									<input type="text" id="myInputName" className="EventsPage-table-title-search" onKeyUp={tableSearchFunctionName} placeholder="Search"></input>
 
 								</th>
 								<th>
 									Date Created
-									<input className="EventsPage-table-title-search" placeholder="Search"></input>
+									<input type="text" id="myInputDate" className="EventsPage-table-title-search" onKeyUp={tableSearchFunctionDate} placeholder="Search"></input>
 
 								</th>
 								<th>
@@ -108,15 +87,59 @@ const EventsPage = () => {
 					</table>
 			</div>
 
-		
-		</div>
-		
+
+		</>
 	);
 
+	// <script type = "text/javascript">
+			
+	// </script>
+
+
 	
-};
+}
 
+function tableSearchFunctionName( ) {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInputName");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("myTable");
+	tr = table.getElementsByTagName("tr");
 
+	// Loop through all table rows, and hide those who don't match the search query
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[0];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+
+function tableSearchFunctionDate( ) {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInputDate");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("myTable");
+	tr = table.getElementsByTagName("tr");
+
+	// Loop through all table rows, and hide those who don't match the search query
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[1];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
 
 
 export default EventsPage;
