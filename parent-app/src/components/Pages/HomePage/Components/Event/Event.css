@@ -11,6 +11,7 @@
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
   overflow: hidden;
+  text-decoration: none;
 }
 .Inside_Middle_Component-elementClick:hover {
   box-shadow: 0 12px 25px 0 rgb(0 0 0 / 20%);
@@ -32,6 +33,7 @@
   text-overflow: ellipsis;
   height: 60px;
   overflow-wrap: break-word;
+  color: #282c35;
 }
 .Inside_Middle_Component-venue {
   margin-top: 22px;

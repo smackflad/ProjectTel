@@ -1,7 +1,7 @@
-import "./InsideMiddleComponent.css";
+import "./Event.css";
 import { useState } from "react";
 
-const InsideMiddleComponent = () => {
+const Event = ({ title, venue }) => {
   return (
     <div className="Inside_Middle_Component-external">
       <a className="Inside_Middle_Component-elementClick" href="/">
@@ -12,12 +12,12 @@ const InsideMiddleComponent = () => {
         ></img>
         <div className="Inside_Middle_Component-info">
           <span className="Inside_Middle_Component-date">25 MAY</span>
-          <span className="Inside_Middle_Component-title">PANATHINAIKOS</span>
-          <span className="Inside_Middle_Component-venue">OAKA</span>
+          <span className="Inside_Middle_Component-title">{title}</span>
+          <span className="Inside_Middle_Component-venue">{venue}</span>
         </div>
       </a>
     </div>
   );
 };
 
-export default InsideMiddleComponent;
+export default Event;
