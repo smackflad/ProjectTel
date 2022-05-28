@@ -1,0 +1,88 @@
+/* .MyFilter-txt-top > span {
+    font-size: 12px;
+    font-weight: 600;
+} */
+#star {
+    color: #be0000;
+
+}
+.MyFilter-txt-outter{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.MyFilter-txt-external {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+}
+.MyFilter-txt-internal {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    border: none;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border-radius: 5px;
+}
+
+.MyFilter-txt-span {
+    padding: 0px;
+    font-size: 18px;
+    /* line-height: 1px; */
+    font-weight: bold;
+    color: rgb(145, 145, 145);
+    outline: none;
+    width: 200px; /* fixed initial size */
+}
+
+.MyFilter-txt-internal-spans{
+    margin: 00px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 39px;
+    /* line-height: 1px; */
+}
+
+
+.MyFilter-txt-span-small{
+    font-size: 14px;
+}
+
+.MyFilter-txt-span-items {
+    font-size: 18px;
+}
+
+.MyFilter-txt-icon{
+    color: rgb(145, 145, 145);
+
+}
+
+@media only screen and (max-width: 1360px){
+
+    .MyFilter-txt-internal {
+        width: 100%;
+    }
+    .MyFilter-txt-span{
+        width: 100%;
+    }
+    
+}
+
+@media only screen and (max-width: 900px){
+    .MyFilter-txt-external{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+    }
+    .MyFilter-txt-internal{
+        width: 80%;
+    }
+}

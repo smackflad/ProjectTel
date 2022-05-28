@@ -11,7 +11,7 @@ const HomePage = () => {
 			<MySearchBar />
 			<Middle_Component />
 			<HomeBot />
-		</div>	
+		</div>
 	);
 };
 
