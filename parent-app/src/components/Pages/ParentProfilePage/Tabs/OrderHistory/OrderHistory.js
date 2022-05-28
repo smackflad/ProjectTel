@@ -1,99 +1,53 @@
 import "./OrderHistory.css";
+import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
+const items = [
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
+];
+
+const Order = ({ name, date, price }) => {
+  return (
+    <div className="OrderHistory-item">
+      <div className="OrderHistory-item-wrapper">
+        <span className="OrderHistory-eventName">{name}</span>
+        <span className="OrderHistory-date">{date}</span>
+        <span className="OrderHistory-totalCost">{price}$</span>
+        <span className="material-icons-outlined">file_download</span>
+      </div>
+    </div>
+  );
+};
+
+const OrdersList = ({ orders }) => {
+  return (
+    <>
+      {orders.map((ord) => {
+        return (
+          <Order
+            name={ord.name}
+            date={ord.date}
+            price={ord.price}
+            key={uuidv4()}
+          />
+        );
+      })}
+    </>
+  );
+};
 const OrderHistory = () => {
+  const [currentItems, setCurrentItems] = useState([
+    { name: "", date: "", price: "" },
+  ]);
+  useEffect(() => {
+    setCurrentItems(items);
+  }, []);
   return (
     <div className="OrderHistory-external">
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Test1234</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">140$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">asdsadsadsadsadas</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">60$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">15415215</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">3$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      <div className="OrderHistory-item">
-        <div className="OrderHistory-item-wrapper">
-          <span className="OrderHistory-eventName">Event1</span>
-          <span className="OrderHistory-date">23/01/2021</span>
-          <span className="OrderHistory-totalCost">30$</span>
-          <span className="material-icons-outlined">file_download</span>
-          {/*all these from DB */}
-        </div>
-      </div>
-      {/*on download click we need to make a pdf */}
+      <OrdersList orders={currentItems} />
     </div>
   );
 };
