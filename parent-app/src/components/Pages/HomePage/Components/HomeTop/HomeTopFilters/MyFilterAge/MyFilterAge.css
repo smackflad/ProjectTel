@@ -1,0 +1,61 @@
+/* .MyFilterAge-txt-top > span {
+    font-size: 12px;
+    font-weight: 600;
+} */
+#star {
+    color: #be0000;
+
+}
+.MyFilterAge-txt-external {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+.MyFilterAge-txt-internal {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    border: none;
+
+    border-radius: 5px;
+}
+
+.MyFilterAge-txt-span {
+    margin: 0px;
+    padding: 20px 10px;
+    font-size: 18px;
+    /* -webkit-transition: 0.5s;
+    transition: 0.5s; */
+    line-height: 1px;
+    font-weight: bold;
+    color: rgb(145, 145, 145);
+    outline: none;
+    width: 200px; /* fixed initial size */
+}
+.MyFilterAge-txt-span:disabled {
+    cursor: not-allowed;
+    background-color: rgb(236, 236, 236);
+    border-color: rgb(175, 175, 175);
+}
+.MyFilterAge-txt-span:focus {
+    border-color: rgba(0, 0, 0, 0.70);
+}
+
+.MyFilterAge-txt-icon{
+    color: rgb(145, 145, 145);
+
+}
+@media only screen and (max-width: 1360px){
+    .MyFilterAge-txt-external{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
+    .MyFilterAge-txt-internal {
+        width: 80%;
+    }
+    .MyFilterAge-txt-span{
+        width: 100%;
+    }
+}

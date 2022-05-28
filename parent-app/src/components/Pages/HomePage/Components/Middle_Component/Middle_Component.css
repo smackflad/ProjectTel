@@ -1,10 +1,12 @@
 .Middle_Component-external{
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-content: center;
     justify-content: center;
     align-items: center;
     margin: 22px 0 22px 0;
+    gap: 20px;
 }
 .Middle_Component-outsideContainer{
     background: #ffffff;

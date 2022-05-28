@@ -1,0 +1,66 @@
+/* .MyFilterLoc-txt-top > span {
+    font-size: 12px;
+    font-weight: 600;
+} */
+#star {
+    color: #be0000;
+
+}
+.MyFilterLoc-txt-outter {
+    width: 100%;
+}
+
+.MyFilterLoc-txt-external {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+.MyFilterLoc-txt-internal {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    border: none;
+
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.MyFilterLoc-txt-span {
+    margin: 0px;
+    padding: 20px 10px;
+    font-size: 18px;
+    /* -webkit-transition: 0.5s;
+    transition: 0.5s; */
+    line-height: 1px;
+    font-weight: bold;
+    color: rgb(145, 145, 145);
+    outline: none;
+    width: 200px; /* fixed initial size */
+}
+.MyFilterLoc-txt-span:disabled {
+    cursor: not-allowed;
+    background-color: rgb(236, 236, 236);
+    border-color: rgb(175, 175, 175);
+}
+.MyFilterLoc-txt-span:focus {
+    border-color: rgba(0, 0, 0, 0.70);
+}
+
+.MyFilterLoc-txt-icon{
+    color: rgb(145, 145, 145);
+
+}
+@media only screen and (max-width: 1360px){
+    .MyFilterLoc-txt-external{
+        width: 100%;
+        display: flex;
+        justify-content:center;
+    }
+
+    .MyFilterLoc-txt-internal {
+        width: 80%;
+    }
+    .MyFilterLoc-txt-span{
+        width: 100%;
+    }
+}
