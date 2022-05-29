@@ -2,6 +2,7 @@ import "./MyNav.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const MyNav = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div className="MyNav-external">
       <div className="MyNav-internal">
@@ -12,12 +13,12 @@ const MyNav = () => {
         <div className="MyNav-items">
           <div className="MyNav-menu">
             <ul>
-              <li>About Us</li>
+              <li>Σχετικά με εμάς</li>
               <li>
-                <Link to="/Register">Register</Link>
+                <Link to="/Register">Εγγραφή</Link>
               </li>
               <li>
-                <Link to="/Login">Login</Link>
+                <Link to="/Login">Σύνδεση</Link>
               </li>
             </ul>
           </div>
@@ -28,6 +29,29 @@ const MyNav = () => {
               </span>
             </Link>
           </div>
+        </div>
+        <div
+          className="MyNav-mobile"
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
+          <span class="material-icons-outlined">menu</span>
+          {open && (
+            <div className="MyNav-mobile-menu">
+              <ul className="MyNav-select-options">
+                <li>
+                  <Link to="/Register">Εγγραφή</Link>
+                </li>
+                <li>
+                  <Link to="/Login">Σύνδεση</Link>
+                </li>
+                <li>
+                  <Link to="/my-profile">Ο Λογαριασμός μου</Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>

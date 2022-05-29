@@ -59,3 +59,55 @@
 .MyNav-icon .md-40 {
   font-size: 40px !important;
 }
+@media (max-width: 700px) {
+  .MyNav-items {
+    display: none;
+  }
+}
+@media (min-width: 700px) {
+  .MyNav-mobile {
+    display: none !important;
+  }
+}
+.MyNav-mobile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+.MyNav-mobile:active {
+  background: #ebeded;
+}
+.MyNav-mobile span {
+  font-size: 40px;
+}
+.MyNav-mobile-menu {
+  position: absolute;
+  right: -10px;
+  top: 60px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 12px 25px 0 rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  z-index: 1;
+  width: 230px;
+}
+.MyNav-select-options {
+  list-style-type: none;
+  padding: 0;
+}
+.MyNav-select-options li {
+  font-size: 24px;
+  margin: 20px 0;
+}
+.MyNav-select-options li a {
+  text-decoration: none;
+  color: #1aabbf;
+}
