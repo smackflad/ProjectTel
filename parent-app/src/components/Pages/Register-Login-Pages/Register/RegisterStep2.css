@@ -12,6 +12,7 @@
 .personal-details-fields {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .personal-details-fields input {
   font-size: 16px;
@@ -22,7 +23,7 @@
   border-bottom: none;
   border-radius: 10px;
   height: 45px;
-  width: 425px;
+  width: 100%;
   background-color: #f4f5f6;
   border: none;
   display: block;

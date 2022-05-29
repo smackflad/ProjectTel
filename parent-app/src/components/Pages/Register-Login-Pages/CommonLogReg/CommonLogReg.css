@@ -6,8 +6,13 @@
   flex-direction: column;
   height: calc(100vh - 100px); /* need change after footer is DONE   !!!!!!!!*/
 }
+@media (max-height: 700px) {
+  .CommonLogReg-external {
+    height: auto;
+  }
+}
 .CommonLogReg-wrapper {
-  width: 485px;
+  width: auto;
   height: 668px;
   border-radius: 10px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -17,7 +22,7 @@
 .Logo-panel {
   height: 90px;
   background-color: #1f263a;
-  width: 485px;
+  width: auto;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;

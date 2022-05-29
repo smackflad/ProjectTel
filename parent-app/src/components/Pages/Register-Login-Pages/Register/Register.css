@@ -2,6 +2,7 @@
   color: #1f263a;
   font-size: 48px;
   padding-bottom: 30px;
+  text-align: center;
 }
 .Register-external {
   display: flex;
@@ -13,12 +14,14 @@
 }
 .simple-text {
   padding-top: 5px;
+  text-align: center;
 }
 .email-wrap {
   display: flex;
   align-items: center;
   position: relative;
   margin-top: 70px;
+  width: 100%;
 }
 .email-wrap span {
   position: absolute;
@@ -34,7 +37,7 @@
   border-bottom: none;
   border-radius: 10px;
   height: 45px;
-  width: 425px;
+  width: 100%;
   background-color: #f4f5f6;
   border: none;
   display: block;
@@ -48,6 +51,7 @@
   align-items: center;
   position: relative;
   margin-top: 30px;
+  width: 100%;
 }
 .password-wrap input {
   font-size: 16px;
@@ -58,7 +62,7 @@
   border-bottom: none;
   border-radius: 10px;
   height: 45px;
-  width: 425px;
+  width: 100%;
   background-color: #f4f5f6;
   border: none;
   display: block;
@@ -146,6 +150,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 .spinner {
   display: flex;
