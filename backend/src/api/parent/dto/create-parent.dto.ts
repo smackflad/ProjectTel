@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDate, IsString } from 'class-validator';
+import { IsDate, IsDateString, IsString } from 'class-validator';
 
 export class CreateParentDto {
   @ApiProperty()
@@ -15,7 +15,7 @@ export class CreateParentDto {
   readonly lastName: string;
 
   @ApiProperty({ type: 'date' })
-  @IsDate()
+  @IsDateString()
   birthDate: string;
 
   // @ApiProperty()

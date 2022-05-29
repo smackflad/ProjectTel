@@ -19,13 +19,10 @@ import { ApiTags } from '@nestjs/swagger';
 export class ParentController {
   constructor(private readonly parentService: ParentService) {}
 
-  @Post(':id')
-  async create(
-    @Param('id') id: string,
-    @Body() createParentDto: CreateParentDto,
-  ) {
-    return await this.parentService.create(id, createParentDto);
-  }
+  // @Post()
+  // async create(@Body() createParentDto: CreateParentDto) {
+  //   return await this.parentService.create(createParentDto);
+  // }
 
   @Get()
   async findAll(@Query() query: PaginationQueryDto) {
@@ -35,6 +32,11 @@ export class ParentController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.parentService.findOne(id);
+  }
+
+  @Get('findOneByEmail/:email')
+  async findOneByEmail(@Param('email') email: string) {
+    return this.parentService.findOneByEmail(email);
   }
 
   @Patch(':id')

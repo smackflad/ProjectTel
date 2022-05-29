@@ -1,9 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Mapper } from './../../infastructure/helpers/mapper.helper';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateParentDto } from './dto/create-parent.dto';
+import { CreateUnitializedParentDto } from './dto/createUnitialized.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
 import { Parent } from './entities/parent.entity';
 
@@ -17,8 +24,39 @@ export class ParentService {
   ) {}
 
   async create(createParentDto: CreateParentDto) {
-    // const user = await this.userRepository.findOne(id);
-    // return await this.parentRepository.save({ user, ...createParentDto });
+    return await this.parentRepository.insert(createParentDto);
+  }
+
+  async createUninitializedParent(
+    createUnitializedParentDto: CreateUnitializedParentDto,
+  ) {
+    console.log(createUnitializedParentDto);
+    try {
+      const parent: Parent = this.parentRepository.create(
+        createUnitializedParentDto,
+      );
+
+      const savedParent = await this.parentRepository.save(parent);
+      return Mapper.mapParentEntityToUnitializedParentResponseModel(
+        savedParent,
+      );
+    } catch (ex: any) {
+      if (ex.constructor === QueryFailedError && (ex as any).code === '23505') {
+        const initialized = await this.isParentInitialized(
+          createUnitializedParentDto.user.email,
+        );
+        throw new ConflictException({ initialized });
+      }
+      throw ex;
+    }
+  }
+
+  async isParentInitialized(email: string) {
+    const { initialized } = await this.parentRepository.findOne({
+      relations: ['user'],
+      where: { user: { email } },
+    });
+    return initialized;
   }
 
   async findAll(query: PaginationQueryDto) {
@@ -31,11 +69,38 @@ export class ParentService {
   }
 
   async findOne(id: string) {
-    return await this.parentRepository.findOne(id);
+    const parent = await this.parentRepository.findOne(id);
+    if (parent === undefined) {
+      throw new NotFoundException();
+    }
+    return Mapper.mapParentEntityToParentResponseModel(parent);
+  }
+
+  async findOneByEmail(email: string) {
+    const parent = await this.parentRepository.findOne({
+      relations: ['user'],
+      where: { user: { email } },
+    });
+    if (parent === undefined) {
+      throw new NotFoundException();
+    }
+    return Mapper.mapParentEntityToParentResponseModel(parent);
   }
 
   async update(id: string, updateParentDto: UpdateParentDto) {
-    return await this.parentRepository.update(id, updateParentDto);
+    const foundParent = await this.parentRepository.findOne(id);
+
+    if (foundParent.initialized)
+      throw new UnprocessableEntityException('parent already initialized');
+
+    const updatedParent = {
+      ...foundParent,
+      ...updateParentDto,
+      initialized: true,
+    };
+    await this.parentRepository.save(updatedParent);
+
+    return Mapper.mapParentEntityToParentResponseModel(updatedParent);
   }
 
   async remove(id: string) {

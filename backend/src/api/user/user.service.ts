@@ -14,8 +14,7 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    // return await this.userRepository.insert(createUserDto);
+    return await this.userRepository.insert(createUserDto);
   }
 
   async findAll(query: PaginationQueryDto) {
@@ -31,10 +30,10 @@ export class UserService {
     return await this.userRepository.findOne(id);
   }
 
-  async findOneByUsername(username: string) {
+  async findOneByEmail(email: string) {
     return await this.userRepository.findOne({
       where: {
-        username,
+        email,
       },
     });
   }

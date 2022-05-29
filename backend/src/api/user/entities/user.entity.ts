@@ -3,7 +3,6 @@ import { Column, Entity } from 'typeorm';
 
 @Entity()
 export class User extends Base {
-  // TODO decide if we will use username or by unique email
   @Column({ nullable: true })
   username: string;
 

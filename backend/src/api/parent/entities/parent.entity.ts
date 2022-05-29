@@ -5,22 +5,25 @@ import { BaseWithoutId } from 'src/infastructure/database/entities/base.entity';
 
 @Entity()
 export class Parent extends BaseWithoutId {
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
-  @Column()
+  @Column({ nullable: true })
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   birthDate: string;
+
+  @Column({ default: false })
+  initialized: boolean;
 
   @OneToMany(() => Order, (order) => order.parent)
   orders: Order[];
 
-  @OneToOne(() => User, { primary: true })
+  @OneToOne(() => User, { primary: true, cascade: ['insert'], eager: true })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 }
