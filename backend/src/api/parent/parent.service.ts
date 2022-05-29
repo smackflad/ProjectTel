@@ -30,7 +30,6 @@ export class ParentService {
   async createUninitializedParent(
     createUnitializedParentDto: CreateUnitializedParentDto,
   ) {
-    console.log(createUnitializedParentDto);
     try {
       const parent: Parent = this.parentRepository.create(
         createUnitializedParentDto,
@@ -42,30 +41,36 @@ export class ParentService {
       );
     } catch (ex: any) {
       if (ex.constructor === QueryFailedError && (ex as any).code === '23505') {
-        const initialized = await this.isParentInitialized(
+        const accDetails = await this.isParentInitialized(
           createUnitializedParentDto.user.email,
         );
-        throw new ConflictException({ initialized });
+        throw new ConflictException(accDetails);
       }
       throw ex;
     }
   }
 
   async isParentInitialized(email: string) {
-    const { initialized } = await this.parentRepository.findOne({
+    const {
+      initialized,
+      user: { id: userId },
+    } = await this.parentRepository.findOne({
       relations: ['user'],
       where: { user: { email } },
     });
-    return initialized;
+    return { initialized, userId };
   }
 
   async findAll(query: PaginationQueryDto) {
     const [result, total] = await this.parentRepository.findAndCount({
-      where: {},
+      relations: ['user'],
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
-    return { result, total };
+    const mappedParents = result.map((parent) =>
+      Mapper.mapParentEntityToParentResponseModel(parent),
+    );
+    return { result: mappedParents, total };
   }
 
   async findOne(id: string) {

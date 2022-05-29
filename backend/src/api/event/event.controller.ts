@@ -6,37 +6,44 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { EventService } from './event.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 
-@Controller('event')
+@ApiTags('events')
+@Controller('events')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
   @Post()
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventService.create(createEventDto);
+  async create(@Body() createEventDto: CreateEventDto) {
+    return await this.eventService.create(createEventDto);
   }
 
   @Get()
-  findAll() {
-    return this.eventService.findAll();
+  async findAll(@Query() query: PaginationQueryDto) {
+    return this.eventService.findAll(query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.eventService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: UpdateEventDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateEventDto: UpdateEventDto,
+  ) {
     return this.eventService.update(id, updateEventDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.eventService.remove(id);
   }
 }

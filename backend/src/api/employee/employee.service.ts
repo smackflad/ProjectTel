@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
+import { CreateAdminDto } from './dto/create-admin.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
@@ -10,13 +11,19 @@ import { Employee } from './entities/employee.entity';
 export class EmployeeService {
   constructor(
     @InjectRepository(Employee)
-    private readonly parentRepository: Repository<Employee>,
+    private readonly employeeRepository: Repository<Employee>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    return 'This action adds a new employee';
+    return this.employeeRepository.create(createEmployeeDto);
+  }
+
+  async createAdmin(createAdminDto: CreateAdminDto) {
+    const admin = this.employeeRepository.create(createAdminDto);
+
+    return this.employeeRepository.save(admin);
   }
 
   async findAll() {

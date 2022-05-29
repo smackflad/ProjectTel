@@ -25,6 +25,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     let message = (exception as any).message.message;
     let code = 'HttpException';
     let initialized = null;
+    let userId = null;
 
     Logger.error(
       message,
@@ -33,7 +34,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     );
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
-    console.log((exception as BadRequestException).getResponse());
     switch (exception.constructor) {
       case HttpException:
         status = (exception as HttpException).getStatus();
@@ -63,6 +63,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         message = (exception as ConflictException).message;
         initialized = ((exception as ConflictException).getResponse() as any)
           .initialized;
+        userId = ((exception as ConflictException).getResponse() as any).userId;
         code = 'ConflictException';
         break;
       case NotFoundException:
@@ -86,6 +87,15 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     response
       .status(status)
-      .json(GlobalResponseError(status, message, code, request, initialized));
+      .json(
+        GlobalResponseError(
+          status,
+          message,
+          code,
+          request,
+          initialized,
+          userId,
+        ),
+      );
   }
 }

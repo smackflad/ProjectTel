@@ -6,4 +6,5 @@ export interface IResponseError {
   path: string;
   method: string;
   initialized?: boolean;
+  userId?: string;
 }

@@ -7,12 +7,14 @@ export const GlobalResponseError: (
   code: string,
   request: Request,
   initialized?: boolean,
+  userId?: string,
 ) => IResponseError = (
   statusCode: number,
   message: string,
   code: string,
   request: Request,
   initialized?: boolean,
+  userId?: string,
 ): IResponseError => {
   return {
     statusCode: statusCode,
@@ -22,5 +24,6 @@ export const GlobalResponseError: (
     path: request.url,
     method: request.method,
     initialized,
+    userId,
   };
 };

@@ -1,3 +1,4 @@
+import { Mapper } from './../../infastructure/helpers/mapper.helper';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
@@ -20,18 +21,20 @@ export class CompanyService {
   ) {}
 
   async create(createCompanyDto: CreateCompanyDto) {
-    console.log(createCompanyDto);
     // create admin
-    // const { admin, ...company } = createCompanyDto;
-    // const result = await this.companyRepository.save(company);
-    // // admin.company = result;
-    // await this.employeeService.create({
-    //   // result: company,
-    //   // ...admin,
-    //   role: UserRole.ADMIN,
-    // });
+    const { admin, ...company } = createCompanyDto;
+    const companyCreated = await this.companyRepository.save(company);
 
-    // return result;
+    const adminCreated = await this.employeeService.createAdmin({
+      company: companyCreated,
+      user: admin,
+      role: UserRole.ADMIN,
+    });
+
+    return Mapper.mapCompanyEntityToCompanyCreatedResponseModel(
+      companyCreated,
+      adminCreated,
+    );
   }
 
   async findAll(query: PaginationQueryDto) {
@@ -40,18 +43,23 @@ export class CompanyService {
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
-    return { result, total };
+    const mappedCompanies = result.map((company) =>
+      Mapper.mapCompanyEntityToCompanyResponseModel(company),
+    );
+    return { result: mappedCompanies, total };
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} company`;
+    const company = await this.companyRepository.findOne(id);
+    return Mapper.mapCompanyEntityToCompanyResponseModel(company);
   }
 
   async update(id: string, updateCompanyDto: UpdateCompanyDto) {
-    return `This action updates a #${id} company`;
+    await this.companyRepository.update(id, updateCompanyDto);
+    return this.findOne(id);
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} company`;
+    return this.companyRepository.delete(id);
   }
 }

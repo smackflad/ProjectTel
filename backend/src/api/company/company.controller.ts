@@ -15,7 +15,7 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 
 @ApiTags('companies')
-@Controller('company')
+@Controller('companies')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 

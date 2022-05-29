@@ -26,6 +26,7 @@ export class Company extends Base {
 
   @OneToOne(() => Location, {
     cascade: ['insert', 'update'],
+    eager: true,
   })
   @JoinColumn()
   location: Location;

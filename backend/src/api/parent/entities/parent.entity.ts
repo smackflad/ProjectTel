@@ -23,7 +23,11 @@ export class Parent extends BaseWithoutId {
   @OneToMany(() => Order, (order) => order.parent)
   orders: Order[];
 
-  @OneToOne(() => User, { primary: true, cascade: ['insert'], eager: true })
+  @OneToOne(() => User, {
+    primary: true,
+    cascade: ['insert', 'update'],
+    eager: true,
+  })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 }

@@ -1,7 +1,16 @@
 import { CreateLocationDto } from './../../location/dto/create-location.dto';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import {
+  IsDefined,
+  IsEmail,
+  IsNotEmptyObject,
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { CreateUserDto } from 'src/api/user/dto/create-user.dto';
+import { Type } from 'class-transformer';
 
 export class CreateCompanyDto {
   @ApiProperty()
@@ -18,6 +27,7 @@ export class CreateCompanyDto {
 
   @ApiProperty()
   @IsString()
+  @IsEmail()
   email: string;
 
   @ApiProperty()
@@ -29,9 +39,18 @@ export class CreateCompanyDto {
   iban: string;
 
   @ApiProperty({ type: CreateUserDto })
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateUserDto)
   admin: CreateUserDto;
 
-  //location details
   @ApiProperty({ type: CreateLocationDto })
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateLocationDto)
   location: CreateLocationDto;
 }

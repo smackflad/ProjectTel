@@ -1,7 +1,10 @@
 import { Company } from 'src/api/company/entities/company.entity';
 import { Location } from 'src/api/location/entities/location.entity';
 import { Order } from 'src/api/order/entities/order.entity';
-import { Base } from 'src/infastructure/database/entities/base.entity';
+import {
+  Base,
+  BaseWithoutId,
+} from 'src/infastructure/database/entities/base.entity';
 import {
   Column,
   Entity,
@@ -12,22 +15,27 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Event extends Location {
+export class Event extends BaseWithoutId {
   @Column()
   title: string;
 
   @Column()
   description: string;
 
-  @Column()
+  @Column('double precision')
   price: number;
 
-  @Column('int')
+  @Column()
   ammount: number;
 
-  // TODO add images
+  @Column({ type: 'date', nullable: true })
+  eventDate: string;
 
-  // TODO add category
+  @Column({ default: false })
+  active: boolean;
+
+  @Column({ type: 'text', array: true })
+  images: string[];
 
   @OneToMany(() => Order, (order) => order.event)
   orders: Order[];
@@ -35,7 +43,11 @@ export class Event extends Location {
   @ManyToOne(() => Company, (company) => company.events)
   company: Company;
 
-  // @OneToOne(() => LocationWithId)
-  // @JoinColumn()
-  // location: LocationWithId;
+  @OneToOne(() => Location, {
+    primary: true,
+    cascade: ['insert', 'update'],
+    eager: true,
+  })
+  @JoinColumn({ name: 'location_id', referencedColumnName: 'id' })
+  location: Location;
 }
