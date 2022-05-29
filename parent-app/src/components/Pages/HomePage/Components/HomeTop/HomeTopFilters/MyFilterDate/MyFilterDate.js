@@ -1,10 +1,18 @@
 import './MyFilterDate.css';
 import '../MyFilter.css';
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import DatePicker from "react-datepicker";
 
-const MyFilterDate = ({type="text", placeholder="",disabled=false}) => 
+const DateCategories = ["Σήμερα","Αυτή την Εβδομάδα"];
+
+const MyFilterDate = ({}) => 
 {
-    const [open, setOpen] = useState(false);
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date());
+    
+
+	const [open, setOpen] = useState(true);
     const [checked, setChecked] = useState([]);
     const handleCheck = (event) => {
         var updatedList = [...checked];
@@ -16,31 +24,56 @@ const MyFilterDate = ({type="text", placeholder="",disabled=false}) =>
         setChecked(updatedList);
     };
 
-    var checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-      })
-    : "";
-
+    var checkedItems = ()=>{
+        if(checked.length > 1){
+            return checked.length+" Επιλεγμένα"
+        }else if(checked.length === 1){
+            return checked[0];
+        }else{
+            return "";
+        }
+    }
 
     return (
         <div className='MyFilter-txt-outter'>
-        <div className="MyFilter-txt-external">
-            <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal'>
+        <div className="MyFilter-txt-external MyFilterDate-txt-external">
+            <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal MyFilterDate-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>
-                    <span className={`MyFilter-txt-span ${checked.length ? "MyFilter-txt-span-small":""}`}>Date</span>
+                    <span className={`MyFilter-txt-span ${checked.length ? "MyFilter-txt-span-small":""}`}>Ημερομηνία</span>
                     {checked.length >0 &&
                             <span className='MyFilter-txt-span-items'>{checkedItems}</span>
                     }
                 </div>
-                <span class="material-icons-outlined MyFilter-txt-icon">
+                <span className="material-icons-outlined MyFilter-txt-icon">
                     {open ? 'close' : 'expand_more'}
                 </span>
             </div>
             {open &&
                 <div className='MyFilterDate-popup-external'>
                     <div className='MyFilterDate-popup-internal'>
-
+                        <span className='MyFilterDate-popup-internal-title'>Επιλογή</span>
+                        <div className='MyFilterDate-popup-internal-items'>
+                            <div className="MyFilterDate-popup-internal-map">
+                                <DatePicker
+                                    selected={startDate}
+                                    onChange={(date) => setStartDate(date)}
+                                    monthsShown={2}
+                                    inline
+                                />
+                                <ul>
+                                    {
+                                        DateCategories.slice(0,DateCategories.length).map((item)=>
+                                            <li key={uuidv4()}>
+                                                <label>
+                                                    <input type="checkbox" value={item} onChange={handleCheck} checked={checked.includes(item)}/>
+                                                    {item}
+                                                </label>
+                                            </li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             }

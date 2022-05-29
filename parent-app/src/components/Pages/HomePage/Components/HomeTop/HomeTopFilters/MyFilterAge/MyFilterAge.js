@@ -1,6 +1,9 @@
 import './MyFilterAge.css';
 import '../MyFilter.css';
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
+
+const ageCategories = ["Προσχολική","Elementary","third","fourth"];
 
 const MyFilterAge = ({}) => 
 {
@@ -16,11 +19,15 @@ const MyFilterAge = ({}) =>
         setChecked(updatedList);
     };
 
-    var checkedItems = checked.length
-    ? checked.reduce((total, item) => {
-        return total + ", " + item;
-      })
-    : "";
+    var checkedItems = ()=>{
+        if(checked.length > 1){
+            return checked.length+" Επιλεγμένα"
+        }else if(checked.length === 1){
+            return checked[0];
+        }else{
+            return "";
+        }
+    }
 
 
     return (
@@ -28,45 +35,31 @@ const MyFilterAge = ({}) =>
         <div className="MyFilter-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>
-                    <span className={`MyFilter-txt-span ${checked.length ? "MyFilter-txt-span-small":""}`}>Age</span>
+                    <span className={`MyFilter-txt-span ${checked.length ? "MyFilter-txt-span-small":""}`}>Ηλικία</span>
                     {checked.length >0 &&
-                            <span className='MyFilter-txt-span-items'>{checkedItems}</span>
+                            <span className='MyFilter-txt-span-items'>{checkedItems()}</span>
                     }
                 </div>
-                <span class="material-icons-outlined MyFilter-txt-icon">
+                <span className="material-icons-outlined MyFilter-txt-icon">
                     {open ? 'close' : 'expand_more'}
                 </span>
             </div>
             {open &&
                 <div className='MyFilterAge-popup-external'>
                     <div className='MyFilterAge-popup-internal'>
-                        <span className='MyFilterAge-popup-internal-title'>Choose Age</span>
+                        <span className='MyFilterAge-popup-internal-title'>Επιλογή</span>
                         <div className='MyFilterAge-popup-internal-items'>
                             <ul>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" value="Preschool" onChange={handleCheck} checked={checked.includes("Preschool")}/>
-                                        Preschool
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" value="Elementary" onChange={handleCheck} checked={checked.includes("Elementary")}/>
-                                        Elementary
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" />
-                                        Preschool
-                                    </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" />
-                                        Preschool
-                                    </label>
-                                </li>
+                                {
+                                    ageCategories.map((item)=>
+                                        <li key={uuidv4()}>
+                                            <label>
+                                                <input type="checkbox" value={item} onChange={handleCheck} checked={checked.includes(item)}/>
+                                                {item}
+                                            </label>
+                                        </li>
+                                    )
+                                }
                             </ul>
                         </div>
                     </div>
