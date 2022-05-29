@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: calc(100vh - 100px); /* need change after footer is DONE   !!!!!!!!*/
+  height: calc(100vh - 100px);
 }
 @media (max-height: 700px) {
   .CommonLogReg-external {

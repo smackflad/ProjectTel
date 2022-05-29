@@ -1,6 +1,14 @@
 .Account-external {
   display: flex;
 }
+@media (max-width: 600px) {
+  .Account-external {
+    flex-direction: column;
+  }
+  .Account-password {
+    margin-left: 0px !important;
+  }
+}
 .Account-info h4 {
   font: normal normal bold 20px/25px;
   color: #5f6061;

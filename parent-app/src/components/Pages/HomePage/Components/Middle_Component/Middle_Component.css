@@ -23,6 +23,7 @@ ul.simple-pagination {
   flex-direction: row;
   list-style-type: none;
   align-items: center;
+  padding-left: 0;
 }
 li.pagination-prev,
 li.pagination-next {

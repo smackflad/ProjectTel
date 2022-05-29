@@ -43,7 +43,7 @@ function App() {
           <Route path="/my-profile" element={<ParentProfilePage />} />
         </Routes>
       </div>
-      <div className="Footer">Footer</div>
+      <div className="Footer">TEL © 2022</div>
     </Router>
   );
 }
