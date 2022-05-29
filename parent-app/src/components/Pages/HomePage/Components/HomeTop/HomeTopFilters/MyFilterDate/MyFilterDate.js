@@ -4,33 +4,47 @@ import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import DatePicker from "react-datepicker";
 
-const DateCategories = ["Σήμερα","Αυτή την Εβδομάδα"];
+const DateCategories = [{item: "Σήμερα", value:0},{item: "Αυτή την Εβδομάδα", value:1},{item: "Συγκεκριμένο διάστημα", value:2}];
 
 const MyFilterDate = ({}) => 
 {
 	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(null);
     
+    const [curr, setCurr] = useState(-5);
 
 	const [open, setOpen] = useState(true);
-    const [checked, setChecked] = useState([]);
+
+    const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+        setCurr(2);
+    };
+
     const handleCheck = (event) => {
-        var updatedList = [...checked];
         if (event.target.checked) {
-            updatedList = [...checked, event.target.value];
+            setCurr(event.target.value);
         } else {
-            updatedList.splice(checked.indexOf(event.target.value), 1);
+            setCurr(-5);
         }
-        setChecked(updatedList);
+        // console.log(curr);
     };
 
     var checkedItems = ()=>{
-        if(checked.length > 1){
-            return checked.length+" Επιλεγμένα"
-        }else if(checked.length === 1){
-            return checked[0];
-        }else{
-            return "";
+        if(curr == 0){
+            const currDate = new Date();
+            return currDate.getDate() + '/' + currDate.getMonth();
+        }else if(curr == 1){
+            var today = new Date();
+            var lastday = new Date();
+            while(lastday.getDay() != 0){
+                lastday.setDate(lastday.getDate()+1);
+            }
+            return today.getDate() + '/' + today.getMonth() + ' - ' + lastday.getDate() + '/' + lastday.getMonth();
+        }else if(curr == 2){
+        
+            return startDate.getDate() + '/' + startDate.getMonth() + ' - ' + endDate.getDate() + '/' + endDate.getMonth();
         }
     }
 
@@ -39,9 +53,9 @@ const MyFilterDate = ({}) =>
         <div className="MyFilter-txt-external MyFilterDate-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal MyFilterDate-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>
-                    <span className={`MyFilter-txt-span ${checked.length ? "MyFilter-txt-span-small":""}`}>Ημερομηνία</span>
-                    {checked.length >0 &&
-                            <span className='MyFilter-txt-span-items'>{checkedItems}</span>
+                    <span className={`MyFilter-txt-span ${curr !== -5 ? "MyFilter-txt-span-small":""}`}>Ημερομηνία</span>
+                    {curr !== -5 &&
+                            <span className='MyFilter-txt-span-items'>{checkedItems()}</span>
                     }
                 </div>
                 <span className="material-icons-outlined MyFilter-txt-icon">
@@ -56,17 +70,20 @@ const MyFilterDate = ({}) =>
                             <div className="MyFilterDate-popup-internal-map">
                                 <DatePicker
                                     selected={startDate}
-                                    onChange={(date) => setStartDate(date)}
+                                    onChange={onChange}
                                     monthsShown={2}
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    selectsRange
                                     inline
                                 />
                                 <ul>
                                     {
-                                        DateCategories.slice(0,DateCategories.length).map((item)=>
+                                        DateCategories.slice(0,DateCategories.length).map((item, index)=>
                                             <li key={uuidv4()}>
                                                 <label>
-                                                    <input type="checkbox" value={item} onChange={handleCheck} checked={checked.includes(item)}/>
-                                                    {item}
+                                                    <input type="checkbox" value={item.value} onChange={handleCheck} checked={index == curr}/>
+                                                    {item.item}
                                                 </label>
                                             </li>
                                         )
