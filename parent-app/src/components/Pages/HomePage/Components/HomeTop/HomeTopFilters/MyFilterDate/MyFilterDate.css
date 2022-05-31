@@ -60,3 +60,30 @@
 .MyFilterDate-popup-internal-title {
     font-size: 28px;
 }
+
+@media only screen and (max-width: 1015px){
+
+    .MyFilterDate-popup-external{
+        width: 80%;
+        position: unset;
+        margin: 0;
+    }
+
+    .MyFilterDate-popup-internal-map{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .MyFilterDate-popup-internal{
+        width: unset;
+    }
+    
+}
+
+@media only screen and (max-width: 830px){
+    .react-datepicker__month-container{
+        float: none !important;
+    }
+}

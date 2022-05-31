@@ -74,7 +74,7 @@
     
 }
 
-@media only screen and (max-width: 900px){
+@media only screen and (max-width: 1015px){
     .MyFilter-txt-external{
         width: 100%;
         display: flex;
