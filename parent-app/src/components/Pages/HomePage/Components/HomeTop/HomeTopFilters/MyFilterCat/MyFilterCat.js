@@ -6,10 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 const CatCategories = ["Προσχολική","Elementary","third","fourth", "Προσχολική","Elementary","third","fourth", "third","fourth"];
 
 
-const MyFilterCat = ({}) => 
+const MyFilterCat = ({checked, setChecked}) => 
 {
 	const [open, setOpen] = useState(false);
-    const [checked, setChecked] = useState([]);
+    // const [checked, setChecked] = useState([]);
     const handleCheck = (event) => {
         var updatedList = [...checked];
         if (event.target.checked) {

@@ -5,10 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ageCategories = ["Προσχολική","Elementary","third","fourth"];
 
-const MyFilterAge = ({}) => 
+const MyFilterAge = ({checked, setChecked}) => 
 {
 	const [open, setOpen] = useState(false);
-    const [checked, setChecked] = useState([]);
     const handleCheck = (event) => {
         var updatedList = [...checked];
         if (event.target.checked) {
@@ -32,6 +31,7 @@ const MyFilterAge = ({}) =>
 
     return (
         <div className='MyFilter-txt-outter'>
+            {/* {checked} */}
         <div className="MyFilter-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>

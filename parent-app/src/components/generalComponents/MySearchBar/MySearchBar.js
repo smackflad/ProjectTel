@@ -5,7 +5,10 @@ const MySearchBar = () =>
 {
     return (
 		<div className="MySearchBar-external">
-            <input type="text" />
+            <input type="text" placeholder='Αναζήτηση'/>
+            <span className="material-symbols-outlined MySearchBar-icon">
+              search
+            </span>
         </div>
 	);
 };
