@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import "./Wallet.css";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const rechargePrices = [10, 25, 50, 100];
 
@@ -14,13 +16,25 @@ const Wallet = () => {
   };
 
   const decreaseRechargeAmmount = (decreaseAmmount) => {
-    let newRechargeAmmount = balance - rechargeAmmount;
+    let newRechargeAmmount = rechargeAmmount - decreaseAmmount;
     newRechargeAmmount = newRechargeAmmount < 0 ? 0 : newRechargeAmmount;
     setRechargeAmmount(newRechargeAmmount);
   };
 
   const rechargeWallet = () => {
     // do something
+    if (rechargeAmmount <= 0) {
+      toast.warn("Παρακαλώ, επιλέξτε ένα ποσό για να προσθέσετε στην κάρτα", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+
     setBalance(rechargeAmmount);
     setRechargeAmmount(0);
   };
@@ -106,6 +120,17 @@ const Wallet = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
