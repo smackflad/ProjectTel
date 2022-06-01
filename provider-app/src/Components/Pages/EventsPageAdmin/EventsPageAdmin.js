@@ -1,40 +1,49 @@
-import "./EventsPage.css";
+import "./EventsPageAdmin.css";
 
 import { useState } from "react";
 
+import MyButton from "../../SharedComponents/MyButton/MyButton";
 
-const EventsPage = () => {	
+
+
+const EventsPageAdmin = () => {	
 	return (
 		<>
-			<span className="EventsPage-top">
-				<span className="EventsPage-top-title">
+			<span className="EventsPageAdmin-top">
+				<span className="EventsPageAdmin-top-title">
 					Events
 				</span>
-		
-				<button className="EventsPage-top-right-button"> New event </button>
 			</span>
-			<div className="EventsPage-container">
-					<table className="EventsPage-table" id="myTable">
+			<div className="EventsPageAdmin-container">
+					<table className="EventsPageAdmin-table" id="myTable">
 							<tr>
 								<th>
 									Event Name
-									<input type="text" id="myInputName" className="EventsPage-table-title-search" onKeyUp={tableSearchFunctionName} placeholder="Search"></input>
+									<input type="text" id="myInputName" className="EventsPageAdmin-table-title-search" onKeyUp={tableSearchFunctionName} placeholder="Search"></input>
+
+								</th>
+								<th>
+									Provider Name
+									<input type="text" id="myInputProvider" className="EventsPageAdmin-table-title-search" onKeyUp={tableSearchFunctionProvider} placeholder="Search"></input>
 
 								</th>
 								<th>
 									Date Created
-									<input type="text" id="myInputDate" className="EventsPage-table-title-search" onKeyUp={tableSearchFunctionDate} placeholder="Search"></input>
+									<input type="text" id="myInputDate" className="EventsPageAdmin-table-title-search" onKeyUp={tableSearchFunctionDate} placeholder="Search"></input>
 
 								</th>
 								<th>
 									Status
-									<button className="EventsPage-table-title-button" >Active</button>
+									<button className="EventsPageAdmin-table-title-button" >Active</button>
 
 								</th>
 							</tr>
 							<tr>
 								<td>
 									Football Practice
+								</td>
+								<td>
+									Athletisism A.E.
 								</td>
 								<td>
 									1/1/2022
@@ -49,6 +58,9 @@ const EventsPage = () => {
 									Painting
 								</td>
 								<td>
+									Municipality of Chalandri
+								</td>
+								<td>
 									11/9/2012
 								</td>
 								<td>
@@ -61,6 +73,9 @@ const EventsPage = () => {
 									Running
 								</td>
 								<td>
+									Municipality of Cholargos
+								</td>
+								<td>
 									5/7/2021
 								</td>
 								<td>
@@ -68,10 +83,10 @@ const EventsPage = () => {
 								</td>
 							</tr>
 
-						<span className="EventsPage-table-footer">
+						<span className="EventsPageAdmin-table-footer">
 							<div class="pagination">
-								<a href="#" onClick={pageLast}>First</a>
-								<a href="#" onClick={pageFirst}>&laquo;</a>
+								<a href="#" class="off" onClick={pageLast}>First</a>
+								<a href="#" class="off" onClick={pageFirst}>&laquo;</a>
 								<a class="active" href="#" onClick={pageFunc}>1</a>
 								<a href="#" onClick={pageFunc}>2</a>
 								<a href="#" onClick={pageFunc}>3</a>
@@ -94,7 +109,7 @@ const EventsPage = () => {
 	
 }
 
-function tableSearchFunctionName( ) {
+function tableSearchFunctionName() {
 	var input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("myInputName");
 	filter = input.value.toUpperCase();
@@ -115,7 +130,29 @@ function tableSearchFunctionName( ) {
 	}
 }
 
-function tableSearchFunctionDate( ) {
+function tableSearchFunctionProvider() {
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInputProvider");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("myTable");
+	tr = table.getElementsByTagName("tr");
+
+	// Loop through all table rows, and hide those who don't match the search query
+	for (i = 0; i < tr.length; i++) {
+		td = tr[i].getElementsByTagName("td")[1];
+		if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+		}
+	}
+}
+	
+
+function tableSearchFunctionDate() {
 	var input, filter, table, tr, td, i, txtValue;
 	input = document.getElementById("myInputDate");
 	filter = input.value.toUpperCase();
@@ -124,7 +161,7 @@ function tableSearchFunctionDate( ) {
 
 	// Loop through all table rows, and hide those who don't match the search query
 	for (i = 0; i < tr.length; i++) {
-		td = tr[i].getElementsByTagName("td")[1];
+		td = tr[i].getElementsByTagName("td")[2];
 		if (td) {
 			txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -153,5 +190,4 @@ function pageNext( ) {
 }
 
 
-
-export default EventsPage;
+export default EventsPageAdmin;

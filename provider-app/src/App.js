@@ -1,5 +1,7 @@
 import './App.css';
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
+import EventsPageAdmin from "./components/Pages/EventsPageAdmin/EventsPageAdmin";
+import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
 // import EventPage from "./components/Pages/EventPage/EventPage";
 import MyNav from './components/GeneralComponents/MyNav/MyNav';
 import {
@@ -14,7 +16,7 @@ function App() {
       <MyNav />
       <div className="Body">
         <Routes>
-          <Route path="/" element={<EventsPage />} />
+          <Route path="/" element={<UsersPageAdmin />} />
           {/* <Route path="/event" element={<EventPage />} /> */}
         </Routes>
       </div>
