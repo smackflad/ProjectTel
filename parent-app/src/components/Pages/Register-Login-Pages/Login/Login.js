@@ -70,6 +70,12 @@ const Login = ({ loading, setLoading }) => {
             value={form.email}
             onChange={handleChange}
             placeholder="Διεύθυνση ηλεκτρονικού ταχυδρομείου"
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά το email σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
         </div>
         <div className="password-wrap">
@@ -82,6 +88,12 @@ const Login = ({ loading, setLoading }) => {
             value={form.password}
             onChange={handleChange}
             placeholder="Κωδικός πρόσβασης"
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά τον κωδικό σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
           <span
             className="material-icons-outlined show-icon"

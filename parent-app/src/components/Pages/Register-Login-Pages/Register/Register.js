@@ -59,6 +59,12 @@ const Register = ({ loading, setLoading }) => {
               placeholder="Διεύθυνση ηλεκτρονικού ταχυδρομείου"
               value={form.email}
               onChange={handleChange}
+              onInvalid={(e) =>
+                e.target.setCustomValidity(
+                  "Παρακαλώ συμπληρώστε σωστά το email σας."
+                )
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
             ></input>
           </div>
           <div className="password-wrap">
@@ -71,6 +77,12 @@ const Register = ({ loading, setLoading }) => {
               placeholder="Κωδικός πρόσβασης"
               value={form.password}
               onChange={handleChange}
+              onInvalid={(e) =>
+                e.target.setCustomValidity(
+                  "Παρακαλώ συμπληρώστε σωστά τον κωδικό σας."
+                )
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
             ></input>
             <span
               className="material-icons-outlined show-icon"
@@ -81,7 +93,16 @@ const Register = ({ loading, setLoading }) => {
           </div>
           <div className="terms">
             <span className="chkTerms">
-              <input type="checkbox" required={true} />
+              <input
+                type="checkbox"
+                required={true}
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Παρακαλώ αποδεχτείτε τους όρους χρήσης."
+                  )
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
+              />
             </span>
             <span className="termsLabel">Αποδέχομαι τους </span>
             <a className="termsLink" target="_blank" href="/terms.pdf">

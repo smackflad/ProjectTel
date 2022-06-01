@@ -60,6 +60,12 @@ const RegisterStep2 = ({ loading, setLoading }) => {
             placeholder="Όνομα"
             value={form.firstName}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά το όνομα σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
           <input
             type="text"
@@ -69,6 +75,12 @@ const RegisterStep2 = ({ loading, setLoading }) => {
             placeholder="Επώνυμο"
             value={form.lastName}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά το επώνυμο σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
           <input
             type="date"
@@ -78,6 +90,12 @@ const RegisterStep2 = ({ loading, setLoading }) => {
             placeholder="dd-mm-yyyy"
             value={form.birthDate}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά την ημ. γέννησής σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
           <input
             type="tel"
@@ -88,6 +106,12 @@ const RegisterStep2 = ({ loading, setLoading }) => {
             pattern="[0-9]{10}"
             value={form.phone}
             onChange={handleChange}
+            onInvalid={(e) =>
+              e.target.setCustomValidity(
+                "Παρακαλώ συμπληρώστε σωστά το τηλέφωνό σας σας."
+              )
+            }
+            onInput={(e) => e.target.setCustomValidity("")}
           ></input>
           <button
             className="reg-log-submit-button"
