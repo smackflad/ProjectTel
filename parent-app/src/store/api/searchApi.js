@@ -1,6 +1,6 @@
-import { serverApi } from "./searchApi";
+import { api } from "./api";
 
-export const searchApi = serverApi.injectEndpoints({
+export const searchApi = api.injectEndpoints({
   endpoints: (build) => ({
     searchEvents: build.query({
       query: (body) => ({

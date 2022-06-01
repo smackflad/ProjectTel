@@ -5,13 +5,19 @@ import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/configureStore";
 import reportWebVitals from "./reportWebVitals";
+import CircleLoader from "react-spinners/CircleLoader";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
+let persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   // </React.StrictMode>
   <Provider store={store}>
-    <App />
+    <PersistGate loading={<CircleLoader />} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
 

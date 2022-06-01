@@ -1,25 +1,29 @@
 import "./Account.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchUserAccount } from "./Account.slice";
+import { useState, useEffect } from "react";
+import { useGetProfileMutation } from "../../../../../store/api/parentApi";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import CircleLoader from "react-spinners/CircleLoader";
 
 const Account = () => {
-  // console.log("ok");
-  const { profile, loading } = useSelector((state) => state.userAccount);
-  const dispatch = useDispatch();
+  const { userId } = useSelector((state) => state.global);
+  const [getProfile, { data, status, isLoading }] = useGetProfileMutation();
+
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await dispatch(fetchUserAccount(2)).unwrap();
-        console.log(`success user id: ${res.data.id}`);
-      } catch (err) {
-        console.error(err.message);
-      }
-      // console.log("hello");
-    })();
-  }, [dispatch]);
-  console.log(loading);
-  console.log(profile);
+    if (status === QueryStatus.uninitialized) getProfile(userId);
+    else if (status === QueryStatus.fulfilled) {
+      console.log(data);
+    }
+  }, [getProfile, data, status, userId]);
+
+  if (isLoading || status === QueryStatus.uninitialized) {
+    return (
+      <div className="Account-external">
+        <CircleLoader />
+      </div>
+    );
+  }
+
   return (
     <div className="Account-external">
       <div className="Account-info">
@@ -27,35 +31,35 @@ const Account = () => {
         <input
           className="Account-inputs"
           type="text"
-          //   value={profile.firstName}
+          value={data.firstName}
+          // onChange={handleChange}
+          disabled
+        />
+        <input
+          className="Account-inputs"
+          type="text"
+          value={data.lastName}
+          // onChange={handleChange}
+          disabled
+        />
+        <input
+          className="Account-inputs"
+          type="text"
+          value={data.user.email}
           //   onChange={handleChange}
           disabled
         />
         <input
           className="Account-inputs"
           type="text"
-          //   value={profile.lastName}
-          //   onChange={handleChange}
-          disabled
-        />
-        <input
-          className="Account-inputs"
-          type="text"
-          //   value={profile.email}
-          //   onChange={handleChange}
-          disabled
-        />
-        <input
-          className="Account-inputs"
-          type="text"
-          //   value={profile.phone}
+          value={data.phone}
           //   onChange={handleChange}
           disabled
         />
         <input
           className="Account-inputs"
           type="date"
-          //   value={profile.birthDate}
+          value={data.birthDate}
           //   onChange={handleChange}
           disabled
         />

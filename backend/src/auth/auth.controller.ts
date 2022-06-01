@@ -9,6 +9,7 @@ import {
   Body,
   Query,
   Param,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -36,12 +37,31 @@ export class AuthController {
     private companyService: CompanyService,
   ) {}
 
+  //TODO: Add userRole to userEntity
+  //TODO: and merge login companies
+
   @Public()
   @UseGuards(AuthGuard('local'))
   @ApiBody({ type: LoginDto })
-  @Post('login')
-  async login(@Request() req) {
-    console.log(req.user);
+  @Post('loginParent')
+  async loginParent(@Request() req, @Body() loginDto: LoginDto) {
+    const token = await this.authService.login(req.user);
+
+    const parentStatus = await this.parentService.isParentInitialized(
+      loginDto.email,
+    );
+    if (parentStatus === false)
+      throw new UnauthorizedException('Parent doesnt exist');
+
+    return { ...token, ...parentStatus };
+  }
+
+  @Public()
+  @UseGuards(AuthGuard('local'))
+  @ApiBody({ type: LoginDto })
+  @Post('loginEmployee')
+  async loginEmployee(@Request() req, @Body() loginDto: LoginDto) {
+    // return role of the employee
     return this.authService.login(req.user);
   }
 

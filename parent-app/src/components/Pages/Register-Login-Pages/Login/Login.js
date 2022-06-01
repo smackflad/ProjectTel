@@ -1,40 +1,44 @@
 import "./Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { http } from "../../../../util/http-common";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../../../store/globalSlice";
+import { useLoginParentMutation } from "../../../../store/api/authApi";
 
-const Login = ({ loading, setLoading }) => {
+const Login = ({ changeLoadingState }) => {
   const [passVisibility, setPassVisibility] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-    setLoading(true);
-    http
-      .post("/login", { form })
-      .then((res) => {
-        setLoading(false);
-        if (res.status == 200) {
-          // alert successfull
-        } else if (res.status == 403) {
-          toast.warn("Το email ή ο κωδικός σας είναι λάθος. Δοκιμάστε ξανά!", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          // alert un auth
-        }
-      })
-      .catch((err) => {
-        toast.error(`Error message: ${err.message}`, {
+
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [loginParent, { data, isError, isLoading, error, status }] =
+    useLoginParentMutation();
+
+  // changeLoadingState(isLoading);
+  useEffect(() => {
+    if (status === QueryStatus.fulfilled) {
+      dispatch(login(data));
+      navigate("/", { replace: true });
+    } else if (isError) {
+      console.log(error.data.initialized);
+      let errToastMessage = "";
+      if (error.status === 401) {
+        errToastMessage = `Δώσατε λάθος στοιχεία`;
+      } else if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -43,13 +47,17 @@ const Login = ({ loading, setLoading }) => {
           draggable: true,
           progress: undefined,
         });
-        setLoading(false);
-        //alert server error
-      });
+    }
+  }, [dispatch, status, error]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    loginParent(form);
   };
 
   const handleChange = (e) => {
-    if (!loading) setForm({ ...form, [e.target.id]: e.target.value });
+    if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   return (
@@ -105,17 +113,6 @@ const Login = ({ loading, setLoading }) => {
           Σύνδεση
         </button>
       </form>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </div>
   );
 };

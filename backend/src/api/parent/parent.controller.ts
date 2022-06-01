@@ -31,7 +31,17 @@ export class ParentController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.parentService.findOne(id);
+    return await this.parentService.findOne(id);
+  }
+
+  @Get(':id/profile')
+  async GetProfile(@Param('id') id: string) {
+    return await this.parentService.findOne(id);
+  }
+
+  @Get(':id/wallet')
+  async getWallet(@Param('id') id: string) {
+    return await this.parentService.findOne(id);
   }
 
   @Get('findOneByEmail/:email')

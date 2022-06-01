@@ -1,30 +1,44 @@
 import "./RegisterStep2.css";
-import { useState } from "react";
-import { http } from "../../../../util/http-common";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useCompleteParentRegistrationMutation } from "../../../../store/api/authApi";
+import { useSelector, useDispatch } from "react-redux";
+import { accountInitialized } from "../../../../store/globalSlice";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
-const RegisterStep2 = ({ loading, setLoading }) => {
+const RegisterStep2 = ({ changeLoadingState }) => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     birthDate: "",
     phone: "",
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-    setLoading(true);
-    http
-      .post("/register-step-2", { form })
-      .then((res) => {
-        setLoading(false);
-        if (res.status == 201) {
-          // alert successfull
-        }
-      })
-      .catch((err) => {
-        toast.error(`Error message: ${err.message}`, {
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { userId } = useSelector((state) => state.global);
+
+  const [completeRegistration, { data, isError, isLoading, error, status }] =
+    useCompleteParentRegistrationMutation();
+
+  useEffect(() => {
+    if (status === QueryStatus.fulfilled) {
+      dispatch(accountInitialized(data.userId));
+      navigate("/", { replace: true });
+    } else if (isError) {
+      console.log(error.data.initialized);
+      let errToastMessage = "";
+      if (error.status === 422) {
+        errToastMessage = `Αυτός ο χρήστης χρησιμοποιείται`;
+      } else if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -33,13 +47,17 @@ const RegisterStep2 = ({ loading, setLoading }) => {
           draggable: true,
           progress: undefined,
         });
-        setLoading(false);
-        //alert server error
-      });
+    }
+  }, [dispatch, status, error]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    completeRegistration({ ...form, id: userId });
   };
 
   const handleChange = (e) => {
-    if (!loading) setForm({ ...form, [e.target.id]: e.target.value });
+    if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   return (
@@ -102,17 +120,6 @@ const RegisterStep2 = ({ loading, setLoading }) => {
           </button>
         </form>
       </div>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </div>
   );
 };

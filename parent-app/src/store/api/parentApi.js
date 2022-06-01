@@ -1,8 +1,8 @@
-import { serverApi } from "./searchApi";
+import { api } from "./api";
 
-export const parentApi = serverApi.injectEndpoints({
+export const parentApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getProfile: build.query({
+    getProfile: build.mutation({
       query: (id) => ({
         url: `parents/${id}/profile`,
       }),
@@ -36,5 +36,9 @@ export const parentApi = serverApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetProfile, useGetWallet, useCreateWallet, useUpdateWallet } =
-  parentApi;
+export const {
+  useGetProfileMutation,
+  useGetWalletQuery,
+  useCreateWallet,
+  useUpdateWallet,
+} = parentApi;

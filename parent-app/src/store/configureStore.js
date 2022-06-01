@@ -1,10 +1,28 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userAccountReducer from "../components/Pages/ParentProfilePage/Tabs/Account/Account.slice";
+import { api } from "./api/api";
+import globalReducer from "./globalSlice";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const reducers = combineReducers({
+  global: globalReducer,
+  [api.reducerPath]: api.reducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: {
-    userAccount: userAccountReducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(api.middleware),
 });
 
 export default store;

@@ -24,7 +24,7 @@ class ConfigService {
   }
 
   public getPort() {
-    return this.getValue('PORT', true);
+    return this.getValue('PORT', false) || 3000;
   }
 
   public isProduction() {

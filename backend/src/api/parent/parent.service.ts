@@ -51,14 +51,14 @@ export class ParentService {
   }
 
   async isParentInitialized(email: string) {
-    const {
-      initialized,
-      user: { id: userId },
-    } = await this.parentRepository.findOne({
+    const parent = await this.parentRepository.findOne({
       relations: ['user'],
       where: { user: { email } },
     });
-    return { initialized, userId };
+    if (!parent) {
+      return false;
+    }
+    return { initialized: parent.initialized, userId: parent.user.id };
   }
 
   async findAll(query: PaginationQueryDto) {

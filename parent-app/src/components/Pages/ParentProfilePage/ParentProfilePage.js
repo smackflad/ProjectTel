@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ParentProfilePage = () => {
-  const [tabIndex, setTabIndex] = useState(2);
+  const [tabIndex, setTabIndex] = useState(0);
 
   return (
     <div className="ParentProfilePage-external">
@@ -23,20 +23,6 @@ const ParentProfilePage = () => {
                 </li>
               );
             })}
-            {/* <li className="mini-menu-selected">
-              <span className="material-icons-outlined">manage_accounts</span>
-              <span>Προσωπικά στοιχεία</span>
-            </li>
-            <li>
-              <span className="material-icons-outlined">history</span>
-              <span>Ιστορικό παραγγελιών</span>
-            </li>
-            <li>
-              <span className="material-icons-outlined">
-                account_balance_wallet
-              </span>
-              <span>Πορτοφόλι</span>
-            </li> */}
           </ul>
         </div>
       </div>

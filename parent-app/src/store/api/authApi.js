@@ -1,15 +1,15 @@
-import { serverApi } from "./searchApi";
+import { api } from "./api";
 
-export const authApi = serverApi.injectEndpoints({
+export const authApi = api.injectEndpoints({
   endpoints: (build) => ({
-    initializeParentRegistration: build.query({
+    initializeParentRegistration: build.mutation({
       query: (body) => ({
         url: `auth/initializeParentRegistration`,
         method: "POST",
         body,
       }),
     }),
-    completeParentRegistration: build.query({
+    completeParentRegistration: build.mutation({
       query: (data) => {
         const { id, ...body } = data;
         return {
@@ -19,11 +19,19 @@ export const authApi = serverApi.injectEndpoints({
         };
       },
     }),
+    loginParent: build.mutation({
+      query: (body) => ({
+        url: `auth/loginParent`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
 export const {
-  useInitializeParentRegistration,
-  useCompleteParentRegistration,
+  useInitializeParentRegistrationMutation,
+  useCompleteParentRegistrationMutation,
+  useLoginParentMutation,
 } = authApi;
