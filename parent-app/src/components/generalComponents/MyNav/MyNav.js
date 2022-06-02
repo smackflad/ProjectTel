@@ -36,7 +36,7 @@ const MyNav = () => {
             setOpen(!open);
           }}
         >
-          <span class="material-icons-outlined">menu</span>
+          <span className="material-icons-outlined">menu</span>
           {open && (
             <div className="MyNav-mobile-menu">
               <ul className="MyNav-select-options">
