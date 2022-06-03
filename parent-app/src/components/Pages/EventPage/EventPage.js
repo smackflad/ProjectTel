@@ -5,10 +5,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import MyButton from "../../SharedComponents/MyButton/MyButton";
 import Popup from "./components/Popup/Popup";
+import SimpleImageSlider from "react-simple-image-slider";
+
 
 const EventPage = () => {	
 	const [startDate, setStartDate] = useState(new Date());
 	const [isOpen, setIsOpen] = useState(false);
+	const images = [
+		{ url: "images/1.jpg" },
+		{ url: "images/2.jpg" },
+		{ url: "images/3.jpg" },
+		{ url: "images/4.jpg" },
+		{ url: "images/5.jpg" },
+		{ url: "images/6.jpg" },
+		{ url: "images/7.jpg" },
+	  ];
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
 		if(isOpen){
@@ -21,20 +32,13 @@ const EventPage = () => {
 		<div className="EventPage-external">
 			<div className="EventPage-top">
 				<div className="EventPage-top-left">
-					<div className="EventPage-top-left-image">
-						
-					</div>
-					<div className="EventPage-top-left-image-select">
-						<div className="EventPage-top-left-image-inside">
-							
-						</div>
-						<div className="EventPage-top-left-image-inside">
-							
-						</div>
-						<div className="EventPage-top-left-image-inside">
-							
-						</div>
-					</div>
+					<SimpleImageSlider
+						width={600}
+						height={420}
+						images={images}
+						showBullets={true}
+						showNavs={true}
+					/>
 				</div>
 				<div className="EventPage-top-right">
 					<div className="EventPage-top-right-txt">
@@ -50,11 +54,12 @@ const EventPage = () => {
 					selected={startDate}
 					onChange={(date) => setStartDate(date)}
 					monthsShown={2}
+					excludeDates={[new Date()]}
 					inline
 					/>
 					<div className="EventPage-top-right-btns">
 						<span className="EventPage-top-right-btns-price">from <span className="EventPage-top-right-btns-price-num">10€</span></span>
-						<MyButton labelTxt={"Save/Edit"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
+						<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
 					</div>
 				</div>
 			</div>
