@@ -85,8 +85,25 @@ const MyFilterLoc = ({}) =>
     }
     const zoom = 13;
 
+    const ref = useRef(null);
+    const onClickOutside = ()=>{
+        if(open){setOpen(!open)};
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+            onClickOutside && onClickOutside();
+          }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+          document.removeEventListener('click', handleClickOutside, true);
+        };
+      }, [ onClickOutside ]);
+
     return (
-        <div className='MyFilter-txt-outter'>
+        <div ref={ref} className='MyFilter-txt-outter'>
         <div className="MyFilter-txt-external MyFilterLoc-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal MyFilterLoc-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>

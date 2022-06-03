@@ -1,6 +1,6 @@
 import './MyFilterAge.css';
 import '../MyFilter.css';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const ageCategories = ["Προσχολική","Elementary","third","fourth"];
@@ -28,9 +28,26 @@ const MyFilterAge = ({checked, setChecked}) =>
         }
     }
 
+    const ref = useRef(null);
+    const onClickOutside = ()=>{
+        if(open){setOpen(!open)};
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+            onClickOutside && onClickOutside();
+          }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+          document.removeEventListener('click', handleClickOutside, true);
+        };
+      }, [ onClickOutside ]);
+
 
     return (
-        <div className='MyFilter-txt-outter'>
+        <div ref={ref} className='MyFilter-txt-outter'>
             {/* {checked} */}
         <div className="MyFilter-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal'>

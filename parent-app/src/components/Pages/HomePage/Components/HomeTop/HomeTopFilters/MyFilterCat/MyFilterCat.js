@@ -1,6 +1,6 @@
 import './MyFilterCat.css';
 import './../MyFilter.css';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 const CatCategories = ["Προσχολική","Elementary","third","fourth", "Προσχολική","Elementary","third","fourth", "third","fourth"];
@@ -8,7 +8,7 @@ const CatCategories = ["Προσχολική","Elementary","third","fourth", "Π
 
 const MyFilterCat = ({checked, setChecked}) => 
 {
-	const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
     // const [checked, setChecked] = useState([]);
     const handleCheck = (event) => {
         var updatedList = [...checked];
@@ -19,7 +19,7 @@ const MyFilterCat = ({checked, setChecked}) =>
         }
         setChecked(updatedList);
     };
-
+    
     var checkedItems = ()=>{
         if(checked.length > 1){
             return checked.length+" Επιλεγμένα"
@@ -29,10 +29,27 @@ const MyFilterCat = ({checked, setChecked}) =>
             return "";
         }
     }
+    
+    const ref = useRef(null);
+    const onClickOutside = ()=>{
+        if(open){setOpen(!open)};
+    }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+            onClickOutside && onClickOutside();
+          }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+          document.removeEventListener('click', handleClickOutside, true);
+        };
+      }, [ onClickOutside ]);
 
 
     return (
-        <div className='MyFilter-txt-outter'>
+        <div ref={ref} className='MyFilter-txt-outter'>
         <div className="MyFilter-txt-external">
             <div onClick={()=>{setOpen(!open)}} className='MyFilter-txt-internal'>
                 <div className={`MyFilter-txt-internal-spans`}>
