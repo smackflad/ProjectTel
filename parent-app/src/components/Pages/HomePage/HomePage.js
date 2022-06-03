@@ -1,12 +1,17 @@
 import "./myHomePage.css";
+import HomeBot from "./Components/HomeBot/HomeBot";
 import Middle_Component from "./Components/Middle_Component/Middle_Component";
+
 import { Navigate } from "react-router-dom";
+import MySearchBar from "../../generalComponents/MySearchBar/MySearchBar";
 
 const HomePage = () => {	
 	return (
 		<div className="homePage-external">
+			<MySearchBar />
 			<Middle_Component />
-		</div>		
+			<HomeBot />
+		</div>
 	);
 };
 

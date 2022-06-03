@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { v4 as uuidv4 } from "uuid";
 
+// import Inside_Middle_Component from '../Inside_Middle_Component/Inside_Middle_Component';
+import HomeTopFilters from '../HomeTop/HomeTopFilters/HomeTopFilters';
+
+
 const items = [
   { title: "test", venue: "test" },
   { title: "test", venue: "test" },
@@ -159,6 +163,7 @@ const Middle_Component = () => {
   };
   return (
     <div className="Middle_Component-external">
+      <HomeTopFilters />
       <div className="Middle_Component-outsideContainer">
         <EventsList events={currentItems} />
       </div>

@@ -1,7 +1,7 @@
 import './MyTextBox.css';
 import { useState } from "react";
 
-const MyTextBox = ({type="text", labelTxt, val, setVal, validate, error, setError, star=false, disabled=false, width="330"}) => 
+const MyTextBox = ({type="text", labelTxt, val, setVal, validate=()=>{}, error, setError, star=false, disabled=false, width="330"}) => 
 {
 	const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
     validate(val, setError);

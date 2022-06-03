@@ -6,7 +6,9 @@
   align-items: center;
   margin: 22px 0 22px 0;
   flex-direction: column;
+  gap: 20px;
 }
+
 .Middle_Component-outsideContainer {
   background: #ffffff;
   border-radius: 5px;
