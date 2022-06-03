@@ -15,6 +15,7 @@ const UsersPageAdmin = () => {
 				</span>
 			</span>
 			<div className="UsersPageAdmin-container">
+				<span className="UsersPageAdmin-tables-container">
 					<table className="UsersPageAdmin-table" id="myTable">
 							<tr>
 								<th>
@@ -24,20 +25,52 @@ const UsersPageAdmin = () => {
 								</th>
 							</tr>
 							<tr>
-								<td>
+								<td onHover={changeBackgroundTable2}>
 									John Stamos
 								</td>
-								<td>
+								<td onHover={changeBackgroundTable2}>
 									Athletisism A.E.
 								</td>
-								<td>
+								<td onHover={changeBackgroundTable2}>
 									President
 								</td>
 							</tr>
 
-				
+							<tr>
+								<td onHover={changeBackgroundTable2}>
+									George Bush
+								</td>
+								<td onHover={changeBackgroundTable2}>
+									U.S.A.
+								</td>
+								<td onHover={changeBackgroundTable2}>
+									Former President
+								</td>
+							</tr>
+					</table>
 
-						<span className="UsersPageAdmin-table-footer">
+					<table className="UsersPageAdmin-table-2" id="myTable2">
+							<tr>
+								<td onHover={changeBackgroundTable}>
+									<a href="#"> delete user </a>
+								</td>
+								<td onHover={changeBackgroundTable}>
+									<a href="#"> reset password </a>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<a href="#"> delete user </a>
+								</td>
+								<td>
+									<a href="#"> reset password </a>
+								</td>
+							</tr>
+							
+					</table>
+				</span>
+				<span className="UsersPageAdmin-table-footer">
 							<div class="pagination">
 								<a href="#" class="off" onClick={pageLast}>First</a>
 								<a href="#" class="off" onClick={pageFirst}>&laquo;</a>
@@ -47,8 +80,7 @@ const UsersPageAdmin = () => {
 								<a href="#" onClick={pageNext}>&raquo;</a>
 								<a href="#" onClick={pageLast}>Last</a>
 							</div>
-						</span>
-					</table>
+				</span>
 			</div>
 
 
@@ -140,6 +172,14 @@ function pageLast( ) {
 }
 
 function pageNext( ) {
+	
+}
+
+function changeBackgroundTable() {
+	
+}
+
+function changeBackgroundTable2() {
 	
 }
 

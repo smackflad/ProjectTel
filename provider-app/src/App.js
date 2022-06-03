@@ -16,7 +16,7 @@ function App() {
       <MyNav />
       <div className="Body">
         <Routes>
-          <Route path="/" element={<UsersPageAdmin />} />
+          <Route path="/" element={<EventsPage />} />
           {/* <Route path="/event" element={<EventPage />} /> */}
         </Routes>
       </div>

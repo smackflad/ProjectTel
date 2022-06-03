@@ -23,6 +23,7 @@
 
 .UsersPageAdmin-container{
     display: flex;
+    flex-direction: column;
     min-width:fit-content;
     min-height:fit-content;
     justify-self: center;
@@ -36,9 +37,18 @@
     box-shadow : rgba(0,0, 0, .15);
 }
 
+.UsersPageAdmin-tables-container {
+    display: flex;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .UsersPageAdmin-table {
     display: flex;
 
+    padding-right: 40px;
     justify-self: stretch;
     flex-direction: column;
     margin-top: 20px;    
@@ -46,7 +56,6 @@
     max-width:fit-content;
     max-height:fit-content;
     justify-content: center;
-    /* align-items: stretch; */
     border-collapse:collapse; 
     border-spacing:12px;
     border-radius: 10px;
@@ -55,7 +64,6 @@
 .UsersPageAdmin-table th {
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
     min-height: 42px;
     border-radius: 10px;
     width: 300px;
@@ -68,15 +76,23 @@
     /* Add a bottom border to all table rows */
   }
 
-.UsersPageAdmin-table tr:nth-child(2) td{
+.UsersPageAdmin-table tr:nth-child(2) td:first-child{
     border-top-left-radius: 10px;
+}
+
+.UsersPageAdmin-table tr:nth-child(2) td:last-of-type{
     border-top-right-radius: 10px;
 }
 
-.UsersPageAdmin-table tr:last-of-type td{
+.UsersPageAdmin-table tr:last-of-type td:first-child{
     border-bottom-left-radius: 10px;
+}
+
+.UsersPageAdmin-table tr:last-of-type td:last-of-type{
     border-bottom-right-radius: 10px;
 }
+
+
 
 .UsersPageAdmin-table-title-search {
     display: flex;
@@ -85,33 +101,20 @@
     justify-content: center;
     text-align: center;
     content: 16px;
-    max-width: 300px;
-    width: 300px;
+    max-width: 600px;
+    width: 600px;
 }
 
-
-
-.UsersPageAdmin-table-title-button {
-    display: flex;
-    background: #EEE4E4;
-    border-radius: 10px;
-    justify-content: center;
-    text-align: center;
-    content: 16px;
-    max-width: 300px;
-    width: 300px;
-}
 
 .UsersPageAdmin-table td{
     display: flex;
     justify-content: center;
+    transition: background-color .3s;
     flex-direction: row;
     background: #ffffff;
     padding: 0 20px;
     border-bottom: 1px solid #ddd;
     width: 250px;
-    margin-left: 25px;
-    margin-right: 25px;
 }
 
 
@@ -131,6 +134,109 @@
 }
 
 .UsersPageAdmin-table tr:hover td {
+    background-color: #c4c4c4;
+}
+
+.UsersPageAdmin-table-2 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 82px;    
+    margin-bottom: 0px;
+    max-width:fit-content;
+    max-height:fit-content;
+    justify-content: center;
+    border-collapse:collapse; 
+    border-spacing:12px;
+    border-radius: 10px;
+}
+
+.UsersPageAdmin-table-2 th {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    min-height: 42px;
+    border-radius: 10px;
+    width: 200px;
+    content: 16px;
+    margin-bottom: 20px;
+}
+
+.UsersPageAdmin-table-2 tr {
+    display: flex;
+    /* Add a bottom border to all table rows */
+  }
+
+.UsersPageAdmin-table-2 tr:nth-child(1) td:first-child{
+    border-top-left-radius: 10px;
+}
+
+.UsersPageAdmin-table-2 tr:nth-child(1) td:last-of-type{
+    border-top-right-radius: 10px;
+}
+
+.UsersPageAdmin-table-2 tr:last-of-type td:first-child{
+    border-bottom-left-radius: 10px;
+}
+
+.UsersPageAdmin-table-2 tr:last-of-type td:last-of-type{
+    border-bottom-right-radius: 10px;
+}
+
+
+
+.UsersPageAdmin-table-2-title-search {
+    display: flex;
+    background: #EEE4E4;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    content: 16px;
+    max-width: 300px;
+    width: 300px;
+}
+
+
+
+.UsersPageAdmin-table-2-title-button {
+    display: flex;
+    background: #EEE4E4;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    content: 16px;
+    max-width: 300px;
+    width: 300px;
+}
+
+.UsersPageAdmin-table-2 td{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background: #ffffff;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+    width: 150px;
+    transition: background-color .3s;
+}
+
+
+
+
+.UsersPageAdmin-table-2-footer {
+    display: flex;
+    margin-top: 20px;
+    align-self: flex-end;
+    
+    background: #ffffff;
+    min-height: 42px;
+}
+
+.UsersPageAdmin-table-2 td:hover {
+    background-color: #c4c4c4;
+    
+}
+
+.UsersPageAdmin-table-2 tr:hover td {
     background-color: #c4c4c4;
 }
 
