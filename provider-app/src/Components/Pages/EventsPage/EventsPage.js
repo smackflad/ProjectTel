@@ -5,13 +5,12 @@ import { useState } from "react";
 
 const EventsPage = () => {	
 	return (
-		<>
+		<div className="EventsPage-external">
 			<span className="EventsPage-top">
-				<span className="EventsPage-top-title">
+				<h1 className="EventsPage-top-title">
 					Events
-				</span>
+				</h1>
 		
-				<button className="EventsPage-top-right-button"> New event </button>
 			</span>
 			<div className="EventsPage-container">
 					<table className="EventsPage-table" id="myTable">
@@ -28,7 +27,7 @@ const EventsPage = () => {
 								</th>
 								<th>
 									Status
-									<button className="EventsPage-table-title-button" >Active</button>
+									<button className="EventsPage-table-title-button"> Active </button>
 
 								</th>
 							</tr>
@@ -67,30 +66,34 @@ const EventsPage = () => {
 									Active
 								</td>
 							</tr>
-
-						<span className="EventsPage-table-footer">
-							<div class="pagination">
-								<a href="#" onClick={pageLast}>First</a>
-								<a href="#" onClick={pageFirst}>&laquo;</a>
-								<a class="active" href="#" onClick={pageFunc}>1</a>
-								<a href="#" onClick={pageFunc}>2</a>
-								<a href="#" onClick={pageFunc}>3</a>
-								<a href="#" onClick={pageNext}>&raquo;</a>
-								<a href="#" onClick={pageLast}>Last</a>
+						<tfoot>
+							<div className="EventsPage-table-pagination">
+								<div class="pagination">
+									<a class="inactive" href="#" onClick={pageFirst}>First</a>
+									<a class="inactive" href="#" onClick={pagePrev}>&laquo;</a>
+									<a class="active" href="#" onClick={pageFunc}>1</a>
+									<a href="#" onClick={pageFunc}>2</a>
+									<a href="#" onClick={pageFunc}>3</a>
+									<a href="#" onClick={pageNext}>&raquo;</a>
+									<a href="#" onClick={pageLast}>Last</a>
+								</div>
 							</div>
-						</span>
+						</tfoot>
 					</table>
+					<button
+						className="chevronButton"
+						type="submit"
+						onClick={()=>{}}
+						disabled={false}
+						>
+						<i className="material-icons chevron-item add">
+							{" "}
+							add{" "}
+						</i>
+					</button>
 			</div>
-
-
-		</>
+		</div>
 	);
-
-	// <script type = "text/javascript">
-			
-	// </script>
-
-
 	
 }
 
@@ -151,6 +154,11 @@ function pageLast( ) {
 function pageNext( ) {
 	
 }
+
+function pagePrev( ) {
+	
+}
+
 
 
 

@@ -1,3 +1,11 @@
+.EventsPage-external{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .EventsPage-top{
     display: flex;
     flex-direction: column;
@@ -9,46 +17,34 @@
     display: flex;
     justify-self: center;
     gap: 25px;
-    font-size: 96px;
+
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
 }
 
-.EventsPage-top-right-button{
-    display: flex;
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: #19A1B7;
-    color:#ffffff;
-    font: 20px;
-
-    margin-left: auto;
-    margin-right: 12%;
-    margin-bottom: 10px;
-}
-
-.EventsPage-top-right-button:hover{
-    background-color: #76CDD9;
-}
 
 .EventsPage-container{
     display: flex;
     justify-content: center;
-
+    justify-self: center;
     min-width:fit-content;
     min-height:fit-content;
-
-    border-radius: 70px;
+    border-radius: 10px;
     padding: 30px;
-    margin-left: 8%;
-    margin-right: 8%;
-    background: #c4c4c4;
-    box-shadow : rgba(0,0, 0, .15);
+    box-shadow: 0 8px 40px rgba(0,0,0,.15);
+    margin-left: 4%;
+    margin-right: 4%;
+    background: #fff;
 }
 
 .EventsPage-table {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 0px;
+    margin: 10px;
     max-width:fit-content;
     max-height:fit-content;
     justify-content: center;
@@ -61,80 +57,161 @@
 .EventsPage-table th {
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
+    padding: 10px;
     min-height: 42px;
-    border-radius: 10px;
     width: 300px;
-    content: 16px;
-    margin-bottom: 20px;
+
+    border: 1px solid var(--unnamed-color-cfd1d1);
+
+    /* UI Properties */
+    background-color: #fff;
+    color: var(--unnamed-color-2f3030);
+    text-align: start;
+    letter-spacing: 0px;
+    color: #2F3030;
+    opacity: 1;
+}
+
+.EventsPage-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.EventsPage-table th:last-of-type {
+    border-top-right-radius: 10px;
 }
 
 .EventsPage-table tr {
     display: flex;
+    border-bottom: 1px solid #ddd;
     /* Add a bottom border to all table rows */
   }
 
-.EventsPage-table tr:nth-child(2) td{
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
 
-.EventsPage-table tr:last-of-type td{
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.EventsPage-table-title-search {
+.EventsPage-table-title-search:first-child {
     display: flex;
-    background: #EEE4E4;
-    border-radius: 10px;
-    justify-content: center;
-    text-align: center;
-    content: 16px;
-    max-width: 300px;
-    width: 300px;
+    min-width: 264px;
+    min-height: 32px;
+
+    margin: 10px;
+
+    /* UI Properties */
+    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 7px;
+    opacity: 1;
+
+    color: #5F6061;
 }
 
+.EventsPage-table-title-search:last-of-type {
+    display: flex;
+    min-width: 140px;
+    min-height: 32px;
 
+    margin: 10px;
+
+    /* UI Properties */
+    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 7px;
+    opacity: 1;
+
+    color: #5F6061;
+}
 
 .EventsPage-table-title-button {
     display: flex;
-    background: #EEE4E4;
-    border-radius: 10px;
-    justify-content: center;
-    text-align: center;
-    content: 16px;
-    max-width: 300px;
-    width: 300px;
+    width: 140px;
+    min-height: 32px;
+
+    margin: 10px;
+
+    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 7px;
+    opacity: 1;
+
+    color: #5F6061;
 }
 
 .EventsPage-table td{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: row;
-    background: #ffffff;
-    padding: 0 20px;
-    border-bottom: 1px solid #ddd;
-    width: 250px;
-    margin-left: 25px;
-    margin-right: 25px;
+    width: 300px;
+
+    padding: 10px;
     transition: background-color .3s;
+    transform-style: flat;
+
+    /* UI Properties */
+    text-align: center;
+    letter-spacing: 0px;
+    opacity: 1;
+
+    color: #5F6061;
 }
 
+.EventsPage-table tr:nth-child(odd){
+    background: #fff;
+}
 
+.EventsPage-table tr:nth-child(even){
+    background: #fafafa;
+}
 
-
-.EventsPage-table-footer {
+.EventsPage-table tfoot{
     display: flex;
-    margin-top: 20px;
-    align-self: flex-end;
-    
-    background: #ffffff;
+    justify-content: end;
     min-height: 42px;
+
+    /* UI Properties */
+    background: var(--unnamed-color-ebeded) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #EBEDED 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 0px 0px 10px 10px;
+    opacity: 1;
 }
 
-.EventsPage-table td:hover {
-    background-color: #c4c4c4;
+
+.EventsPage-table tr th:nth-child(2){
+    width: 150px;
+}
+
+.EventsPage-table tr td:nth-child(2){
+    width: 150px;
+}
+
+.EventsPage-table tr th:nth-child(3){
+    width: 150px;
+}
+
+.EventsPage-table tr td:nth-child(3){
+    width: 150px;
+}
+
+
+
+
+.EventsPage-table-pagination {
+    display: flex;
+    justify-self: flex-end;
+    
+    min-height: 42px;
+
+    /* UI Properties */
+    background: var(--unnamed-color-ebeded) 0% 0% no-repeat padding-box;
+    background: #EBEDED 0% 0% no-repeat padding-box;
+    /* border: 1px solid #CFD1D1; */
+    border-radius: 0px 0px 10px 10px;
+    opacity: 1;
 }
 
 .EventsPage-table tr:hover td {
@@ -148,6 +225,7 @@
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
+
   }
   
   .pagination a.active {
@@ -156,3 +234,43 @@
   }
   
   .pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+
+  .chevron-item {
+    margin: 0;
+    padding: 5px;
+    color: rgba(0, 0, 0, 0.479);
+    background-color: #FFD3D3;
+    font-size: 35px !important;
+    font-weight:lighter;
+    border-style: none;
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25), 10px 10px 20px rgba(170, 170, 204, 0.5), -10px -10px 20px #FFFFFF;
+    border-radius: 32px;
+}
+.chevron-item.add {
+    background-color: #7ef87c;
+}
+
+.chevronButton:disabled {
+    opacity: 40%;
+    cursor: not-allowed;
+}.chevron-item {
+    margin: 0;
+    padding: 5px;
+    color: rgba(0, 0, 0, 0.479);
+    background-color: #FFD3D3;
+    font-size: 35px !important;
+    font-weight:lighter;
+    border-style: none;
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25), 10px 10px 20px rgba(170, 170, 204, 0.5), -10px -10px 20px #FFFFFF;
+    border-radius: 32px;
+}
+.chevron-item.add {
+    background-color: #7ef87c;
+}
+
+.chevronButton:disabled {
+    opacity: 40%;
+    cursor: not-allowed;
+}
