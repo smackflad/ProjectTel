@@ -5,20 +5,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import MyButton from "../../SharedComponents/MyButton/MyButton";
 import Popup from "./components/Popup/Popup";
-import SimpleImageSlider from "react-simple-image-slider";
-
-
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import "../../../images/"
 const EventPage = () => {	
 	const [startDate, setStartDate] = useState(new Date());
 	const [isOpen, setIsOpen] = useState(false);
 	const images = [
-		{ url: "images/1.jpg" },
-		{ url: "images/2.jpg" },
-		{ url: "images/3.jpg" },
-		{ url: "images/4.jpg" },
-		{ url: "images/5.jpg" },
-		{ url: "images/6.jpg" },
-		{ url: "images/7.jpg" },
+		{ url: "https://2.img-dpreview.com/files/p/E~TS590x0~articles/5081755051/0652566517.jpeg" },
+		
 	  ];
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
@@ -32,13 +27,23 @@ const EventPage = () => {
 		<div className="EventPage-external">
 			<div className="EventPage-top">
 				<div className="EventPage-top-left">
-					<SimpleImageSlider
+					{/* <SimpleImageSlider
 						width={600}
 						height={420}
 						images={images}
 						showBullets={true}
 						showNavs={true}
-					/>
+					/> */}
+					<Carousel width="600px">
+						{
+							images.slice(0,images.length).map((item, index)=>
+								<div>
+									<img src={item.url} />
+									{/* <p className="legend">Legend 1</p> */}
+								</div>
+							)
+						}
+					</Carousel>
 				</div>
 				<div className="EventPage-top-right">
 					<div className="EventPage-top-right-txt">
@@ -50,15 +55,57 @@ const EventPage = () => {
 							Δημοτικό Θέατρο
 						</span>
 					</div>
-					<DatePicker
-					selected={startDate}
-					onChange={(date) => setStartDate(date)}
-					monthsShown={2}
-					excludeDates={[new Date()]}
-					inline
-					/>
-					<div className="EventPage-top-right-btns">
-						<span className="EventPage-top-right-btns-price">from <span className="EventPage-top-right-btns-price-num">10€</span></span>
+					<div className="EventPage-top-right-other">
+						<DatePicker
+						selected={startDate}
+						onChange={(date) => setStartDate(date)}
+						monthsShown={2}
+						excludeDates={[new Date()]}
+						popperClassName="test"
+						inline
+						/>
+						<div className="EventPage-top-right-btns">
+							<span className="EventPage-top-right-btns-price">from <span className="EventPage-top-right-btns-price-num">10€</span></span>
+							<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div className="EventPage-top-mobile">
+				<div className="EventPage-top-mobile-title">
+					<span className="EventPage-title">ΤΟ ΜΙΝΟΡΕ</span>
+					<span className="EventPage-location">
+						<span className="material-icons-outlined">
+							location_on
+						</span>
+						Δημοτικό Θέατρο
+					</span>
+				</div>
+				<div className="EventPage-top-mobile-left">
+					<Carousel>
+						{
+							images.slice(0,images.length).map((item, index)=>
+								<div>
+									<img src={item.url} />
+									{/* <p className="legend">Legend 1</p> */}
+								</div>
+							)
+						}
+					</Carousel>
+				</div>
+				<div className="EventPage-top-mobile-right">
+					<div className="EventPage-top-mobile-datepicker">
+						<DatePicker
+						selected={startDate}
+						onChange={(date) => setStartDate(date)}
+						monthsShown={2}
+						excludeDates={[new Date()]}
+						inline
+						/>
+					</div>
+					<div className="EventPage-top-mobile-right-btns">
+						<span className="EventPage-top-mobile-right-btns-price">from <span className="EventPage-top-mobile-right-btns-price-num">10€</span></span>
 						<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
 					</div>
 				</div>

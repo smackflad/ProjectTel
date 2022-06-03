@@ -76,18 +76,19 @@ const MyFilterDate = ({}) =>
                     <div className='MyFilterDate-popup-internal'>
                         <span className='MyFilterDate-popup-internal-title'>Επιλογή</span>
                         <div className='MyFilterDate-popup-internal-items'>
-                            <div className="MyFilterDate-popup-internal-map">
-                                <DatePicker
-                                    selected={null}
-                                    onChange={onChange}
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    selectsRange={true}
-                                    isClearable={true}
-                                    inline
-                                    monthsShown={2}
-                                    popperClassName="test"
-                                />
+                            <div className="MyFilterDate-popup-internal-date">
+                                <div className="MyFilterDate-popup-internal-date-datePicker">
+                                    <DatePicker
+                                        selected={null}
+                                        onChange={onChange}
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        selectsRange={true}
+                                        isClearable={true}
+                                        inline
+                                        monthsShown={2}
+                                    />
+                                </div>
 
                                 {/* <DatePicker
                                     renderCustomHeader={({

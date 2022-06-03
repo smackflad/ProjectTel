@@ -67,3 +67,17 @@ text-decoration-line: underline;
     height: 130px;
     background-color: blue;
 }
+
+@media only screen and (max-width: 520px){
+    .EventPage-PopupSuccess-internal-items-bot-inner{
+        flex-direction: column;
+        justify-content: unset;
+    }
+    .EventPage-PopupSuccess-internal-items-bot{
+        width: unset;
+    }
+    
+    .EventPage-PopupSuccess-internal{
+        min-width: max-content;
+    }
+}

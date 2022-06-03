@@ -50,7 +50,7 @@
     direction: ltr;
 }
 
-.MyFilterDate-popup-internal-map {
+.MyFilterDate-popup-internal-date {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -69,7 +69,7 @@
         margin: 0;
     }
 
-    .MyFilterDate-popup-internal-map{
+    .MyFilterDate-popup-internal-date{
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
@@ -83,7 +83,7 @@
 }
 
 @media only screen and (max-width: 830px){
-    .react-datepicker__month-container{
+    .MyFilterDate-popup-internal-date-datePicker > div > .react-datepicker > .react-datepicker__month-container{
         float: none !important;
     }
 }

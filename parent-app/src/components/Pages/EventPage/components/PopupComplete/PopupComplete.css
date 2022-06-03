@@ -70,3 +70,22 @@
     cursor: pointer;
     color: rgb(133, 133, 133);
 }
+
+@media only screen and (max-width: 520px){
+    .EventPage-PopupComplete-internal-items-bot-inner{
+        flex-direction: column;
+        justify-content: unset;
+    }
+    .EventPage-PopupComplete-internal-items-bot{
+        width: unset;
+    }
+
+    .EventPage-PopupComplete-internal-items{
+        flex-direction: row;
+        align-items: unset;
+    }
+    
+    .EventPage-PopupComplete-internal{
+        min-width: max-content;
+    }
+}
