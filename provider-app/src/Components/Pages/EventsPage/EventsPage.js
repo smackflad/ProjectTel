@@ -30,6 +30,17 @@ const EventsPage = () => {
 									<button className="EventsPage-table-title-button"> Active </button>
 
 								</th>
+								<button
+									className="chevronButton"
+									type="submit"
+									onClick={()=>{}}
+									disabled={false}
+									>
+									<i className="material-icons chevron-item add">
+										{" "}
+										add{" "}
+									</i>
+								</button>
 							</tr>
 							<tr>
 								<td>
@@ -79,18 +90,7 @@ const EventsPage = () => {
 								</div>
 							</div>
 						</tfoot>
-					</table>
-					<button
-						className="chevronButton"
-						type="submit"
-						onClick={()=>{}}
-						disabled={false}
-						>
-						<i className="material-icons chevron-item add">
-							{" "}
-							add{" "}
-						</i>
-					</button>
+				</table>
 			</div>
 		</div>
 	);

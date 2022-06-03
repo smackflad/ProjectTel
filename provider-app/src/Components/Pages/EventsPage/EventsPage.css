@@ -237,37 +237,31 @@
 
 
 
-  .chevron-item {
+  .chevronButton {
     margin: 0;
-    padding: 5px;
-    color: rgba(0, 0, 0, 0.479);
-    background-color: #FFD3D3;
-    font-size: 35px !important;
-    font-weight:lighter;
+    /* padding: 0 10px 0 0; */
+    background: none;
     border-style: none;
-    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25), 10px 10px 20px rgba(170, 170, 204, 0.5), -10px -10px 20px #FFFFFF;
-    border-radius: 32px;
-}
-.chevron-item.add {
-    background-color: #7ef87c;
+    border-color: rgb(73, 64, 64);
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+    display: flex;
+    padding-top: 15px;
 }
 
-.chevronButton:disabled {
-    opacity: 40%;
-    cursor: not-allowed;
-}.chevron-item {
+.chevron-item {
     margin: 0;
     padding: 5px;
     color: rgba(0, 0, 0, 0.479);
     background-color: #FFD3D3;
-    font-size: 35px !important;
-    font-weight:lighter;
+    font-size: 35px !important; /*change this to make smaller */
     border-style: none;
     box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25), 10px 10px 20px rgba(170, 170, 204, 0.5), -10px -10px 20px #FFFFFF;
     border-radius: 32px;
 }
 .chevron-item.add {
-    background-color: #7ef87c;
+    background-color: #86ff84;
 }
 
 .chevronButton:disabled {
