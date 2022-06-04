@@ -28,7 +28,6 @@ const Wallet = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(form);
     updateWallet({ ...form, id: userId });
   };
 
@@ -176,7 +175,7 @@ const Wallet = () => {
       </div>
       <div className="Wallet-cards">
         <h4>Η κάρτα μου</h4>
-        {data.cardExists && (
+        {myCard !== "" && (
           <div className="Wallet-card-change">
             <input
               className="Wallet-myCard"
@@ -207,6 +206,14 @@ const Wallet = () => {
               id="CardNumber"
               name="CardNumber"
               placeholder="Προσθήκη κάρτας "
+              pattern="[1-9]{16}"
+              required={true}
+              onInvalid={(e) =>
+                e.target.setCustomValidity(
+                  "Παρακαλώ συμπληρώστε σωστά τον αριθμό της κάρτας σας."
+                )
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
               value={form.card}
               onChange={(e) =>
                 setForm({ balance: balance, card: e.target.value })
@@ -217,13 +224,28 @@ const Wallet = () => {
                 type="month"
                 id="CardDate"
                 name="CardDate"
+                required={true}
                 placeholder="Ημερομηνία λήξης "
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Παρακαλώ συμπληρώστε σωστά την ημερομηνία της κάρτας σας."
+                  )
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
               ></input>
               <input
                 type="text"
                 id="CardCvv"
                 name="CardCvv"
+                required={true}
+                pattern="[1-9]{3}"
                 placeholder="CVV "
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Παρακαλώ συμπληρώστε σωστά το CVV σας."
+                  )
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
               ></input>
             </div>
             <div className="Wallet-add-button-wrap">
