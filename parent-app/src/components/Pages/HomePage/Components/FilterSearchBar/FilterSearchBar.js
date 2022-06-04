@@ -13,8 +13,9 @@ const FilterSearchBar = () => {
   };
 
   return (
-    <div className="FilterSearchBar-external" onSubmit={handleSubmit}>
+    <form className="FilterSearchBar-external" onSubmit={handleSubmit}>
       <input
+        
         type="text"
         placeholder="Αναζήτηση"
         value={searchState.search}
@@ -32,7 +33,7 @@ const FilterSearchBar = () => {
       >
         search
       </span>
-    </div>
+    </form>
   );
 };
 

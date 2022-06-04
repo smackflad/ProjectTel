@@ -4,7 +4,7 @@ import { useState } from "react";
 const Event = ({ title, venue }) => {
   return (
     <div className="Inside_Middle_Component-external">
-      <a className="Inside_Middle_Component-elementClick" href="/">
+      <a className="Inside_Middle_Component-elementClick" href="/event">
         <img
           className="Inside-Middle-Component-image"
           src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"

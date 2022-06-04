@@ -16,6 +16,8 @@ const DateFilter = ({}) => {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [FinalstartDate, setFinalStartDate] = useState("");
+  const [FinalendDate, setFinalEndDate] = useState("");
 
   const [curr, setCurr] = useState(0);
 
@@ -23,8 +25,13 @@ const DateFilter = ({}) => {
 
   const onChange = (dates) => {
     const [start, end] = dates;
+    const endTemp = new Date(end);
+    endTemp.setHours(23, 59, 59, 999);
+
     setStartDate(start);
     setEndDate(end);
+    setFinalStartDate(start);
+    setFinalEndDate(endTemp);
     if (end !== "") {
       setCurr(3);
     } else {
@@ -37,17 +44,39 @@ const DateFilter = ({}) => {
       setCurr(event.target.value);
       setEndDate("");
       setStartDate("");
+      if(event.target.value == 1){
+        const currDate = new Date();
+        setFinalStartDate(currDate.toString());
+        currDate.setHours(23, 59, 59, 999); //TODO remove this if want to print events that are still active
+        setFinalEndDate(currDate.toString());
+      }else if(event.target.value == 2){
+        var today = new Date();//TODO remove this if want to print events that are still active
+        var lastday = new Date();
+        // today.setHours(23, 59, 59, 999);
+        lastday.setHours(23, 59, 59, 999);
+        while (lastday.getDay() !== 0) {
+          lastday.setDate(lastday.getDate() + 1);
+        }
+        setFinalStartDate(today.toString());
+        setFinalEndDate(lastday.toString());
+      }else if(event.target.value == 0){
+        setFinalStartDate("");
+        setFinalEndDate("");
+      }
     } else {
-      if (endDate !== "") setEndDate("");
+      if (endDate !== "") {
+        setEndDate("");
+        setFinalEndDate("");
+      }
       setCurr(0);
     }
   };
 
   var checkedItems = () => {
-    if (curr === 1) {
+    if (curr == 1) {
       const currDate = new Date();
       return currDate.getDate() + "/" + currDate.getMonth();
-    } else if (curr === 2) {
+    } else if (curr == 2) {
       var today = new Date();
       var lastday = new Date();
       while (lastday.getDay() !== 0) {
@@ -62,7 +91,7 @@ const DateFilter = ({}) => {
         "/" +
         lastday.getMonth()
       );
-    } else if (curr === 3) {
+    } else if (curr == 3) {
       if (startDate && endDate)
         return (
           startDate.getDate() +
@@ -73,7 +102,8 @@ const DateFilter = ({}) => {
           "/" +
           endDate.getMonth()
         );
-    } else if (curr === 0) {
+    } else if (curr == 0) {
+
     }
     return "";
   };
@@ -100,11 +130,11 @@ const DateFilter = ({}) => {
   useEffect(() => {
     dispatch(
       update((state) => {
-        state.startDate = startDate;
-        state.endDate = endDate;
+        state.startDate = FinalstartDate;
+        state.endDate = FinalendDate;
       })
     );
-  }, [startDate, endDate]);
+  }, [FinalstartDate, FinalendDate]);
 
   return (
     <div ref={ref} className="MyFilter-txt-outter">
