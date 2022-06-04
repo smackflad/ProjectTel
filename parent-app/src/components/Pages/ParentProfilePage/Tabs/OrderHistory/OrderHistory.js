@@ -7,6 +7,21 @@ const items = [
   { name: "test", date: "20/01/2002", price: "15" },
   { name: "123123testw21", date: "25/06/2022", price: "40" },
   { name: "test", date: "20/01/2022", price: "56" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
+  { name: "test", date: "20/01/2002", price: "15" },
+  { name: "123123testw21", date: "25/06/2022", price: "40" },
+  { name: "test", date: "20/01/2022", price: "56" },
 ];
 
 const Order = ({ name, date, price }) => {

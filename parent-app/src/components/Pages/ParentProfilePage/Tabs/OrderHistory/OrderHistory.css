@@ -4,6 +4,25 @@
   border-radius: 10px;
   background-color: #f5f7f7;
   flex-direction: column;
+  max-height: 525px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #1aabbf #cfd1d1;
+  scrollbar-width: thin;
+}
+.OrderHistory-external::-webkit-scrollbar {
+  width: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-track {
+  background: #cfd1d1;
+  border-radius: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-thumb {
+  background: #1aabbf;
+  border-radius: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-thumb:hover {
+  background: #76cdd9;
 }
 .OrderHistory-item-wrapper {
   display: flex;
