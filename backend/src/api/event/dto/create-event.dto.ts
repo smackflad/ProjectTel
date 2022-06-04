@@ -35,10 +35,6 @@ export class CreateEventDto {
   eventDate: string;
 
   @ApiProperty()
-  @IsString()
-  companyId: string;
-
-  @ApiProperty()
   @IsArray()
   images: string[];
 

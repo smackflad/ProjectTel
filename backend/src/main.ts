@@ -11,9 +11,7 @@ import { configService } from './config/config.service';
 import { GlobalExceptionFilter } from './infastructure/filters/globalException.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
-    cors: { credentials: false },
-  });
+  const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -46,7 +44,11 @@ async function bootstrap() {
 
   // app.useGlobalFilters(new GlobalExceptionFilter());
 
-  // app.enableCors({ origin: 'http://localhost:3000' });
+  app.enableCors({
+    origin: '*',
+    methods: 'GET, PUT, POST, DELETE, OPTIONS, PATCH',
+    allowedHeaders: 'Content-Type, Authorization',
+  });
 
   await app.listen(configService.getPort());
 }

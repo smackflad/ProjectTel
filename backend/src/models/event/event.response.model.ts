@@ -15,6 +15,8 @@ export class EventResponseModel {
 
   companyId: string;
 
+  companyName: string;
+
   images: string[];
 
   location: LocationResponseModel = new LocationResponseModel();

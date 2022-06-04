@@ -28,7 +28,7 @@ export class CompanyService {
     const adminCreated = await this.employeeService.createAdmin({
       company: companyCreated,
       user: admin,
-      role: UserRole.ADMIN,
+      role: UserRole.COMPANY_ADMIN,
     });
 
     return Mapper.mapCompanyEntityToCompanyCreatedResponseModel(

@@ -38,6 +38,10 @@ export class UserService {
     });
   }
 
+  async saveUser(user: User) {
+    return await this.userRepository.save(user);
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }

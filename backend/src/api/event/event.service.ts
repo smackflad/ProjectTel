@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { Mapper } from 'src/infastructure/helpers/mapper.helper';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 import { Company } from '../company/entities/company.entity';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
+import { EventsPaginationQueryDto } from './dto/events-pagination.dto';
+import { UserRole } from 'src/infastructure/enums/roles.enum';
 
 @Injectable()
 export class EventService {
@@ -17,22 +19,40 @@ export class EventService {
     private readonly companyRepository: Repository<Company>,
   ) {}
 
-  async create(createEventDto: CreateEventDto) {
-    const { companyId, ...eventToBeCreated } = createEventDto;
-
+  async create(companyId: string, createEventDto: CreateEventDto) {
     const company = await this.companyRepository.findOne(companyId);
 
     const savedEvent = await this.eventRepository.save({
-      ...eventToBeCreated,
+      ...createEventDto,
       company,
     });
 
     return Mapper.mapEventEntityToEventCreatedResponseModel(savedEvent);
   }
 
-  async findAll(query: PaginationQueryDto) {
+  async findAll(
+    companyId: string,
+    role: UserRole,
+    query: EventsPaginationQueryDto,
+  ) {
+    let whereQuery = {};
+    if (role === UserRole.COMPANY_ADMIN) {
+      whereQuery = {
+        company: { id: companyId },
+      };
+    } else if (role === UserRole.ADMIN && query.companyName !== undefined) {
+      whereQuery = {
+        company: { name: Like(`%${query.companyName}%`) },
+      };
+    }
+
+    if (query.eventName !== undefined) {
+      whereQuery = { title: Like(`%${query.eventName}%`), ...whereQuery };
+    }
+
     const [result, total] = await this.eventRepository.findAndCount({
-      relations: ['location'],
+      relations: ['location', 'company'],
+      where: whereQuery,
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
@@ -40,7 +60,7 @@ export class EventService {
     const mappedEvents = result.map((event) =>
       Mapper.mapEventEntityToEventResponseModel(event),
     );
-    return { mappedCompanies: mappedEvents, total };
+    return { items: mappedEvents, total };
   }
 
   async findOne(id: string) {
@@ -58,8 +78,7 @@ export class EventService {
       ...eventToBeUpdated.location,
       ...updateEventDto.location,
     };
-    console.log(eventToBeUpdated);
-    console.log({ ...eventToBeUpdated, ...updateEventDto });
+
     const updatedEvent = await this.eventRepository.save({
       ...eventToBeUpdated,
       ...updateEventDto,

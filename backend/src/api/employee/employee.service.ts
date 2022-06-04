@@ -26,6 +26,27 @@ export class EmployeeService {
     return this.employeeRepository.save(admin);
   }
 
+  async findEmployeeRoleByEmail(email: string) {
+    const employee = await this.employeeRepository.findOne({
+      relations: ['user', 'company'],
+      where: { user: { email } },
+    });
+    if (!employee) return false;
+
+    return {
+      role: employee.role,
+      id: employee.user.id,
+      companyId: employee.company.id,
+    };
+  }
+
+  async findEmployeeRoleById(id: string) {
+    const employee = await this.employeeRepository.findOne(id);
+    if (!employee) return false;
+
+    return employee.role;
+  }
+
   async findAll() {
     return `This action returns all employee`;
   }

@@ -7,6 +7,7 @@ import { CompanyResponseModel } from 'src/models/company/company.response.mode';
 import { EventResponseModel } from 'src/models/event/event.response.model';
 import { LocationResponseModel } from 'src/models/location/location.response.model';
 import { ParentReponseModel } from 'src/models/parent/parent.response.model';
+import { ParentProfileReponseModel } from 'src/models/parent/parent.profile.response.model';
 import { UnitializedParentReponseModel } from 'src/models/parent/unitializedParent.response.model';
 import { EventCreatedResponseModel } from 'src/models/event/event-created.response.model';
 
@@ -31,6 +32,20 @@ export class Mapper {
     res.user.email = parent.user.email;
     res.user.id = parent.user.id;
 
+    res.birthDate = parent.birthDate;
+    res.firstName = parent.firstName;
+    res.lastName = parent.lastName;
+    res.phone = parent.phone;
+
+    return res;
+  }
+
+  static mapParentEntityToParentProfileResponseModel(
+    parent: Parent,
+  ): ParentProfileReponseModel {
+    const res: ParentProfileReponseModel = new ParentProfileReponseModel();
+
+    res.email = parent.user.email;
     res.birthDate = parent.birthDate;
     res.firstName = parent.firstName;
     res.lastName = parent.lastName;
@@ -98,6 +113,10 @@ export class Mapper {
     res.ammount = event.ammount;
     res.images = event.images;
     res.eventDate = event.eventDate;
+    if (event.company !== null && event.company !== undefined) {
+      res.companyId = event.company.id;
+      res.companyName = event.company.name;
+    }
 
     res.location.address = event.location.address;
     res.location.addressNum = event.location.addressNum;

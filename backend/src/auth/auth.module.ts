@@ -10,6 +10,7 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserModule } from 'src/api/user/user.module';
 import { ParentModule } from 'src/api/parent/parent.module';
 import { CompanyModule } from 'src/api/company/company.module';
+import { EmployeeModule } from 'src/api/employee/employee.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CompanyModule } from 'src/api/company/company.module';
     ParentModule,
     CompanyModule,
     PassportModule,
+    EmployeeModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '6000s' },

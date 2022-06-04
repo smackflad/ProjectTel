@@ -19,14 +19,10 @@ import { UserService } from 'src/api/user/user.service';
 import { CompanyService } from 'src/api/company/company.service';
 import { ParentService } from 'src/api/parent/parent.service';
 import { CreateUnitializedParentDto } from 'src/api/parent/dto/createUnitialized.dto';
-import {
-  RegisterQueryDto,
-  RegisterType,
-  RegistrationStep,
-} from './dtos/register.query.dto';
 import { CreateParentDto } from 'src/api/parent/dto/create-parent.dto';
 import { UpdateParentDto } from 'src/api/parent/dto/update-parent.dto';
-
+import { ResetPasswordDto } from './dtos/reset-password.dto';
+import { EmployeeService } from 'src/api/employee/employee.service';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
@@ -35,6 +31,7 @@ export class AuthController {
     private userService: UserService,
     private parentService: ParentService,
     private companyService: CompanyService,
+    private employeeService: EmployeeService,
   ) {}
 
   //TODO: Add userRole to userEntity
@@ -62,7 +59,13 @@ export class AuthController {
   @Post('loginEmployee')
   async loginEmployee(@Request() req, @Body() loginDto: LoginDto) {
     // return role of the employee
-    return this.authService.login(req.user);
+    const token = await this.authService.login(req.user);
+    const role = await this.employeeService.findEmployeeRoleByEmail(
+      loginDto.email,
+    );
+    if (!role) throw new UnauthorizedException('Employee doesnt exist');
+
+    return { ...token, ...role };
   }
 
   @Public()
@@ -86,6 +89,16 @@ export class AuthController {
     return await this.parentService.createUninitializedParent(
       createUnitializedParentDto,
     );
+  }
+
+  @Public()
+  @Post(':id/resetPassword')
+  async resetPassword(
+    @Param('id') id: string,
+    @Body()
+    resetDto: ResetPasswordDto,
+  ) {
+    return await this.authService.resetPassword(id, resetDto);
   }
 
   @Public()

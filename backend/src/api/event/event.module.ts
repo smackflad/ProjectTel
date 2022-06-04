@@ -1,3 +1,4 @@
+import { EmployeeModule } from './../employee/employee.module';
 import { Module } from '@nestjs/common';
 import { EventService } from './event.service';
 import { EventController } from './event.controller';
@@ -8,7 +9,10 @@ import { Order } from 'src/api/order/entities/order.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Event, Order, Location, Company])],
+  imports: [
+    EmployeeModule,
+    TypeOrmModule.forFeature([Event, Order, Location, Company]),
+  ],
   controllers: [EventController],
   providers: [EventService],
 })

@@ -9,6 +9,7 @@ export class Company extends Base {
   @Column()
   name: string;
 
+  // @Column({ unique: true })
   @Column()
   taxId: string;
 

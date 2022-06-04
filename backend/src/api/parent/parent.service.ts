@@ -10,6 +10,7 @@ import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { QueryFailedError, Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateParentDto } from './dto/create-parent.dto';
+import { UpdateCardDto } from './dto/update-card.dto';
 import { CreateUnitializedParentDto } from './dto/createUnitialized.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
 import { Parent } from './entities/parent.entity';
@@ -79,6 +80,33 @@ export class ParentService {
       throw new NotFoundException();
     }
     return Mapper.mapParentEntityToParentResponseModel(parent);
+  }
+
+  async findParentProfile(id: string) {
+    const parent = await this.parentRepository.findOne(id);
+    if (parent === undefined) {
+      throw new NotFoundException();
+    }
+    return Mapper.mapParentEntityToParentProfileResponseModel(parent);
+  }
+
+  async findWallet(id: string) {
+    const parent = await this.parentRepository.findOne(id);
+    if (parent === undefined) {
+      throw new NotFoundException();
+    }
+    if (parent.card) return { cardExists: true, card: parent.card };
+    else return { cardExists: false };
+  }
+
+  async updateWallet(id: string, updateCardDto: UpdateCardDto) {
+    const updateResult = await this.parentRepository.update(id, {
+      ...updateCardDto,
+    });
+    if (!updateResult) {
+      throw new NotFoundException();
+    }
+    return await this.findWallet(id);
   }
 
   async findOneByEmail(email: string) {
