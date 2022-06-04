@@ -1,10 +1,9 @@
 import { Company } from 'src/api/company/entities/company.entity';
 import { Location } from 'src/api/location/entities/location.entity';
 import { Order } from 'src/api/order/entities/order.entity';
-import {
-  Base,
-  BaseWithoutId,
-} from 'src/infastructure/database/entities/base.entity';
+import { BaseWithoutId } from 'src/infastructure/database/entities/base.entity';
+import { AgeCategory } from 'src/infastructure/enums/age-category.enum';
+import { EventCategory } from 'src/infastructure/enums/event-category.enum';
 import {
   Column,
   Entity,
@@ -30,6 +29,20 @@ export class Event extends BaseWithoutId {
 
   @Column({ type: 'date', nullable: true })
   eventDate: string;
+
+  @Column({
+    type: 'enum',
+    enum: EventCategory,
+    default: EventCategory.INDOOR,
+  })
+  eventCategory: EventCategory;
+
+  @Column({
+    type: 'enum',
+    enum: AgeCategory,
+    default: AgeCategory.MIDDLE_SCHOOL,
+  })
+  ageCategory: AgeCategory;
 
   @Column({ default: false })
   active: boolean;

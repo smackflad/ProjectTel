@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const MyNav = () => {
   const [open, setOpen] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.global);
-  console.log(isLoggedIn);
+
   return (
     <div className="MyNav-external">
       <div className="MyNav-internal">

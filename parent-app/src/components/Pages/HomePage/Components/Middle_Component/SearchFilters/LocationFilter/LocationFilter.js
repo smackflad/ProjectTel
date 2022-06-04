@@ -1,4 +1,4 @@
-import "./MyFilterLoc.css";
+import "./LocationFilter.css";
 import "../MyFilter.css";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -60,7 +60,7 @@ function Map({ center, zoom }) {
   );
 }
 
-const MyFilterLoc = ({}) => {
+const LocationFilter = ({}) => {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState([]);
 
@@ -111,12 +111,12 @@ const MyFilterLoc = ({}) => {
 
   return (
     <div ref={ref} className="MyFilter-txt-outter">
-      <div className="MyFilter-txt-external MyFilterLoc-txt-external">
+      <div className="MyFilter-txt-external LocationFilter-txt-external">
         <div
           onClick={() => {
             setOpen(!open);
           }}
-          className="MyFilter-txt-internal MyFilterLoc-txt-internal"
+          className="MyFilter-txt-internal LocationFilter-txt-internal"
         >
           <div className={`MyFilter-txt-internal-spans`}>
             <span
@@ -135,11 +135,13 @@ const MyFilterLoc = ({}) => {
           </span>
         </div>
         {open && (
-          <div className="MyFilterLoc-popup-external">
-            <div className="MyFilterLoc-popup-internal">
-              <span className="MyFilterLoc-popup-internal-title">Επιλογή</span>
-              <div className="MyFilterLoc-popup-internal-items">
-                <div className="MyFilterLoc-popup-internal-map">
+          <div className="LocationFilter-popup-external">
+            <div className="LocationFilter-popup-internal">
+              <span className="LocationFilter-popup-internal-title">
+                Επιλογή
+              </span>
+              <div className="LocationFilter-popup-internal-items">
+                <div className="LocationFilter-popup-internal-map">
                   <Wrapper
                     apiKey={"AIzaSyBT2if7zGVEamPsOO5I02MFM3COSVegWCY"}
                     render={render}
@@ -158,4 +160,4 @@ const MyFilterLoc = ({}) => {
   );
 };
 
-export default MyFilterLoc;
+export default LocationFilter;

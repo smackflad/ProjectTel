@@ -5,6 +5,7 @@ import {
   IsDate,
   IsDateString,
   IsDefined,
+  IsEnum,
   IsNotEmptyObject,
   IsNumber,
   IsObject,
@@ -12,6 +13,8 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { CreateLocationDto } from 'src/api/location/dto/create-location.dto';
+import { AgeCategory } from 'src/infastructure/enums/age-category.enum';
+import { EventCategory } from 'src/infastructure/enums/event-category.enum';
 
 export class CreateEventDto {
   @ApiProperty()
@@ -37,6 +40,22 @@ export class CreateEventDto {
   @ApiProperty()
   @IsArray()
   images: string[];
+
+  @ApiProperty({
+    name: 'eventCategory',
+    enum: EventCategory,
+    default: EventCategory.INDOOR,
+  })
+  @IsEnum(EventCategory)
+  eventCategory: EventCategory;
+
+  @ApiProperty({
+    name: 'ageCategory',
+    enum: AgeCategory,
+    default: AgeCategory.MIDDLE_SCHOOL,
+  })
+  @IsEnum(AgeCategory)
+  ageCategory: AgeCategory;
 
   @ApiProperty({ type: CreateLocationDto })
   @IsDefined()

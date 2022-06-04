@@ -4,7 +4,7 @@ import Middle_Component from "./Components/Middle_Component/Middle_Component";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import MySearchBar from "../../generalComponents/MySearchBar/MySearchBar";
+import FilterSearchBar from "./Components/FilterSearchBar/FilterSearchBar";
 
 const HomePage = () => {
   const { accountInitialized, isLoggedIn } = useSelector(
@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
     <div className="homePage-external">
-      <MySearchBar />
+      <FilterSearchBar />
       <Middle_Component />
       <HomeBot />
     </div>

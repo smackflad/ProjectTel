@@ -7,13 +7,15 @@ import { Location } from 'src/api/location/entities/location.entity';
 import { Event } from 'src/api/event/entities/event.entity';
 import { Order } from 'src/api/order/entities/order.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SearchController } from './search.controller';
+import { SearchService } from './search.service';
 
 @Module({
   imports: [
     EmployeeModule,
     TypeOrmModule.forFeature([Event, Order, Location, Company]),
   ],
-  controllers: [EventController],
-  providers: [EventService],
+  controllers: [EventController, SearchController],
+  providers: [EventService, SearchService],
 })
 export class EventModule {}
