@@ -6,11 +6,12 @@ import Register from "./components/Pages/Register-Login-Pages/Register/Register"
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
+import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 // import './App.css';
 // import HomePage from './components/Pages/HomePage/HomePage';
-import EventPage from './components/Pages/EventPage/EventPage';
+import EventPage from "./components/Pages/EventPage/EventPage";
 // import MyNav from './components/generalComponents/MyNav/MyNav';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -51,6 +52,7 @@ function App() {
             />
             <Route path="/event" element={<EventPage />} />
             <Route path="/my-profile" element={<ParentProfilePage />} />
+            <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </div>
         <div className="Footer">TEL © 2022</div>
