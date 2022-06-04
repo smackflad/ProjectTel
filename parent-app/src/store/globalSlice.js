@@ -13,7 +13,6 @@ const globalSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      console.log(action.payload);
       state.userId = action.payload.userId;
       state.accountInitialized = action.payload.initialized;
       state.token = action.payload.access_token;
@@ -29,7 +28,6 @@ const globalSlice = createSlice({
       if (action.payload === state.userId) state.accountInitialized = true;
     },
     initAccount(state, action) {
-      console.log(action.payload);
       state.userId = action.payload;
       state.isLoggedIn = true;
       state.accountInitialized = false;

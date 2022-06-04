@@ -74,10 +74,11 @@ export class AuthController {
     @Param('id') id: string,
     @Body() createParentDto: CreateParentDto,
   ) {
-    return await this.parentService.update(
+    const updatedParent = await this.parentService.update(
       id,
       createParentDto as UpdateParentDto,
     );
+    return { userId: updatedParent.user.id };
   }
 
   @Public()
