@@ -23,6 +23,9 @@ export class Parent extends BaseWithoutId {
   @Column({ nullable: true })
   card: string;
 
+  @Column({ nullable: true, default: 0 })
+  balance: number;
+
   @OneToMany(() => Order, (order) => order.parent)
   orders: Order[];
 

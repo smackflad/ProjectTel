@@ -95,7 +95,8 @@ export class ParentService {
     if (parent === undefined) {
       throw new NotFoundException();
     }
-    if (parent.card) return { cardExists: true, card: parent.card };
+    if (parent.card)
+      return { cardExists: true, card: parent.card, balance: parent.balance };
     else return { cardExists: false };
   }
 
