@@ -24,7 +24,7 @@ export class SearchEventDto {
     name: 'eventCategory',
     enum: EventCategory,
     isArray: true,
-    default: EventCategory.INDOOR,
+    default: EventCategory.CINEMA,
   })
   @IsOptional()
   @IsEnum(EventCategory, { each: true })

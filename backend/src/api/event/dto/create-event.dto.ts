@@ -44,7 +44,7 @@ export class CreateEventDto {
   @ApiProperty({
     name: 'eventCategory',
     enum: EventCategory,
-    default: EventCategory.INDOOR,
+    default: EventCategory.CINEMA,
   })
   @IsEnum(EventCategory)
   eventCategory: EventCategory;
