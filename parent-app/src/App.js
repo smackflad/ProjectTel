@@ -4,6 +4,7 @@ import MyNav from "./components/generalComponents/MyNav/MyNav";
 import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/CommonLogReg";
 import Register from "./components/Pages/Register-Login-Pages/Register/Register";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
+import Logout from "./components/Pages/Register-Login-Pages/Logout/Logout";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
 import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
@@ -47,6 +48,14 @@ function App() {
               element={
                 <CommonLogReg>
                   <RegisterStep2 />
+                </CommonLogReg>
+              }
+            />
+            <Route
+              path="/Logout"
+              element={
+                <CommonLogReg>
+                  <Logout />
                 </CommonLogReg>
               }
             />
