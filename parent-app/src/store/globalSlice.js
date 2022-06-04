@@ -8,8 +8,8 @@ const initialState = {
 };
 
 // Then, handle actions in your reducers:
-const userAccountSlice = createSlice({
-  name: "userAccount",
+const globalSlice = createSlice({
+  name: "global",
   initialState,
   reducers: {
     login(state, action) {
@@ -37,7 +37,7 @@ const userAccountSlice = createSlice({
   },
 });
 
-const { actions, reducer } = userAccountSlice;
+const { actions, reducer } = globalSlice;
 
 export const { login, logout, accountInitialized, initAccount } = actions;
 

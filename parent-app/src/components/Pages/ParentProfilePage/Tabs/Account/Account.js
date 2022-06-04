@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useGetProfileMutation } from "../../../../../store/api/parentApi";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import CircleLoader from "react-spinners/CircleLoader";
+import { toast } from "react-toastify";
 
 const Account = () => {
   const { userId } = useSelector((state) => state.global);
@@ -45,7 +46,7 @@ const Account = () => {
         <input
           className="Account-inputs"
           type="text"
-          value={data.user.email}
+          value={data.email}
           //   onChange={handleChange}
           disabled
         />
@@ -69,8 +70,8 @@ const Account = () => {
         <form className="password-change">
           <input
             type="password"
-            id="Oldpassword"
-            name="Oldpassword"
+            id="oldPassword"
+            name="oldPassword"
             required
             // value={form.password}
             // onChange={handleChange}
@@ -78,8 +79,8 @@ const Account = () => {
           />
           <input
             type="password"
-            id="NewPassword"
-            name="NewPassword"
+            id="newPassword"
+            name="newPassword"
             required
             // value={form.password}
             // onChange={handleChange}
@@ -87,8 +88,8 @@ const Account = () => {
           />
           <input
             type="password"
-            id="NewPasswordVer"
-            name="NewPasswordVer"
+            id="newPassword2"
+            name="newPassword2"
             required
             // value={form.password}
             // onChange={handleChange}
