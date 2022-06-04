@@ -7,6 +7,7 @@ import Login from "./components/Pages/Register-Login-Pages/Login/Login";
 import Logout from "./components/Pages/Register-Login-Pages/Logout/Logout";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
+import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 // import './App.css';
@@ -60,6 +61,7 @@ function App() {
             />
             <Route path="/event" element={<EventPage />} />
             <Route path="/my-profile" element={<ParentProfilePage />} />
+            <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </div>
         <div className="Footer">TEL © 2022</div>

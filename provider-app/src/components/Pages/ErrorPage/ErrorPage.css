@@ -1,0 +1,44 @@
+.error-redirect-button {
+  border: 0;
+  outline: none;
+  background-color: #1aabbf;
+  color: #fff;
+  border-radius: 10px;
+  height: 36px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+.error-redirect-button:focus,
+.error-redirect-button:active,
+.error-redirect-button:hover {
+  border: 0;
+  outline: none;
+}
+.error-redirect-button:hover {
+  background-color: #76cdd9;
+}
+.error404Page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 130px;
+}
+.error404-text-wrap {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.error404-text-wrap h1 {
+  margin: 0;
+}
+.error404-text-wrap span {
+  font-size: 20px;
+}
+@media (max-width: 670px) {
+  .error404Page {
+    flex-direction: column;
+  }
+  .error404-text-wrap {
+    margin-left: 0;
+  }
+}
