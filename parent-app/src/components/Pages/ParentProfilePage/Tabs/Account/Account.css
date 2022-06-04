@@ -79,3 +79,7 @@
 .Account-password button:hover {
   cursor: pointer;
 }
+form.password-change span.material-icons-outlined.show-icon {
+  cursor: pointer;
+  color: black;
+}
