@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px 20px 20px 20px;
-  width: 300px;
+  width: 400px;
 }
 .EventCategoryFilter-popup-internal-title {
   font-size: 18px;
@@ -48,9 +48,13 @@
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 670px) {
   .EventCategoryFilter-popup-internal-items {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .EventCategoryFilter-popup-internal-items ul {
+    padding: 0px;
   }
 }
