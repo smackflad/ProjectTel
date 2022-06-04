@@ -19,6 +19,16 @@ export const authApi = api.injectEndpoints({
         };
       },
     }),
+    resetPassword: build.mutation({
+      query: (data) => {
+        const { id, ...body } = data;
+        return {
+          url: `auth/${id}/resetPassword`,
+          method: "POST",
+          body,
+        };
+      },
+    }),
     loginParent: build.mutation({
       query: (body) => ({
         url: `auth/loginParent`,
@@ -34,4 +44,5 @@ export const {
   useInitializeParentRegistrationMutation,
   useCompleteParentRegistrationMutation,
   useLoginParentMutation,
+  useResetPasswordMutation,
 } = authApi;

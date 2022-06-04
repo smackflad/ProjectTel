@@ -7,22 +7,12 @@ export const parentApi = api.injectEndpoints({
         url: `parents/${id}/profile`,
       }),
     }),
-    getWallet: build.query({
+    getWallet: build.mutation({
       query: (id) => ({
         url: `parents/${id}/wallet`,
       }),
     }),
-    createWallet: build.query({
-      query: (data) => {
-        const { id, ...body } = data;
-        return {
-          url: `parents/${id}/wallet`,
-          method: "POST",
-          body,
-        };
-      },
-    }),
-    updateWallet: build.query({
+    updateWallet: build.mutation({
       query: (data) => {
         const { id, ...body } = data;
         return {
@@ -38,7 +28,6 @@ export const parentApi = api.injectEndpoints({
 
 export const {
   useGetProfileMutation,
-  useGetWalletQuery,
-  useCreateWallet,
-  useUpdateWallet,
+  useGetWalletMutation,
+  useUpdateWalletMutation,
 } = parentApi;
