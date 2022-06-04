@@ -1,270 +1,85 @@
-.EventsPage-external{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.EventsPage-external {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-
-.EventsPage-top{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.status-inactive {
+  color: red;
 }
-
-.EventsPage-top-title{
-    display: flex;
-    justify-self: center;
-    gap: 25px;
-
-    color: var(--unnamed-color-000000);
-    text-align: left;
-    
-    letter-spacing: 0px;
-    color: #000000;
-    opacity: 1;
+.status-active {
+  color: green;
 }
-
-
-.EventsPage-container{
-    display: flex;
-    justify-content: center;
-    justify-self: center;
-    min-width:fit-content;
-    min-height:fit-content;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 8px 40px rgba(0,0,0,.15);
-    margin-left: 4%;
-    margin-right: 4%;
-    background: #fff;
+.EventsPage-add-new {
+  border: 0;
+  outline: 0;
+  background-color: #1aabbf;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 36px;
+  padding-right: 15px;
 }
-
-.EventsPage-table {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-    max-width:fit-content;
-    max-height:fit-content;
-    justify-content: center;
-    align-items: stretch;
-    border-collapse:collapse; 
-    border-spacing:12px;
-    border-radius: 10px;
+.EventsPage-top-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
-
-.EventsPage-table th {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    min-height: 42px;
-    width: 300px;
-
-    border: 1px solid var(--unnamed-color-cfd1d1);
-
-    /* UI Properties */
-    background-color: #fff;
-    color: var(--unnamed-color-2f3030);
-    text-align: start;
-    letter-spacing: 0px;
-    color: #2F3030;
-    opacity: 1;
+.rdt_TableHeadRow {
+  background-color: #ebeded !important;
+  border-radius: 10px 10px 0 0;
 }
-
-.EventsPage-table th:first-child {
-    border-top-left-radius: 10px;
+.EventsPage-Datatable {
+  border: 1px solid #ebeded;
+  border-radius: 10px;
 }
-
-.EventsPage-table th:last-of-type {
-    border-top-right-radius: 10px;
+.rdt_Pagination {
+  border-radius: 0 0 10px 10px;
+  background-color: #ebeded !important;
 }
-
-.EventsPage-table tr {
-    display: flex;
-    border-bottom: 1px solid #ddd;
-    /* Add a bottom border to all table rows */
-  }
-
-
-.EventsPage-table-title-search:first-child {
-    display: flex;
-    min-width: 264px;
-    min-height: 32px;
-
-    margin: 10px;
-
-    /* UI Properties */
-    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #FAFAFA 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 7px;
-    opacity: 1;
-
-    color: #5F6061;
+.EventsPage-top-wrapper h1 {
+  color: #5f6061;
+  font-size: 25px;
 }
+.EventsPage-search {
+  border: 0;
+  border-radius: 10px;
+  background: #ebeded;
+  color: #5f6061;
 
-.EventsPage-table-title-search:last-of-type {
-    display: flex;
-    min-width: 140px;
-    min-height: 32px;
-
-    margin: 10px;
-
-    /* UI Properties */
-    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #FAFAFA 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 7px;
-    opacity: 1;
-
-    color: #5F6061;
+  height: 36px;
+  padding: 0 15px 0 30px;
 }
-
-.EventsPage-table-title-button {
-    display: flex;
-    width: 140px;
-    min-height: 32px;
-
-    margin: 10px;
-
-    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #FAFAFA 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 7px;
-    opacity: 1;
-
-    color: #5F6061;
+.EventsPage-search:focus,
+.EventsPage-search:active,
+.EventsPage-search:focus-visible {
+  border: 0;
+  outline-style: none;
 }
-
-.EventsPage-table td{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    width: 300px;
-
-    padding: 10px;
-    transition: background-color .3s;
-    transform-style: flat;
-
-    /* UI Properties */
-    text-align: center;
-    letter-spacing: 0px;
-    opacity: 1;
-
-    color: #5F6061;
+.EventsPage-span-search-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 12px;
 }
-
-.EventsPage-table tr:nth-child(odd){
-    background: #fff;
+.EventsPage-span-search-wrap span {
+  position: absolute;
+  left: 5px;
+  color: #5f6061;
 }
-
-.EventsPage-table tr:nth-child(even){
-    background: #fafafa;
+.wrap-all-search {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
-
-.EventsPage-table tfoot{
-    display: flex;
-    justify-content: end;
-    min-height: 42px;
-
-    /* UI Properties */
-    background: var(--unnamed-color-ebeded) 0% 0% no-repeat padding-box;
-    border: 1px solid var(--unnamed-color-cfd1d1);
-    background: #EBEDED 0% 0% no-repeat padding-box;
-    border: 1px solid #CFD1D1;
-    border-radius: 0px 0px 10px 10px;
-    opacity: 1;
+.rdt_TableRow:nth-child(even) {
+  background-color: #fafafa;
 }
-
-
-.EventsPage-table tr th:nth-child(2){
-    width: 150px;
-}
-
-.EventsPage-table tr td:nth-child(2){
-    width: 150px;
-}
-
-.EventsPage-table tr th:nth-child(3){
-    width: 150px;
-}
-
-.EventsPage-table tr td:nth-child(3){
-    width: 150px;
-}
-
-
-
-
-.EventsPage-table-pagination {
-    display: flex;
-    justify-self: flex-end;
-    
-    min-height: 42px;
-
-    /* UI Properties */
-    background: var(--unnamed-color-ebeded) 0% 0% no-repeat padding-box;
-    background: #EBEDED 0% 0% no-repeat padding-box;
-    /* border: 1px solid #CFD1D1; */
-    border-radius: 0px 0px 10px 10px;
-    opacity: 1;
-}
-
-.EventsPage-table tr:hover td {
-    background-color: #c4c4c4;
-}
-
-
-.pagination a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-
-  }
-  
-  .pagination a.active {
-    background-color: dodgerblue;
-    color: white;
-  }
-  
-  .pagination a:hover:not(.active) {background-color: #ddd;}
-
-
-
-  .chevronButton {
-    margin: 0;
-    /* padding: 0 10px 0 0; */
-    background: none;
-    border-style: none;
-    border-color: rgb(73, 64, 64);
-    cursor: pointer;
-    height: max-content;
-    width: max-content;
-    display: flex;
-    padding-top: 15px;
-}
-
-.chevron-item {
-    margin: 0;
-    padding: 5px;
-    color: rgba(0, 0, 0, 0.479);
-    background-color: #FFD3D3;
-    font-size: 35px !important; /*change this to make smaller */
-    border-style: none;
-    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 5px 5px 10px rgba(170, 170, 204, 0.25), 10px 10px 20px rgba(170, 170, 204, 0.5), -10px -10px 20px #FFFFFF;
-    border-radius: 32px;
-}
-.chevron-item.add {
-    background-color: #86ff84;
-}
-
-.chevronButton:disabled {
-    opacity: 40%;
-    cursor: not-allowed;
+.rdt_TableRow:nth-child(odd) {
+  background-color: #fff;
 }
