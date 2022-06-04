@@ -33,7 +33,7 @@ export class Event extends BaseWithoutId {
   @Column({
     type: 'enum',
     enum: EventCategory,
-    default: EventCategory.INDOOR,
+    default: EventCategory.CINEMA,
   })
   eventCategory: EventCategory;
 
