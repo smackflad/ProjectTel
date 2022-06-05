@@ -2,7 +2,7 @@ import "./EventsPageAdmin.css";
 
 import { useState } from "react";
 
-import MyButton from "../../SharedComponents/MyButton/MyButton";
+import MyButton from "../../generalComponents/MyButton/MyButton";
 
 
 

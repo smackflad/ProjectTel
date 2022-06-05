@@ -1,11 +1,14 @@
 import "./App.css";
 import HomePage from "./components/Pages/HomePage/HomePage";
-import MyNav from "./components/generalComponents/MyNav/MyNav";
+
 import ProviderProfilePage from "./components/Pages/ProviderProfilePage/ProviderProfilePage";
 import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
-import EventsPage from "./Components/Pages/EventsPage/EventsPage";
 import NewEventPage from './components/Pages/NewEventPage/NewEventPage';
 import OverviewPage from './components/Pages/OverviewPage/OverviewPage';
+import MyNav from "./components/sharedComponents/MyNav/MyNav";
+import EventsPage from "./components/Pages/EventsPage/EventsPage";
+import EventsPageAdmin from "./components/Pages/EventsPageAdmin/EventsPageAdmin";
+import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -19,6 +22,8 @@ function App() {
           <Route path='/newEvent' element={<NewEventPage />} />
           <Route path='/overview' element={<OverviewPage />} />
           <Route path="/eventsPage" element={<EventsPage />} />
+          <Route path="/eventsPageAdmin" element={<EventsPageAdmin />} />
+          <Route path="/usersPageAdmin" element={<UsersPageAdmin />} />
           <Route path="/profile" element={<ProviderProfilePage />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
