@@ -68,6 +68,8 @@
 
 .EventPage-top-right-txt .EventPage-title {
     font-size: 34px;
+    text-align: center;
+    max-width: 482px;
 }
 
 .EventPage-top-right-txt .EventPage-location {
@@ -102,6 +104,7 @@
 
 .EventPage-bot-txt {
     font-size: 16px;
+    text-align: justify;
 }
 
 .EventPage-bot-map {
@@ -189,6 +192,7 @@
 
 .EventPage-top-mobile-title .EventPage-title {
     font-size: 34px;
+    text-align: center;
 }
 
 .EventPage-top-mobile-title .EventPage-location {
@@ -210,6 +214,9 @@
     }
     .EventPage-top {
         display: none;
+    }
+    .EventPage-top-mobile-left > .carousel-root {
+        max-width: 600px;
     }
 }
 

@@ -59,7 +59,7 @@ function App() {
                 </CommonLogReg>
               }
             />
-            <Route path="/event" element={<EventPage />} />
+            <Route path="/event/:id" element={<EventPage />} />
             <Route path="/my-profile" element={<ParentProfilePage />} />
             <Route path="/*" element={<ErrorPage />} />
           </Routes>
