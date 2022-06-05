@@ -1,0 +1,35 @@
+.myTextArea-top > span {
+    font-size: 12px;
+    font-weight: 600;
+}
+#star {
+    color: red;
+}
+
+.myTextArea-external{
+    width: 100%;
+}
+
+.myTextArea-internal {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 21px 0px;
+}
+
+.myTextArea-internal textarea {
+    background-color: #F4F5F6;
+    margin: 0px;
+    padding: 30px;
+    font-size: 18px;
+    border: 0px solid rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
+    line-height: 1px;
+    outline: none;
+    /* width: 330px; */
+
+    /* min-height: 400px; */
+    resize: none;
+}
+.myTextArea-internal input:focus {
+    border-color: rgba(0, 0, 0, 0.70);
+}

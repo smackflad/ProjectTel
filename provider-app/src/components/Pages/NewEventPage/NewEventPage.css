@@ -1,0 +1,97 @@
+.NewEventPage-internal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.NewEventPage-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    /* background-color: lightblue; */
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 40px #00000029; 
+
+
+}
+.NewEventPage-first{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content:space-between;
+    align-items: center;
+}
+.NewEventPage-third{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 30px;
+}
+
+.NewEventPage-fifth {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.NewEventPage-fourth {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+
+.NewEventPage-fourth-left-FC {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.NewEventPage-fourth-left-FC > .NewEventPage-fileName-FC{
+    margin-right: 15px;
+}
+
+.NewEventPage-fourth-left-FC > .NewEventPage-file-FC > label {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 5px 15px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.NewEventPage-disabled-file-input{
+    background-color: rgb(236, 236, 236);
+    border-color: rgb(175, 175, 175);
+    opacity: 80%;
+    cursor: not-allowed !important;
+}
+.NewEventPage-disabled-file-input > * {
+    cursor: not-allowed;
+}
+
+.NewEventPage-fourth-right {
+    flex: 1;
+    background-color: #F4F5F6;
+    border-radius: 10px;
+}
+
+.NewEventPage-upload-icon{
+    font-size: 50px;
+}
+
+.NewEventPage-fifth {
+    margin-top: 21px;
+
+}
