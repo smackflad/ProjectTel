@@ -2,33 +2,23 @@ import { api } from "./api";
 
 export const authApi = api.injectEndpoints({
   endpoints: (build) => ({
-    // initializeParentRegistration: build.mutation({
-    //   query: (body) => ({
-    //     url: `auth/initializeParentRegistration`,
-    //     method: "POST",
-    //     body,
-    //   }),
-    // }),
-    // completeParentRegistration: build.mutation({
-    //   query: (data) => {
-    //     const { id, ...body } = data;
-    //     return {
-    //       url: `auth/completeParentRegistration/${id}`,
-    //       method: "POST",
-    //       body,
-    //     };
-    //   },
-    // }),
-    // resetPassword: build.mutation({
-    //   query: (data) => {
-    //     const { id, ...body } = data;
-    //     return {
-    //       url: `auth/${id}/resetPassword`,
-    //       method: "POST",
-    //       body,
-    //     };
-    //   },
-    // }),
+    registerCompany: build.mutation({
+      query: (body) => ({
+        url: `auth/registerCompany`,
+        method: "POST",
+        body,
+      }),
+    }),
+    resetPassword: build.mutation({
+      query: (data) => {
+        const { id, ...body } = data;
+        return {
+          url: `auth/${id}/resetPassword`,
+          method: "POST",
+          body,
+        };
+      },
+    }),
     loginEmployee: build.mutation({
       query: (body) => ({
         url: `auth/loginEmployee`,
@@ -41,8 +31,7 @@ export const authApi = api.injectEndpoints({
 });
 
 export const {
-//   useInitializeParentRegistrationMutation,
-//   useCompleteParentRegistrationMutation,
-//   useResetPasswordMutation,
+  useRegisterCompanyMutation,
+  useResetPasswordMutation,
   useLoginEmployeeMutation,
 } = authApi;
