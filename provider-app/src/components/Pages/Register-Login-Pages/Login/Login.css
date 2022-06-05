@@ -1,0 +1,11 @@
+.Login-external{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    padding: 40px 30px 0 30px;
+}
+.Login-external .reg-log-submit-button{
+    margin-top: 45px;
+}
