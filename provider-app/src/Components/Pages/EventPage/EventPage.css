@@ -1,0 +1,105 @@
+.EventPage-external{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.EventPage-top {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.EventPage-top-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 23px;
+}
+
+.EventPage-top-left-image {
+    width: 600px;
+    height: 100%;
+    background-color: blue;
+}
+
+.EventPage-top-left-image-select {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.EventPage-top-left-image-inside{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+
+.EventPage-top-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+    gap: 20px;
+    /* align-items: center; */
+}
+
+.EventPage-top-right-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 20px;
+    margin: 0 10px 10px 0;
+}
+
+.EventPage-top-right-txt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.EventPage-top-right-txt .EventPage-title {
+    font-size: 34px;
+}
+
+.EventPage-top-right-txt .EventPage-location {
+    font-size: 18px;
+    display: flex;
+}
+
+.EventPage-top-right-btns-price{
+    font-size: 15px;
+}
+.EventPage-top-right-btns-price-num {
+    font-size: 30px;
+    border-bottom: 1px solid #000;
+}
+
+.EventPage-bot{
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+    gap: 25px;
+}
+
+.EventPage-bot-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.EventPage-bot-title {
+    font-size: 28px;
+}
+
+.EventPage-bot-txt {
+    font-size: 16px;
+}
+
+.EventPage-bot-map {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

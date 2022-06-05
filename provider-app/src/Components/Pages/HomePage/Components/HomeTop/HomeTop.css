@@ -1,0 +1,10 @@
+.HomeTop-external {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.HomeTop-searchBar{
+    margin: 150px 0px;
+}

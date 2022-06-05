@@ -1,0 +1,45 @@
+.EventPage-Popup-external {
+    background: rgba(196, 196, 196, 0.17);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.EventPage-Popup-internal {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.EventPage-Popup-close {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    z-index: 15;
+}
+.EventPage-Popup-close:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.EventPage-Popup-close:before, .EventPage-Popup-close:after {
+    position: absolute;
+    right: calc(31.3% - 5px);
+    top: calc(100vh - 85vh - 150px);
+    content: ' ';
+    height: 23px;
+    width: 2px;
+    background-color: #333;
+}
+.EventPage-Popup-close:before {
+    transform: rotate(45deg);
+}
+.EventPage-Popup-close:after {
+    transform: rotate(-45deg);
+}
