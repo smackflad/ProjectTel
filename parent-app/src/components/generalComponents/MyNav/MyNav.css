@@ -59,19 +59,19 @@
 .MyNav-icon .md-40 {
   font-size: 40px !important;
 }
-@media (max-width: 700px) {
+@media only screen and (max-width: 725px) {
   .MyNav-items {
     display: none;
   }
-}
-@media (min-width: 700px) {
   .MyNav-mobile {
-    display: none !important;
+    display: flex !important;
   }
 }
+
 .MyNav-mobile {
   position: relative;
-  display: flex;
+  /* display: flex; */
+  display: none;
   align-items: center;
   cursor: pointer;
   -webkit-touch-callout: none; /* iOS Safari */
