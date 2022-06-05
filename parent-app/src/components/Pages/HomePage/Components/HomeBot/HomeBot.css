@@ -29,3 +29,21 @@
 .HomeBot-btnR {
     background-image: url("./provider.jpg");
 }
+
+@media only screen and (max-width: 1100px) {
+    .HomeBot-external{
+        flex-direction: column;
+        gap: 25px;
+    }
+    .HomeBot-btnL {
+        /* background-image: url("./newsletter.png"); */
+        margin-right: 0;
+    }
+}
+
+
+@media only screen and (max-width: 530px) {
+    .HomeBot-btn {
+        padding: 7px 75px 25px 40px;
+    }
+}
