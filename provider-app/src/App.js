@@ -12,7 +12,10 @@ import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
+import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/CommonLogReg";
 import Register from "./components/Pages/Register-Login-Pages/Register/Register";
+import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
+import RegisterStep3 from "./components/Pages/Register-Login-Pages/Register/RegisterStep3";
 
 function App() {
   return (
@@ -21,8 +24,38 @@ function App() {
       <div className="Body">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
+          <Route
+              path="/Register"
+              element={
+                <CommonLogReg>
+                  <Register />
+                </CommonLogReg>
+              }
+            />
+            <Route
+              path="/Login"
+              element={
+                <CommonLogReg>
+                  <Login />
+                </CommonLogReg>
+              }
+            />
+            <Route
+              path="/Register2"
+              element={
+                <CommonLogReg>
+                  <RegisterStep2 />
+                </CommonLogReg>
+              }
+            />
+            <Route
+              path="/Register3"
+              element={
+                <CommonLogReg>
+                  <RegisterStep3 />
+                </CommonLogReg>
+              }
+            />
           <Route path='/newEvent' element={<NewEventPage />} />
           <Route path='/overview' element={<OverviewPage />} />
           <Route path="/eventsPage" element={<EventsPage />} />

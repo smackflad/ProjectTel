@@ -5,9 +5,11 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import globalReducer from "./globalSlice";
+import providerRegisterReducer from "./providerRegisterSlice";
 
 const reducers = combineReducers({
     global: globalReducer,
+    register: providerRegisterReducer,
     [api.reducerPath]: api.reducer,
   });
 
