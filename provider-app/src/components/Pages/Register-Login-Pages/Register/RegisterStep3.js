@@ -82,9 +82,8 @@ const RegisterStep3 = ({ changeLoadingState }) => {
       <span className="Header-Register">Σχεδόν έτοιμος</span>
       <span className="simple-text">Ένα ακόμα βήμα πριν την ολοκλήρωση</span>
       <span className="simple-text">
-        Συμπλήρωσε τις προσωπικές σας πληροφορίες
+        Συμπληρώστε τις πληροφορίες της εταιρίας σας
       </span>
-      <span className="material-icons-outlined personal-datails">person</span>
       <div className="personal-details-fields">
         <form className="RegisterStep3-form" onSubmit={handleSubmit}>
           <input
