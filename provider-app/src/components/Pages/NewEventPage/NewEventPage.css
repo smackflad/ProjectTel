@@ -85,6 +85,13 @@
     flex: 1;
     background-color: #F4F5F6;
     border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    overflow-x: auto;
+    gap: 5px;
+    align-items: center;
+    max-width: 584px;
+    
 }
 
 .NewEventPage-upload-icon{
@@ -94,4 +101,9 @@
 .NewEventPage-fifth {
     margin-top: 21px;
 
+}
+
+.NewEventPage-fourth-right-imgs{
+    max-width: 145px;
+    height: auto;
 }

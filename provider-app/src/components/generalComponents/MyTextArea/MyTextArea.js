@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './MyTextArea.css';
 
-const MyTextArea = ({labelTxt, val, setVal=(a)=>{}, star=false, disabled=false, rows="100", cols="50"}) => 
+const MyTextArea = ({id, labelTxt, val, setVal=(a)=>{}, star=false, disabled=false, rows="100", cols="50"}) => 
 {
-    const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
+    // const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
     return (
 		<div className="myTextArea-external">
             <div className='myTextArea-internal'>

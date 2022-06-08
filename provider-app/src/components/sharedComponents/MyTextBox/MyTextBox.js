@@ -1,9 +1,9 @@
 import './MyTextBox.css';
 import { useState } from "react";
 
-const MyTextBox = ({type="text", labelTxt, val, setVal=(a)=>{}, validate=(a,b)=>{}, error, setError, star=false, disabled=false, width="330"}) => 
+const MyTextBox = ({id="", type="text", labelTxt, val, setVal=(a)=>{}, validate=(a,b)=>{}, error, setError, star=false, disabled=false, width="330"}) => 
 {
-	const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
+	// const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
     validate(val, setError);
     return (
 		<div className="myTextBox-txt-external">
