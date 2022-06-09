@@ -1,0 +1,54 @@
+.OrderHistory-external {
+  width: 100%;
+  display: flex;
+  border-radius: 10px;
+  background-color: #f5f7f7;
+  flex-direction: column;
+  max-height: 525px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-color: #1aabbf #cfd1d1;
+  scrollbar-width: thin;
+}
+.OrderHistory-external::-webkit-scrollbar {
+  width: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-track {
+  background: #cfd1d1;
+  border-radius: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-thumb {
+  background: #1aabbf;
+  border-radius: 10px;
+}
+.OrderHistory-external::-webkit-scrollbar-thumb:hover {
+  background: #76cdd9;
+}
+.OrderHistory-item-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.OrderHistory-eventName {
+  padding: 8px;
+  font: normal normal 600 18px/23px Arial;
+  letter-spacing: 0px;
+  color: #2f3030;
+  overflow: hidden;
+  width: 30%;
+  text-overflow: ellipsis;
+}
+.OrderHistory-item {
+  border-bottom: 1px solid #cfd1d1;
+  background-color: #fff;
+}
+.OrderHistory-item-wrapper .material-icons-outlined {
+  color: #1aabbf;
+  cursor: pointer;
+}
+.OrderHistory-item-wrapper .material-icons-outlined:hover {
+  color: #76cdd9;
+}
+span.OrderHistory-date {
+  font-size: 12px;
+}

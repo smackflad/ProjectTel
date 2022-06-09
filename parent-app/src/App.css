@@ -27,6 +27,12 @@
 .App-link {
   color: #61dafb;
 }
+.Footer {
+  position: unset;
+  bottom: 0;
+  text-align: right;
+  padding-right: 10px;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +41,7 @@
   to {
     transform: rotate(360deg);
   }
+}
+.Body {
+  min-height: calc(100vh - 100px);
 }

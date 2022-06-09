@@ -1,0 +1,160 @@
+.Header-Register {
+  color: #1f263a;
+  font-size: 48px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.Register-external {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  padding: 40px 30px 0 30px;
+}
+.simple-text {
+  padding-top: 5px;
+  text-align: center;
+}
+.email-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 70px;
+  width: 100%;
+}
+.email-wrap span {
+  position: absolute;
+  left: 10px;
+  color: #5f6061;
+}
+.email-wrap input {
+  font-size: 16px;
+  padding: 0 40px 0 40px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 10px;
+  height: 45px;
+  width: 100%;
+  background-color: #f4f5f6;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  outline-width: 0;
+}
+.password-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 30px;
+  width: 100%;
+}
+.password-wrap input {
+  font-size: 16px;
+  padding: 0 40px 0 40px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 10px;
+  height: 45px;
+  width: 100%;
+  background-color: #f4f5f6;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  outline-width: 0;
+}
+.password-wrap span {
+  position: absolute;
+  left: 10px;
+  color: #5f6061;
+}
+.password-wrap span.show-icon {
+  position: absolute;
+  right: 10px;
+  left: auto;
+  color: #1aabbf;
+}
+.password-wrap span:hover {
+  cursor: pointer;
+}
+.terms {
+  text-align: center;
+  margin-top: 35px;
+}
+.already-registered {
+  margin-top: 30px;
+}
+.Register-external input[type="checkbox"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  content: none;
+  width: 28px;
+  height: 28px;
+}
+.Register-external input[type="checkbox"]:before {
+  font-size: 14px;
+  content: "✔";
+  color: transparent !important;
+  border-radius: 6px;
+  display: block;
+  border: 2px solid #1aabbf;
+  padding-right: 4px;
+  padding-left: 4px;
+  margin-right: 5px;
+  height: 23px;
+  width: 23px;
+  box-sizing: border-box;
+  line-height: 23px;
+}
+.Register-external input[type="checkbox"]:checked:before {
+  color: #1aabbf !important;
+}
+.termsLink {
+  font-size: 14px;
+  color: #1aabbf;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.already-registered {
+  color: #828282;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+}
+.already-registered:hover {
+  text-decoration: underline;
+}
+.reg-log-submit-button {
+  margin-top: 15px;
+  border: 0;
+  border-radius: 10px;
+  height: 36px;
+  width: 30%;
+}
+.reg-log-submit-button:hover {
+  cursor: pointer;
+}
+.Register-Login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.spinner {
+  display: flex;
+  position: absolute;
+  left: 48%;
+  top: 50%;
+}

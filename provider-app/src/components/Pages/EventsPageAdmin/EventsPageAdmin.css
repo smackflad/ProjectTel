@@ -1,0 +1,158 @@
+.EventsPageAdmin-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.EventsPageAdmin-top-title{
+    display: flex;
+    justify-self: center;
+    gap: 25px;
+    font-size: 96px;
+}
+
+.EventsPageAdmin-top-title-button{
+    display: flex;
+    font-size: 96px;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+
+.EventsPageAdmin-container{
+    display: flex;
+    min-width:fit-content;
+    min-height:fit-content;
+    justify-self: center;
+    justify-content: center;
+    border-radius: 50px;
+
+    padding: 30px;
+    margin-left: 8%;
+    margin-right: 8%;
+    background: #c4c4c4;
+    box-shadow : rgba(0,0, 0, .15);
+}
+
+.EventsPageAdmin-table {
+    display: flex;
+
+    justify-self: stretch;
+    flex-direction: column;
+    margin-top: 20px;    
+    margin-bottom: 0px;
+    max-width:fit-content;
+    max-height:fit-content;
+    justify-content: center;
+    /* align-items: stretch; */
+    border-collapse:collapse; 
+    border-spacing:12px;
+    border-radius: 10px;
+}
+
+.EventsPageAdmin-table th {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    min-height: 42px;
+    border-radius: 10px;
+    width: 300px;
+    content: 16px;
+    margin-bottom: 20px;
+}
+
+.EventsPageAdmin-table tr {
+    display: flex;
+    /* Add a bottom border to all table rows */
+  }
+
+.EventsPageAdmin-table tr:nth-child(2) td{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.EventsPageAdmin-table tr:last-of-type td{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.EventsPageAdmin-table-title-search {
+    display: flex;
+    background: #EEE4E4;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    content: 16px;
+    max-width: 300px;
+    width: 300px;
+}
+
+
+
+.EventsPageAdmin-table-title-button {
+    display: flex;
+    background: #EEE4E4;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    content: 16px;
+    max-width: 300px;
+    width: 300px;
+}
+
+.EventsPageAdmin-table td{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background: #ffffff;
+    padding: 0 20px;
+    border-bottom: 1px solid #ddd;
+    width: 250px;
+    margin-left: 25px;
+    margin-right: 25px;
+    transition: background-color .3s;
+}
+
+
+
+
+.EventsPageAdmin-table-footer {
+    display: flex;
+    margin-top: 20px;
+    align-self: flex-end;
+    
+    background: #ffffff;
+    min-height: 42px;
+}
+
+.EventsPageAdmin-table td:hover {
+    background-color: #c4c4c4;
+}
+
+.EventsPageAdmin-table tr:hover td {
+    background-color: #c4c4c4;
+}
+
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+  
+  .pagination a.active {
+    background-color: #E8FAFA;
+    color: white;
+  }
+
+  .pagination a.off {
+    background-color: rgb(88, 88, 88);
+    color: white;
+  }
+  
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+

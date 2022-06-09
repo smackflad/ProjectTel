@@ -1,0 +1,118 @@
+
+/* body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+} */
+.container{
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 50px;
+    padding: 30px;
+    margin: 0 15px;
+    background-color: rgb(204, 204, 204);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+.container header{
+
+
+    font-size: 25px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    margin:  10px 0;
+       
+}
+
+
+.container  .fields{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+ .fields .input-field{
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+
+.input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+.input-field input, select{
+
+    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 10px;
+    opacity: 1;
+    height: 40px;
+}
+.input-field input[type="text2"], select{
+    width: calc(50%);
+    background: var(--unnamed-color-fafafa) 0% 0% no-repeat padding-box;
+    border: 1px solid var(--unnamed-color-cfd1d1);
+    background: #FAFAFA 0% 0% no-repeat padding-box;
+    border: 1px solid #CFD1D1;
+    border-radius: 10px;
+    opacity: 1;
+    height: 40px;
+}
+
+.input-field input :focus,
+.input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+}
+
+.container  button{
+
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--unnamed-color-76cdd9);
+    text-align: right;
+    text-decoration: underline;
+    font: normal normal normal 16px/16px Averta PE;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+}
+.container  .btnText{
+    font-size: 12px;
+    font-weight: 400;
+}
+ button:hover{
+    color: #1282b6;
+    cursor: pointer;
+}
+
+ 
+ .buttons{
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 750px) {
+   
+  
+     .fields .input-field{
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+     .fields .input-field{
+        width: 100%;
+    }
+}
+

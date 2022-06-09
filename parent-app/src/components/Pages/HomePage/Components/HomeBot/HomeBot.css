@@ -1,0 +1,49 @@
+.HomeBot-external {
+    display: flex;
+    flex-direction: row;
+}
+
+.HomeBot-btn {
+    display: flex;
+    text-align: left;
+    border-radius: 25px;
+    padding: 15px 150px 50px 80px;
+    font-size: 40px;
+    line-height: 1px;
+    font-weight: 300;
+    color: black;
+
+    background-position:top;
+    background-size: 100%;
+    transition: 0.7s;
+}
+.HomeBot-btn:hover {
+    background-size: 120%;
+}
+
+.HomeBot-btnL {
+    background-image: url("./newsletter.png");
+    margin-right: 80px;
+}
+
+.HomeBot-btnR {
+    background-image: url("./provider.jpg");
+}
+
+@media only screen and (max-width: 1100px) {
+    .HomeBot-external{
+        flex-direction: column;
+        gap: 25px;
+    }
+    .HomeBot-btnL {
+        /* background-image: url("./newsletter.png"); */
+        margin-right: 0;
+    }
+}
+
+
+@media only screen and (max-width: 530px) {
+    .HomeBot-btn {
+        padding: 7px 75px 25px 40px;
+    }
+}
