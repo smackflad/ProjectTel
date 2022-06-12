@@ -1,117 +1,192 @@
-import "./providerProfilePage.css";
-import { Navigate } from "react-router-dom";
+import "./ProviderProfilePage.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchUserAccount } from "./ProviderProfilePage.slice";
 
 const ProviderProfilePage = () => {
+  // console.log("ok");
+  const { profile, loading } = useSelector((state) => state.userAccount);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await dispatch(fetchUserAccount(2)).unwrap();
+        console.log(`success user id: ${res.data.id}`);
+      } catch (err) {
+        console.error(err.message);
+      }
+      // console.log("hello");
+    })();
+  }, [dispatch]);
+  console.log(loading);
+  console.log(profile);
   return (
-    <div className="ProviderProfilePage -external">
-      <body>
-        <div className="container">
-          <header>Company Profile</header>
+    <div className="ProviderProfilePage-external">
+      <div className="container-selection">
+        <div className="ProviderProfilePage-info">
+          <h4>Πληροφορίες Εταιρικού Λογαριασμού</h4>
 
-          <div className="details personal">
-            <div className="fields">
-              <div className="input-field">
-                <label>First Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter first name"
-                  required
-                ></input>
-                <button className="changeNameBtn">
-                  <span className="btnText">change name</span>
-                  <i className="uil uil-navigator"></i>
-                </button>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            placeholder=""
+            //   value={profile.firstName}
+            //   onChange={handleChange}
+            disabled
+          ></input>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyName}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Last Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter last name"
-                  required
-                ></input>
-              </div>
 
-              <div className="input-field">
-                <label>Company Name</label>
-                <input type="text" placeholder="My company name"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.lastName}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Contact Phone Number</label>
-                <input type="number" placeholder="2100000000000"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyID}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Company ID</label>
-                <input type="text" placeholder="My company ID"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.email}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Company Email Address</label>
-                <input type="text" placeholder="companyemail@mail.com"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.taxOffice}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="myemail@mail.com"
-                  required
-                ></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyEmailAddress}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Tax Office</label>
-                <input type="text" placeholder="My tax office"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyAdress}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>IBAN</label>
-                <input
-                  type="text"
-                  placeholder="GR00000000000000000000000"
-                ></input>
-                <button className="changeIbanBtn">
-                  <span className="btnText">change IBAN</span>
-                  <i className="uil uil-navigator"></i>
-                </button>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyPhoneNumber}
+            //   onChange={handleChange}
+            disabled
+          ></input>
+        
+         <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyCity}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Old Password</label>
-                <input type="text"></input>
-              </div>
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
+            //   value={profile.companyPostalCode}
+            //   onChange={handleChange}
+            disabled
+          ></input>
 
-              <div className="input-field">
-                <label>Company Address</label>
-                <input type="text" placeholder="My company address"></input>
-              </div>
-
-              <div className="input-field"></div>
-
-              <div className="input-field">
-                <label>New Password</label>
-                <input type="text"></input>
-                <button className="changePassBtn">
-                  <span className="btnText">change password</span>
-                  <i className="uil uil-navigator"></i>
-                </button>
-              </div>
-
-              <div className="input-field">
-                <label>Company Postal Code</label>
-                <input type="text" placeholder="0000"></input>
-              </div>
-
-              <div className="input-field">
-                <label>Company City</label>
-                <input type="text" placeholder="My city"></input>
-              </div>
-            </div>
-          </div>
         </div>
-      </body>
+
+        <div className="ProviderProfilePage-password">
+          <h4>Αλλαγή κωδικού</h4>
+          <form className="password-change">
+            <input
+              type="password"
+              id="Oldpassword"
+              name="Oldpassword"
+              required
+              // value={form.password}
+              // onChange={handleChange}
+              placeholder="Τωρινός κωδικός πρόσβασης" />
+            <input
+              type="password"
+              id="NewPassword"
+              name="NewPassword"
+              required
+              // value={form.password}
+              // onChange={handleChange}
+              placeholder="Νέος κωδικός πρόσβασης" />
+            <input
+              type="password"
+              id="NewPasswordVer"
+              name="NewPasswordVer"
+              required
+              // value={form.password}
+              // onChange={handleChange}
+              placeholder="Επανάληψη νέου κωδικού πρόσβασης" />
+            <button
+              type="submit"
+              style={{
+                backgroundColor: "#1AABBF",
+                color: "#ffffff",
+                fontSize: "16px",
+              }}
+            >
+              Αλλαγή κωδικού
+            </button>
+          </form>
+          <h4>Αλλαγή IBAN</h4>
+          <form className="Iban-change">
+            <input
+              type="Iban"
+              id="OldIban"
+              name="OldIban"
+              required
+              // value={form.iban}
+              // onChange={handleChange}
+              placeholder="Τωρινό IBAN" />
+            <input
+              type="Iban"
+              id="NewIban"
+              name="NewIban"
+              required
+              // value={form.iban}
+              // onChange={handleChange}
+              placeholder="Νέο IBAN" />
+
+            <button
+              type="submit"
+              style={{
+                backgroundColor: "#1AABBF",
+                color: "#ffffff",
+                fontSize: "16px",
+              }}
+            >
+              Αλλαγή IBAN
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
