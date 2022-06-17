@@ -103,7 +103,30 @@
 
 }
 
-.NewEventPage-fourth-right-imgs{
+.NewEventPage-fourth-right-imgs {
+    position: relative
+}
+
+.NewEventPage-fourth-right-img{
     max-width: 145px;
     height: auto;
+}
+
+.NewEventPage-fourth-right-img-close {
+    display: none;
+    position: absolute;
+    top: 0em;
+    right: 0em;
+    z-index: 10;
+    font-weight: 100;
+    color: rgb(223, 50, 50);
+}
+
+.NewEventPage-fourth-right-img:hover + .NewEventPage-fourth-right-img-close {
+    display: block;
+}
+
+.NewEventPage-fourth-right-img-close:hover {
+    display: block;
+    cursor: pointer;
 }

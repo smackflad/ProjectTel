@@ -2,7 +2,7 @@ import "./NewEventPage.css";
 import { Navigate } from "react-router-dom";
 import MyTextBox from '../../sharedComponents/MyTextBox/MyTextBox'
 import MyTextArea from "../../generalComponents/MyTextArea/MyTextArea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyButton from "../../generalComponents/MyButton/MyButton";
 const NewEventPage = () => {
 	const [link, setLink] = useState();
@@ -15,6 +15,18 @@ const NewEventPage = () => {
 		Array.from(e.target.files).forEach(item=>{
 			settempImgs(tempImgs => [...tempImgs, URL.createObjectURL(item)]);
 		})
+	}
+
+	useEffect(() => {
+		console.log(selectedFiles);
+	}, [selectedFiles]);
+
+	const handleImgDelClick = (i) =>{
+		console.log(i);
+		// settempImgs(tempImgs => [...tempImgs.splice(index, 1)]);
+		settempImgs((tempImgs) => tempImgs.filter((_, index) => index !== i));
+		// setselectedFiles((selectedFiles) => selectedFiles.filter((_, index) => index !== i));
+		
 	}
 
 	return (
@@ -47,7 +59,12 @@ const NewEventPage = () => {
 							<div className="NewEventPage-fourth-right">
 								{
 									tempImgs.map((item, index)=>(//TODO fix key
-										<img className="NewEventPage-fourth-right-imgs" src={item} key={index}/>
+										<div className="NewEventPage-fourth-right-imgs" key={index}>
+											<img className="NewEventPage-fourth-right-img" src={item}/>
+											<span className="material-symbols-outlined NewEventPage-fourth-right-img-close" onClick={()=>{handleImgDelClick(index)}}>
+												close
+											</span>
+										</div>
 									))
 								}
 							</div>
