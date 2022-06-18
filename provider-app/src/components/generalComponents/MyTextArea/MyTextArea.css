@@ -19,11 +19,11 @@
 .myTextArea-internal textarea {
     background-color: #F4F5F6;
     margin: 0px;
-    padding: 30px;
+    padding: 15px;
     font-size: 18px;
     border: 0px solid rgba(0, 0, 0, 0.30);
     border-radius: 10px;
-    line-height: 1px;
+    /* line-height: 1px; */
     outline: none;
     /* width: 330px; */
 
