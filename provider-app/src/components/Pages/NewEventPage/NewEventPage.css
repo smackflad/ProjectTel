@@ -25,18 +25,33 @@
 .NewEventPage-third{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     width: 100%;
-    gap: 30px;
+    gap: 20px;
 }
 
-.NewEventPage-fifth {
+
+.NewEventPage-fourth{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.NewEventPage-fourth-top, .NewEventPage-fourth-mid, .NewEventPage-fourth-bot{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
+
+.NewEventPage-sixth {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.NewEventPage-fourth {
+.NewEventPage-fifth {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -45,18 +60,18 @@
 }
 
 
-.NewEventPage-fourth-left-FC {
+.NewEventPage-fifth-left-FC {
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
 }
 
-.NewEventPage-fourth-left-FC > .NewEventPage-fileName-FC{
+.NewEventPage-fifth-left-FC > .NewEventPage-fileName-FC{
     margin-right: 15px;
 }
 
-.NewEventPage-fourth-left-FC > .NewEventPage-file-FC > label {
+.NewEventPage-fifth-left-FC > .NewEventPage-file-FC > label {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -81,7 +96,7 @@
     cursor: not-allowed;
 }
 
-.NewEventPage-fourth-right {
+.NewEventPage-fifth-right {
     flex: 1;
     background-color: #F4F5F6;
     border-radius: 10px;
@@ -98,21 +113,21 @@
     font-size: 50px;
 }
 
-.NewEventPage-fifth {
+.NewEventPage-sixth {
     margin-top: 21px;
 
 }
 
-.NewEventPage-fourth-right-imgs {
+.NewEventPage-fifth-right-imgs {
     position: relative
 }
 
-.NewEventPage-fourth-right-img{
+.NewEventPage-fifth-right-img{
     max-width: 145px;
     height: auto;
 }
 
-.NewEventPage-fourth-right-img-close {
+.NewEventPage-fifth-right-img-close {
     display: none;
     position: absolute;
     top: 0em;
@@ -122,11 +137,24 @@
     color: rgb(223, 50, 50);
 }
 
-.NewEventPage-fourth-right-img:hover + .NewEventPage-fourth-right-img-close {
+.NewEventPage-fifth-right-img:hover + .NewEventPage-fifth-right-img-close {
     display: block;
 }
 
-.NewEventPage-fourth-right-img-close:hover {
+.NewEventPage-fifth-right-img-close:hover {
     display: block;
     cursor: pointer;
 }
+
+
+
+.NewEventPage-sixth-button {
+    border: 0;
+    border-radius: 10px;
+    height: 36px;
+    /* width: 30%; */
+    padding: 8px 16px;
+  }
+  .NewEventPage-sixth-button:hover {
+    cursor: pointer;
+  }

@@ -1,7 +1,7 @@
 import './MyTextBox.css';
 import { useState } from "react";
 
-const MyTextBox = ({id="", type="text", labelTxt, val, setVal=(a)=>{}, validate=(a,b)=>{}, error, setError, star=false, disabled=false, width="330"}) => 
+const MyTextBox = ({id="", type="text", labelTxt, val, setVal=(a)=>{}, validate=(a,b)=>{}, error, setError, star=false, disabled=false, width="330", pattern=""}) => 
 {
 	// const [id] = useState(() => `component-${Math.random().toString(16).slice(2)}`);
     validate(val, setError);
@@ -11,7 +11,14 @@ const MyTextBox = ({id="", type="text", labelTxt, val, setVal=(a)=>{}, validate=
                 <div className="myTextBox-txt-top">
                    <span>{star && (<span id="star">*</span>)}<label htmlFor={id}>{labelTxt}</label></span>
                 </div>
-                <input type={type} style={{width:width+"px"}} id={id} onChange={(e)=>{setVal(e.target.value);if(validate){validate(e.target.value, setError)}}} value={val} disabled={disabled}/>
+                <input 
+                    type={type} 
+                    pattern={pattern} 
+                    style={{width:width+"px"}} 
+                    id={id} 
+                    onChange={(e)=>{setVal(e.target.value);if(validate){validate(e.target.value, setError)}}} 
+                    value={val} 
+                    disabled={disabled}/>
                 <span className={'myTextBox-error_span_txt'+(error ? ' myTextBox-error_msg_txt' : '')}>*{error}</span>
             </div>
         </div>
