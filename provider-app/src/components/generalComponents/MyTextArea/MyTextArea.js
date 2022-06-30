@@ -10,7 +10,10 @@ const MyTextArea = ({id, labelTxt, val, setVal=(a)=>{}, star=false, disabled=fal
                 <div className="myTextArea-top">
                     <span>{star && (<span id="star">*</span>)}<label htmlFor={id}>{labelTxt}</label></span>
                 </div>
-                <textarea name={id} id={id} onChange={(e)=>{setVal(e.target.value)}} defaultValue={val} rows={rows} disabled={disabled}></textarea>
+                <textarea name={id} id={id} 
+                // onChange={(e)=>{setVal(e.target.value)}}
+                onChange={setVal}
+                 defaultValue={val} rows={rows} disabled={disabled}></textarea>
             </div>
         </div>
 	);

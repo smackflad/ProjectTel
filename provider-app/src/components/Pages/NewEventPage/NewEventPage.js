@@ -15,25 +15,32 @@ const NewEventPage = () => {
 	const [form, setForm] = useState({
 		title: "",
 		price: "",
-		desc: "",
+		desc: "",		
+	});
+
+	const [location, setLocation] = useState({
 		address: "",
 		addressNum: "",
 		city: "",
-		postalCode: "",
 		state: "",
 		country: "",
-		
-	});
+		postalCode: "",
+	})
+
 	const [values, setValues] = useState(new DateObject());
-	
+
+	const [filesFinale, setfilesFinale] = useState([]);
+
 	const [selectedFiles, setselectedFiles] = useState([]);
 	const [tempImgs, settempImgs] = useState([]);
-	const handleFileChange = (e)=>{
+	const handleFileChange = (e)=>{//TODO has a problem when re-selecting the same items wont call this function
+		// console.log("Test")
 		setselectedFiles(e.target.files);
 		settempImgs([]);
 		Array.from(e.target.files).forEach(item=>{
 			settempImgs(tempImgs => [...tempImgs, URL.createObjectURL(item)]);
 		})
+		setfilesFinale([...e.target.files]);
 	}
 
 	const [newEventCompany, { data, isError, isLoading, error, status }] =
@@ -43,16 +50,22 @@ const NewEventPage = () => {
 		if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
 	};
 	
-	useEffect(() => {
-		console.log(selectedFiles);
-	}, [selectedFiles]);
+	const handleLocationChange = (e) => {
+		setLocation({ ...location, [e.target.id]: e.target.value });
+		// if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
+	};
+
+	// useEffect(() => {
+	// 	console.log(selectedFiles);
+	// }, [selectedFiles]);
 
 	const handleImgDelClick = (i) =>{
-		console.log(i);
+		// setselectedFiles([]);
+		// console.log(i);
 		// settempImgs(tempImgs => [...tempImgs.splice(index, 1)]);
 		settempImgs((tempImgs) => tempImgs.filter((_, index) => index !== i));
-		// setselectedFiles((selectedFiles) => selectedFiles.filter((_, index) => index !== i));
-		
+		setfilesFinale((filesFinale) => filesFinale.filter((_, index) => index !== i));
+		// var temp = selectedFiles.filter((_, index) => index !== i);
 	}
 
 	function CustomDate({id="", type="text", labelTxt, star=false, disabled=false, width="330px", openCalendar, value, handleValueChange }) {
@@ -78,7 +91,8 @@ const NewEventPage = () => {
 
 	  const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log({...form});
+		console.log(tempImgs);
+		console.log({...form, location: {...location}});
 		// newEventCompany({ ...form, id: userId });
 	};
 
@@ -90,10 +104,10 @@ const NewEventPage = () => {
 				<form onSubmit={handleSubmit}>
 					<div className="NewEventPage-wrapper">
 						<div className="NewEventPage-first">
-							<MyTextBox id="title" labelTxt={"Event Title"} width={"100%"}/>
-							<MyTextBox id="price" labelTxt={"Price"} width={"50px"}/>
+							<MyTextBox id="title" setVal={handleChange} labelTxt={"Event Title"} width={"100%"}/>
+							<MyTextBox id="price" setVal={handleChange} labelTxt={"Price"} width={"50px"}/>
 						</div>
-						 <MyTextArea id="desc" labelTxt={"Description"} />
+						 <MyTextArea id="desc" setVal={handleChange}  labelTxt={"Description"} />
 						<div className="NewEventPage-third">
 							<DatePicker
 								value={values} 
@@ -109,22 +123,22 @@ const NewEventPage = () => {
 						</div>
 						<div className="NewEventPage-fourth">
 							<div className="NewEventPage-fourth-top">
-								<MyTextBox id="address" labelTxt={"Οδός"} width={"50%"} />
-								<MyTextBox id="addressNum" type="number" labelTxt={"Αριθμός Οδού"} width={"83px"}/>
+								<MyTextBox id="address" setVal={handleLocationChange} labelTxt={"Οδός"} width={"50%"} />
+								<MyTextBox id="addressNum" setVal={handleLocationChange} type="number" labelTxt={"Αριθμός Οδού"} width={"83px"}/>
 							</div>
 							<div className="NewEventPage-fourth-mid">
-								<MyTextBox id="city" labelTxt={"Πόλη"} width={"50%"}/>
-								<MyTextBox id="postalCode" type="tel" labelTxt={"Τ.Κ."} width={"83px"} pattern="[0-9]{5}"/>
+								<MyTextBox id="city" setVal={handleLocationChange} labelTxt={"Πόλη"} width={"50%"}/>
+								<MyTextBox id="postalCode" setVal={handleLocationChange} type="tel" labelTxt={"Τ.Κ."} width={"83px"} pattern="[0-9]{5}"/>
 							</div>
 							<div className="NewEventPage-fourth-bot">
-								<MyTextBox id="state" labelTxt={"Νομός"} width={"50%"}/>
-								<MyTextBox id="country" labelTxt={"Χώρα"} width={"50%"}/>
+								<MyTextBox id="state" setVal={handleLocationChange} labelTxt={"Νομός"} width={"50%"}/>
+								<MyTextBox id="country" setVal={handleLocationChange} labelTxt={"Χώρα"} width={"50%"}/>
 							</div>
 						</div>
 						<div className="NewEventPage-fifth">
 							<div className="NewEventPage-fifth-left-FC">
 								<div className="NewEventPage-file-FC">
-									<input type="file" multiple accept='image/*' onChange={handleFileChange} id="NewEventPage-file-btn-FC" hidden disabled={disabled}></input>
+									<input type="file" multiple accept='image/*' onChange={handleFileChange} id="NewEventPage-file-btn-FC" onClick={(e)=>{e.target.value=null}} hidden disabled={disabled}></input>
 									<label htmlFor="NewEventPage-file-btn-FC" className={(disabled ?' NewEventPage-disabled-file-input' : '')}>
 										<i className={"material-icons-outlined NewEventPage-upload-icon"}> file_upload </i>
 										<span>Επιλογή αρχείου</span>

@@ -15,9 +15,11 @@ const MyTextBox = ({id="", type="text", labelTxt, val, setVal=(a)=>{}, validate=
                 <input 
                     name={id}
                     type={type} 
-                    pattern={pattern}  
+                    // {pattern !== "" ? {pattern: pattern} : {}}
+                    pattern={pattern !== "" ? pattern : undefined}
                     id={id} 
-                    onChange={(e)=>{setVal(e.target.value);if(validate){validate(e.target.value, setError)}}} 
+                    // onChange={(e)=>{setVal(e.target.value);if(validate){validate(e.target.value, setError)}}} 
+                    onChange={setVal}
                     value={val} 
                     disabled={disabled}/>
                 <span className={'myTextBox-error_span_txt'+(error ? ' myTextBox-error_msg_txt' : '')}>*{error}</span>
