@@ -48,7 +48,7 @@ const Register = ({ changeLoadingState }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    // console.log(form);
     dispatch(registerStep1(form));
     navigate("/Register2", { replace: true });
   };
