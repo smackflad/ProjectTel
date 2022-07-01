@@ -10,9 +10,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useParams } from "react-router-dom";
 // import "../../../images/"
 import { v4 as uuidv4 } from "uuid";
+import EventMap from "./components/maps/EventMap";
 
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-import {} from "@googlemaps/js-api-loader";
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
+// import {} from "@googlemaps/js-api-loader";
 
 
 const items = [{
@@ -241,59 +242,59 @@ const items = [{
   }];
 
 
-  function Map({ center, zoom }) {
-	const ref = useRef();
-	const [map, setMap] = useState();
+//   function Map({ center, zoom }) {
+// 	const ref = useRef();
+// 	const [map, setMap] = useState();
   
-	useEffect(() => {
-	  if (ref.current && !map) {
-		setMap(
-		  new window.google.maps.Map(ref.current, {
-			center,
-			zoom,
-		  })
-		);
-	  }
-	});
+// 	useEffect(() => {
+// 	  if (ref.current && !map) {
+// 		setMap(
+// 		  new window.google.maps.Map(ref.current, {
+// 			center,
+// 			zoom,
+// 		  })
+// 		);
+// 	  }
+// 	});
   
-	return (
-	  <div
-		style={{ width: "100%", height: "250px" }}
-		ref={ref}
-		id="map"
-		className=""
-	  />
-	);
-  }
+// 	return (
+// 	  <div
+// 		style={{ width: "100%", height: "250px" }}
+// 		ref={ref}
+// 		id="map"
+// 	  />
+// 	);
+//   }
 
-  const render = (status) => {
-	if (status === Status.LOADING) return <h3>{status} ..</h3>;
-	if (status === Status.FAILURE) return <h3>{status} ...</h3>;
-	return null;
-  };
+//   const render = (status) => {
+// 	if (status === Status.LOADING) return <h3>{status} ..</h3>;
+// 	if (status === Status.FAILURE) return <h3>{status} ...</h3>;
+// 	return null;
+//   };
   
-  const Marker = (options) => {
-	const [marker, setMarker] = useState();
+//   const Marker = (options) => {
+// 	const [marker, setMarker] = useState();
   
-	useEffect(() => {
-	  if (!marker) {
-		setMarker(new window.google.maps.Marker());
-	  }
+// 	useEffect(() => {
+// 	  if (!marker) {
+// 		setMarker(new window.google.maps.Marker());
+// 	  }
   
-	  // remove marker from map on unmount
-	  return () => {
-		if (marker) {
-		  marker.setMap(null);
-		}
-	  };
-	}, [marker]);
-	useEffect(() => {
-	  if (marker) {
-		marker.setOptions(options);
-	  }
-	}, [marker, options]);
-	return null;
-  };
+// 	  // remove marker from map on unmount
+// 	  return () => {
+// 		if (marker) {
+// 		  marker.setMap(null);
+// 		}
+// 	  };
+// 	}, [marker]);
+
+// 	useEffect(() => {
+// 	  if (marker) {
+// 		marker.setOptions(options);
+// 	  }
+// 	}, [marker, options]);
+// 	return null;
+//   };
 
 const EventPage = () => {	
 	const params = useParams();
@@ -309,9 +310,9 @@ const EventPage = () => {
 		}
 	}
 
-	const zoom = 13;
-	let center = { lat: 37.990832, lng: 23.70332 };
-  let position = { lat: -25.363882, lng: 131.044922 };
+// 	const zoom = 13;
+// 	let center = { lat: 37.990832, lng: 23.70332 };
+//   let position = { lat: 37.990832, lng: 23.70332 };
 
 	return (
 		<div className="EventPage-external">
@@ -407,14 +408,7 @@ const EventPage = () => {
 				</div>
 				<div className="EventPage-bot-map">
 					<span className="EventPage-bot-title">Χάρτης</span>
-					<Wrapper
-						apiKey={"AIzaSyBT2if7zGVEamPsOO5I02MFM3COSVegWCY"}
-						render={render}
-					>
-						<Map center={center} zoom={zoom}>
-							<Marker position={position} />
-						</Map>
-                  	</Wrapper>
+					<EventMap lat={37.772} lng={-122.214} />
 				</div>
 			</div>
 			{isOpen && <Popup
