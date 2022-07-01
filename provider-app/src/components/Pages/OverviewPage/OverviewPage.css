@@ -1,9 +1,20 @@
+.OverviewPage-external {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
 .OverviewPage-internal{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    justify-items: center;
+    /* width: 100%; */
 }
 .OverviewPage-wrapper{
+    min-width: 60%;
+    /* max-width: 70%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +44,7 @@
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
-    /* gap: 40px; */
+    gap: 40px;
 }
 
 .OverviewPage-middle-inner{
@@ -57,8 +68,8 @@
 }
 
 .OverviewPage-bot {
-    width: 1000px;
-    height: 400px;
+    /* width: 1000px; */
+    /* height: 400px; */
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -79,8 +90,21 @@
     gap: 20px;
 }
 
-.OverviewPage-bot-left{
-    width: 100%;
+.OverviewPage-bot-left {
+    /* width: 100%; */
+    display: flex;
+    justify-content: center;
+    /* flex-direction: column; */
+    /* padding: 20px; */
+    border-radius: 10px;
+    /* gap: 15px; */
+    /* box-shadow: 0px 8px 40px #00000029; */
+    background-color: #f5f7f7;
+
+}
+
+.OverviewPage-bot-right{
+    /* min-width: 200px; */
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -91,14 +115,28 @@
 
 }
 
-.OverviewPage-bot-right{
-    min-width: 200px;
+@media only screen and (max-width: 725px) {
+    .OverviewPage-top-div .MySelectBox-external{
+        width: 100%;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 10px;
-    gap: 15px;
-    /* box-shadow: 0px 8px 40px #00000029; */
-    background-color: #f5f7f7;
-
+    justify-content: center;
+    }
+    .OverviewPage-top-div{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .OverviewPage-middle{
+        flex-direction: column;
+        align-items: center;
+    }
+    .OverviewPage-wrapper{
+        padding: 25px;
+        margin: 5px;
+    }
+    .OverviewPage-bot-inner{
+        flex-direction: column;
+    }
+    .OverviewPage-bot{
+        padding: 20px;
+    }
 }
