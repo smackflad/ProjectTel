@@ -241,61 +241,6 @@ const items = [{
 	"location": null
   }];
 
-
-//   function Map({ center, zoom }) {
-// 	const ref = useRef();
-// 	const [map, setMap] = useState();
-  
-// 	useEffect(() => {
-// 	  if (ref.current && !map) {
-// 		setMap(
-// 		  new window.google.maps.Map(ref.current, {
-// 			center,
-// 			zoom,
-// 		  })
-// 		);
-// 	  }
-// 	});
-  
-// 	return (
-// 	  <div
-// 		style={{ width: "100%", height: "250px" }}
-// 		ref={ref}
-// 		id="map"
-// 	  />
-// 	);
-//   }
-
-//   const render = (status) => {
-// 	if (status === Status.LOADING) return <h3>{status} ..</h3>;
-// 	if (status === Status.FAILURE) return <h3>{status} ...</h3>;
-// 	return null;
-//   };
-  
-//   const Marker = (options) => {
-// 	const [marker, setMarker] = useState();
-  
-// 	useEffect(() => {
-// 	  if (!marker) {
-// 		setMarker(new window.google.maps.Marker());
-// 	  }
-  
-// 	  // remove marker from map on unmount
-// 	  return () => {
-// 		if (marker) {
-// 		  marker.setMap(null);
-// 		}
-// 	  };
-// 	}, [marker]);
-
-// 	useEffect(() => {
-// 	  if (marker) {
-// 		marker.setOptions(options);
-// 	  }
-// 	}, [marker, options]);
-// 	return null;
-//   };
-
 const EventPage = () => {	
 	const params = useParams();
 	const currItem = items.find(item => item.id == params.id);
@@ -310,10 +255,6 @@ const EventPage = () => {
 		}
 	}
 
-// 	const zoom = 13;
-// 	let center = { lat: 37.990832, lng: 23.70332 };
-//   let position = { lat: 37.990832, lng: 23.70332 };
-
 	return (
 		<div className="EventPage-external">
 			<div className="EventPage-top">
@@ -323,7 +264,6 @@ const EventPage = () => {
 							currItem.images.slice(0,currItem.images.length).map((item, index)=>
 								<div key={uuidv4()}>
 									<img src={item.url} />
-									{/* <p className="legend">Legend 1</p> */}
 								</div>
 							)
 						}
@@ -341,15 +281,11 @@ const EventPage = () => {
 					</div>
 					<div className="EventPage-top-right-other">
 						<DatePicker
-						// selected={new Date(currItem.eventDate)}
 						minDate={new Date(currItem.eventDate)}
-						// maxDate={new Date(currItem.eventDate)}
-						// onChange={(date) => setStartDate(date)}
 						monthsShown={2}
 						includeDateIntervals={[{start: new Date(currItem.eventDate), end: new Date(currItem.eventDate)}]}
 						highlightDates={[new Date(currItem.eventDate)]}
 						inline
-						// disabled
 						/>
 						<div className="EventPage-top-right-btns">
 							<span className="EventPage-top-right-btns-price">από <span className="EventPage-top-right-btns-price-num">{currItem.price}€</span></span>
@@ -375,7 +311,6 @@ const EventPage = () => {
 							currItem.images.slice(0,currItem.images.length).map((item, index)=>
 								<div key={uuidv4()}>
 									<img src={item.url} />
-									{/* <p className="legend">Legend 1</p> */}
 								</div>
 							)
 						}
@@ -384,15 +319,11 @@ const EventPage = () => {
 				<div className="EventPage-top-mobile-right">
 					<div className="EventPage-top-mobile-datepicker">
 						<DatePicker
-							// selected={new Date(currItem.eventDate)}
 							minDate={new Date(currItem.eventDate)}
-							// maxDate={new Date(currItem.eventDate)}
-							// onChange={(date) => setStartDate(date)}
 							monthsShown={1}
 							includeDateIntervals={[{start: new Date(currItem.eventDate), end: new Date(currItem.eventDate)}]}
 							highlightDates={[new Date(currItem.eventDate)]}
 							inline
-							// disabled
 						/>
 					</div>
 					<div className="EventPage-top-mobile-right-btns">

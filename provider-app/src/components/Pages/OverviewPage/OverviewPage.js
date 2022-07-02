@@ -1,5 +1,5 @@
 import "./OverviewPage.css";
-import {useRef, useState } from "react";
+import {useEffect, useRef, useState } from "react";
 import MySelectBox from "../../generalComponents/MySelectBox/MySelectBox";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryScatter, VictoryGroup, VictoryTooltip } from 'victory';
 import { v4 as uuidv4 } from "uuid";
@@ -10,16 +10,20 @@ const OverviewPage = () => {
 	const left= useRef(null);
 	const [width, height] = useSize(left)
 	const [statsCurr, setstatsCurr] = useState();
-	const data = [
-		{quarter: 1, earnings: 13000},
-		{quarter: 2, earnings: 16500},
-		{quarter: 3, earnings: 14250},
-		{quarter: 4, earnings: 19000}
-	  ];
-
 	const [stats, setStats] = useState([]);
+	const [toggle, setToggle ] = useState("rev");
 
-	const dates = ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05"]
+	useEffect(() => {
+		console.log(toggle)
+	}, [toggle]);
+
+	const data = [
+		{ x: "2020-01-01", y: 2 },
+		{ x: "2020-02-01", y: 3 },
+		{ x: "2020-03-01", y: 5 },
+		{ x: "2020-04-01", y: 4 },
+	{ x: "2020-05-01", y: 7 }
+	]
 
 	const triggerStats = (i)=>{
 		if(statsCurr === i){
@@ -32,14 +36,21 @@ const OverviewPage = () => {
 						mutation: () => {
 						  return { style: { fill: "blue" } };
 						}
-					  },
+					},
+					{
+						target: ["labels"],
+						eventKey: "all",
+						mutation: () => {
+						return { active: false };
+						}
+					},
 				]
 			);
 			return
 		}
 		setstatsCurr(i);
 		var temp= [];
-		dates.map((item, index)=>{
+		data.map((item, index)=>{
 			if(index != i){
 				temp.push(index);
 			}
@@ -50,7 +61,7 @@ const OverviewPage = () => {
 				  target: ["data"],
 				  eventKey: i.toString(),
 				  mutation: () => {
-					return { style: { fill: "red" } };
+					return { style: { fill: "lightgreen" } };
 				  }
 				},
 				{
@@ -59,7 +70,21 @@ const OverviewPage = () => {
 					mutation: () => {
 					  return { style: { fill: "blue" } };
 					}
-				  },
+				},
+				{
+					target: ["labels"],
+					eventKey: i.toString(),
+					mutation: () => {
+					  return { active: true };
+					}
+				},
+				{
+					target: ["labels"],
+					eventKey: temp,
+					mutation: () => {
+					return { active: false };
+					}
+				},
 			]
 		);
 	}
@@ -72,8 +97,8 @@ const OverviewPage = () => {
 					<div className="OverviewPage-top">
 						<span>Show data for: </span>
 						<div className="OverviewPage-top-div">
-							<MySelectBox />
-							<MySelectBox />
+							<MySelectBox items={["test", "Test2", "Test3", "Test4"]} />
+							<MySelectBox items={["test", "Test2", "Test3", "Test4"]}/>
 						</div>
 					</div>
 					<div className="OverviewPage-middle">
@@ -95,45 +120,54 @@ const OverviewPage = () => {
 						</div>
 					</div>
 					<div className="OverviewPage-bot">
-						<span>Event Statistics</span>
+						<div className="OverviewPage-bot-top">
+							<span>Event Statistics</span>
+							<div class="OverviewPage-bot-radios">
+								<div className="OverviewPage-bot-radios-item">
+										<input value="rev" type="radio" name="expOpt" id="radio3" checked={toggle === "rev"} onClick={(e)=>{setToggle(e.target.value)}}/>
+										<label for="radio3" class="{ radioDis: !select}" >Revenue</label>
+								</div>
+								<div className="OverviewPage-bot-radios-item">
+										<input value="ord" type="radio" name="expOpt" id="radio4" checked={toggle === "ord"} onClick={(e)=>{setToggle(e.target.value)}} />
+										<label for="radio4" class="{ radioDis: !select}" >Orders</label>
+								</div>
+							</div>
+						</div>
 						<div className="OverviewPage-bot-inner">
 							<div ref={left} className="OverviewPage-bot-left">
 							<VictoryChart
 								domainPadding={20}
-								
 							>
 								<VictoryAxis
-									// tickValues specifies both the number of ticks and where
-									// they are placed on the axis
 									tickValues={[1, 2, 3, 4, 5]}
-									tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4", "Quarter 5"]}
+									tickFormat={(y) =>(y.slice(5))}
 								/>
 								<VictoryAxis
 									dependentAxis
-									// tickFormat specifies how ticks should be displayed
 									tickFormat={(x) => (`$${x / 1}k`)}
 								/>
 								<VictoryGroup
 									style={{ data: {fill: "blue"}}}
-									data={[
-									{ x: 1, y: 2 },
-									{ x: 2, y: 3 },
-									{ x: 3, y: 5 },
-									{ x: 4, y: 4 },
-									{ x: 5, y: 7 }
-									]}
+									data={data}
 								>
 
 								<VictoryLine name="line"
 									style={{
-									data: { 
-										stroke: "#c43a31"
-									},
-									parent: { border: "1px solid #ccc"}
+										data: { 
+											stroke: "#007281"
+										},
+										parent: { border: "1px solid #ccc"}
 									}}
-
-								/>
+									
+									/>
 								<VictoryScatter 
+									labels={({ datum }) => `${datum.y}`}
+									labelComponent={
+										<VictoryTooltip
+										dy={-7}
+										  style={{ fontSize: 14 }}	
+										/>
+									  }
 								size={4}
 								externalEventMutations={stats}
 								events={[{
@@ -153,14 +187,14 @@ const OverviewPage = () => {
 							</VictoryChart>
 							</div>
 							<div className="OverviewPage-bot-right" style={{maxHeight: height-40}}>
-								{dates.map((item, i) =>{
+								{data.map((item, i) =>{
 									return(
 										<div key={uuidv4()} className={`OverviewPage-bot-right-item ${statsCurr === i ? "OverviewPage-bot-right-item-clicked": ""}`} onClick={()=>{triggerStats(i)}}>
 											<div className="OverviewPage-bot-right-item-top">
 												<span className="material-symbols-outlined OverviewPage-bot-right-item-dash">
 													check_indeterminate_small
 												</span>
-												<span className="OverviewPage-bot-right-item-txt">{item}</span>
+												<span className="OverviewPage-bot-right-item-txt">{item.x}</span>
 											</div>
 											<span className="OverviewPage-bot-right-item-line">
 											</span>

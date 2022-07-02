@@ -68,13 +68,8 @@
 }
 
 .OverviewPage-bot {
-    /* width: 1000px; */
-    /* height: 400px; */
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* width: fit-content; */
-    /* background-color: lightblue; */
     padding: 40px;
     border-radius: 10px;
     gap: 30px;
@@ -260,4 +255,57 @@
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
+}
+
+.OverviewPage-bot-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.OverviewPage-bot-top span{
+    font-size: 18px;
+}
+
+.OverviewPage-bot-radios{
+    display: flex;
+    flex-direction: row;
+}
+
+.OverviewPage-bot-radios-item input {
+    opacity: 0;
+    position: fixed;
+    width: 0;
+    margin: 0;
+    padding: 0;
+}
+.OverviewPage-bot-radios-item label {
+    cursor: pointer;
+    border-style: none none solid none;
+    border-width: 2px;
+    border-color: #c9c9c900;/* change this */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    font-size: 18px;
+    /* font-weight: bold; */
+    color: #000000;
+}
+.OverviewPage-bot-radios-item input:checked + label {
+    border-color: #1aabbf;
+    /* border-color: #007281; */
+}
+.OverviewPage-bot-radios-item label:hover {
+    opacity: 0.6;
+}
+
+@media only screen and (max-width: 440px) {
+    .OverviewPage-bot-top{
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
 }
