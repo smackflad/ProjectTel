@@ -137,7 +137,7 @@
 }
 
 .OverviewPage-bot-right-item-clicked{
-    color: #1abf6c;
+    /* color: #1abf6c; */
 }
 
 .OverviewPage-bot-right-item:hover{
@@ -145,6 +145,12 @@
     cursor: pointer;
 }
 .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-dash, .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line::after, .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line::before {
+    color: #29f890;
+    border-color: #29f890;
+
+}
+
+.OverviewPage-bot-right-item-clicked .OverviewPage-bot-right-item-dash, .OverviewPage-bot-right-item-clicked .OverviewPage-bot-right-item-line::after, .OverviewPage-bot-right-item-clicked .OverviewPage-bot-right-item-line::before {
     color: #29f890;
     border-color: #29f890;
 
@@ -216,6 +222,12 @@
 	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
 }
 
+.OverviewPage-bot-right-item-clicked .OverviewPage-bot-right-item-line:after{
+	width: calc(50% - 1px);
+	height: calc(100% - 2px);
+	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
+}
+
 .OverviewPage-bot-right-item .OverviewPage-bot-right-item-line:before{
 	content:'';
 	position: absolute;
@@ -233,6 +245,12 @@
 }
 
 .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line:before{
+	width: calc(50% - 1px);
+	height: calc(100% - 2px);
+	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
+}
+
+.OverviewPage-bot-right-item-clicked .OverviewPage-bot-right-item-line:before{
 	width: calc(50% - 1px);
 	height: calc(100% - 2px);
 	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
