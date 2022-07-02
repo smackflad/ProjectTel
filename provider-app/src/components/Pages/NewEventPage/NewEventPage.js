@@ -33,7 +33,7 @@ const NewEventPage = () => {
 
 	const [selectedFiles, setselectedFiles] = useState([]);
 	const [tempImgs, settempImgs] = useState([]);
-	const handleFileChange = (e)=>{//TODO has a problem when re-selecting the same items wont call this function
+	const handleFileChange = (e)=>{
 		// console.log("Test")
 		setselectedFiles(e.target.files);
 		settempImgs([]);

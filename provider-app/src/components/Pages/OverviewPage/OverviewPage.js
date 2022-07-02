@@ -1,20 +1,16 @@
 import "./OverviewPage.css";
-import { Navigate } from "react-router-dom";
-import MyTextBox from '../../sharedComponents/MyTextBox/MyTextBox'
-import MyTextArea from "../../generalComponents/MyTextArea/MyTextArea";
-import { useState } from "react";
-import MyButton from "../../generalComponents/MyButton/MyButton";
+import {useRef, useState } from "react";
 import MySelectBox from "../../generalComponents/MySelectBox/MySelectBox";
 import { VictoryLine, VictoryChart, VictoryAxis, VictoryScatter, VictoryGroup } from 'victory';
+import { v4 as uuidv4 } from "uuid";
 
+import useSize from '@react-hook/size'
 
 
 
 const OverviewPage = () => {
-	const [file_name, setFile_name] = useState("test");
-	const [link, setLink] = useState();
-	const [on_change_f, setOn_change_f] = useState();
-	const [disabled, setDisabled] = useState();
+	const left= useRef(null);
+	const [width, height] = useSize(left)
 
 	const data = [
 		{quarter: 1, earnings: 13000},
@@ -22,6 +18,8 @@ const OverviewPage = () => {
 		{quarter: 3, earnings: 14250},
 		{quarter: 4, earnings: 19000}
 	  ];
+
+	const dates = ["2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-01-01", "2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05"]
 
 	return (
 		<div className="OverviewPage-external">
@@ -56,11 +54,9 @@ const OverviewPage = () => {
 					<div className="OverviewPage-bot">
 						<span>Event Statistics</span>
 						<div className="OverviewPage-bot-inner">
-							<div className="OverviewPage-bot-left">
+							<div ref={left} className="OverviewPage-bot-left">
 							<VictoryChart
-								// domainPadding will add space to each side of VictoryBar to
-								// prevent it from overlapping the axis
-								// domainPadding={20}
+								domainPadding={20}
 							>
 								<VictoryAxis
 									// tickValues specifies both the number of ticks and where
@@ -93,8 +89,21 @@ const OverviewPage = () => {
 								</VictoryGroup>
 							</VictoryChart>
 							</div>
-							<div className="OverviewPage-bot-right">
-								
+							<div className="OverviewPage-bot-right" style={{maxHeight: height-40}}>
+								{dates.map((item) =>{
+									return(
+										<div key={uuidv4()} className="OverviewPage-bot-right-item">
+											<div className="OverviewPage-bot-right-item-top">
+												<span className="material-symbols-outlined OverviewPage-bot-right-item-dash">
+													check_indeterminate_small
+												</span>
+												<span className="OverviewPage-bot-right-item-txt">{item}</span>
+											</div>
+											<span className="OverviewPage-bot-right-item-line">
+											</span>
+										</div>
+									);
+								})}
 							</div>
 						</div>
 					</div>

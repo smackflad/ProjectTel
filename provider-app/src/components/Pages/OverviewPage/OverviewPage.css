@@ -85,9 +85,10 @@
 .OverviewPage-bot-inner{
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: min-content;
     width: 100%;
     gap: 20px;
+    /* height: max-content; */
 }
 
 .OverviewPage-bot-left {
@@ -100,22 +101,56 @@
     /* gap: 15px; */
     /* box-shadow: 0px 8px 40px #00000029; */
     background-color: #f5f7f7;
-
+    height: max-content;
 }
 
 .OverviewPage-bot-right{
     /* min-width: 200px; */
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 20px 20px 5px;
     border-radius: 10px;
     gap: 15px;
     /* box-shadow: 0px 8px 40px #00000029; */
+    /* background-color: black; */
     background-color: #f5f7f7;
+    overflow-y: hidden;
+    overflow: auto;
 
 }
 
-@media only screen and (max-width: 725px) {
+.OverviewPage-bot-right-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 20px;
+}
+
+.OverviewPage-bot-right-item-txt{
+    color: black;
+}
+
+.OverviewPage-bot-right-item-dash{
+    color: #1aabbf;
+	transition: border-color 0.15s ease-out;
+}
+
+.OverviewPage-bot-right-item-clicked{
+    color: #1abf6c;
+}
+
+.OverviewPage-bot-right-item:hover{
+    /* opacity: 0.6; */
+    cursor: pointer;
+}
+.OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-dash, .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line::after, .OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line::before {
+    color: #29f890;
+    border-color: #29f890;
+
+}
+
+@media only screen and (max-width: 738px) {
     .OverviewPage-top-div .MySelectBox-external{
         width: 100%;
     display: flex;
@@ -139,4 +174,72 @@
     .OverviewPage-bot{
         padding: 20px;
     }
+    .OverviewPage-bot-right{
+    padding: 20px;
+        
+    }
+
+    /* for the line animation */
+    .OverviewPage-bot-right-item .OverviewPage-bot-right-item-line:before{
+        right: 50% !important;
+    }
+    .OverviewPage-bot-right{
+        max-height: unset !important;
+    }
+}
+
+
+/* for the line animation */
+.OverviewPage-bot-right-item{
+	transform: translatey(0px);
+}
+
+.OverviewPage-bot-right-item  > .OverviewPage-bot-right-item-line:after{
+	content:'';
+	position: absolute;
+	bottom:0;
+	left: 50%;
+	width: 20px;
+	height: 0;
+	
+	border: 1px solid #1aabbf;
+	border-left: none;
+	border-top: none;
+    border-right: none;
+
+    transition: height 0.15s ease-out, width 0.15s ease-out 0.15s, border-color 0.50s ease-out;
+}
+
+.OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line:after{
+	width: calc(50% - 1px);
+	height: calc(100% - 2px);
+	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
+}
+
+.OverviewPage-bot-right-item .OverviewPage-bot-right-item-line:before{
+	content:'';
+	position: absolute;
+	bottom:0;
+	right: 32%;
+	width: 20px;
+	height: 0;
+	
+	border: 1px solid #1aabbf;
+	border-right: none;
+	border-top: none;
+    border-left: none;
+	
+	transition: height 0.15s ease-out, width 0.15s ease-out 0.15s, border-color 0.50s ease-out;
+}
+
+.OverviewPage-bot-right-item:hover .OverviewPage-bot-right-item-line:before{
+	width: calc(50% - 1px);
+	height: calc(100% - 2px);
+	transition: width 0.15s ease-out, height 0.15s ease-out 0.15s;
+}
+
+.OverviewPage-bot-right-item-top {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
 }
