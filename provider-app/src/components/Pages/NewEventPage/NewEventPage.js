@@ -140,12 +140,20 @@ const NewEventPage = () => {
                 labelTxt={"Event Title"}
                 width={"100%"}
               />
-              <MyTextBox
-                id="price"
-                setVal={handleChange}
-                labelTxt={"Price"}
-                width={"50px"}
-              />
+			  <div className="NewEventPage-first-other">
+				<MyTextBox
+					id="ammount"
+					setVal={handleChange}
+					labelTxt={"Ammount"}
+					width={"50px"}
+				/>
+				<MyTextBox
+					id="price"
+					setVal={handleChange}
+					labelTxt={"Price"}
+					width={"50px"}
+				/>
+			  </div>
             </div>
             <MyTextArea
               id="desc"
