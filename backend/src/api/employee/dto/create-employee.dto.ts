@@ -1,5 +1,13 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEnum } from 'class-validator';
+import { CreateUserDto } from 'src/api/user/dto/create-user.dto';
+import { Type } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsDefined,
+  IsEnum,
+  IsNotEmptyObject,
+  IsObject,
+  ValidateNested,
+} from 'class-validator';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
 
 export class CreateEmployeeDto {
@@ -10,4 +18,12 @@ export class CreateEmployeeDto {
   })
   @IsEnum(UserRole)
   role: UserRole;
+
+  @ApiProperty({ type: CreateUserDto })
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateUserDto)
+  user: CreateUserDto;
 }

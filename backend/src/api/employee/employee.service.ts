@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Mapper } from 'src/infastructure/helpers/mapper.helper';
+import { Like, Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { EmployeePaginationQueryDto } from './dto/get-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
 
@@ -17,7 +20,11 @@ export class EmployeeService {
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    return this.employeeRepository.create(createEmployeeDto);
+    const employee = this.employeeRepository.create(createEmployeeDto);
+
+    const savedEmployee = await this.employeeRepository.save(employee);
+
+    return Mapper.mapEmployeeEntityToEmployeeResponseModel(savedEmployee);
   }
 
   async createAdmin(createAdminDto: CreateAdminDto) {
@@ -47,12 +54,30 @@ export class EmployeeService {
     return employee.role;
   }
 
-  async findAll() {
-    return `This action returns all employee`;
+  async findAll(query: EmployeePaginationQueryDto) {
+    const [result, total] = await this.employeeRepository.findAndCount({
+      relations: ['company', 'user'],
+      where: [
+        { company: { name: Like(`%${query.search}%`) } },
+        { user: { firstName: Like(`%${query.search}%`) } },
+        { user: { lastName: Like(`%${query.search}%`) } },
+      ],
+      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
+    });
+
+    const mappedEmployees = result.map((employee) =>
+      Mapper.mapEmployeeEntityToEmployeeWithCompanyDetailsResponseModel(
+        employee,
+      ),
+    );
+    return { items: mappedEmployees, total };
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} employee`;
+    const employee = await this.employeeRepository.findOne(id);
+
+    return Mapper.mapEmployeeEntityToEmployeeResponseModel(employee);
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
@@ -60,6 +85,6 @@ export class EmployeeService {
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} employee`;
+    return await this.employeeRepository.delete(id);
   }
 }

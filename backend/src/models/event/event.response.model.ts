@@ -19,5 +19,7 @@ export class EventResponseModel {
 
   images: string[];
 
+  active: boolean;
+
   location: LocationResponseModel = new LocationResponseModel();
 }
