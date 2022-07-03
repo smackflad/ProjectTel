@@ -44,10 +44,10 @@ const RegisterStep3 = ({ changeLoadingState }) => {
   useRegisterCompanyMutation();
 
   useEffect(() => {
-    console.log("test")
+    // console.log(status)
     if (status === QueryStatus.fulfilled) {
-      dispatch(login(data)); //TODO make this so by default is logged in after register
-      navigate("/", { replace: true });
+      // dispatch(login(data)); //TODO make this so by default is logged in after register
+      navigate("/login", { replace: true });
     } else if (isError) {
       console.log(error.data.initialized);
       let errToastMessage = "";
