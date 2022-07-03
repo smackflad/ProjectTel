@@ -17,7 +17,8 @@ const NewEventPage = () => {
   const [form, setForm] = useState({
     title: "",
     price: "",
-    desc: "",
+    description: "",
+    ammount: "",
   });
 
   const [location, setLocation] = useState({
