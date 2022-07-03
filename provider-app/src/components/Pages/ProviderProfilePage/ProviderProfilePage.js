@@ -13,7 +13,7 @@ const ProviderProfilePage = () => {
   const [passVisibility, setPassVisibility] = useState(false);
   const companyId = useSelector((state) => state.persistedReducer.global.companyId);
   const id = useSelector((state) => state.persistedReducer.global.userId);
-  
+
   const [getProfile, { data, status, isLoading }] = useGetProfileMutation();
   const [getEmployee, { data: dataE, status: statusE, isLoading: isLoadingE }] = useGetEmployeeMutation();
   
@@ -62,6 +62,7 @@ const ProviderProfilePage = () => {
   }, [statusE]);
 
   useEffect(() => {
+    console.log(status)
     if (status === QueryStatus.uninitialized) {
       getProfile(companyId);
     }else if (status === QueryStatus.fulfilled) {
@@ -117,18 +118,28 @@ const ProviderProfilePage = () => {
         newPassword: "",
         newPassword2: "",
       });
-    } else if (statusR === QueryStatus.rejected) {
-      toast.error("Ο κωδικός πού δώσατε είναι λανθασμένος", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    } else if (isErrorR) {
+      let errToastMessage = "";
+      if (errorR.status === 401) {
+        errToastMessage = `Δώσατε λάθος στοιχεία`;
+      } else if (errorR.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (errorR.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+        console.log(errToastMessage)
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
     }
-  }, [statusR, errorR]);
+  }, [statusR, errorR, isErrorR]);
 
   if (isLoading || status === QueryStatus.uninitialized || isLoadingE || statusE === QueryStatus.uninitialized) {
     return (

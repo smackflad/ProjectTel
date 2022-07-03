@@ -9,6 +9,7 @@ import MyNav from "./components/sharedComponents/MyNav/MyNav";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import EventsPageAdmin from "./components/Pages/EventsPageAdmin/EventsPageAdmin";
 import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
+import { ToastContainer } from "react-toastify";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
@@ -19,6 +20,7 @@ import RegisterStep3 from "./components/Pages/Register-Login-Pages/Register/Regi
 import Logout from "../src/components/Pages/Register-Login-Pages/Logout/Logout";
 function App() {
   return (
+    <>
     <Router>
       <MyNav />
       <div className="Body">
@@ -77,6 +79,19 @@ function App() {
         Footer
       </div>
     </Router>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
+    </>
+
   );
 }
 

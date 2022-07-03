@@ -29,7 +29,6 @@ const RegisterStep2 = ({ changeLoadingState }) => {
     <>
       <div className="Register2-external">
         <span className="Header-Register2">Ποιός/ά είσαι</span>
-        {/* <span className="simple-text">Καλώς ήρθες στην πλατφόρμα μας.</span> */}
         <span className="simple-text">
           Δώσε καποίες πληροφορίες για εσένα
         </span>

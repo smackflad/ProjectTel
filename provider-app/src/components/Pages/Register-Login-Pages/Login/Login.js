@@ -27,7 +27,6 @@ const Login = ({ changeLoadingState }) => {
       dispatch(login(data));
       navigate("/", { replace: true });
     } else if (isError) {
-      console.log(error.data.initialized);
       let errToastMessage = "";
       if (error.status === 401) {
         errToastMessage = `Δώσατε λάθος στοιχεία`;

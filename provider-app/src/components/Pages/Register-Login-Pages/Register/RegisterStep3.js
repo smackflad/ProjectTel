@@ -5,14 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterCompanyMutation } from "../../../../store/api/authApi";
 import { useSelector, useDispatch } from "react-redux";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
-import { login } from "../../../../store/globalSlice";
-// import { registerStep3 } from "../../../../store/providerRegisterSlice";
 
 const RegisterStep3 = ({ changeLoadingState }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // const { userId } = useSelector((state) => state.global);
   const prevInput = useSelector((state) => state.persistedReducer.register);
   const [form, setForm] = useState({
     admin: {
@@ -37,16 +34,13 @@ const RegisterStep3 = ({ changeLoadingState }) => {
     country: "",
     postalCode: "",
   })
-  // console.log(prevInput);
 
 
   const [registerCompany, { data, isError, isLoading, error, status }] =
   useRegisterCompanyMutation();
 
   useEffect(() => {
-    // console.log(status)
     if (status === QueryStatus.fulfilled) {
-      // dispatch(login(data)); //TODO make this so by default is logged in after register
       navigate("/login", { replace: true });
     } else if (isError) {
       console.log(error.data.initialized);
@@ -80,12 +74,10 @@ const RegisterStep3 = ({ changeLoadingState }) => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
-    // if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   const handleLocationChange = (e) => {
     setLocation({ ...location, [e.target.id]: e.target.value });
-    // if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
   return (

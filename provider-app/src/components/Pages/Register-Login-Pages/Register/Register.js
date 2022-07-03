@@ -12,43 +12,8 @@ const Register = ({ changeLoadingState }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const [register, { data, isError, isLoading, error, status }] =
-  // useRegisterCompanyMutation();
-
-  useEffect(() => {
-    // if (status === QueryStatus.fulfilled) {
-    //   dispatch(initAccount(data.user.id));
-    //   navigate("/Register2", { replace: true });
-    // } else if (isError) {
-    //   let errToastMessage = "";
-    //   if (error.status === 409 && !error.data.initialized) {
-    //     dispatch(initAccount(error.data.userId));
-    //     navigate("/Register2", { replace: true });
-    //   } else if (error.status === 409) {
-    //     errToastMessage = `Αυτός ο χρήστης χρησιμοποιείται`;
-    //   } else if (error.status === 400) {
-    //     errToastMessage = `ERROR: 400 BAD REQUEST`;
-    //   } else if (error.status === 500) {
-    //     errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
-    //   }
-
-    //   if (errToastMessage !== "")
-    //     toast.error(errToastMessage, {
-    //       position: "top-center",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //     });
-    // }
-  // }, [dispatch, status, error]);
-}, [dispatch]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(form);
     dispatch(registerStep1(form));
     navigate("/Register2", { replace: true });
   };
