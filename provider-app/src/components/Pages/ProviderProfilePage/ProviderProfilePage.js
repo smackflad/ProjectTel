@@ -2,27 +2,41 @@ import "./providerProfilePage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useGetProfileMutation } from "../../../store/api/providerApi";
-import { useGetEmployeeMutation } from "../../../store/api/providerApi";//TODO
+import { useGetEmployeeMutation } from "../../../store/api/providerApi"; //TODO
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
 import CircleLoader from "react-spinners/CircleLoader";
-import {useResetPasswordMutation} from "../../../store/api/authApi";//TODO
+import { useResetPasswordMutation } from "../../../store/api/authApi"; //TODO
+import { useNavigate } from "react-router-dom";
 
 const ProviderProfilePage = () => {
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
 
   const [passVisibility, setPassVisibility] = useState(false);
-  const companyId = useSelector((state) => state.persistedReducer.global.companyId);
+  const companyId = useSelector(
+    (state) => state.persistedReducer.global.companyId
+  );
   const id = useSelector((state) => state.persistedReducer.global.userId);
 
   const [getProfile, { data, status, isLoading }] = useGetProfileMutation();
-  const [getEmployee, { data: dataE, status: statusE, isLoading: isLoadingE }] = useGetEmployeeMutation();
-  
+  const [getEmployee, { data: dataE, status: statusE, isLoading: isLoadingE }] =
+    useGetEmployeeMutation();
+
   const [form, setForm] = useState({
     oldPassword: "",
     newPassword: "",
     newPassword2: "",
   });
-  
+
   useEffect(() => {
     if (statusE === QueryStatus.uninitialized) {
       getEmployee(id);
@@ -34,9 +48,18 @@ const ProviderProfilePage = () => {
       getProfile(companyId);
     }
   }, [companyId, status]);
-  
-  const [resetPassword, { data: dataR, isError: isErrorR, isLoading: isLoadingR, error: errorR, status: statusR }] = useResetPasswordMutation();
-  
+
+  const [
+    resetPassword,
+    {
+      data: dataR,
+      isError: isErrorR,
+      isLoading: isLoadingR,
+      error: errorR,
+      status: statusR,
+    },
+  ] = useResetPasswordMutation();
+
   useEffect(() => {
     if (statusR === QueryStatus.fulfilled) {
       console.log(dataR);
@@ -63,7 +86,7 @@ const ProviderProfilePage = () => {
       } else if (errorR.status === 500) {
         errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
       }
-        console.log(errToastMessage)
+      console.log(errToastMessage);
       if (errToastMessage !== "")
         toast.error(errToastMessage, {
           position: "top-center",
@@ -77,7 +100,12 @@ const ProviderProfilePage = () => {
     }
   }, [statusR, errorR, isErrorR]);
 
-  if (isLoading || status === QueryStatus.uninitialized || isLoadingE || statusE === QueryStatus.uninitialized) {
+  if (
+    isLoading ||
+    status === QueryStatus.uninitialized ||
+    isLoadingE ||
+    statusE === QueryStatus.uninitialized
+  ) {
     return (
       <div className="Account-external">
         <CircleLoader />
@@ -102,7 +130,7 @@ const ProviderProfilePage = () => {
         newPassword2: "",
       });
       return;
-    }else{
+    } else {
       resetPassword({
         email: data.email,
         oldPassword: form.oldPassword,
@@ -110,7 +138,6 @@ const ProviderProfilePage = () => {
         id: id,
       });
     }
-
   };
 
   const handleChange = (e) => {
@@ -133,7 +160,6 @@ const ProviderProfilePage = () => {
           <input
             className="ProviderProfilePage-inputs"
             type="text"
-
             placeholder="lastName"
             // value={dataE.lastName}
             disabled
@@ -202,7 +228,6 @@ const ProviderProfilePage = () => {
             value={data.location.postalCode}
             disabled
           ></input>
-
         </div>
 
         <div className="ProviderProfilePage-password">
@@ -263,7 +288,7 @@ const ProviderProfilePage = () => {
               required
               value={data.iban}
               // onChange={handleChange}
-              placeholder="Τωρινό IBAN" 
+              placeholder="Τωρινό IBAN"
               disabled
             />
             <input
@@ -273,8 +298,8 @@ const ProviderProfilePage = () => {
               required
               value={data.iban}
               onChange={handleChange}
-              placeholder="Νέο IBAN" />
-
+              placeholder="Νέο IBAN"
+            />
 
             <button
               type="submit"
