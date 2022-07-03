@@ -7,29 +7,48 @@ const paginationComponentOptions = {
   rangeSeparatorText: "από",
 };
 
+const DeleteUser = async (userID, refresh) => {
+  var requestOptions = {
+    method: "DELETE",
+  };
+
+  fetch(`http://localhost:3001/api/v1/employee/${userID}`, requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result);
+      refresh();
+    })
+    .catch((error) => console.log("error", error));
+};
+
 const columns = [
   {
     name: "Όνοματεπώνημο",
-    selector: (row) => row.name + " ", //....... last name
+    selector: (row) => row.firstName + " " + row.lastName,
     sortable: true,
     width: "300px",
   },
   {
     name: "Εταιρία",
-    selector: (row) => row.company,
+    selector: (row) => row.companyName,
     sortable: true,
     width: "200px",
   },
   {
     name: "Ρόλος",
-    selector: (row) => row.position,
+    selector: (row) => row.role,
     sortable: true,
     width: "200px",
   },
   {
     name: "Διαγραφή",
-    selector: () => (
-      <button className="delete-employee-button">Διαγραφή χρήστη</button>
+    selector: (row) => (
+      <button
+        onClick={() => DeleteUser(row.id, row.refresh)}
+        className="delete-employee-button"
+      >
+        Διαγραφή χρήστη
+      </button>
     ),
   },
 ];
@@ -41,22 +60,31 @@ const UsersPageAdmin = () => {
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState("");
+  const [refresh, setRefresh] = useState(false);
+
+  const refreshData = () => {
+    setRefresh(!refresh);
+  };
 
   useEffect(() => {
-    fetchData(1, perPage);
-  }, [perPage]);
+    fetchData(0, perPage);
+  }, [perPage, refresh]);
   const fetchData = async (page, per_page, search) => {
     if (search === undefined) {
       search = "";
     }
     fetch(
-      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}`
+      `http://localhost:3001/api/v1/employee?search=${search}&pageSize=${perPage}&pageNumber=${page}`
     )
       .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
-          setItems(result.data);
+          result.items.forEach((item) => {
+            item.refresh = refreshData;
+          });
+          console.log(result);
+          setItems(result.items);
           setTotalRows(result.total);
         },
         (error) => {
@@ -74,8 +102,7 @@ const UsersPageAdmin = () => {
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
     if (e.target.value.length >= 3) {
-      fetchData(1, perPage, e.target.value);
-      console.log("pressed  ", e.target.value);
+      fetchData(0, perPage, e.target.value);
     }
   };
   if (error) {
