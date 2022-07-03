@@ -1,4 +1,4 @@
-import "./EventsPage.css";
+import "./EventsOverviewPage.css";
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 
@@ -8,62 +8,67 @@ const paginationComponentOptions = {
   rangeSeparatorText: "από",
 };
 
-const columns = [
-  {
-    name: "Δρραστηριότητα",
-    selector: (row) => row.name,
-    sortable: true,
-    width: "300px",
-  },
-  {
-    name: "Ημερομηνία",
-    selector: (row) => row.date,
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Εκκρεμότητα",
-    selector: (row) => 
-   
-      
-  
-    <div class="action_btn">
 
-            <button name="submit" class="event-accept" type="submit" value="accept" onClick={(e) => {
-                
-                // setShowCreate(true);
-              }}>Accept </button>
-            /
-            <button name="submit" class="event-decline" type="submit" value="decline" onClick={(e) => {
-                
-              }}>Decline </button>
-
-            <p id="saved"></p>
-            </div>
-       
-   
-       
-  },
-  
-];
  
 const EventsPage = () => {
+  const columns = [
+    {
+      name: "Δρραστηριότητα",
+      selector: (row) => row.name,
+      sortable: true,
+      width: "300px",
+    },
+    {
+      name: "Ημερομηνία",
+      selector: (row) => row.date,
+      sortable: true,
+      width: "200px",
+    },
+    {
+      name: "Εκκρεμότητα",
+      selector: (row) =>
+     
+        
+    
+      <div class="action_btn">
+  
+              <button name="submit" class="event-accept" type="submit" value="accept" onClick={(e) => {
+                  
+                this.setActive(true);
+                window.location.reload();
+                
+                }}>Accept </button>
+              /
+              <button name="submit" class="event-decline" type="submit" value="decline" onClick={(e) => {
+                    this.setActive(false);
+                   window.location.reload();
+                }}>Decline </button>
+  
+              <p id="saved"></p>
+              </div>
+         
+     
+         
+    },
+    
+  ];
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState("");
+  const [active,setActive]=useState("false");
 
   useEffect(() => {
     fetchData(1, perPage);
   }, [perPage]);
-  const fetchData = async (page, per_page, search) => {
+  const fetchData = async (page, per_page, search,active) => {
     if (search === undefined) {
       search = "";
     }
     fetch(
-      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}`
+      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}%active=${active}`
     )
       .then((res) => res.json())
       .then(
