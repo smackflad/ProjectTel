@@ -10,6 +10,8 @@ import { ParentReponseModel } from 'src/models/parent/parent.response.model';
 import { ParentProfileReponseModel } from 'src/models/parent/parent.profile.response.model';
 import { UnitializedParentReponseModel } from 'src/models/parent/unitializedParent.response.model';
 import { EventCreatedResponseModel } from 'src/models/event/event-created.response.model';
+import { EmployeeResponseModel } from 'src/models/employee/Employee.response.model';
+import { EmployeeWithCompanyDetailsResponseModel } from 'src/models/employee/EmployeeWithCompanyDetails.eesponse.model';
 
 export class Mapper {
   static mapParentEntityToUnitializedParentResponseModel(
@@ -63,8 +65,9 @@ export class Mapper {
     res.name = company.name;
     res.email = company.email;
     res.phone = company.phone;
-    res.taxId = res.taxId;
-    res.taxOffice = res.taxOffice;
+    res.taxId = company.taxId;
+    res.taxOffice = company.taxOffice;
+    res.iban = company.iban;
     res.id = company.id;
     res.admin.email = admin.user.email;
     res.admin.firstName = admin.user.firstName;
@@ -86,12 +89,13 @@ export class Mapper {
     company: Company,
   ): CompanyResponseModel {
     const res: CompanyResponseModel = new CompanyResponseModel();
-
+    console.log(company);
     res.name = company.name;
     res.email = company.email;
     res.phone = company.phone;
-    res.taxId = res.taxId;
-    res.taxOffice = res.taxOffice;
+    res.taxId = company.taxId;
+    res.taxOffice = company.taxOffice;
+    res.iban = company.iban;
     res.id = company.id;
     res.location.address = company.location.address;
     res.location.addressNum = company.location.addressNum;
@@ -101,6 +105,7 @@ export class Mapper {
     res.location.country = company.location.country;
     res.location.latitude = company.location.latitude;
     res.location.longtitude = company.location.longtitude;
+    console.log(res);
 
     return res;
   }
@@ -115,6 +120,7 @@ export class Mapper {
     res.ammount = event.ammount;
     res.images = event.images;
     res.eventDate = event.eventDate;
+    res.active = event.active;
     if (event.company !== null && event.company !== undefined) {
       res.companyId = event.company.id;
       res.companyName = event.company.name;
@@ -144,6 +150,7 @@ export class Mapper {
     res.ammount = event.ammount;
     res.images = event.images;
     res.eventDate = event.eventDate;
+    res.active = event.active;
 
     res.location.address = event.location.address;
     res.location.addressNum = event.location.addressNum;
@@ -156,6 +163,39 @@ export class Mapper {
 
     res.company.name = event.company.name;
     res.company.id = event.company.id;
+
+    return res;
+  }
+
+  static mapEmployeeEntityToEmployeeResponseModel(
+    employee: Employee,
+  ): EmployeeResponseModel {
+    const res: EmployeeResponseModel = new EmployeeResponseModel();
+
+    res.email = employee.user.email;
+    res.firstName = employee.user.firstName;
+    res.lastName = employee.user.lastName;
+    res.role = employee.role;
+    res.id = employee.user.id;
+
+    return res;
+  }
+
+  static mapEmployeeEntityToEmployeeWithCompanyDetailsResponseModel(
+    employee: Employee,
+  ): EmployeeWithCompanyDetailsResponseModel {
+    const res: EmployeeWithCompanyDetailsResponseModel =
+      new EmployeeWithCompanyDetailsResponseModel();
+    console.log(employee);
+    res.email = employee.user.email;
+    res.firstName = employee.user.firstName;
+    res.lastName = employee.user.lastName;
+    res.role = employee.role;
+    res.id = employee.user.id;
+    if (employee.company) {
+      res.companyId = employee.company.id;
+      res.companyName = employee.company.name;
+    }
 
     return res;
   }

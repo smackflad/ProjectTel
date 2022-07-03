@@ -6,10 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
+import { EmployeePaginationQueryDto } from './dto/get-employee.dto';
 
 @Controller('employee')
 export class EmployeeController {
@@ -20,9 +23,14 @@ export class EmployeeController {
     return this.employeeService.create(createEmployeeDto);
   }
 
+  @Post('createSystemAdmin')
+  createSystemAdmin(@Body() createEmployeeDto: CreateEmployeeDto) {
+    return this.employeeService.create(createEmployeeDto);
+  }
+
   @Get()
-  findAll() {
-    return this.employeeService.findAll();
+  findAll(@Query() query: EmployeePaginationQueryDto) {
+    return this.employeeService.findAll(query);
   }
 
   @Get(':id')
