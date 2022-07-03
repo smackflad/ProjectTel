@@ -67,6 +67,8 @@ export class Mapper {
     res.taxOffice = res.taxOffice;
     res.id = company.id;
     res.admin.email = admin.user.email;
+    res.admin.firstName = admin.user.firstName;
+    res.admin.lastName = admin.user.lastName;
     res.admin.id = admin.user.id;
     res.location.address = company.location.address;
     res.location.addressNum = company.location.addressNum;

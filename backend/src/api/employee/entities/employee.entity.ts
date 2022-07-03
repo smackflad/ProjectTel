@@ -23,4 +23,10 @@ export class Employee extends BaseWithoutId {
   })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
+
+  @Column({ nullable: true })
+  firstName: string;
+
+  @Column({ nullable: true })
+  lastName: string;
 }
