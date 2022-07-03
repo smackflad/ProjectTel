@@ -15,9 +15,9 @@ const RegisterStep3 = ({ changeLoadingState }) => {
     admin: {
       email: prevInput.admin.email,
       password: prevInput.admin.password,
+      firstName: prevInput.admin.firstName,
+      lastName: prevInput.admin.lastName,
     },
-    firstName: prevInput.firstName,
-    lastName: prevInput.lastName,
     name: "",
     taxId: "",
     taxOffice: "",
@@ -68,7 +68,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ ...form, location: {...location} });
+    // console.log({ ...form, location: {...location} });
     registerCompany({ ...form, location: {...location} });
   };
 

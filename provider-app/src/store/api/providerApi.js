@@ -12,6 +12,16 @@ export const providerApi = api.injectEndpoints({
         url: `employee/${id}`,
       }),
     }),
+    updateIban: build.mutation({
+      query: (data) => {
+        const { id, ...body } = data;
+        return {
+          url: `companies/${id}`,
+          method: "PATCH",
+          body,
+        };
+      },
+    }),
     // getWallet: build.mutation({
     //   query: (id) => ({
     //     url: `parents/${id}/wallet`,
@@ -34,4 +44,5 @@ export const providerApi = api.injectEndpoints({
 export const {
   useGetProfileMutation,
   useGetEmployeeMutation,
+  useUpdateIbanMutation,
 } = providerApi;

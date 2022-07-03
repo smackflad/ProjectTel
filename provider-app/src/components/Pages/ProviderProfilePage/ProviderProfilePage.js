@@ -2,11 +2,12 @@ import "./providerProfilePage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useGetProfileMutation } from "../../../store/api/providerApi";
-import { useGetEmployeeMutation } from "../../../store/api/providerApi"; //TODO
+import { useGetEmployeeMutation } from "../../../store/api/providerApi";
+import { useUpdateIbanMutation } from "../../../store/api/providerApi";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
 import CircleLoader from "react-spinners/CircleLoader";
-import { useResetPasswordMutation } from "../../../store/api/authApi"; //TODO
+import { useResetPasswordMutation } from "../../../store/api/authApi";
 import { useNavigate } from "react-router-dom";
 
 const ProviderProfilePage = () => {
@@ -31,11 +32,50 @@ const ProviderProfilePage = () => {
   const [getEmployee, { data: dataE, status: statusE, isLoading: isLoadingE }] =
     useGetEmployeeMutation();
 
+  const [updateIban, { data: dataU, isError: isErrorU, isLoading: isLoadingU, error: errorU, status: statusU }] =
+  useUpdateIbanMutation();
+
   const [form, setForm] = useState({
     oldPassword: "",
     newPassword: "",
     newPassword2: "",
   });
+
+  const [iban, setIban] = useState("")
+
+  useEffect(() => {
+    if (statusU === QueryStatus.fulfilled) {
+      toast.success("Το IBAN σας άλλαξε επιτυχώς", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate(0);
+    } else if (isErrorU) {
+      console.log(errorU.data.initialized);
+      let errToastMessage = "";
+      if (errorU.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (errorU.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [statusU, errorU]);
 
   useEffect(() => {
     if (statusE === QueryStatus.uninitialized) {
@@ -62,7 +102,6 @@ const ProviderProfilePage = () => {
 
   useEffect(() => {
     if (statusR === QueryStatus.fulfilled) {
-      console.log(dataR);
       toast.success("Ο κωδικός σας άλλαξε επιτυχώς", {
         position: "top-center",
         autoClose: 5000,
@@ -86,7 +125,6 @@ const ProviderProfilePage = () => {
       } else if (errorR.status === 500) {
         errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
       }
-      console.log(errToastMessage);
       if (errToastMessage !== "")
         toast.error(errToastMessage, {
           position: "top-center",
@@ -112,6 +150,27 @@ const ProviderProfilePage = () => {
       </div>
     );
   }
+
+  const handleChangeIban = (e) =>{
+    e.preventDefault();
+    if(iban === ""){
+      toast.error("Κενό IBAN", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }else{
+      updateIban({
+        iban: iban,
+        id: companyId
+      })
+    }
+  }
+
   const handleSubmitPass = (e) => {
     e.preventDefault();
     if (form.newPassword !== form.newPassword2) {
@@ -132,7 +191,7 @@ const ProviderProfilePage = () => {
       return;
     } else {
       resetPassword({
-        email: data.email,
+        email: dataE.email,
         oldPassword: form.oldPassword,
         newPassword: form.newPassword,
         id: id,
@@ -153,7 +212,7 @@ const ProviderProfilePage = () => {
             className="ProviderProfilePage-inputs"
             type="text"
             placeholder="firstname"
-            // value={dataE.firstName}
+            value={dataE.firstName}
             disabled
           ></input>
 
@@ -161,7 +220,7 @@ const ProviderProfilePage = () => {
             className="ProviderProfilePage-inputs"
             type="text"
             placeholder="lastName"
-            // value={dataE.lastName}
+            value={dataE.lastName}
             disabled
           ></input>
 
@@ -169,7 +228,7 @@ const ProviderProfilePage = () => {
             className="ProviderProfilePage-inputs"
             type="text"
             placeholder="AdminEmail"
-            // value={dataE.email}
+            value={dataE.email}
             disabled
           ></input>
 
@@ -296,13 +355,13 @@ const ProviderProfilePage = () => {
               id="NewIban"
               name="NewIban"
               required
-              value={data.iban}
-              onChange={handleChange}
+              value={iban}
+              onChange={(e)=>{setIban(e.target.value)}}
               placeholder="Νέο IBAN"
             />
 
             <button
-              type="submit"
+              onClick={handleChangeIban}
               style={{
                 backgroundColor: "#1AABBF",
                 color: "#ffffff",
