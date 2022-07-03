@@ -1,7 +1,6 @@
 import "./providerProfilePage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchUserAccount } from "./ProviderProfilePage.slice";
 
 const ProviderProfilePage = () => {
 
@@ -182,7 +181,7 @@ const ProviderProfilePage = () => {
             className="ProviderProfilePage-inputs"
             type="text"
             placeholder="companyPhoneNumber"
-            //   value={profile.companyPhoneNumber}
+               value={data.companyPhoneNumber}
             //   onChange={handleChange}
             disabled
           ></input>
