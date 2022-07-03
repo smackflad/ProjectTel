@@ -10,7 +10,7 @@ const paginationComponentOptions = {
 const columns = [
   {
     name: "Όνοματεπώνημο",
-    selector: (row) => row.name,
+    selector: (row) => row.name + " ", //....... last name
     sortable: true,
     width: "300px",
   },
@@ -21,22 +21,19 @@ const columns = [
     width: "200px",
   },
   {
-    name: "Θέση",
+    name: "Ρόλος",
     selector: (row) => row.position,
     sortable: true,
     width: "200px",
   },
+  {
+    name: "Διαγραφή",
+    selector: () => (
+      <button className="delete-employee-button">Διαγραφή χρήστη</button>
+    ),
+  },
 ];
-const columns_admin = [
-	{
-	  name: "Διαγραφή χρήστη",
-	  width: "150px",
-	},
-	{
-	  name: "Αλλαγή κωδικού",
-	  width: "150px",
-	},
-  ];
+
 const UsersPageAdmin = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -105,32 +102,20 @@ const UsersPageAdmin = () => {
               ></input>
             </div>
           </div>
-		  <div className="UsersPageAdmin-Datatable-Container">
-			<div className="UsersPageAdmin-Datatable">
-				<DataTable
-				columns={columns}
-				data={items}
-				pagination
-				paginationServer
-				paginationTotalRows={totalRows}
-				onChangePage={handlePageChange}
-				onChangeRowsPerPage={handlePerRowsChange}
-				paginationComponentOptions={paginationComponentOptions}
-				/>
-			</div>
-
-			<div className="UsersPageAdmin-Datatable-Admin">
-				<DataTable
-				columns={columns_admin}
-				data={items}
-				paginationServer
-				paginationTotalRows={totalRows}
-				onChangePage={handlePageChange}
-				onChangeRowsPerPage={handlePerRowsChange}
-				paginationComponentOptions={paginationComponentOptions}
-				/>
-			</div>
-		  </div>
+          <div className="UsersPageAdmin-Datatable-Container">
+            <div className="UsersPageAdmin-Datatable">
+              <DataTable
+                columns={columns}
+                data={items}
+                pagination
+                paginationServer
+                paginationTotalRows={totalRows}
+                onChangePage={handlePageChange}
+                onChangeRowsPerPage={handlePerRowsChange}
+                paginationComponentOptions={paginationComponentOptions}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
