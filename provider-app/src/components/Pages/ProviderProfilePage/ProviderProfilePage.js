@@ -1,4 +1,4 @@
-import "./ProviderProfilePage.css";
+import "./providerProfilePage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUserAccount } from "./ProviderProfilePage.slice";
