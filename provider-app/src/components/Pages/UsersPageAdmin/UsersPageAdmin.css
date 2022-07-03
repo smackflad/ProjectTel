@@ -95,6 +95,7 @@ button.delete-employee-button {
   color: #fff;
   border: none;
   height: 30px;
+  cursor: pointer;
 }
 button.delete-employee-button:hover {
   background-color: #bae6ec;
