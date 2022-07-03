@@ -4,22 +4,22 @@ import { useEffect } from "react";
 import { fetchUserAccount } from "./ProviderProfilePage.slice";
 
 const ProviderProfilePage = () => {
-  // console.log("ok");
-  const { profile, loading } = useSelector((state) => state.userAccount);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await dispatch(fetchUserAccount(2)).unwrap();
-        console.log(`success user id: ${res.data.id}`);
-      } catch (err) {
-        console.error(err.message);
-      }
-      // console.log("hello");
-    })();
-  }, [dispatch]);
-  console.log(loading);
-  console.log(profile);
+  // // console.log("ok");      
+  // const { profile, loading } = useSelector((state) => state.userAccount);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const res = await dispatch(fetchUserAccount(2)).unwrap();
+  //       console.log(`success user id: ${res.data.id}`);
+  //     } catch (err) {
+  //       console.error(err.message);
+  //     }
+  //     // console.log("hello");
+  //   })();
+  // }, [dispatch]);
+  // console.log(loading);
+  // console.log(profile);
   return (
     <div className="ProviderProfilePage-external">
       <div className="container-selection">
@@ -29,7 +29,6 @@ const ProviderProfilePage = () => {
           <input
             className="ProviderProfilePage-inputs"
             type="text"
-            placeholder=""
             //   value={profile.firstName}
             //   onChange={handleChange}
             disabled
