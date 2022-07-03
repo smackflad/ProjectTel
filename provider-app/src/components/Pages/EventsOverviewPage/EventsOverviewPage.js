@@ -23,7 +23,7 @@ const columns = [
   },
   {
     name: "Εκκρεμότητα",
-    selector: (row) =>
+    selector: (row) => 
    
       
   
