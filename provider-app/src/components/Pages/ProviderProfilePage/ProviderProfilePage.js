@@ -24,78 +24,14 @@ const ProviderProfilePage = () => {
   });
   
   useEffect(() => {
-    console.log(statusE);
     if (statusE === QueryStatus.uninitialized) {
       getEmployee(id);
-    }else if (statusE === QueryStatus.fulfilled) {
-      console.log(dataE);
-      // toast.success("Ο κωδικός σας άλλαξε επιτυχώς", {
-        //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
-      // setForm({
-      //   oldPassword: "",
-      //   newPassword: "",
-      //   newPassword2: "",
-      // });
-    } else if (statusE === QueryStatus.rejected) {
-      // toast.error("Ο κωδικός πού δώσατε είναι λανθασμένος", {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
-      // setForm({
-        //   oldPassword: "",
-      //   newPassword: form.newPassword,
-      //   newPassword2: form.newPassword2,
-      // });
     }
   }, [statusE]);
 
   useEffect(() => {
-    console.log(status)
     if (status === QueryStatus.uninitialized) {
       getProfile(companyId);
-    }else if (status === QueryStatus.fulfilled) {
-      console.log(data);
-      // toast.success("Ο κωδικός σας άλλαξε επιτυχώς", {
-        //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
-      // setForm({
-      //   oldPassword: "",
-      //   newPassword: "",
-      //   newPassword2: "",
-      // });
-    } else if (status === QueryStatus.rejected) {
-      // toast.error("Ο κωδικός πού δώσατε είναι λανθασμένος", {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
-      // setForm({
-        //   oldPassword: "",
-      //   newPassword: form.newPassword,
-      //   newPassword2: form.newPassword2,
-      // });
     }
   }, [companyId, status]);
   
@@ -191,18 +127,8 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="firstname"
             // value={dataE.firstName}
-            //   onChange={handleChange}
             disabled
           ></input>
-          <input
-            className="ProviderProfilePage-inputs"
-            type="text"
-            placeholder="companyName"
-            value={data.name}
-            //   onChange={handleChange}
-            disabled
-          ></input>
-
 
           <input
             className="ProviderProfilePage-inputs"
@@ -210,16 +136,6 @@ const ProviderProfilePage = () => {
 
             placeholder="lastName"
             // value={dataE.lastName}
-            //   onChange={handleChange}
-            disabled
-          ></input>
-
-          <input
-            className="ProviderProfilePage-inputs"
-            type="text"
-            placeholder="companyID"
-            value={data.companyID}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -228,17 +144,22 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="AdminEmail"
             // value={dataE.email}
-            //   onChange={handleChange}
             disabled
           ></input>
 
           <input
             className="ProviderProfilePage-inputs"
             type="text"
+            placeholder="companyName"
+            value={data.name}
+            disabled
+          ></input>
 
+          <input
+            className="ProviderProfilePage-inputs"
+            type="text"
             placeholder="taxOffice"
             value={data.taxOffice}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -247,7 +168,6 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="companyEmailAddress"
             value={data.email}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -256,7 +176,6 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="companyAdress"
             value={data.location.address}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -265,7 +184,6 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="companyPhoneNumber"
             value={data.phone}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -274,7 +192,6 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="companyCity"
             value={data.location.city}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -283,7 +200,6 @@ const ProviderProfilePage = () => {
             type="text"
             placeholder="companyPostalCode"
             value={data.location.postalCode}
-            //   onChange={handleChange}
             disabled
           ></input>
 
@@ -347,7 +263,9 @@ const ProviderProfilePage = () => {
               required
               value={data.iban}
               // onChange={handleChange}
-              placeholder="Τωρινό IBAN" />
+              placeholder="Τωρινό IBAN" 
+              disabled
+            />
             <input
               type="Iban"
               id="NewIban"
