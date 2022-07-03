@@ -21,8 +21,8 @@ const Login = ({ changeLoadingState }) => {
   const [loginEmployee, { data, isError, isLoading, error, status }] =
     useLoginEmployeeMutation();
 
-  // changeLoadingState(isLoading);
-  useEffect(() => {
+    // changeLoadingState(isLoading);
+    useEffect(() => {
     if (status === QueryStatus.fulfilled) {
       dispatch(login(data));
       navigate("/", { replace: true });
@@ -52,7 +52,6 @@ const Login = ({ changeLoadingState }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     loginEmployee(form);
   };
 

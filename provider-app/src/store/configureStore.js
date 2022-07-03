@@ -6,11 +6,9 @@ import storage from "redux-persist/lib/storage";
 
 import globalReducer from "./globalSlice";
 import providerRegisterReducer from "./providerRegisterSlice";
-
 const reducers = combineReducers({
     global: globalReducer,
     register: providerRegisterReducer,
-    [api.reducerPath]: api.reducer,
   });
 
 const persistConfig = {
@@ -20,7 +18,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-    reducer: {persistedReducer},
+    reducer: {persistedReducer, [api.reducerPath]: api.reducer},
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
