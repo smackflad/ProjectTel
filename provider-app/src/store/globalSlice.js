@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    id: "",
+    userId: "",
     access_token: "",
     role: "",
     companyId: "",
@@ -13,7 +13,7 @@ const globalSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-        state.id = action.payload.userId;
+        state.userId = action.payload.id;
         state.access_token = action.payload.access_token;
         state.role = action.payload.role;
         state.companyId = action.payload.companyId;

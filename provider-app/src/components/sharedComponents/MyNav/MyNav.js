@@ -39,7 +39,7 @@ const MyNav = () => {
           </div>
           {isLoggedIn && (
             <div className="MyNav-icon">
-              <Link to="/my-profile">
+              <Link to="/profile">
                 <span className="material-icons-outlined md-40">
                   account_circle
                 </span>
