@@ -16,7 +16,7 @@ import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/C
 import Register from "./components/Pages/Register-Login-Pages/Register/Register";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import RegisterStep3 from "./components/Pages/Register-Login-Pages/Register/RegisterStep3";
-
+import Logout from "../src/components/Pages/Register-Login-Pages/Logout/Logout";
 function App() {
   return (
     <Router>
@@ -53,6 +53,14 @@ function App() {
               element={
                 <CommonLogReg>
                   <RegisterStep3 />
+                </CommonLogReg>
+              }
+            />
+            <Route
+              path="/Logout"
+              element={
+                <CommonLogReg>
+                  <Logout />
                 </CommonLogReg>
               }
             />

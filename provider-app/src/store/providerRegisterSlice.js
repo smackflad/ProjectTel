@@ -4,7 +4,9 @@ const initialState = {
     admin: {
         email: "",
         password: "",
-    }
+    },
+    firstName: "",
+    lastName: ""
     // name: "",
     // taxId: "",
     // taxOffice: "",
@@ -29,8 +31,8 @@ const providerRegisterSlice = createSlice({
         state.admin.password = action.payload.password;
     },
     registerStep2(state, action) {
-        //TODO for firstname
-        //     for lastname
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
     },
     // registerStep3(state, action) {
     //     state.name = action.payload.name;

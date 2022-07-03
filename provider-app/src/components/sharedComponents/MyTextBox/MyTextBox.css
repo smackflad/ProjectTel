@@ -2,23 +2,33 @@
     font-size: 12px;
     font-weight: 600;
 }
+.myTextBox-txt-top {
+    /* width: max-content; */
+}
 #star {
     color: #be0000;
 
+}
+
+.myTextBox-txt-external{
+    /* width: max-content; */
+    /* max-width: 10px; */
 }
 
 .myTextBox-txt-internal {
     display: flex;
     flex-direction: column;
     margin: 0px 0px 21px 0px;
-    gap: 6px
+    gap: 6px;
+    width: 100%;
 }
 
 .myTextBox-txt-internal input {
+    /* width: 100%; */
     background-color: #F4F5F6;
     margin: 0px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 12px;
     border: 0px solid rgba(0, 0, 0, 0.30);
     border-radius: 10px;
     -webkit-transition: 0.5s;

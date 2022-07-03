@@ -1,22 +1,21 @@
-.MySelectBox-select {
-    
-}
-
 .MySelectBox-select select {
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    opacity: 1;
-    text-align: center;
-    width: 137px;
-    height: 30px;
-    padding: 5px 10px;
-    /* background-color: #EBEDED; */
-    background: url("keyboard_arrow_down_FILL0_wght400_GRAD0_opsz48.png") no-repeat right #EBEDED;
-    font: normal normal normal 16px/20px;
-    appearance: none;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  opacity: 1;
+  width: 137px;
+  height: 30px;
+  padding: 5px 10px;
+  /* background-color: #EBEDED; */
+  background: url("keyboard_arrow_down_FILL0_wght400_GRAD0_opsz48.png")
+    no-repeat right #ebeded;
+  font: normal normal normal 16px/20px;
+  appearance: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .MySelectBox-select select option:checked {
-    background-color: lightblue;
+  background-color: #1aabbf;
+  color: #fff;
 }

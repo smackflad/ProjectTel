@@ -5,43 +5,48 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterCompanyMutation } from "../../../../store/api/authApi";
 import { useSelector, useDispatch } from "react-redux";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
-import { registerStep3 } from "../../../../store/providerRegisterSlice";
+import { login } from "../../../../store/globalSlice";
+// import { registerStep3 } from "../../../../store/providerRegisterSlice";
 
 const RegisterStep3 = ({ changeLoadingState }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   
   // const { userId } = useSelector((state) => state.global);
-  
-  const prevInput = useSelector((state) => state.persistedReducer.register.admin);
+  const prevInput = useSelector((state) => state.persistedReducer.register);
   const [form, setForm] = useState({
     admin: {
-      email: prevInput.email,
-      password: prevInput.password,
+      email: prevInput.admin.email,
+      password: prevInput.admin.password,
     },
+    firstName: prevInput.firstName,
+    lastName: prevInput.lastName,
     name: "",
     taxId: "",
     taxOffice: "",
     email: "",
     phone: "",
-    iban: "",
-    location: "",
+    iban: ""
+  });
+
+  const [location, setLocation] = useState({
     address: "",
     addressNum: "",
     city: "",
     state: "",
     country: "",
     postalCode: "",
-  });
-  console.log(form);
+  })
+  // console.log(prevInput);
 
 
   const [registerCompany, { data, isError, isLoading, error, status }] =
   useRegisterCompanyMutation();
 
   useEffect(() => {
+    console.log("test")
     if (status === QueryStatus.fulfilled) {
-      // dispatch(registerStep3(...form)); //TODO make this so by default is logged in after register
+      dispatch(login(data)); //TODO make this so by default is logged in after register
       navigate("/", { replace: true });
     } else if (isError) {
       console.log(error.data.initialized);
@@ -69,11 +74,17 @@ const RegisterStep3 = ({ changeLoadingState }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerCompany({ ...form });
+    console.log({ ...form, location: {...location} });
+    registerCompany({ ...form, location: {...location} });
   };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
+    // if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  const handleLocationChange = (e) => {
+    setLocation({ ...location, [e.target.id]: e.target.value });
     // if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
@@ -199,7 +210,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             required={true}
             placeholder="Διεύθυνση"
             value={form.address}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά την διεύθυνση της εταιρίας."
@@ -214,7 +225,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             required={true}
             placeholder="Αριθμός Διεύθυνσης"
             value={form.addressNum}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά τον αριθμό διεύθυνσης της εταιρίας."
@@ -229,7 +240,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             required={true}
             placeholder="Περιοχή"
             value={form.city}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά την περιοχή της εταιρίας."
@@ -244,7 +255,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             required={true}
             placeholder="Πολιτεία"
             value={form.state}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά την πολιτεία της εταιρίας."
@@ -259,7 +270,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             required={true}
             placeholder="Χώρα"
             value={form.country}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά την χώρα της εταιρίας."
@@ -275,7 +286,7 @@ const RegisterStep3 = ({ changeLoadingState }) => {
             placeholder="Ταχυδρομικός Κώδικας"
             pattern="[0-9]{5}"
             value={form.postalCode}
-            onChange={handleChange}
+            onChange={handleLocationChange}
             onInvalid={(e) =>
               e.target.setCustomValidity(
                 "Παρακαλώ συμπληρώστε σωστά τον ταχυδρομικό κώδικα της εταιρίας."

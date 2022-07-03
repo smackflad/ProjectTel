@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.Body {
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+body {
+  font-family: "Comfortaa", cursive;
+}
