@@ -1,4 +1,4 @@
-.userCreationPage-external{
+.UserCreationPage-external{
     flex: 1;
   display: flex;
   align-items: flex-start;
@@ -7,11 +7,11 @@
 }
 
 @media (max-width: 600px) {
-    .userCreationPage-external {
+    .UserCreationPage-external {
       flex-direction: column;
       align-items: center;
     }
-    .userCreationPage-password {
+    .UserCreationPage-password {
       margin-left: 0px !important;
     }
   }
@@ -27,14 +27,14 @@
     min-width: 480px;
    
   }
-  .userCreationPage-info h4 {
+  .UserCreationPage-info h4 {
     font: normal normal bold 20px/25px;
     color: #5f6061;
     text-align: center;
   }
 
 
-  .userCreationPage-inputs {
+  .UserCreationPage-inputs {
 
 
     font-size: 16px;
@@ -54,7 +54,7 @@
     margin-bottom: 15px;
     outline-width: 0;
   }
-  .userCreationPage-info {
+  .UserCreationPage-info {
     width: 500px;
     display: flex;
     flex-direction: row;
@@ -62,18 +62,18 @@
     justify-content: center;
     
   }
-  .userCreationPage-password button {
+  .UserCreationPage-password button {
     margin-top: 15px;
     border: 0;
     border-radius: 10px;
     height: 37px;
     width: 55%;
   }
-  .userCreationPage-password h4 {
+  .UserCreationPage-password h4 {
     color: #5f6061;
     text-align: center;
   }
-  .userCreationPage-password {
+  .UserCreationPage-password {
     display: flex;
     flex-direction: column;
     margin-left: 70px;
@@ -101,7 +101,7 @@
     margin-bottom: 15px;
     outline-width: 0;
   }
-  .userCreationPage-password button:hover {
+  .UserCreationPage-password button:hover {
     cursor: pointer;
   }
   

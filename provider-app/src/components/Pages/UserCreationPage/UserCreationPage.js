@@ -1,8 +1,8 @@
-import "./userCreationPage.css";
+import "./UserCreationPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-const userCreationPage = () => {
+const UserCreationPage = () => {
   // // console.log("ok");      
   // const { profile, loading } = useSelector((state) => state.userAccount);
   // const dispatch = useDispatch();
@@ -20,13 +20,13 @@ const userCreationPage = () => {
   // console.log(loading);
   // console.log(profile);
   return (
-    <div className="userCreationPage-external">
+    <div className="UserCreationPage-external">
       <div className="container-selection">
 
         <h1>Εισαγωγή Νέου Χρήστη</h1>
        
         <input
-          className="userCreationPage-inputs"
+          className="UserCreationPage-inputs"
           type="text"
           placeholder="Όνομα"
           id="firstName"
@@ -35,7 +35,7 @@ const userCreationPage = () => {
           required
         ></input>
         <input
-          className="userCreationPage-inputs"
+          className="UserCreationPage-inputs"
           type="text"
           placeholder="Επίθετο"
           id="lastName"
@@ -45,7 +45,7 @@ const userCreationPage = () => {
         ></input>
 
 
-        <input className="userCreationPage-inputs"
+        <input className="UserCreationPage-inputs"
           type="text"
           id="Role"
           name="Role"
@@ -61,7 +61,7 @@ const userCreationPage = () => {
 
 
         <input
-          className="userCreationPage-inputs"
+          className="UserCreationPage-inputs"
           type="text"
           id="Password"
           name="Password"
@@ -71,7 +71,7 @@ const userCreationPage = () => {
           placeholder="Κωδικός πρόσβασης"
         ></input>
         <input
-          className="userCreationPage-inputs"
+          className="UserCreationPage-inputs"
           type="text"
           id="PasswordVer"
           name="PasswordVer"
@@ -81,7 +81,7 @@ const userCreationPage = () => {
           placeholder="Επανάληψη κωδικού πρόσβασης"
         ></input>
         <button
-          className="userCreationPage-inputs"
+          className="UserCreationPage-inputs"
           type="submit"
           style={{
             backgroundColor: "#1AABBF",
