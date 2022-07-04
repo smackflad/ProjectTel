@@ -2,8 +2,8 @@ import "./EventCategoryFilter.css";
 import "../MyFilter.css";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-// import { useDispatch } from "react-redux";
-// import { update } from "../../../../../../../store/searchSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { catUpdate } from "../../../../../store/providerNewEventSlice";
 
 const eventCategoriesArr = [
   { id: 0, name: "Μουσική", checked: false, db: "Music" },
@@ -24,8 +24,9 @@ const eventCategoriesArr = [
 ];
 
 const EventCategoryFilter = () => {
-  // const dispatch = useDispatch();
-  const [eventCategories, setEventCategories] = useState(eventCategoriesArr);
+  const dispatch = useDispatch();
+  const prev = useSelector((state) => state.persistedReducer.newEvent.eventCategory);
+  const [eventCategories, setEventCategories] = useState(eventCategoriesArr.map(x =>{if(prev.includes(x.db)){x.checked = true;} return x}));
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -49,6 +50,8 @@ const EventCategoryFilter = () => {
       return a;
     });
     setEventCategories(updatedAgeCat);
+    dispatch(catUpdate(eventCategories.filter(x => x.checked).map(x => x.db)));
+
   };
 
   const ref = useRef(null);

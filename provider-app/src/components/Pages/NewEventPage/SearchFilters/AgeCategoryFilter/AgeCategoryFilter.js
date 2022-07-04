@@ -2,8 +2,8 @@ import "./AgeCategoryFilter.css";
 import "../MyFilter.css";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-// import { update } from "../../../../../../../store/searchSlice";
-// import { useDispatch } from "react-redux";
+import { ageUpdate } from "../../../../../store/providerNewEventSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const ageCategoriesArr = [
   { id: 1, name: "Νηπειαγωγείο", checked: false, db: "kindergarten" },
@@ -14,8 +14,9 @@ const ageCategoriesArr = [
 ];
 
 const AgeCategoryFilter = () => {
-  // const dispatch = useDispatch();
-  const [ageCategories, setAgeCategories] = useState(ageCategoriesArr);
+  const dispatch = useDispatch();
+  const prev = useSelector((state) => state.persistedReducer.newEvent.ageCategory);
+  const [ageCategories, setAgeCategories] = useState(ageCategoriesArr.map(x =>{if(prev.includes(x.db)){x.checked = true;} return x}));
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -46,6 +47,8 @@ const AgeCategoryFilter = () => {
       return a;
     });
     setAgeCategories(updatedAgeCat);
+    // console.log(ageCategories.filter(x => x.checked).map(x => x.db))
+    dispatch(ageUpdate(ageCategories.filter(x => x.checked).map(x => x.db)));
   };
 
   useEffect(() => {

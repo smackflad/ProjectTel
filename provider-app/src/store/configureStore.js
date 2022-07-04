@@ -6,9 +6,11 @@ import storage from "redux-persist/lib/storage";
 
 import globalReducer from "./globalSlice";
 import providerRegisterReducer from "./providerRegisterSlice";
+import providerNewEventReducer from "./providerNewEventSlice";
 const reducers = combineReducers({
     global: globalReducer,
     register: providerRegisterReducer,
+    newEvent: providerNewEventReducer,
   });
 
 const persistConfig = {

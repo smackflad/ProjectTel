@@ -11,30 +11,22 @@ import { useNewEventCompanyMutation } from "../../../store/api/newEventApi";
 import mergeImages from "merge-images";
 import WaterMarkImage from "../../../images/Watermark.png";
 import SearchFilters from "./SearchFilters/SearchFilters";
+import { fromUpdate, locationUpdate, dateUpdate } from "../../../store/providerNewEventSlice";
+import { useSelector, useDispatch } from "react-redux";
 const NewEventPage = () => {
+  const dispatch = useDispatch();
+  const prev = useSelector((state) => state.persistedReducer.newEvent);
+  // console.log(prev)
+  const companyId = useSelector(
+    (state) => state.persistedReducer.global.companyId
+  );
   const [link, setLink] = useState();
   const [disabled, setDisabled] = useState();
-  const [form, setForm] = useState({
-    title: "",
-    price: "",
-    description: "",
-    ammount: "",
-  });
+  const [form, setForm] = useState(prev);
 
-  const [location, setLocation] = useState({
-    address: "",
-    addressNum: "",
-    city: "",
-    state: "",
-    country: "",
-    postalCode: "",
-  });
+  const [location, setLocation] = useState(prev.location);
 
-  const [values, setValues] = useState(new DateObject());
-  useEffect(() => {
-    // if(values[0])
-    // console.log(values[0].weekDay)
-  }, [values]);
+  const [values, setValues] = useState(prev.eventDate);
 
   const [filesFinale, setfilesFinale] = useState([]);
 
@@ -68,11 +60,20 @@ const NewEventPage = () => {
     useNewEventCompanyMutation();
 
   const handleChange = (e) => {
-    if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
+    if (!isLoading) {
+      setForm({ ...form, [e.target.id]: e.target.value })
+      dispatch(fromUpdate({ ...form, [e.target.id]: e.target.value }))
+    };
   };
+
+  const handleChangeDate = (e) =>{
+    setValues(e);
+    dispatch(dateUpdate({eventDate: e}));
+  }
 
   const handleLocationChange = (e) => {
     setLocation({ ...location, [e.target.id]: e.target.value });
+    dispatch(locationUpdate({ ...location, [e.target.id]: e.target.value }))
   };
 
   const handleImgDelClick = (i) => {
@@ -122,10 +123,10 @@ const NewEventPage = () => {
       let pp = item.month.name+" "+item.day+" "+item.year+" "+item.hour+":"+item.minute;
       dates.push(new Date(pp))
     })
-    // console.log(tempImgs);//blob version with water mark
-    console.log({ ...form, location: { ...location }, eventDate: dates });
+    console.log({...prev, eventDate: dates, id: companyId})
+    // console.log(tempImgs);//blob version with water mark //TODO
     // console.log(filesFinale);//file version without watermark
-    // newEventCompany({ ...form, id: userId });
+    newEventCompany({...prev, eventDate: dates, id: companyId});
   };
 
   return (
@@ -137,6 +138,7 @@ const NewEventPage = () => {
             <div className="NewEventPage-first">
               <MyTextBox
                 id="title"
+                val={form.title}
                 setVal={handleChange}
                 labelTxt={"Event Title"}
                 width={"100%"}
@@ -144,12 +146,14 @@ const NewEventPage = () => {
 			  <div className="NewEventPage-first-other">
 				<MyTextBox
 					id="ammount"
-					setVal={handleChange}
+          val={form.ammount}
+          setVal={handleChange}
 					labelTxt={"Ammount"}
 					width={"50px"}
 				/>
 				<MyTextBox
 					id="price"
+          val={form.price}
 					setVal={handleChange}
 					labelTxt={"Price"}
 					width={"50px"}
@@ -157,6 +161,7 @@ const NewEventPage = () => {
 			  </div>
             </div>
             <MyTextArea
+              val={form.description}
               id="description"
               setVal={handleChange}
               labelTxt={"Description"}
@@ -165,7 +170,7 @@ const NewEventPage = () => {
             <div className="NewEventPage-third">
               <DatePicker
                 value={values}
-                onChange={setValues}
+                onChange={handleChangeDate}
                 format="DD/MM HH:mm"
                 multiple
                 plugins={[
@@ -180,27 +185,31 @@ const NewEventPage = () => {
             <div className="NewEventPage-fourth">
               <div className="NewEventPage-fourth-top">
                 <MyTextBox
+                  val={location.address}
                   id="address"
                   setVal={handleLocationChange}
                   labelTxt={"Οδός"}
                   width={"50%"}
                 />
                 <MyTextBox
+                  val={location.addressNum}
                   id="addressNum"
                   setVal={handleLocationChange}
                   type="number"
                   labelTxt={"Αριθμός Οδού"}
-                  width={"83px"}
+                  width={"93px"}
                 />
               </div>
               <div className="NewEventPage-fourth-mid">
                 <MyTextBox
+                  val={location.city}
                   id="city"
                   setVal={handleLocationChange}
                   labelTxt={"Πόλη"}
                   width={"50%"}
                 />
                 <MyTextBox
+                  val={location.postalCode}
                   id="postalCode"
                   setVal={handleLocationChange}
                   type="tel"
@@ -211,12 +220,14 @@ const NewEventPage = () => {
               </div>
               <div className="NewEventPage-fourth-bot">
                 <MyTextBox
+                  val={location.state}
                   id="state"
                   setVal={handleLocationChange}
                   labelTxt={"Νομός"}
                   width={"50%"}
                 />
                 <MyTextBox
+                  val={location.country}
                   id="country"
                   setVal={handleLocationChange}
                   labelTxt={"Χώρα"}
