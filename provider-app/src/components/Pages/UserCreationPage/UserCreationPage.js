@@ -1,47 +1,45 @@
 import "./UserCreationPage.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import { useNavigate } from "react-router-dom";
 
-const UserCreationPage = () => {
-  // // console.log("ok");      
-  // const { profile, loading } = useSelector((state) => state.userAccount);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const res = await dispatch(fetchUserAccount(2)).unwrap();
-  //       console.log(`success user id: ${res.data.id}`);
-  //     } catch (err) {
-  //       console.error(err.message);
-  //     }
-  //     // console.log("hello");
-  //   })();
-  // }, [dispatch]);
-  // console.log(loading);
-  // console.log(profile);
+const UserCreationPage = ({ changeLoadingState }) => {
+
+  const [passVisibility, setPassVisibility] = useState(false);
+
+  const [form, setForm] = useState({ firstName: "", lastName: "", password: "",passwordVer: "" });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+
   return (
     <div className="UserCreationPage-external">
       <div className="container-selection">
 
         <h1>Εισαγωγή Νέου Χρήστη</h1>
-       
+        <form className="New-User-form" >
         <input
           className="UserCreationPage-inputs"
           type="text"
           placeholder="Όνομα"
           id="firstName"
-         // value={form.firstName}
-          //   onChange={handleChange}
+          value={form.firstName}
+             onChange={handleChange}
           required
+          onInput={(e) => e.target.setCustomValidity("")}
         ></input>
         <input
           className="UserCreationPage-inputs"
           type="text"
           placeholder="Επίθετο"
           id="lastName"
-         // value={form.lastName}
-          //   onChange={handleChange}
+          value={form.lastName}
+          onChange={handleChange}
           required
+          onInput={(e) => e.target.setCustomValidity("")}
         ></input>
 
 
@@ -52,7 +50,9 @@ const UserCreationPage = () => {
           placeholder="Ρόλος"
           required
           list="roles" 
-          //value={form.Role}
+          value={form.Role}
+          onChange={handleChange}
+          onInput={(e) => e.target.setCustomValidity("")}
           />
         <datalist id="roles">
           <option value="companyAdmin">Χρήστης Διαχείρισης</option>
@@ -60,26 +60,56 @@ const UserCreationPage = () => {
         </datalist>
 
 
-        <input
-          className="UserCreationPage-inputs"
-          type="text"
-          id="Password"
-          name="Password"
-          required
-          //value={form.Password}
-          // onChange={handleChange}
-          placeholder="Κωδικός πρόσβασης"
-        ></input>
-        <input
-          className="UserCreationPage-inputs"
-          type="text"
-          id="PasswordVer"
-          name="PasswordVer"
-          required
-          //value={form.PasswordVer}
-          // onChange={handleChange}
-          placeholder="Επανάληψη κωδικού πρόσβασης"
-        ></input>
+       
+        <div className="password-wrap">
+          
+            <input
+              type={passVisibility ? "text" : "password"}
+              id="password"
+              name="password"
+              required
+              placeholder="Κωδικός πρόσβασης"
+              value={form.password}
+              onChange={handleChange}
+              onInvalid={(e) =>
+                e.target.setCustomValidity(
+                  "Παρακαλώ συμπληρώστε σωστά τον κωδικό σας."
+                )
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
+            ></input>
+            <span
+              className="material-icons-outlined show-icon"
+              onClick={(e) => setPassVisibility(!passVisibility)}
+            >
+              {passVisibility ? "visibility" : "visibility_off"}
+            </span>
+          </div>
+        
+          <div className="password-wrap">
+           
+            <input
+              type={passVisibility ? "text" : "passwordVer"}
+              id="passwordVer"
+              name="passwordVer"
+              required
+              placeholder="Επανάληψη Κωδικού πρόσβασης"
+              value={form.passwordVer}
+              onChange={handleChange}
+              onInvalid={(e) =>
+                e.target.setCustomValidity(
+                  "Παρακαλώ συμπληρώστε σωστά τον κωδικό σας."
+                )
+              }
+              onInput={(e) => e.target.setCustomValidity("")}
+            ></input>
+            <span
+              className="material-icons-outlined show-icon"
+              onClick={(e) => setPassVisibility(!passVisibility)}
+            >
+              {passVisibility ? "visibility" : "visibility_off"}
+            </span>
+          </div>
         <button
           className="UserCreationPage-inputs"
           type="submit"
@@ -93,6 +123,9 @@ const UserCreationPage = () => {
         </button>
 
 
+
+</form>
+
       </div>
     </div>
 
@@ -100,4 +133,4 @@ const UserCreationPage = () => {
   );
 };
 
-export default ProviderProfilePage;
+export default UserCreationPage;

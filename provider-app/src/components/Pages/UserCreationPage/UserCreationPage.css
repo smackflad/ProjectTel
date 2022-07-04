@@ -1,108 +1,130 @@
 .UserCreationPage-external{
-    flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 30px;
+  flex: 1;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+padding: 30px;
 }
 
 @media (max-width: 600px) {
-    .UserCreationPage-external {
-      flex-direction: column;
-      align-items: center;
-    }
-    .UserCreationPage-password {
-      margin-left: 0px !important;
-    }
-  }
-  
-  .container-selection {
-    min-height: 300px;
-    background-color: #f5f7f7;
-    flex-direction: column;
-    margin-left: 50px;
-    display: flex;
-    border-radius: 10px;
-    padding: 40px;
-    min-width: 480px;
-   
-  }
-  .UserCreationPage-info h4 {
-    font: normal normal bold 20px/25px;
-    color: #5f6061;
-    text-align: center;
-  }
-
-
-  .UserCreationPage-inputs {
-
-
-    font-size: 16px;
-    padding: 0 10px 0 10px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: none;
-    border-radius: 10px;
-    height: 45px;
-    background-color: #fff;
-    border: none;
-    display: block;
-    box-sizing: border-box;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    outline-width: 0;
-  }
-  .UserCreationPage-info {
-    width: 500px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-  }
-  .UserCreationPage-password button {
-    margin-top: 15px;
-    border: 0;
-    border-radius: 10px;
-    height: 37px;
-    width: 55%;
-  }
-  .UserCreationPage-password h4 {
-    color: #5f6061;
-    text-align: center;
-  }
-  .UserCreationPage-password {
-    display: flex;
-    flex-direction: column;
-    margin-left: 70px;
-  }
-  .password-change {
-    display: flex;
+  .UserCreationPage-external {
     flex-direction: column;
     align-items: center;
   }
-  .password-change input {
-    font-size: 16px;
-    padding: 0 10px 0 10px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: none;
-    border-radius: 10px;
-    height: 45px;
-    background-color: #fff;
-    border: none;
-    display: block;
-    box-sizing: border-box;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    outline-width: 0;
+  .UserCreationPage-password {
+    margin-left: 0px !important;
   }
-  .UserCreationPage-password button:hover {
-    cursor: pointer;
-  }
+}
+
+.container-selection {
+  min-height: 300px;
+  background-color: #f5f7f7;
+  flex-direction: column;
+  margin-left: 50px;
+  display: flex;
+  border-radius: 10px;
+  padding: 40px;
+  min-width: 480px;
+ 
+}
+.New-User-form{
+display: flex;
+flex-direction: column;
+}
+
+.UserCreationPage-info h4 {
+  font: normal normal bold 20px/25px;
+  color: #5f6061;
+  text-align: center;
+}
+
+
+.UserCreationPage-inputs {
+
+
+  font-size: 16px;
+  padding: 0 10px 0 10px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 10px;
+  height: 45px;
+  background-color: #fff;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  outline-width: 0;
+}
+.UserCreationPage-info {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   
-  
+}
+.UserCreationPage-password button {
+  margin-top: 15px;
+  border: 0;
+  border-radius: 10px;
+  height: 37px;
+  width: 55%;
+}
+.UserCreationPage-password h4 {
+  color: #5f6061;
+  text-align: center;
+}
+.UserCreationPage-password {
+  display: flex;
+  flex-direction: column;
+  margin-left: 70px;
+}
+.password-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.password-wrap input {
+ 
+  font-size: 16px;
+  padding: 0 10px 0 10px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 10px;
+  height: 45px;
+  background-color: #fff;
+  width: 100%;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  outline-width: 0;
+ 
+}
+.password-wrap span {
+  position: absolute;
+  left: 10px;
+  color: #5f6061;
+}
+.password-wrap span.show-icon {
+  position: absolute;
+  height: 35px;
+  right: 20px;
+  left: auto;
+  color: #1aabbf;
+}
+.password-wrap span:hover {
+  cursor: pointer;
+}
+.UserCreationPage-password button:hover {
+  cursor: pointer;
+}
