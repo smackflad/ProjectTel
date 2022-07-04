@@ -157,7 +157,7 @@
 
 .NewEventPage-fifth-right-imgs {
     position: relative;
-    z-index: 999;
+    /* z-index: 999; */
 }
 
 .NewEventPage-fifth-right-img{

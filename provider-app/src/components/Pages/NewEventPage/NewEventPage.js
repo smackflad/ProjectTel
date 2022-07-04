@@ -10,7 +10,7 @@ import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import { useNewEventCompanyMutation } from "../../../store/api/newEventApi";
 import mergeImages from "merge-images";
 import WaterMarkImage from "../../../images/Watermark.png";
-
+import SearchFilters from "./SearchFilters/SearchFilters";
 const NewEventPage = () => {
   const [link, setLink] = useState();
   const [disabled, setDisabled] = useState();
@@ -31,13 +31,16 @@ const NewEventPage = () => {
   });
 
   const [values, setValues] = useState(new DateObject());
+  useEffect(() => {
+    // if(values[0])
+    // console.log(values[0].weekDay)
+  }, [values]);
 
   const [filesFinale, setfilesFinale] = useState([]);
 
   const [selectedFiles, setselectedFiles] = useState([]);
   const [tempImgs, settempImgs] = useState([]);
   const handleFileChange = async (e) => {
-    // console.log("Test")
     setselectedFiles(e.target.files);
     settempImgs([]);
     Array.from(e.target.files).forEach((item) => {
@@ -50,8 +53,8 @@ const NewEventPage = () => {
         var width = this.width;
         waterMarkHeigt = height - 80;
         waremarkWidth = width - 51;
-        console.log(height);
-        console.log(waterMarkHeigt);
+        // console.log(height);
+        // console.log(waterMarkHeigt);
         mergeImages([
           { src: URL.createObjectURL(item), x: 0, y: 0 },
           { src: WaterMarkImage, x: waremarkWidth, y: waterMarkHeigt },
@@ -70,22 +73,13 @@ const NewEventPage = () => {
 
   const handleLocationChange = (e) => {
     setLocation({ ...location, [e.target.id]: e.target.value });
-    // if (!isLoading) setForm({ ...form, [e.target.id]: e.target.value });
   };
 
-  // useEffect(() => {
-  // 	console.log(selectedFiles);
-  // }, [selectedFiles]);
-
   const handleImgDelClick = (i) => {
-    // setselectedFiles([]);
-    // console.log(i);
-    // settempImgs(tempImgs => [...tempImgs.splice(index, 1)]);
     settempImgs((tempImgs) => tempImgs.filter((_, index) => index !== i));
     setfilesFinale((filesFinale) =>
       filesFinale.filter((_, index) => index !== i)
     );
-    // var temp = selectedFiles.filter((_, index) => index !== i);
   };
 
   function CustomDate({
@@ -123,8 +117,14 @@ const NewEventPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(tempImgs);
-    console.log({ ...form, location: { ...location } });
+    let dates = []
+    values.map((item)=>{
+      let pp = item.month.name+" "+item.day+" "+item.year+" "+item.hour+":"+item.minute;
+      dates.push(new Date(pp))
+    })
+    // console.log(tempImgs);//blob version with water mark
+    console.log({ ...form, location: { ...location }, eventDate: dates });
+    // console.log(filesFinale);//file version without watermark
     // newEventCompany({ ...form, id: userId });
   };
 
@@ -157,10 +157,11 @@ const NewEventPage = () => {
 			  </div>
             </div>
             <MyTextArea
-              id="desc"
+              id="description"
               setVal={handleChange}
               labelTxt={"Description"}
             />
+            <SearchFilters />
             <div className="NewEventPage-third">
               <DatePicker
                 value={values}
