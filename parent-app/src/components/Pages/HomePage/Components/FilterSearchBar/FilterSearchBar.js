@@ -40,11 +40,12 @@ const FilterSearchBar = ({val, setVal}) => {
       <input
         type="text"
         placeholder="Αναζήτηση"
-        value={searchState.search}
+        value={searchState.title}
         onChange={(e) =>
           dispatch(
             update((state) => {
-              state.search = e.target.value;
+              state.title = e.target.value;
+              state.description = e.target.value;
             })
           )
         }

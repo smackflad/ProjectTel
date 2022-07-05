@@ -95,9 +95,9 @@ const EventCategoryFilter = () => {
   useEffect(() => {
     setDisplayTxt(checkedItems());
     const selected = eventCategories.filter((c) => c.checked).map((c) => c.db);
-    dispatch(update((state) => (state.ageCategories = selected)));
-    console.log(searchState);
-    getSearch(searchState)
+    dispatch(update((state) => (state.eventCategory = selected)));
+    console.log({...searchState, eventCategory: selected});
+    getSearch({...searchState, eventCategory: selected})
   }, [eventCategories]);
 
   return (

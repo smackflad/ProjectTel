@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  ageCategories: [],
-  eventCategories: [],
-  searchTxt: "",
+  ageCategory: [],
+  eventCategory: [],
+  title: "",
+  description: "",
   startDate: "",
   endDate: "",
-  location: "",
+  long: "",
+  lat: "",
 };
 
 // Then, handle actions in your reducers:

@@ -5,6 +5,7 @@ export const searchApi = api.injectEndpoints({
     getSearch: build.mutation({
       query: (body) => ({
         url: `search/`,
+        method: "POST",
         body,
       }),
     }),
