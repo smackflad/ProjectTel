@@ -4,6 +4,7 @@ import {
   Body,
   Query,
   UnauthorizedException,
+  Post,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
@@ -15,7 +16,7 @@ import { SearchService } from './search.service';
 export class SearchController {
   constructor(private readonly searchService: SearchService) {}
 
-  @Get('search')
+  @Post('search')
   async findAll(
     @Query() query: PaginationQueryDto,
     @Body() search: SearchEventDto,
