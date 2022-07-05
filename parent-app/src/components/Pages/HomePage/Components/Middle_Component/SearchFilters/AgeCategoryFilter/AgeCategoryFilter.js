@@ -84,9 +84,10 @@ const AgeCategoryFilter = () => {
   useEffect(() => {
     setDisplayTxt(checkedItems());
     const selected = ageCategories.filter((c) => c.checked).map((c) => c.db);
-    dispatch(update((state) => (state.ageCategories = selected)));
-    console.log(searchState);
-    getSearch(searchState)
+    dispatch(update((state) => (state.ageCategory = selected)));
+    console.log({...searchState, ageCategory: selected});
+    getSearch({...searchState, ageCategory: selected})
+
   }, [ageCategories]);
 
   return (

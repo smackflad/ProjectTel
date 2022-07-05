@@ -150,14 +150,21 @@ const DateFilter = ({}) => {
   }, [onClickOutside]);
 
   useEffect(() => {
-    dispatch(
-      update((state) => {
-        state.startDate = FinalstartDate;
-        state.endDate = FinalendDate;
-      })
-    );
-    console.log(searchState);
-    getSearch(searchState)
+    if(FinalendDate && FinalstartDate){
+      console.log(FinalstartDate)
+      let tempS = new Date(FinalstartDate).toISOString()
+      let tempE = new Date(FinalendDate).toISOString()
+      let finS = tempS.substring(0, tempS.indexOf('T'));
+      let finE = tempE.substring(0, tempE.indexOf('T'));
+      dispatch(
+        update((state) => {
+          state.startDate = finS;
+          state.endDate = finE;
+        })
+      );
+      console.log({...searchState, startDate: finS, endDate: finE});
+      getSearch({...searchState, startDate: finS, endDate: finE})
+    }
   }, [FinalstartDate, FinalendDate]);
 
   return (
