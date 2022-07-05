@@ -2,10 +2,9 @@ import { api } from "./api";
 
 export const searchApi = api.injectEndpoints({
   endpoints: (build) => ({
-    searchEvents: build.query({
+    getSearch: build.mutation({
       query: (body) => ({
         url: `search/`,
-        method: "POST",
         body,
       }),
     }),
@@ -13,4 +12,4 @@ export const searchApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useSearchEvents } = searchApi;
+export const { useGetSearchMutation } = searchApi;

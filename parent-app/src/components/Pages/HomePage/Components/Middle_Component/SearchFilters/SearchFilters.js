@@ -8,12 +8,6 @@ import DateFilter from "./DateFilter/DateFilter";
 import { useState } from "react";
 
 const SearchFilters = () => {
-  const [location, setLocation] = useState([]);
-  const [dateStart, setDateStart] = useState();
-  const [dateEnd, setDateEnd] = useState();
-  console.log(location);
-  console.log(dateStart);
-  console.log(dateEnd);
   return (
     <div className="SearchFilters-TopFilters-external">
       <EventCategoryFilter />

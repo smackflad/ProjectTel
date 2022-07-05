@@ -2,9 +2,11 @@ import "./DateFilter.css";
 import "../MyFilter.css";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { update } from "../../../../../../../store/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetSearchMutation } from "../../../../../../../store/api/searchApi"
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
 const DateCategories = [
   { item: "Οποτεδήποτε", value: 0 },
@@ -22,6 +24,26 @@ const DateFilter = ({}) => {
   const [curr, setCurr] = useState(0);
 
   const [open, setOpen] = useState(false);
+
+  const searchState = useSelector((state) => state.search);
+
+  const [getSearch, { data, status, isLoading, isError, error }] =
+  useGetSearchMutation();
+
+  useEffect(() => {
+    if (status === QueryStatus.fulfilled) {
+      console.log(searchState);
+    } else if (isError) {
+      let errToastMessage = "";
+      if (error.status === 401) {
+        console.log(`Δώσατε λάθος στοιχεία`)
+      } else if (error.status === 400) {
+        console.log(`ERROR: 400 BAD REQUEST`)
+      } else if (error.status === 500) {
+        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
+      }
+    }
+  }, [status, error, isError]);
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -134,6 +156,8 @@ const DateFilter = ({}) => {
         state.endDate = FinalendDate;
       })
     );
+    console.log(searchState);
+    getSearch(searchState)
   }, [FinalstartDate, FinalendDate]);
 
   return (

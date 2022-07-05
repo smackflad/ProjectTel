@@ -4,7 +4,7 @@ export const eventApi = api.injectEndpoints({
   endpoints: (build) => ({
     getEvents: build.mutation({
       query: (body) => ({
-        url: `search`,
+        url: `search/`,
         body,
       }),
     }),

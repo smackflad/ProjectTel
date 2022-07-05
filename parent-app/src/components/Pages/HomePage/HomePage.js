@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FilterSearchBar from "./Components/FilterSearchBar/FilterSearchBar";
+import { useState } from "react";
 
 const HomePage = () => {
   const { accountInitialized, isLoggedIn } = useSelector(
@@ -15,9 +16,11 @@ const HomePage = () => {
     if (isLoggedIn && !accountInitialized) navigate("/Register2");
   }, [accountInitialized]);
 
+  const [search, setSearch] = useState("");
+
   return (
     <div className="homePage-external">
-      <FilterSearchBar />
+      <FilterSearchBar val={search} setVal={setSearch} />
       <Middle_Component />
       <HomeBot />
     </div>
