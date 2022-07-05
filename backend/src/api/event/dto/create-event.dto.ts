@@ -33,9 +33,9 @@ export class CreateEventDto {
   @IsNumber()
   ammount: number;
 
-  @ApiProperty()
-  @IsDateString()
-  eventDate: string;
+  @ApiProperty({ isArray: true, type: 'datestring' })
+  @IsArray()
+  eventDate: string[];
 
   @ApiProperty()
   @IsArray()
@@ -44,18 +44,20 @@ export class CreateEventDto {
   @ApiProperty({
     name: 'eventCategory',
     enum: EventCategory,
-    default: EventCategory.CINEMA,
+    default: [EventCategory.CINEMA],
+    isArray: true,
   })
-  @IsEnum(EventCategory)
-  eventCategory: EventCategory;
+  @IsEnum(EventCategory, { each: true })
+  eventCategory: EventCategory[];
 
   @ApiProperty({
     name: 'ageCategory',
     enum: AgeCategory,
-    default: AgeCategory.MIDDLE_SCHOOL,
+    default: [AgeCategory.MIDDLE_SCHOOL],
+    isArray: true,
   })
-  @IsEnum(AgeCategory)
-  ageCategory: AgeCategory;
+  @IsEnum(AgeCategory, { each: true })
+  ageCategory: AgeCategory[];
 
   @ApiProperty({ type: CreateLocationDto })
   @IsDefined()

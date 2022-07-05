@@ -11,8 +11,14 @@ import { useNewEventCompanyMutation } from "../../../store/api/newEventApi";
 import mergeImages from "merge-images";
 import WaterMarkImage from "../../../images/Watermark.png";
 import SearchFilters from "./SearchFilters/SearchFilters";
-import { fromUpdate, locationUpdate, dateUpdate } from "../../../store/providerNewEventSlice";
+import {
+  fromUpdate,
+  locationUpdate,
+  dateUpdate,
+} from "../../../store/providerNewEventSlice";
 import { useSelector, useDispatch } from "react-redux";
+import uploadImage from "../../../util/azureUploader";
+
 const NewEventPage = () => {
   const dispatch = useDispatch();
   const prev = useSelector((state) => state.persistedReducer.newEvent);
@@ -20,26 +26,25 @@ const NewEventPage = () => {
   const companyId = useSelector(
     (state) => state.persistedReducer.global.companyId
   );
+
   const [link, setLink] = useState();
   const [disabled, setDisabled] = useState();
   const [form, setForm] = useState(prev);
 
   const [location, setLocation] = useState(prev.location);
 
-  const [values, setValues] = useState(prev.eventDate);
+  const [dates, setDates] = useState(prev.eventDate);
 
-  const [filesFinale, setfilesFinale] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
 
-  const [selectedFiles, setselectedFiles] = useState([]);
   const [tempImgs, settempImgs] = useState([]);
   const handleFileChange = async (e) => {
-    setselectedFiles(e.target.files);
-    settempImgs([]);
     Array.from(e.target.files).forEach((item) => {
       var image = new Image();
       image.src = URL.createObjectURL(item);
       var waterMarkHeigt;
       var waremarkWidth;
+      const fileType = item.type.split("/")[1];
       image.onload = function () {
         var height = this.height;
         var width = this.width;
@@ -50,37 +55,37 @@ const NewEventPage = () => {
         mergeImages([
           { src: URL.createObjectURL(item), x: 0, y: 0 },
           { src: WaterMarkImage, x: waremarkWidth, y: waterMarkHeigt },
-        ]).then((b64) => settempImgs((tempImgs) => [...tempImgs, b64]));
+        ]).then(async (b64) => {
+          settempImgs((tempImgs) => [...tempImgs, b64]);
+        });
       };
     });
-    setfilesFinale([...e.target.files]);
   };
+  console.log(tempImgs);
 
   const [newEventCompany, { data, isError, isLoading, error, status }] =
     useNewEventCompanyMutation();
 
   const handleChange = (e) => {
     if (!isLoading) {
-      setForm({ ...form, [e.target.id]: e.target.value })
-      dispatch(fromUpdate({ ...form, [e.target.id]: e.target.value }))
-    };
+      setForm({ ...form, [e.target.id]: e.target.value });
+      dispatch(fromUpdate({ ...form, [e.target.id]: e.target.value }));
+    }
   };
 
-  const handleChangeDate = (e) =>{
-    setValues(e);
-    dispatch(dateUpdate({eventDate: e}));
-  }
+  const handleChangeDate = (e) => {
+    console.log(e);
+    setDates(e);
+    dispatch(dateUpdate({ eventDate: e }));
+  };
 
   const handleLocationChange = (e) => {
     setLocation({ ...location, [e.target.id]: e.target.value });
-    dispatch(locationUpdate({ ...location, [e.target.id]: e.target.value }))
+    dispatch(locationUpdate({ ...location, [e.target.id]: e.target.value }));
   };
 
   const handleImgDelClick = (i) => {
     settempImgs((tempImgs) => tempImgs.filter((_, index) => index !== i));
-    setfilesFinale((filesFinale) =>
-      filesFinale.filter((_, index) => index !== i)
-    );
   };
 
   function CustomDate({
@@ -116,17 +121,30 @@ const NewEventPage = () => {
     );
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let dates = []
-    values.map((item)=>{
-      let pp = item.month.name+" "+item.day+" "+item.year+" "+item.hour+":"+item.minute;
-      dates.push(new Date(pp))
-    })
-    console.log({...prev, eventDate: dates, id: companyId})
+
+    const isoDates = dates.map((item) => {
+      const unixTimestamp = typeof item == "object" ? item.unix : item;
+      return new Date(unixTimestamp).toISOString();
+    });
+
+    const imagesUrls = [];
+    for await (const image of tempImgs) {
+      const url = await uploadImage({ b64: image }, companyId);
+      imagesUrls.push(url);
+    }
+
+    const newEvent = {
+      ...prev,
+      eventDate: isoDates,
+      id: companyId,
+      images: imagesUrls,
+    };
+    console.log(newEvent);
     // console.log(tempImgs);//blob version with water mark //TODO
     // console.log(filesFinale);//file version without watermark
-    newEventCompany({...prev, eventDate: dates, id: companyId});
+    newEventCompany(newEvent);
   };
 
   return (
@@ -143,22 +161,22 @@ const NewEventPage = () => {
                 labelTxt={"Event Title"}
                 width={"100%"}
               />
-			  <div className="NewEventPage-first-other">
-				<MyTextBox
-					id="ammount"
-          val={form.ammount}
-          setVal={handleChange}
-					labelTxt={"Ammount"}
-					width={"50px"}
-				/>
-				<MyTextBox
-					id="price"
-          val={form.price}
-					setVal={handleChange}
-					labelTxt={"Price"}
-					width={"50px"}
-				/>
-			  </div>
+              <div className="NewEventPage-first-other">
+                <MyTextBox
+                  id="ammount"
+                  val={form.ammount}
+                  setVal={handleChange}
+                  labelTxt={"Ammount"}
+                  width={"50px"}
+                />
+                <MyTextBox
+                  id="price"
+                  val={form.price}
+                  setVal={handleChange}
+                  labelTxt={"Price"}
+                  width={"50px"}
+                />
+              </div>
             </div>
             <MyTextArea
               val={form.description}
@@ -169,7 +187,7 @@ const NewEventPage = () => {
             <SearchFilters />
             <div className="NewEventPage-third">
               <DatePicker
-                value={values}
+                value={dates}
                 onChange={handleChangeDate}
                 format="DD/MM HH:mm"
                 multiple

@@ -7,7 +7,7 @@ export class EventResponseModel {
 
   description: string;
 
-  eventDate: string;
+  eventDate: string[];
 
   price: number;
 

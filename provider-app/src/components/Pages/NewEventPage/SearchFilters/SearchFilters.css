@@ -9,6 +9,7 @@
   max-width: 1090px;
   padding: 15px 0;
   gap: 60px;
+  /* cursor: pointer; */
 }
 .MyFilter-txt-outter span.material-icons-outlined {
   cursor: pointer;
