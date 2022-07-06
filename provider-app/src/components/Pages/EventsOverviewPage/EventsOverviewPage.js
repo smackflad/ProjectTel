@@ -34,13 +34,13 @@ const EventsPage = () => {
   
               <button name="submit" class="event-accept" type="submit" value="accept" onClick={(e) => {
                   
-                this.setActive(true);
+                setActive(true);
                 window.location.reload();
                 
                 }}>Accept </button>
               /
               <button name="submit" class="event-decline" type="submit" value="decline" onClick={(e) => {
-                    this.setActive(false);
+                    setActive(false);
                    window.location.reload();
                 }}>Decline </button>
   

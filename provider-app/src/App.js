@@ -9,7 +9,8 @@ import MyNav from "./components/sharedComponents/MyNav/MyNav";
 import EventsPage from "./components/Pages/EventsPage/EventsPage";
 import EventsPageAdmin from "./components/Pages/EventsPageAdmin/EventsPageAdmin";
 import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
-
+import UserCreationPage from "./components/Pages/UserCreationPage/UserCreationPage";
+import EventsOverviewPage from"./components/Pages/EventsOverviewPage/EventsOverviewPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
 import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/CommonLogReg";
@@ -17,6 +18,7 @@ import Register from "./components/Pages/Register-Login-Pages/Register/Register"
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import RegisterStep3 from "./components/Pages/Register-Login-Pages/Register/RegisterStep3";
 import Logout from "../src/components/Pages/Register-Login-Pages/Logout/Logout";
+
 function App() {
   return (
     <Router>
@@ -71,6 +73,8 @@ function App() {
           <Route path="/usersPageAdmin" element={<UsersPageAdmin />} />
           <Route path="/profile" element={<ProviderProfilePage />} />
           <Route path="/*" element={<ErrorPage />} />
+          <Route path="/UserCreationPage" element={<UserCreationPage />} />
+          <Route path="/EventsOverviewPage" element={<EventsOverviewPage />} />
         </Routes>
       </div>
       <div className="Footer">
