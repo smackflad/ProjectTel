@@ -10,7 +10,7 @@ export const eventApi = api.injectEndpoints({
     }),
     getEvent: build.mutation({
       query: (id) => ({
-        url: `events/${id}`,
+        url: `companies/123/events/${id}`,
       }),
     }),
   }),

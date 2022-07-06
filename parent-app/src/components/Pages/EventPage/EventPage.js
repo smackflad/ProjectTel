@@ -273,13 +273,14 @@ const EventPage = () => {
 		if (status === QueryStatus.uninitialized) {
 			getEvent(params.id);
 		}else if (status === QueryStatus.fulfilled) {
-			console.log(status);
-			setCurrItem(status);
+			// console.log(data);
+			setCurrItem(data);
 			var tempDates = [];
-			status.eventDate.map((item)=>{
-				tempDates.push(new Date(item));
+			data.eventDate.map((item)=>{
+				tempDates.push(new Date(item.slice(0, -1)));
 			})
 			setDates(tempDates);
+			// console.log(data.eventDate, tempDates)
 		}else if (isError) {
 			// console.log(error.data);
 			let errToastMessage = "";
@@ -324,9 +325,9 @@ const EventPage = () => {
 				<div className="EventPage-top-left">
 					<Carousel width="600px">
 						{
-							currItem.images.slice(0,currItem.images.length).map((item, index)=>
-								<div key={uuidv4()}>
-									<img src={item.url} />
+							currItem.images.map((item, index)=>
+							<div key={uuidv4()}>
+									<img src={item} />
 								</div>
 							)
 						}
@@ -339,15 +340,15 @@ const EventPage = () => {
 							<span className="material-icons-outlined">
 								location_on
 							</span>
-							Δημοτικό Θέατρο
+							{currItem.location.address}
 						</span>
 					</div>
 					<div className="EventPage-top-right-other">
 						<DatePicker
 						minDate={dates[0]}
 						monthsShown={2}
-						includeDateIntervals={[{start: dates[0], end: dates[dates.length]}]}
-							highlightDates={dates}
+						includeDateIntervals={[{start: new Date(dates[0].getDate()-1), end: dates[dates.length-1]}]}
+						highlightDates={dates}
 						inline
 						/>
 						<div className="EventPage-top-right-btns">
@@ -365,30 +366,32 @@ const EventPage = () => {
 						<span className="material-icons-outlined">
 							location_on
 						</span>
-						Δημοτικό Θέατρο
+						{currItem.location.address}
 					</span>
 				</div>
 				<div className="EventPage-top-mobile-left">
 					<Carousel>
 						{
-							currItem.images.slice(0,currItem.images.length).map((item, index)=>
+							currItem.images.map((item, index)=>
 								<div key={uuidv4()}>
-									<img src={item.url} />
+									<img src={item} />
 								</div>
 							)
 						}
 					</Carousel>
 				</div>
 				<div className="EventPage-top-mobile-right">
-					<div className="EventPage-top-mobile-datepicker">
-						<DatePicker
-							minDate={dates[0]}
-							monthsShown={1}
-							includeDateIntervals={[{start: dates[0], end: dates[dates.length]}]}
-							highlightDates={dates}
-							inline
-						/>
-					</div>
+					{/* {dates.length > 0 &&  */}
+						<div className="EventPage-top-mobile-datepicker">
+							<DatePicker
+								minDate={dates[0]}
+								monthsShown={1}
+								includeDateIntervals={[{start: new Date(dates[0].getDate()-1), end: dates[dates.length-1]}]}
+								highlightDates={dates}
+								inline
+							/>
+						</div>
+					{/* } */}
 					<div className="EventPage-top-mobile-right-btns">
 						<span className="EventPage-top-mobile-right-btns-price">από <span className="EventPage-top-mobile-right-btns-price-num">{currItem.price}€</span></span>
 						<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
@@ -402,7 +405,7 @@ const EventPage = () => {
 				</div>
 				<div className="EventPage-bot-map">
 					<span className="EventPage-bot-title">Χάρτης</span>
-					<EventMap lat={parseInt(currItem.location.latitude)} lng={parseInt(currItem.location.longtitude)} />
+					{/* <EventMap lat={parseInt(currItem.location.latitude)} lng={parseInt(currItem.location.longtitude)} /> */}
 				</div>
 			</div>
 			{isOpen && <Popup
