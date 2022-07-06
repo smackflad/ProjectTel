@@ -3,6 +3,10 @@ import Event from "../Event/Event";
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
+import { useGetSearchMutation } from "../../../../../store/api/searchApi";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+
 
 // import Inside_Middle_Component from '../Inside_Middle_Component/Inside_Middle_Component';
 import SearchFilters from "./SearchFilters/SearchFilters";
@@ -241,6 +245,37 @@ const EventsList = ({ events }) => {
   );
 };
 const Middle_Component = () => {
+  const state = useSelector((state) => state.search);
+  
+
+  const [getSearch, { data, status, isLoading, isError, error }] =
+  useGetSearchMutation();
+
+  useEffect(() => {
+    if (status === QueryStatus.fulfilled) {
+      console.log(data)//TODO ALEX make it work with pagenate, everything is in data and everything works
+    } else if (isError) {
+      console.log(error.data);
+      let errToastMessage = "";
+      if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      console.log(errToastMessage);
+    }
+  }, [data, isLoading, isError, status, error]);
+
+  useEffect(() => {
+    if(state.title === ""){
+      delete state.title;
+      delete state.description;
+    }
+    getSearch({...state})
+    console.log(state)
+  }, [state])
+  
+  
   const [currentItems, setCurrentItems] = useState([{ id:"",title: "", venue: "", images:[{url:""}],eventDate:"", }]);
   const [pageCount, setPageCount] = useState(0);
   // Here we use item offsets; we could also use page offsets

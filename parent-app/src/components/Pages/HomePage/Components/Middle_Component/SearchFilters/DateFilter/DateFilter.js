@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import DatePicker from "react-datepicker";
 import { update } from "../../../../../../../store/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetSearchMutation } from "../../../../../../../store/api/searchApi"
-import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
 const DateCategories = [
   { item: "Οποτεδήποτε", value: 0 },
@@ -26,24 +24,6 @@ const DateFilter = ({}) => {
   const [open, setOpen] = useState(false);
 
   const searchState = useSelector((state) => state.search);
-
-  const [getSearch, { data, status, isLoading, isError, error }] =
-  useGetSearchMutation();
-
-  useEffect(() => {
-    if (status === QueryStatus.fulfilled) {
-      console.log(searchState);
-    } else if (isError) {
-      let errToastMessage = "";
-      if (error.status === 401) {
-        console.log(`Δώσατε λάθος στοιχεία`)
-      } else if (error.status === 400) {
-        console.log(`ERROR: 400 BAD REQUEST`)
-      } else if (error.status === 500) {
-        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
-      }
-    }
-  }, [status, error, isError]);
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -86,10 +66,10 @@ const DateFilter = ({}) => {
         setFinalEndDate("");
       }
     } else {
-      if (endDate !== "") {
-        setEndDate("");
-        setFinalEndDate("");
-      }
+      setEndDate("");
+      setFinalEndDate("");
+      setStartDate("");
+      setFinalStartDate("");
       setCurr(0);
     }
   };
@@ -151,19 +131,24 @@ const DateFilter = ({}) => {
 
   useEffect(() => {
     if(FinalendDate && FinalstartDate){
-      console.log(FinalstartDate)
       let tempS = new Date(FinalstartDate).toISOString()
       let tempE = new Date(FinalendDate).toISOString()
-      let finS = tempS.substring(0, tempS.indexOf('T'));
-      let finE = tempE.substring(0, tempE.indexOf('T'));
+      // let finS = tempS.substring(0, tempS.indexOf('T'));
+      // let finE = tempE.substring(0, tempE.indexOf('T'));
       dispatch(
         update((state) => {
-          state.startDate = finS;
-          state.endDate = finE;
+          state.startDate = tempS;
+          state.endDate = tempE;
         })
       );
-      console.log({...searchState, startDate: finS, endDate: finE});
-      getSearch({...searchState, startDate: finS, endDate: finE})
+      // console.log({...searchState, startDate: tempS, endDate: tempE});
+    }else{
+      dispatch(
+        update((state) => {
+          delete state.startDate;
+          delete state.endDate;
+        })
+      );
     }
   }, [FinalstartDate, FinalendDate]);
 

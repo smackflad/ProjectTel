@@ -17,7 +17,7 @@ const RegisterStep2 = ({ changeLoadingState }) => {
   let navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { userId } = useSelector((state) => state.global);
+  const { userId } = useSelector((state) => state.persistedReducer.global);
 
   const [completeRegistration, { data, isError, isLoading, error, status }] =
     useCompleteParentRegistrationMutation();

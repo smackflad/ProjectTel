@@ -8,7 +8,7 @@ const Event = ({ id, title, venue, img, date }) => {
   const datee = new Date(date);
   // console.log(datee.getDate()+" "+monthNames[datee.getMonth()]);
   // {datee.getDate()+" "+monthNames[datee.getMonth()]}
-  console.log(id);
+  // console.log(id);
   return (
     <div className="Inside_Middle_Component-external">
       <a className="Inside_Middle_Component-elementClick" href={"/event/"+id}>

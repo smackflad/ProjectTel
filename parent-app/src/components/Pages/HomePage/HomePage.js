@@ -8,8 +8,8 @@ import FilterSearchBar from "./Components/FilterSearchBar/FilterSearchBar";
 import { useState } from "react";
 
 const HomePage = () => {
-  const { accountInitialized, isLoggedIn } = useSelector(
-    (state) => state.global
+    const { accountInitialized, isLoggedIn } = useSelector(
+    (state) => state.persistedReducer.global
   );
   let navigate = useNavigate();
   useEffect(() => {

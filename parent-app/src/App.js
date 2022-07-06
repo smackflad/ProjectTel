@@ -9,7 +9,7 @@ import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/Regi
 import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
 import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
 import { ToastContainer } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useSelectovr } from "react-redux";
 // import './App.css';
 // import HomePage from './components/Pages/HomePage/HomePage';
 import EventPage from "./components/Pages/EventPage/EventPage";
@@ -18,7 +18,7 @@ import EventPage from "./components/Pages/EventPage/EventPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  // const { loggedIn } = useSelector((state) => state.global);
+  // const { loggedIn } = useSelector((state) => state.persistedReducer.global);
 
   return (
     <>

@@ -9,7 +9,7 @@ import { useResetPasswordMutation } from "../../../../../store/api/authApi";
 
 const Account = () => {
   const [passVisibility, setPassVisibility] = useState(false);
-  const { userId } = useSelector((state) => state.global);
+  const { userId } = useSelector((state) => state.persistedReducer.global);
   const [getProfile, { data, status, isLoading }] = useGetProfileMutation();
   const [form, setForm] = useState({
     oldPassword: "",

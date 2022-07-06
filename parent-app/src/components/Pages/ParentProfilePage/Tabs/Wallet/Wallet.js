@@ -14,7 +14,7 @@ const rechargePrices = [10, 25, 50, 100];
 const Wallet = () => {
   const [myCard, setMyCard] = useState("");
   const [showCreate, setShowCreate] = useState(false);
-  const { userId } = useSelector((state) => state.global);
+  const { userId } = useSelector((state) => state.persistedReducer.global);
   const [getWallet, { data, status, isLoading }] = useGetWalletMutation();
   const [form, setForm] = useState({
     card: "",

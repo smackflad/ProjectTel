@@ -5,8 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { useGeolocated } from "react-geolocated";
 import { update } from "../../../../../../../store/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetSearchMutation } from "../../../../../../../store/api/searchApi"
-import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
 const containerStyle = {
   width: '100%',
@@ -15,26 +13,6 @@ const containerStyle = {
 function FilterMap(lat) {
   const searchState = useSelector((state) => state.search);
   const dispatch = useDispatch();
-
-  const [getSearch, { data, status, isLoading, isError, error }] =
-  useGetSearchMutation();
-
-  useEffect(() => {
-    if (status === QueryStatus.fulfilled) {
-      console.log(searchState);
-    } else if (isError) {
-      let errToastMessage = "";
-      if (error.status === 401) {
-        console.log(`Δώσατε λάθος στοιχεία`)
-      } else if (error.status === 400) {
-        console.log(`ERROR: 400 BAD REQUEST`)
-      } else if (error.status === 500) {
-        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
-      }
-    }
-  }, [status, error, isError]);
-
-
 
   var center = lat;
   
@@ -59,7 +37,6 @@ function FilterMap(lat) {
         })
       )
       console.log({...searchState, long: position.lng, lat: position.lat});
-      // getSearch({...searchState, long: position.lng, lat: position.lat})
     }
   }, [position]);
 

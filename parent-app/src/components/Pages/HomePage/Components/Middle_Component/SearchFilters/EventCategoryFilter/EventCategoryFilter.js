@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { update } from "../../../../../../../store/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetSearchMutation } from "../../../../../../../store/api/searchApi"
-import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
 const eventCategoriesArr = [
   { id: 0, name: "Μουσική", checked: false, db: "Music" },
@@ -32,24 +30,6 @@ const EventCategoryFilter = () => {
   const [open, setOpen] = useState(false);
 
   const searchState = useSelector((state) => state.search);
-
-  const [getSearch, { data, status, isLoading, isError, error }] =
-  useGetSearchMutation();
-
-  useEffect(() => {
-    if (status === QueryStatus.fulfilled) {
-      console.log(searchState);
-    } else if (isError) {
-      let errToastMessage = "";
-      if (error.status === 401) {
-        console.log(`Δώσατε λάθος στοιχεία`)
-      } else if (error.status === 400) {
-        console.log(`ERROR: 400 BAD REQUEST`)
-      } else if (error.status === 500) {
-        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
-      }
-    }
-  }, [status, error, isError]);
 
   var checkedItems = () => {
     const selected = eventCategories.filter((c) => c.checked).length;
@@ -95,9 +75,12 @@ const EventCategoryFilter = () => {
   useEffect(() => {
     setDisplayTxt(checkedItems());
     const selected = eventCategories.filter((c) => c.checked).map((c) => c.db);
-    dispatch(update((state) => (state.eventCategory = selected)));
-    console.log({...searchState, eventCategory: selected});
-    getSearch({...searchState, eventCategory: selected})
+    if(selected.length){
+      dispatch(update((state) => (state.eventCategory = selected)));
+    }else{
+      dispatch(update((state) => (delete state.eventCategory)));
+    }
+    // console.log({...searchState, eventCategory: selected});
   }, [eventCategories]);
 
   return (

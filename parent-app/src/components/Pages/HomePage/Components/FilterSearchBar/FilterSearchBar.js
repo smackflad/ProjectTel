@@ -2,37 +2,28 @@ import "./FilterSearchBar.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { update } from "../../../../../store/searchSlice";
-import { useGetSearchMutation } from "../../../../../store/api/searchApi"
-import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
-
-
-const FilterSearchBar = ({val, setVal}) => {
+const FilterSearchBar = () => {
   const dispatch = useDispatch();
   const searchState = useSelector((state) => state.search);
-
-  const [getSearch, { data, status, isLoading, isError, error }] =
-  useGetSearchMutation();
-
-  useEffect(() => {
-    if (status === QueryStatus.fulfilled) {
-      console.log(searchState);
-    } else if (isError) {
-      let errToastMessage = "";
-      if (error.status === 401) {
-        console.log(`Δώσατε λάθος στοιχεία`)
-      } else if (error.status === 400) {
-        console.log(`ERROR: 400 BAD REQUEST`)
-      } else if (error.status === 500) {
-        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
-      }
-    }
-  }, [status, error, isError]);
+  const [tempVal, setTempVal] = useState(searchState.title)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchState);
-    getSearch(searchState)
+    if(tempVal !== ""){
+      dispatch(
+        update((state) => {
+          state.title = tempVal;
+          state.description = tempVal;
+        })
+      )
+    }else{
+      dispatch(update((state) => {
+        delete state.title;
+        delete state.description;
+      }));
+
+    }
   };
 
   return (
@@ -40,14 +31,9 @@ const FilterSearchBar = ({val, setVal}) => {
       <input
         type="text"
         placeholder="Αναζήτηση"
-        value={searchState.title}
+        value={tempVal}
         onChange={(e) =>
-          dispatch(
-            update((state) => {
-              state.title = e.target.value;
-              state.description = e.target.value;
-            })
-          )
+          setTempVal(e.target.value)
         }
       />
       <span

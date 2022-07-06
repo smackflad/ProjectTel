@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const ParentProfilePage = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { accountInitialized, isLoggedIn } = useSelector(
-    (state) => state.global
+    (state) => state.persistedReducer.global
   );
   let navigate = useNavigate();
   useEffect(() => {

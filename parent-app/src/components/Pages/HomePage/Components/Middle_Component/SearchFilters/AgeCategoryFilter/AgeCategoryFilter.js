@@ -22,24 +22,6 @@ const AgeCategoryFilter = () => {
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
-  const [getSearch, { data, status, isLoading, isError, error }] =
-  useGetSearchMutation();
-
-  useEffect(() => {
-    if (status === QueryStatus.fulfilled) {
-      console.log(searchState);
-    } else if (isError) {
-      let errToastMessage = "";
-      if (error.status === 401) {
-        console.log(`Δώσατε λάθος στοιχεία`)
-      } else if (error.status === 400) {
-        console.log(`ERROR: 400 BAD REQUEST`)
-      } else if (error.status === 500) {
-        console.log(`ERROR: 500 INTERNAL SERVER ERROR`)
-      }
-    }
-  }, [status, error, isError]);
-
   var checkedItems = () => {
     const selected = ageCategories.filter((c) => c.checked).length;
 
@@ -84,9 +66,12 @@ const AgeCategoryFilter = () => {
   useEffect(() => {
     setDisplayTxt(checkedItems());
     const selected = ageCategories.filter((c) => c.checked).map((c) => c.db);
-    dispatch(update((state) => (state.ageCategory = selected)));
-    console.log({...searchState, ageCategory: selected});
-    getSearch({...searchState, ageCategory: selected})
+    if(selected.length){
+      dispatch(update((state) => (state.ageCategory = selected)));
+    }else{
+      dispatch(update((state) => (delete state.ageCategory)));
+    }
+    // console.log({...searchState, ageCategory: selected});
 
   }, [ageCategories]);
 

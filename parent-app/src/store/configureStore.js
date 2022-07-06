@@ -7,9 +7,7 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const reducers = combineReducers({
-  search: searchReducer,
   global: globalReducer,
-  [api.reducerPath]: api.reducer,
 });
 
 const persistConfig = {
@@ -20,7 +18,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {persistedReducer, search: searchReducer, [api.reducerPath]: api.reducer},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
