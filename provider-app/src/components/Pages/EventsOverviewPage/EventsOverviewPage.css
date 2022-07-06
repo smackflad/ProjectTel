@@ -1,4 +1,4 @@
-.EventsPage-external {
+.EventsOverviewPage-external {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,7 +12,7 @@
   color: green;
 }
 
-.EventsPage-top-wrapper {
+.EventsOverviewPage-top-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -24,7 +24,7 @@
   background-color: #ebeded !important;
   border-radius: 10px 10px 0 0;
 }
-.EventsPage-Datatable {
+.EventsOverviewPage-Datatable {
   border: 1px solid #ebeded;
   border-radius: 10px;
 }
@@ -36,7 +36,7 @@
   color: #5f6061;
   font-size: 25px;
 }
-.EventsPage-search {
+.EventsOverviewPage-search {
   border: 0;
   border-radius: 10px;
   background: #ebeded;
@@ -45,19 +45,19 @@
   height: 36px;
   padding: 0 15px 0 30px;
 }
-.EventsPage-search:focus,
-.EventsPage-search:active,
-.EventsPage-search:focus-visible {
+.EventsOverviewPage-search:focus,
+.EventsOverviewPage-search:active,
+.EventsOverviewPage-search:focus-visible {
   border: 0;
   outline-style: none;
 }
-.EventsPage-span-search-wrap {
+.EventsOverviewPage-span-search-wrap {
   display: flex;
   align-items: center;
   position: relative;
   margin-left: 12px;
 }
-.EventsPage-span-search-wrap span {
+.EventsOverviewPage-span-search-wrap span {
   position: absolute;
   left: 5px;
   color: #5f6061;

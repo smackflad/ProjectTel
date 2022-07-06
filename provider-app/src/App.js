@@ -73,8 +73,8 @@ function App() {
           <Route path="/usersPageAdmin" element={<UsersPageAdmin />} />
           <Route path="/profile" element={<ProviderProfilePage />} />
           <Route path="/*" element={<ErrorPage />} />
-          <Route path="/UserCreationPage" element={<UserCreationPage />} />
-          <Route path="/EventsOverviewPage" element={<EventsOverviewPage />} />
+          <Route path="/userCreationPage" element={<UserCreationPage />} />
+          <Route path="/eventsOverviewPage" element={<EventsOverviewPage />} />
         </Routes>
       </div>
       <div className="Footer">

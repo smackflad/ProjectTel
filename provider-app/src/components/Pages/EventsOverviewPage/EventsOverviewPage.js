@@ -10,7 +10,7 @@ const paginationComponentOptions = {
 
 
  
-const EventsPage = () => {
+const EventsOverviewPage = () => {
   const columns = [
     {
       name: "Δρραστηριότητα",
@@ -102,18 +102,18 @@ const EventsPage = () => {
     return <div>Φόρτωση δεδομένων ...</div>;
   } else {
     return (
-      <div className="EventsPage-external">
-        <div className="EventsPage-top-wrapper">
+      <div className="EventsOverviewPage-external">
+        <div className="EventsOverviewPage-top-wrapper">
           <h1>Οι δραστηριότητες μου</h1>
           
         </div>
         <div>
           <div className="wrap-all-search">
             <span>Aναζήτηση:</span>
-            <div className="EventsPage-span-search-wrap">
+            <div className="EventsOverviewPage-span-search-wrap">
               <span className="material-icons-outlined">search</span>
               <input
-                className="EventsPage-search"
+                className="EventsOverviewPage-search"
                 type={"text"}
                 placeholder="Αναζήτηση δραστηριότητας"
                 onChange={handleKeyPress}
@@ -121,7 +121,7 @@ const EventsPage = () => {
               ></input>
             </div>
           </div>
-          <div className="EventsPage-Datatable">
+          <div className="EventsOverviewPage-Datatable">
             <DataTable
               columns={columns}
               data={items}
@@ -138,4 +138,4 @@ const EventsPage = () => {
     );
   }
 };
-export default EventsPage;
+export default EventsOverviewPage;
