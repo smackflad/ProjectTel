@@ -45,8 +45,9 @@ const RegisterStep3 = ({ changeLoadingState }) => {
     } else if (isError) {
       console.log(error.data.initialized);
       let errToastMessage = "";
-      if (error.status === 422) {
+      if (error.status === 409) {
         errToastMessage = `Αυτός ο χρήστης χρησιμοποιείται`;
+        navigate('/Register');
       } else if (error.status === 400) {
         errToastMessage = `ERROR: 400 BAD REQUEST`;
       } else if (error.status === 500) {
