@@ -47,7 +47,9 @@ export class OrderService {
   }
 
   async findAll(parentId: string, query: PaginationQueryDto) {
-    const parent = await this.parentService.findOne(parentId);
+    const parent = await this.parentRepository.findOne(parentId, {
+      relations: ['order'],
+    });
     console.log(parent);
     console.log(query);
     if (parent === undefined) {
@@ -57,7 +59,7 @@ export class OrderService {
     const [result, total] = await this.orderRepository.findAndCount({
       // relations: ['parent'],
       // where: {
-      //   parent,
+      //   parent: { user: parent.user },
       // },
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,

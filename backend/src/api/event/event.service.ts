@@ -25,6 +25,7 @@ export class EventService {
     const savedEvent = await this.eventRepository.save({
       ...createEventDto,
       company,
+      active: true,
     });
 
     return Mapper.mapEventEntityToEventCreatedResponseModel(savedEvent);

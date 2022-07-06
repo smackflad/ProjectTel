@@ -1,17 +1,17 @@
-.ProviderProfilePage-external {
+.UserCreationPage-external{
   flex: 1;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 30px;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+padding: 30px;
 }
 
 @media (max-width: 600px) {
-  .ProviderProfilePage-external {
+  .UserCreationPage-external {
     flex-direction: column;
     align-items: center;
   }
-  .ProviderProfilePage-password {
+  .UserCreationPage-password {
     margin-left: 0px !important;
   }
 }
@@ -19,19 +19,29 @@
 .container-selection {
   min-height: 300px;
   background-color: #f5f7f7;
+  flex-direction: column;
   margin-left: 50px;
   display: flex;
   border-radius: 10px;
   padding: 40px;
   min-width: 480px;
+ 
 }
-.ProviderProfilePage-info h4 {
+.New-User-form{
+display: flex;
+flex-direction: column;
+}
+
+.UserCreationPage-info h4 {
   font: normal normal bold 20px/25px;
   color: #5f6061;
   text-align: center;
 }
 
-.ProviderProfilePage-inputs {
+
+.UserCreationPage-inputs {
+
+
   font-size: 16px;
   padding: 0 10px 0 10px;
   border-top: none;
@@ -49,35 +59,38 @@
   margin-bottom: 15px;
   outline-width: 0;
 }
-.ProviderProfilePage-info {
+.UserCreationPage-info {
   width: 500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  
 }
-.ProviderProfilePage-password button {
+.UserCreationPage-password button {
   margin-top: 15px;
   border: 0;
   border-radius: 10px;
   height: 37px;
   width: 55%;
 }
-.ProviderProfilePage-password h4 {
+.UserCreationPage-password h4 {
   color: #5f6061;
   text-align: center;
 }
-.ProviderProfilePage-password {
+.UserCreationPage-password {
   display: flex;
   flex-direction: column;
   margin-left: 70px;
 }
-.password-change {
+.password-wrap {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  position: relative;
+  width: 100%;
 }
-.password-change input {
+.password-wrap input {
+ 
   font-size: 16px;
   padding: 0 10px 0 10px;
   border-top: none;
@@ -87,6 +100,7 @@
   border-radius: 10px;
   height: 45px;
   background-color: #fff;
+  width: 100%;
   border: none;
   display: block;
   box-sizing: border-box;
@@ -94,35 +108,23 @@
   margin-right: 15px;
   margin-bottom: 15px;
   outline-width: 0;
+ 
 }
-.ProviderProfilePage-password button:hover {
+.password-wrap span {
+  position: absolute;
+  left: 10px;
+  color: #5f6061;
+}
+.password-wrap span.show-icon {
+  position: absolute;
+  height: 35px;
+  right: 20px;
+  left: auto;
+  color: #1aabbf;
+}
+.password-wrap span:hover {
   cursor: pointer;
 }
-.Iban-change {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-form.password-change span.material-icons-outlined.show-icon {
+.UserCreationPage-password button:hover {
   cursor: pointer;
-  color: black;
-}
-
-.Iban-change input {
-  font-size: 16px;
-  padding: 0 10px 0 10px;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: none;
-  border-radius: 10px;
-  height: 45px;
-  background-color: #fff;
-  border: none;
-  display: block;
-  box-sizing: border-box;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  outline-width: 0;
 }

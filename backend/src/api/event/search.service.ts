@@ -51,12 +51,12 @@ export class SearchService {
     if (search.eventCategory !== undefined) {
       whereQuery = {
         ...whereQuery,
-        eventCategory: Any(search.eventCategory),
+        eventCategory: In(search.eventCategory),
       };
     }
     if (search.ageCategory !== undefined) {
       whereQuery = {
-        ageCategory: Any(search.ageCategory),
+        ageCategory: In(search.ageCategory),
       };
     }
     if (search.startDate && search.endDate) {
@@ -75,7 +75,7 @@ export class SearchService {
         eventDate: MoreThanOrEqual(search.startDate),
       };
     }
-
+    console.log(whereQuery);
     return { ...whereQuery, active: true };
   }
 }

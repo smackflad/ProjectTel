@@ -32,8 +32,16 @@ const ProviderProfilePage = () => {
   const [getEmployee, { data: dataE, status: statusE, isLoading: isLoadingE }] =
     useGetEmployeeMutation();
 
-  const [updateIban, { data: dataU, isError: isErrorU, isLoading: isLoadingU, error: errorU, status: statusU }] =
-  useUpdateIbanMutation();
+  const [
+    updateIban,
+    {
+      data: dataU,
+      isError: isErrorU,
+      isLoading: isLoadingU,
+      error: errorU,
+      status: statusU,
+    },
+  ] = useUpdateIbanMutation();
 
   const [form, setForm] = useState({
     oldPassword: "",
@@ -41,7 +49,7 @@ const ProviderProfilePage = () => {
     newPassword2: "",
   });
 
-  const [iban, setIban] = useState("")
+  const [iban, setIban] = useState("");
 
   useEffect(() => {
     if (statusU === QueryStatus.fulfilled) {
@@ -151,9 +159,9 @@ const ProviderProfilePage = () => {
     );
   }
 
-  const handleChangeIban = (e) =>{
+  const handleChangeIban = (e) => {
     e.preventDefault();
-    if(iban === ""){
+    if (iban === "") {
       toast.error("Κενό IBAN", {
         position: "top-center",
         autoClose: 5000,
@@ -163,13 +171,13 @@ const ProviderProfilePage = () => {
         draggable: true,
         progress: undefined,
       });
-    }else{
+    } else {
       updateIban({
         iban: iban,
-        id: companyId
-      })
+        id: companyId,
+      });
     }
-  }
+  };
 
   const handleSubmitPass = (e) => {
     e.preventDefault();
@@ -356,7 +364,9 @@ const ProviderProfilePage = () => {
               name="NewIban"
               required
               value={iban}
-              onChange={(e)=>{setIban(e.target.value)}}
+              onChange={(e) => {
+                setIban(e.target.value);
+              }}
               placeholder="Νέο IBAN"
             />
 

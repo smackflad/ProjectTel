@@ -1,8 +1,6 @@
-import "./EventsPage.css";
+import "./EventsOverviewPage.css";
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 // const [showCreate, setShowCreate] = useState(false);s
 const paginationComponentOptions = {
@@ -10,70 +8,77 @@ const paginationComponentOptions = {
   rangeSeparatorText: "από",
 };
 
-const columns = [
-  {
-    name: "Δρραστηριότητα",
-    selector: (row) => row.title,
-    sortable: true,
-    width: "300px",
-  },
-  {
-    name: "Ημερομηνία",
-    selector: (row) =>
-      row.eventDate !== null && typeof row.eventDate === "array"
-        ? row.eventDate[0]
-        : row.eventDate,
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Κατάσταση",
-    selector: (row) =>
-      row.active ? (
-        <span className="status-active">Ενεργό</span>
-      ) : (
-        <span className="status-inactive">Ανενεργό</span>
+const EventsOverviewPage = () => {
+  const columns = [
+    {
+      name: "Δρραστηριότητα",
+      selector: (row) => row.name,
+      sortable: true,
+      width: "300px",
+    },
+    {
+      name: "Ημερομηνία",
+      selector: (row) => row.date,
+      sortable: true,
+      width: "200px",
+    },
+    {
+      name: "Εκκρεμότητα",
+      selector: (row) => (
+        <div className="action_btn">
+          <button
+            name="submit"
+            className="event-accept"
+            type="submit"
+            value="accept"
+            onClick={(e) => {
+              setActive(true);
+              window.location.reload();
+            }}
+          >
+            Accept{" "}
+          </button>
+          /
+          <button
+            name="submit"
+            className="event-decline"
+            type="submit"
+            value="decline"
+            onClick={(e) => {
+              setActive(false);
+              window.location.reload();
+            }}
+          >
+            Decline{" "}
+          </button>
+          <p id="saved"></p>
+        </div>
       ),
-    width: "200px",
-  },
-];
-
-const EventsPage = () => {
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `../newEvent`;
-    navigate(path);
-  };
-
+    },
+  ];
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
-  const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
-
-  const companyId = useSelector(
-    (state) => state.persistedReducer.global.companyId
-  );
-  const userID = useSelector((state) => state.persistedReducer.global.userId);
+  const [active, setActive] = useState("false");
 
   useEffect(() => {
-    fetchData(page, perPage, search);
-  }, [perPage, page, search]);
-
-  const fetchData = async (page, per_page, searchTxt) => {
+    fetchData(1, perPage);
+  }, [perPage]);
+  const fetchData = async (page, per_page, search, active) => {
+    if (search === undefined) {
+      search = "";
+    }
     fetch(
-      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}${
-        searchTxt !== undefined ? "&eventName=" + searchTxt : ""
-      }`
+      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}%active=${active}`
     )
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result);
           setIsLoaded(true);
-          setItems(result.items);
+          setItems(result.data);
           setTotalRows(result.total);
         },
         (error) => {
@@ -83,16 +88,17 @@ const EventsPage = () => {
       );
   };
   const handlePageChange = (page) => {
-    console.log(page - 1);
-    setPage(page - 1);
+    fetchData(page, perPage);
   };
   const handlePerRowsChange = async (newPerPage, page) => {
     setPerPage(newPerPage);
   };
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
-    // fetchData(page, perPage, e.target.value);
-    console.log("pressed  ", e.target.value);
+    if (e.target.value.length >= 3) {
+      fetchData(1, perPage, e.target.value);
+      console.log("pressed  ", e.target.value);
+    }
   };
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -100,20 +106,17 @@ const EventsPage = () => {
     return <div>Φόρτωση δεδομένων ...</div>;
   } else {
     return (
-      <div className="EventsPage-external">
-        <div className="EventsPage-top-wrapper">
+      <div className="EventsOverviewPage-external">
+        <div className="EventsOverviewPage-top-wrapper">
           <h1>Οι δραστηριότητες μου</h1>
-          <button onClick={routeChange} className="EventsPage-add-new">
-            <span className="material-icons-outlined">add</span> Προσθήκη
-          </button>
         </div>
         <div>
           <div className="wrap-all-search">
             <span>Aναζήτηση:</span>
-            <div className="EventsPage-span-search-wrap">
+            <div className="EventsOverviewPage-span-search-wrap">
               <span className="material-icons-outlined">search</span>
               <input
-                className="EventsPage-search"
+                className="EventsOverviewPage-search"
                 type={"text"}
                 placeholder="Αναζήτηση δραστηριότητας"
                 onChange={handleKeyPress}
@@ -121,7 +124,7 @@ const EventsPage = () => {
               ></input>
             </div>
           </div>
-          <div className="EventsPage-Datatable">
+          <div className="EventsOverviewPage-Datatable">
             <DataTable
               columns={columns}
               data={items}
@@ -138,4 +141,4 @@ const EventsPage = () => {
     );
   }
 };
-export default EventsPage;
+export default EventsOverviewPage;
