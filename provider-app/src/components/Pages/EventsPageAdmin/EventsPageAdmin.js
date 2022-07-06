@@ -1,5 +1,6 @@
 import "./EventsPageAdmin.css";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 
 const paginationComponentOptions = {
@@ -10,19 +11,22 @@ const paginationComponentOptions = {
 const columns = [
   {
     name: "Δρραστηριότητα",
-    selector: (row) => row.name,
+    selector: (row) => row.title,
     sortable: true,
     width: "300px",
   },
   {
-    name: "Δημιουργός",
-    selector: (row) => row.provider,
+    name: "Παραγωγός",
+    selector: (row) => row.companyName,
     sortable: true,
     width: "200px",
   },
   {
     name: "Ημερομηνία",
-    selector: (row) => row.date,
+    selector: (row) =>
+      row.eventDate !== null && typeof row.eventDate === "array"
+        ? row.eventDate[0]
+        : row.eventDate,
     sortable: true,
     width: "200px",
   },
@@ -34,6 +38,7 @@ const columns = [
       ) : (
         <span className="status-inactive">Ανενεργό</span>
       ),
+    sortable: true,
     width: "200px",
   },
 ];
@@ -45,21 +50,24 @@ const EventsPageAdmin = () => {
   const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState("");
 
+  const companyId = useSelector(
+    (state) => state.persistedReducer.global.companyId
+  );
+  const userID = useSelector((state) => state.persistedReducer.global.userId);
+
   useEffect(() => {
-    fetchData(1, perPage);
+    fetchData(0, perPage);
   }, [perPage]);
-  const fetchData = async (page, per_page, search) => {
-    if (search === undefined) {
-      search = "";
-    }
+  console.log(companyId, userID);
+  const fetchData = async (page, per_page, searchTxt) => {
     fetch(
-      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}`
+      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}`
     )
       .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
-          setItems(result.data);
+          setItems(result.items);
           setTotalRows(result.total);
         },
         (error) => {

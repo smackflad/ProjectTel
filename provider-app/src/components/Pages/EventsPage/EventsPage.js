@@ -18,7 +18,10 @@ const columns = [
   },
   {
     name: "Ημερομηνία",
-    selector: (row) => row.eventDate,
+    selector: (row) =>
+      row.eventDate !== null && typeof row.eventDate === "array"
+        ? row.eventDate[0]
+        : row.eventDate,
     sortable: true,
     width: "200px",
   },
@@ -51,16 +54,13 @@ const EventsPage = () => {
     (state) => state.persistedReducer.global.companyId
   );
   const userID = useSelector((state) => state.persistedReducer.global.userId);
-  console.log(companyId, userID);
+
   useEffect(() => {
     fetchData(0, perPage);
   }, [perPage]);
-  const fetchData = async (page, per_page, search) => {
-    if (search === undefined) {
-      search = "";
-    }
+  const fetchData = async (page, per_page, searchTxt) => {
     fetch(
-      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}&eventName=${search}`
+      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}&eventName=${searchTxt}`
     )
       .then((res) => res.json())
       .then(
@@ -84,8 +84,10 @@ const EventsPage = () => {
   };
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
-    fetchData(0, perPage, e.target.value);
-    console.log("pressed  ", e.target.value);
+    if (e.target.value.length >= 3) {
+      fetchData(1, perPage, e.target.value);
+      console.log("pressed  ", e.target.value);
+    }
   };
   if (error) {
     return <div>Error: {error.message}</div>;

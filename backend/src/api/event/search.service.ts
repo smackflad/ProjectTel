@@ -28,8 +28,8 @@ export class SearchService {
     const [result, total] = await this.eventRepository.findAndCount({
       relations: ['location', 'company'],
       where: this.PopulateWhereQueryFromSearchRequest(search),
-      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
-      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
+      take: query.pageSize, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize, //? DefaultValues.PAGINATION_OFFSET,
     });
     const mappedEvents = result.map((event) =>
       Mapper.mapEventEntityToEventResponseModel(event),

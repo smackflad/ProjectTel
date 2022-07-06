@@ -53,14 +53,15 @@ export class EventService {
     const [result, total] = await this.eventRepository.findAndCount({
       relations: ['location', 'company'],
       where: whereQuery,
-      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
-      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
+      take: query.pageSize, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize, //? DefaultValues.PAGINATION_OFFSET,
     });
-
+    console.log(result, total);
     const mappedEvents = result.map((event) =>
       Mapper.mapEventEntityToEventResponseModel(event),
     );
-    return { items: mappedEvents, total };
+    console.log(mappedEvents);
+    return { items: mappedEvents, total: mappedEvents.length };
   }
 
   async findOne(id: string) {
