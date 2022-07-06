@@ -121,6 +121,9 @@ export class Mapper {
     res.images = event.images;
     res.eventDate = event.eventDate;
     res.active = event.active;
+    res.eventCategory = event.eventCategory;
+    res.ageCategory = event.ageCategory;
+
     if (event.company !== null && event.company !== undefined) {
       res.companyId = event.company.id;
       res.companyName = event.company.name;
@@ -151,6 +154,8 @@ export class Mapper {
     res.images = event.images;
     res.eventDate = event.eventDate;
     res.active = event.active;
+    res.eventCategory = event.eventCategory;
+    res.ageCategory = event.ageCategory;
 
     res.location.address = event.location.address;
     res.location.addressNum = event.location.addressNum;

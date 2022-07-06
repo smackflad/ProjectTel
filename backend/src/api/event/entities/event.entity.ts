@@ -27,24 +27,22 @@ export class Event extends BaseWithoutId {
   @Column()
   ammount: number;
 
-  @Column({ type: 'date', nullable: true, array: true })
-  eventDate: string[];
+  @Column({ type: 'date', nullable: true })
+  eventDate: string;
 
   @Column({
     type: 'enum',
     enum: EventCategory,
-    default: [EventCategory.CINEMA],
-    array: true,
+    default: EventCategory.CINEMA,
   })
-  eventCategory: EventCategory[];
+  eventCategory: EventCategory;
 
   @Column({
     type: 'enum',
     enum: AgeCategory,
-    default: [AgeCategory.MIDDLE_SCHOOL],
-    array: true,
+    default: AgeCategory.MIDDLE_SCHOOL,
   })
-  ageCategory: AgeCategory[];
+  ageCategory: AgeCategory;
 
   @Column({ default: false })
   active: boolean;

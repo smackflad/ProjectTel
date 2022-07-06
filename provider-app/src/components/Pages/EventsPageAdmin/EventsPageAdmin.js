@@ -31,15 +31,37 @@ const columns = [
     width: "200px",
   },
   {
-    name: "Κατάσταση",
-    selector: (row) =>
-      row.active ? (
-        <span className="status-active">Ενεργό</span>
-      ) : (
-        <span className="status-inactive">Ανενεργό</span>
-      ),
-    sortable: true,
-    width: "200px",
+    name: "Εκκρεμότητα",
+    selector: (row) => (
+      <div className="action-btn">
+        <button
+          name="submit"
+          className="event-accept"
+          type="submit"
+          value="accept"
+          // onClick={(e) => {
+          //   setActive(true);
+          //   window.location.reload();
+          // }}
+        >
+          Accept{" "}
+        </button>
+        /
+        <button
+          name="submit"
+          className="event-decline"
+          type="submit"
+          value="decline"
+          // onClick={(e) => {
+          //   setActive(false);
+          //   window.location.reload();
+          // }}
+        >
+          Decline{" "}
+        </button>
+        <p id="saved"></p>
+      </div>
+    ),
   },
 ];
 const EventsPageAdmin = () => {
@@ -61,7 +83,9 @@ const EventsPageAdmin = () => {
   console.log(companyId, userID);
   const fetchData = async (page, per_page, searchTxt) => {
     fetch(
-      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}`
+      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}${
+        searchTxt !== undefined ? "&eventName=" + searchTxt : ""
+      }`
     )
       .then((res) => res.json())
       .then(

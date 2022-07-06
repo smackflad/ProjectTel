@@ -28,8 +28,8 @@ export class SearchService {
     const [result, total] = await this.eventRepository.findAndCount({
       relations: ['location', 'company'],
       where: this.PopulateWhereQueryFromSearchRequest(search),
-      take: query.pageSize, //? DefaultValues.PAGINATION_LIMIT,
-      skip: query.pageNumber * query.pageSize, //? DefaultValues.PAGINATION_OFFSET,
+      take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
+      skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
     const mappedEvents = result.map((event) =>
       Mapper.mapEventEntityToEventResponseModel(event),
@@ -51,12 +51,12 @@ export class SearchService {
     if (search.eventCategory !== undefined) {
       whereQuery = {
         ...whereQuery,
-        eventCategory: Any(search.eventCategory),
+        eventCategory: In(search.eventCategory),
       };
     }
     if (search.ageCategory !== undefined) {
       whereQuery = {
-        ageCategory: Any(search.ageCategory),
+        ageCategory: In(search.ageCategory),
       };
     }
     if (search.startDate && search.endDate) {
@@ -75,7 +75,7 @@ export class SearchService {
         eventDate: MoreThanOrEqual(search.startDate),
       };
     }
-
+    console.log(whereQuery);
     return { ...whereQuery, active: true };
   }
 }

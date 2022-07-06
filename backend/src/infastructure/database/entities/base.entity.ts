@@ -6,7 +6,7 @@ import {
   VersionColumn,
 } from 'typeorm';
 
-@Entity()
+// @Entity()
 export class Base {
   @PrimaryGeneratedColumn('uuid')
   id: string;

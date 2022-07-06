@@ -1,3 +1,5 @@
+import { AgeCategory } from 'src/infastructure/enums/age-category.enum';
+import { EventCategory } from 'src/infastructure/enums/event-category.enum';
 import { LocationResponseModel } from '../location/location.response.model';
 
 export class EventResponseModel {
@@ -7,7 +9,7 @@ export class EventResponseModel {
 
   description: string;
 
-  eventDate: string[];
+  eventDate: string;
 
   price: number;
 
@@ -16,6 +18,10 @@ export class EventResponseModel {
   companyId: string;
 
   companyName: string;
+
+  eventCategory: EventCategory;
+
+  ageCategory: AgeCategory;
 
   images: string[];
 
