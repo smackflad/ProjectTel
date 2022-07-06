@@ -23,7 +23,7 @@ export class OrderController {
     @Param('parentId') parentId: string,
     @Body() createOrderDto: CreateOrderDto,
   ) {
-    return await this.orderService.create(parentId, createOrderDto);
+    await this.orderService.create(parentId, createOrderDto);
   }
 
   @Get()

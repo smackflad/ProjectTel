@@ -27,10 +27,16 @@ export class OrderService {
   async create(parentId: string, createOrderDto: CreateOrderDto) {
     const parent = await this.parentRepository.findOne(parentId);
     let event = await this.eventRepository.findOne(createOrderDto.eventId);
-    if (createOrderDto.ammount > event.ammount) {
-      throw new BadRequestException('Event ammount');
+    const askedAmmount = createOrderDto.ammount;
+    const availableAmmount = event.ammount;
+    console.log(availableAmmount, askedAmmount, parent.balance, event.price);
+    if (
+      askedAmmount > availableAmmount ||
+      parent.balance < askedAmmount * event.price
+    ) {
+      throw new BadRequestException("Can't proccess order");
     }
-    event.ammount -= createOrderDto.ammount;
+    event.ammount -= askedAmmount;
     event = await this.eventRepository.save(event);
 
     return await this.orderRepository.save({
