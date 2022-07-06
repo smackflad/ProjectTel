@@ -12,11 +12,7 @@ import {
   Any,
 } from 'typeorm';
 import { Company } from '../company/entities/company.entity';
-import { CreateEventDto } from './dto/create-event.dto';
-import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
-import { EventsPaginationQueryDto } from './dto/events-pagination.dto';
-import { UserRole } from 'src/infastructure/enums/roles.enum';
 import { SearchEventDto } from './dto/search-event.dto';
 
 @Injectable()
@@ -80,7 +76,6 @@ export class SearchService {
       };
     }
 
-    console.log(whereQuery);
-    return whereQuery;
+    return { ...whereQuery, active: true };
   }
 }
