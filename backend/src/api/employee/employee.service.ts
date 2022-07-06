@@ -1,3 +1,4 @@
+import { Company } from './../company/entities/company.entity';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,11 +17,15 @@ export class EmployeeService {
     @InjectRepository(Employee)
     private readonly employeeRepository: Repository<Employee>,
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    private readonly companyRepository: Repository<Company>,
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
-    const employee = this.employeeRepository.create(createEmployeeDto);
+    const { companyId, ...event } = createEmployeeDto;
+
+    const company = await this.companyRepository.findOne(companyId);
+
+    const employee = this.employeeRepository.create({ ...event, company });
 
     const savedEmployee = await this.employeeRepository.save(employee);
 

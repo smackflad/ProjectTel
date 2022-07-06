@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsNotEmptyObject,
   IsObject,
+  IsUUID,
   ValidateNested,
 } from 'class-validator';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
@@ -26,4 +27,8 @@ export class CreateEmployeeDto {
   @ValidateNested()
   @Type(() => CreateUserDto)
   user: CreateUserDto;
+
+  @ApiProperty()
+  @IsUUID()
+  companyId: string;
 }

@@ -23,11 +23,6 @@ export class EmployeeController {
     return this.employeeService.create(createEmployeeDto);
   }
 
-  @Post('createSystemAdmin')
-  createSystemAdmin(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeeService.create(createEmployeeDto);
-  }
-
   @Get()
   findAll(@Query() query: EmployeePaginationQueryDto) {
     return this.employeeService.findAll(query);
