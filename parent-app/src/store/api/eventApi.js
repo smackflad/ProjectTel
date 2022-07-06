@@ -8,8 +8,13 @@ export const eventApi = api.injectEndpoints({
         body,
       }),
     }),
+    getEvent: build.mutation({
+      query: (id) => ({
+        url: `events/${id}`,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetEventsMutation } = eventApi;
+export const { useGetEventsMutation, useGetEventMutation } = eventApi;

@@ -1,5 +1,5 @@
 import "./NewEventPage.css";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import MyTextBox from "../../sharedComponents/MyTextBox/MyTextBox";
 import MyTextArea from "../../generalComponents/MyTextArea/MyTextArea";
 import { useEffect, useState } from "react";
@@ -11,15 +11,24 @@ import { useNewEventCompanyMutation } from "../../../store/api/newEventApi";
 import mergeImages from "merge-images";
 import WaterMarkImage from "../../../images/Watermark.png";
 import SearchFilters from "./SearchFilters/SearchFilters";
-import {
-  fromUpdate,
-  locationUpdate,
-  dateUpdate,
-} from "../../../store/providerNewEventSlice";
+import { fromUpdate, locationUpdate, dateUpdate } from "../../../store/providerNewEventSlice";
 import { useSelector, useDispatch } from "react-redux";
 import uploadImage from "../../../util/azureUploader";
+import CircleLoader from "react-spinners/CircleLoader";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
 
 const NewEventPage = () => {
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
+
   const dispatch = useDispatch();
   const prev = useSelector((state) => state.persistedReducer.newEvent);
   // console.log(prev)
@@ -121,6 +130,17 @@ const NewEventPage = () => {
     );
   }
 
+  if (
+    isLoading// ||
+    // status === QueryStatus.uninitialized
+  ) {
+    return (
+      <div className="Account-external">
+        <CircleLoader />
+      </div>
+    );
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -145,6 +165,7 @@ const NewEventPage = () => {
     // console.log(tempImgs);//blob version with water mark //TODO
     // console.log(filesFinale);//file version without watermark
     newEventCompany(newEvent);
+    navigate("/");
   };
 
   return (

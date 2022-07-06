@@ -7,17 +7,17 @@ import MyButton from "../../SharedComponents/MyButton/MyButton";
 import Popup from "./components/Popup/Popup";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 // import "../../../images/"
 import { v4 as uuidv4 } from "uuid";
 import EventMap from "./components/maps/EventMap";
-
-// import { Wrapper, Status } from "@googlemaps/react-wrapper";
-// import {} from "@googlemaps/js-api-loader";
+import { useGetEventMutation } from "../../../store/api/eventApi";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import CircleLoader from "react-spinners/CircleLoader";
 
 
 const items = [{
-	"id": 1,
+	"id": "6cedf051-1fcc-4875-a3a3-1582061c336a",
 	"title": "Nothing to Lose",
 	"description": "blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue",
 	"eventDate": "6/7/2022",
@@ -243,7 +243,58 @@ const items = [{
 
 const EventPage = () => {	
 	const params = useParams();
-	const currItem = items.find(item => item.id == params.id);
+	let navigate = useNavigate();
+	const [getEvent, { data, isError, isLoading, error, status }] =
+    useGetEventMutation();
+	const [currItem, setCurrItem] = useState({
+		location: {
+			address: "",
+			addressNum: "",
+			city: "",
+			state: "",
+			postalCode: "",
+			country: "",
+			latitude: "",
+			longtitude: ""
+		},
+		// id: "6cedf051-1fcc-4875-a3a3-1582061c336a",
+		title: "",
+		description: "",
+		price: "",
+		ammount: "",
+		images: [],
+		eventDate: [],
+		// companyId: "696a4a30-892b-47e8-9c0c-34252dc9b6f7",
+		companyName: ""
+	});
+	const [dates, setDates] = useState([]);
+
+	useEffect(() => {
+		if (status === QueryStatus.uninitialized) {
+			getEvent(params.id);
+		}else if (status === QueryStatus.fulfilled) {
+			console.log(status);
+			setCurrItem(status);
+			var tempDates = [];
+			status.eventDate.map((item)=>{
+				tempDates.push(new Date(item));
+			})
+			setDates(tempDates);
+		}else if (isError) {
+			// console.log(error.data);
+			let errToastMessage = "";
+			if (error.status === 400) {
+			  errToastMessage = `ERROR: 400 BAD REQUEST`;
+			} else if (error.status === 500) {
+			  errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+			}else if(error.status === 404){
+				errToastMessage = `ERROR: 404 no route found`;
+			}
+			if(errToastMessage)console.log(errToastMessage);
+			navigate('/')
+		  }
+	  }, [params, status, isError, error]);
+
 	const [startDate, setStartDate] = useState(new Date());
 	const [isOpen, setIsOpen] = useState(false);
 	const togglePopup = () => {
@@ -254,6 +305,18 @@ const EventPage = () => {
 			document.body.style.overflow = 'hidden';
 		}
 	}
+
+	if (
+		isLoading ||
+		!dates.length
+		// status === QueryStatus.uninitialized
+	  ) {
+		return (
+		  <div className="Account-external">
+			<CircleLoader />
+		  </div>
+		);
+	  }
 
 	return (
 		<div className="EventPage-external">
@@ -281,10 +344,10 @@ const EventPage = () => {
 					</div>
 					<div className="EventPage-top-right-other">
 						<DatePicker
-						minDate={new Date(currItem.eventDate)}
+						minDate={dates[0]}
 						monthsShown={2}
-						includeDateIntervals={[{start: new Date(currItem.eventDate), end: new Date(currItem.eventDate)}]}
-						highlightDates={[new Date(currItem.eventDate)]}
+						includeDateIntervals={[{start: dates[0], end: dates[dates.length]}]}
+							highlightDates={dates}
 						inline
 						/>
 						<div className="EventPage-top-right-btns">
@@ -319,10 +382,10 @@ const EventPage = () => {
 				<div className="EventPage-top-mobile-right">
 					<div className="EventPage-top-mobile-datepicker">
 						<DatePicker
-							minDate={new Date(currItem.eventDate)}
+							minDate={dates[0]}
 							monthsShown={1}
-							includeDateIntervals={[{start: new Date(currItem.eventDate), end: new Date(currItem.eventDate)}]}
-							highlightDates={[new Date(currItem.eventDate)]}
+							includeDateIntervals={[{start: dates[0], end: dates[dates.length]}]}
+							highlightDates={dates}
 							inline
 						/>
 					</div>
@@ -339,7 +402,7 @@ const EventPage = () => {
 				</div>
 				<div className="EventPage-bot-map">
 					<span className="EventPage-bot-title">Χάρτης</span>
-					<EventMap lat={37.772} lng={-122.214} />
+					<EventMap lat={parseInt(currItem.location.latitude)} lng={parseInt(currItem.location.longtitude)} />
 				</div>
 			</div>
 			{isOpen && <Popup
