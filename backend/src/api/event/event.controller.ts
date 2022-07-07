@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { EventsPaginationQueryDto } from './dto/events-pagination.dto';
 import { EmployeeService } from '../employee/employee.service';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
+import { Console } from 'console';
 
 @ApiTags('events')
 @Controller('companies/:companyId/events')

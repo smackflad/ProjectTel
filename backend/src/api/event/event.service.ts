@@ -25,7 +25,7 @@ export class EventService {
     const savedEvent = await this.eventRepository.save({
       ...createEventDto,
       company,
-      active: true,//TODO delete this
+      active: true, //TODO delete this
     });
 
     return Mapper.mapEventEntityToEventCreatedResponseModel(savedEvent);
@@ -53,7 +53,7 @@ export class EventService {
 
     const [result, total] = await this.eventRepository.findAndCount({
       relations: ['location', 'company'],
-      where: {...whereQuery, active: false},
+      where: { ...whereQuery, active: false },
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
