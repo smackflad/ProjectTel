@@ -111,3 +111,9 @@
   text-decoration: none;
   color: #1aabbf;
 }
+.my-coin-icon {
+  background: url(../../../images/tokens.png) 16px no-repeat;
+  width: 35px;
+  height: 20px;
+  background-size: 16px;
+}
