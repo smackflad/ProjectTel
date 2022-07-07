@@ -59,7 +59,7 @@
 .MyNav-icon .md-40 {
   font-size: 40px !important;
 }
-@media only screen and (max-width: 725px) {
+@media only screen and (max-width: 1088px) {
   .MyNav-items {
     display: none;
   }
