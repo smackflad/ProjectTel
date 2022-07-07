@@ -2,6 +2,7 @@ import "./EventsPageAdmin.css";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const paginationComponentOptions = {
   rowsPerPageText: "Αποτελέσματα ανά σελίδα",
@@ -71,11 +72,23 @@ const EventsPageAdmin = () => {
   const [totalRows, setTotalRows] = useState(0);
   const [perPage, setPerPage] = useState(10);
   const [search, setSearch] = useState("");
+  const [active, setActive] = useState("false");
 
   const companyId = useSelector(
     (state) => state.persistedReducer.global.companyId
   );
   const userID = useSelector((state) => state.persistedReducer.global.userId);
+
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
 
   useEffect(() => {
     fetchData(0, perPage);
@@ -83,9 +96,10 @@ const EventsPageAdmin = () => {
   console.log(companyId, userID);
   const fetchData = async (page, per_page, searchTxt) => {
     fetch(
-      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}${
-        searchTxt !== undefined ? "&eventName=" + searchTxt : ""
-      }`
+      // `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}${
+      //   searchTxt !== undefined ? "&eventName=" + searchTxt : ""
+      // }`
+      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}%active=${active}`
     )
       .then((res) => res.json())
       .then(
