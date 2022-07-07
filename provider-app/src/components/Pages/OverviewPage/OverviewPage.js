@@ -11,6 +11,8 @@ import {
 } from "victory";
 import { v4 as uuidv4 } from "uuid";
 import SearchFilters from "./SearchFilters/SearchFilters";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import useSize from "@react-hook/size";
 
@@ -20,6 +22,16 @@ const OverviewPage = () => {
   const [statsCurr, setstatsCurr] = useState();
   const [stats, setStats] = useState([]);
   const [toggle, setToggle] = useState("rev");
+
+  let navigate = useNavigate();
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
 
   useEffect(() => {
     
