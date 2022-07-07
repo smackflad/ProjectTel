@@ -1,71 +1,162 @@
 import "./EventsPageAdmin.css";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DataTable from "react-data-table-component";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useUpdateActiveMutation, useDeleteEventMutation } from "../../../store/api/adminApi";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import { toast } from "react-toastify";
 
 const paginationComponentOptions = {
   rowsPerPageText: "Αποτελέσματα ανά σελίδα",
   rangeSeparatorText: "από",
 };
-
-const columns = [
-  {
-    name: "Δρραστηριότητα",
-    selector: (row) => row.title,
-    sortable: true,
-    width: "300px",
-  },
-  {
-    name: "Παραγωγός",
-    selector: (row) => row.companyName,
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Ημερομηνία",
-    selector: (row) =>
-      row.eventDate !== null && typeof row.eventDate === "array"
-        ? row.eventDate[0]
-        : row.eventDate,
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Εκκρεμότητα",
-    selector: (row) => (
-      <div className="action-btn">
-        <button
-          name="submit"
-          className="event-accept"
-          type="submit"
-          value="accept"
-          // onClick={(e) => {
-          //   setActive(true);
-          //   window.location.reload();
-          // }}
-        >
-          Accept{" "}
-        </button>
-        /
-        <button
-          name="submit"
-          className="event-decline"
-          type="submit"
-          value="decline"
-          // onClick={(e) => {
-          //   setActive(false);
-          //   window.location.reload();
-          // }}
-        >
-          Decline{" "}
-        </button>
-        <p id="saved"></p>
-      </div>
-    ),
-  },
-];
 const EventsPageAdmin = () => {
+  let navigate = useNavigate();
+
+  const companyID = useSelector(
+    (state) => state.persistedReducer.global.companyId
+  );
+  const userID = useSelector(
+    (state) => state.persistedReducer.global.userId
+  );
+
+  const [updateActive, { data, isError, isLoading, error: errorU, status }] =
+  useUpdateActiveMutation();
+
+  const [deleteEvent, { data: dataD, isError: isErrorD, isLoading: isLoadingD, error: errorD, status: statusD }] =
+  useDeleteEventMutation();
+
+  useEffect(() => {
+    console.log(statusD, dataD)
+    if(statusD === QueryStatus.uninitialized){
+      
+    }else if(statusD === QueryStatus.fulfilled){
+      // toast.success("Η δραστηριότητα εγκρίθηκε επιτυχώς", {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      // });
+      navigate(0);
+    }else if (isErrorD) {
+      console.log(errorD.data);
+      let errToastMessage = "";
+      if (errorD.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (errorD.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [dataD, isErrorD, isLoadingD, errorD, statusD]);
+
+  useEffect(() => {
+    if(status === QueryStatus.uninitialized){
+      
+    }else if(status === QueryStatus.fulfilled){
+      // console.log(data, status)
+      // toast.success("Η δραστηριότητα απορρίφθηκε επιτυχώς", {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      // });
+      navigate(0);
+    }else if (isError) {
+      console.log(error);
+      let errToastMessage = "";
+      if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [data, isError, isLoading, errorU, status]);
+
+
+  const columns = [
+    {
+      name: "Δρραστηριότητα",
+      selector: (row) => row.title,
+      sortable: true,
+      width: "300px",
+    },
+    {
+      name: "Παραγωγός",
+      selector: (row) => row.companyName,
+      sortable: true,
+      width: "200px",
+    },
+    {
+      name: "Ημερομηνία",
+      selector: (row) =>
+        row.eventDate !== null && typeof row.eventDate === "array"
+          ? row.eventDate[0]
+          : row.eventDate,
+      sortable: true,
+      width: "200px",
+    },
+    {
+      name: "Εκκρεμότητα",
+      selector: (row) => (
+        <div className="action-btn">
+          <button
+            name="submit"
+            className="event-accept"
+            type="submit"
+            value="accept"
+            onClick={(e) => {
+              updateActive({active: true, eventID: row.id})
+              setActive(true);
+            }}
+          >
+            Accept{" "}
+          </button>
+          /
+          <button
+            name="submit"
+            className="event-decline"
+            type="submit"
+            value="decline"
+            onClick={(e) => {
+              deleteEvent({active: true, eventID: row.id})
+              setActive(false);
+            }}
+          >
+            Decline{" "}
+          </button>
+          <p id="saved"></p>
+        </div>
+      ),
+    },
+  ];
+
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -77,12 +168,10 @@ const EventsPageAdmin = () => {
   const companyId = useSelector(
     (state) => state.persistedReducer.global.companyId
   );
-  const userID = useSelector((state) => state.persistedReducer.global.userId);
 
   const loggedin = useSelector(
     (state) => state.persistedReducer.global.isLoggedIn
   );
-  let navigate = useNavigate();
 
   useEffect(() => {
     if (!loggedin) {
@@ -96,10 +185,10 @@ const EventsPageAdmin = () => {
   console.log(companyId, userID);
   const fetchData = async (page, per_page, searchTxt) => {
     fetch(
-      // `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}${
-      //   searchTxt !== undefined ? "&eventName=" + searchTxt : ""
-      // }`
-      `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}%active=${active}`
+      `http://localhost:3001/api/v1/companies/${companyId}/events?pageNumber=${page}&pageSize=${per_page}&employeeId=${userID}&active=false${
+        searchTxt !== undefined ? "&eventName=" + searchTxt : ""
+      }`
+      // `https://www.mecallapi.com/api/attractions?page=${page}&per_page=${per_page}&eventName=${search}%active=${active}`
     )
       .then((res) => res.json())
       .then(

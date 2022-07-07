@@ -4,9 +4,9 @@ export const adminApi = api.injectEndpoints({
   endpoints: (build) => ({
     updateActive: build.mutation({
       query: (data) => {
-        const { userID, companyID, ...body } = data;
+        const { eventID, ...body } = data;
         return {
-          url: `companies/${companyID}/events/${userID}`,
+          url: `companies/pp/events/${eventID}`,
           method: "PATCH",
           body,
         };
@@ -14,9 +14,9 @@ export const adminApi = api.injectEndpoints({
     }),
     deleteEvent: build.mutation({
       query: (data) => {
-        const { userID, companyID } = data;
+        const { eventID } = data;
         return{
-          url: `companies/${companyID}/events/${userID}`,
+          url: `companies/pp/events/${eventID}`,
           method: "DELETE"
         }
       },
