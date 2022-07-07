@@ -101,9 +101,8 @@ const UsersPageAdmin = () => {
   };
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
-    if (e.target.value.length >= 3) {
-      fetchData(0, perPage, e.target.value);
-    }
+
+    fetchData(0, perPage, e.target.value);
   };
   if (error) {
     return <div>Error: {error.message}</div>;
