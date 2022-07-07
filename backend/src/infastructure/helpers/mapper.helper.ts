@@ -124,6 +124,8 @@ export class Mapper {
     res.ammount = event.ammount;
     res.images = event.images;
     res.eventDate = event.eventDate;
+    if (typeof event.multipleEventDates !== 'undefined')
+      res.multipleEventDates = event.multipleEventDates;
     res.active = event.active;
     res.eventCategory = event.eventCategory;
     res.ageCategory = event.ageCategory;
@@ -157,6 +159,8 @@ export class Mapper {
     res.ammount = event.ammount;
     res.images = event.images;
     res.eventDate = event.eventDate;
+    if (typeof event.multipleEventDates !== 'undefined')
+      res.multipleEventDates = event.multipleEventDates;
     res.active = event.active;
     res.eventCategory = event.eventCategory;
     res.ageCategory = event.ageCategory;

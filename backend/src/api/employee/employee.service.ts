@@ -11,6 +11,7 @@ import { EmployeePaginationQueryDto } from './dto/get-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
 import { CompanyService } from '../company/company.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class EmployeeService {
@@ -29,6 +30,9 @@ export class EmployeeService {
 
     const employee = this.employeeRepository.create({ ...event, company });
 
+    const salt = await bcrypt.genSalt();
+    employee.user.password = await bcrypt.hash(employee.user.password, salt);
+
     const savedEmployee = await this.employeeRepository.save(employee);
 
     return Mapper.mapEmployeeEntityToEmployeeResponseModel(savedEmployee);
@@ -36,6 +40,9 @@ export class EmployeeService {
 
   async createAdmin(createAdminDto: CreateAdminDto) {
     const admin = this.employeeRepository.create(createAdminDto);
+
+    const salt = await bcrypt.genSalt();
+    admin.user.password = await bcrypt.hash(admin.user.password, salt);
 
     return this.employeeRepository.save(admin);
   }

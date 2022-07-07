@@ -30,7 +30,6 @@ export class OrderService {
     let event = await this.eventRepository.findOne(createOrderDto.eventId);
     const askedAmmount = createOrderDto.ammount;
     const availableAmmount = event.ammount;
-    console.log(availableAmmount, askedAmmount, parent.balance, event.price);
     if (
       askedAmmount > availableAmmount ||
       parent.balance < askedAmmount * event.price
