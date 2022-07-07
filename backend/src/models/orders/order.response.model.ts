@@ -1,9 +1,9 @@
-export class CreatedOrderResponseModel {
-  id: string;
+export class OrderResponseModel {
+  eventTitle: string;
+
+  date: string;
+
+  pricePaid: number;
 
   ammount: number;
-
-  totalCost: number;
-
-  balanceLeft: number;
 }
