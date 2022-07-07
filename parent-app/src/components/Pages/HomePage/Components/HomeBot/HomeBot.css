@@ -19,6 +19,7 @@
 }
 .HomeBot-btn:hover {
     background-size: 120%;
+    cursor: pointer;
 }
 
 .HomeBot-btnL {

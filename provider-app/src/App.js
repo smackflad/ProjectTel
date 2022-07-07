@@ -11,7 +11,6 @@ import EventsPageAdmin from "./components/Pages/EventsPageAdmin/EventsPageAdmin"
 import UsersPageAdmin from "./components/Pages/UsersPageAdmin/UsersPageAdmin";
 import { ToastContainer } from "react-toastify";
 import UserCreationPage from "./components/Pages/UserCreationPage/UserCreationPage";
-import EventsOverviewPage from "./components/Pages/EventsOverviewPage/EventsOverviewPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Pages/Register-Login-Pages/Login/Login";
 import CommonLogReg from "./components/Pages/Register-Login-Pages/CommonLogReg/CommonLogReg";

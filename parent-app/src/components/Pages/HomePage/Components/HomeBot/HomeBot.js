@@ -1,14 +1,14 @@
 import "./HomeBot.css";
 
-import { Navigate } from "react-router-dom";
-
 const HomeBot = () => {
 	return (
 		<div className="HomeBot-external">
 			<div className="HomeBot-btn HomeBot-btnL">
 				<span><pre>Εγγραφή</pre>στο</span>
 			</div>
-			<div className="HomeBot-btn HomeBot-btnR">
+			<div onClick={()=>{
+				window.location.assign('http://localhost:3002/');
+			}} className="HomeBot-btn HomeBot-btnR">
 				<span><pre>Είσαι</pre>Provider;</span>
 			</div>
 		</div>
