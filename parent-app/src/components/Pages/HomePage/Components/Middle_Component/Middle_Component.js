@@ -14,16 +14,17 @@ const EventsList = ({ events }) => {
   return (
     <>
       {events.map((ev) => {
-        return (
-          <Event
-            id={ev.id}
-            title={ev.title}
-            venue={"ev.location.city"}
-            img={ev.images[0].url}
-            date={ev.eventDate}
-            key={uuidv4()}
-          />
-        );
+        if (ev.location)
+          return (
+            <Event
+              id={ev.id}
+              title={ev.title}
+              venue={ev.location.city}
+              img={ev.images[0]}
+              date={ev.eventDate}
+              key={uuidv4()}
+            />
+          );
       })}
     </>
   );
@@ -42,6 +43,7 @@ const Middle_Component = () => {
       setResponse(data);
       setItemsSum(data.total);
       const items = data.items;
+      console.log(items);
       const endOffset = itemOffset + itemsPerPage;
       console.log(`Loading items from ${itemOffset} to ${endOffset}`);
       setCurrentItems(items.slice(itemOffset, endOffset));
@@ -80,8 +82,8 @@ const Middle_Component = () => {
     // Fetch items from another resources.
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    if(response.items)
-    setCurrentItems(response.items.slice(itemOffset, endOffset));
+    if (response.items)
+      setCurrentItems(response.items.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(itemsSum / itemsPerPage));
   }, [response, itemOffset, itemsPerPage]);
 
