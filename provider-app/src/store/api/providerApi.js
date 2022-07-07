@@ -22,21 +22,14 @@ export const providerApi = api.injectEndpoints({
         };
       },
     }),
-    // getWallet: build.mutation({
-    //   query: (id) => ({
-    //     url: `parents/${id}/wallet`,
-    //   }),
-    // }),
-    // updateWallet: build.mutation({
-    //   query: (data) => {
-    //     const { id, ...body } = data;
-    //     return {
-    //       url: `parents/${id}/wallet`,
-    //       method: "PATCH",
-    //       body,
-    //     };
-    //   },
-    // }),
+    getEvents: build.mutation({
+      query: (data) => {
+        const { cID, eID } = data;
+        return{
+          url: `companies/${cID}/events?pageNumber=0&pageSize=10000&employeeId=${eID}`,
+        }
+      },
+    }),
   }),
   overrideExisting: false,
 });
@@ -45,4 +38,5 @@ export const {
   useGetProfileMutation,
   useGetEmployeeMutation,
   useUpdateIbanMutation,
+  useGetEventsMutation,
 } = providerApi;

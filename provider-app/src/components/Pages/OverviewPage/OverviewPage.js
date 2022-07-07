@@ -10,6 +10,7 @@ import {
   VictoryTooltip,
 } from "victory";
 import { v4 as uuidv4 } from "uuid";
+import SearchFilters from "./SearchFilters/SearchFilters";
 
 import useSize from "@react-hook/size";
 
@@ -21,7 +22,7 @@ const OverviewPage = () => {
   const [toggle, setToggle] = useState("rev");
 
   useEffect(() => {
-    console.log(toggle);
+    
   }, [toggle]);
 
   const data = [
@@ -100,8 +101,7 @@ const OverviewPage = () => {
           <div className="OverviewPage-top">
             <span>Show data for: </span>
             <div className="OverviewPage-top-div">
-              <MySelectBox items={["test", "Test2", "Test3", "Test4"]} />
-              <MySelectBox items={["test", "Test2", "Test3", "Test4"]} />
+              <SearchFilters />
             </div>
           </div>
           <div className="OverviewPage-middle">
@@ -124,12 +124,12 @@ const OverviewPage = () => {
                     type="radio"
                     name="expOpt"
                     id="radio3"
-                    checked={toggle === "rev"}
+                    defaultChecked={toggle === "rev"}
                     onClick={(e) => {
                       setToggle(e.target.value);
                     }}
                   />
-                  <label for="radio3" className="{ radioDis: !select}">
+                  <label htmlFor="radio3" className="{ radioDis: !select}">
                     Revenue
                   </label>
                 </div>
@@ -139,12 +139,12 @@ const OverviewPage = () => {
                     type="radio"
                     name="expOpt"
                     id="radio4"
-                    checked={toggle === "ord"}
+                    defaultChecked={toggle === "ord"}
                     onClick={(e) => {
                       setToggle(e.target.value);
                     }}
                   />
-                  <label for="radio4" className="{ radioDis: !select}">
+                  <label htmlFor="radio4" className="{ radioDis: !select}">
                     Orders
                   </label>
                 </div>

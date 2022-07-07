@@ -1,0 +1,87 @@
+.Overview-DateFilter-popup-external {
+  /* width: 70%; */
+  position: absolute;
+  z-index: 100;
+  margin: 45px 0 0 5px;
+  /* min-width: max-content; */
+  background-color: #ffffff;
+  box-shadow: 0px -1px 12px 10px rgb(0 0 0 / 4%);
+  /* direction: ltr; */
+}
+
+.Overview-DateFilter-popup-internal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 20px 20px 20px;
+}
+.Overview-DateFilter-popup-internal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(87, 87, 87);
+  margin-bottom: 15px;
+}
+
+.Overview-DateFilter-popup-internal-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.Overview-DateFilter-popup-internal-items ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Overview-DateFilter-popup-internal-items ul li label input {
+  margin-right: 10px;
+}
+
+.Overview-DateFilter-txt-external {
+  /* direction: rtl; */
+}
+.Overview-DateFilter-txt-internal {
+  /* direction: ltr; */
+}
+
+.Overview-DateFilter-popup-internal-date {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+.Overview-DateFilter-popup-internal-title {
+  font-size: 28px;
+}
+
+@media only screen and (max-width: 1015px) {
+  .Overview-DateFilter-popup-external {
+    width: 80%;
+    position: unset;
+    margin: 0;
+  }
+
+  .Overview-DateFilter-popup-internal-date {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Overview-DateFilter-popup-internal {
+    width: unset;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .Overview-DateFilter-popup-internal-date-datePicker
+    > div
+    > .react-datepicker
+    > .react-datepicker__month-container {
+    float: none !important;
+  }
+}

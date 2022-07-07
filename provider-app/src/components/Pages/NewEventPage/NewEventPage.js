@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import uploadImage from "../../../util/azureUploader";
 import CircleLoader from "react-spinners/CircleLoader";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import { toast } from "react-toastify";
 
 const NewEventPage = () => {
   const loggedin = useSelector(
@@ -74,6 +75,63 @@ const NewEventPage = () => {
 
   const [newEventCompany, { data, isError, isLoading, error, status }] =
     useNewEventCompanyMutation();
+
+
+  useEffect(() => {
+    if(status === QueryStatus.uninitialized){
+      
+    }else if(status === QueryStatus.fulfilled){
+      navigate("/");
+      toast.success("Η δραστηριότητα δημιουργήθηκε επιτυχώς", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch(fromUpdate({
+        ageCategory: [],
+        eventCategory: [],
+        title: "",
+        description: "",
+        price: "",
+        ammount: "",
+      }));
+      dispatch(locationUpdate({
+        location: {
+          address: "",
+          addressNum: "",
+          city: "",
+          state: "",
+          country: "",
+          postalCode: ""
+        }
+      }));
+      dispatch(dateUpdate({
+        eventDate: [],
+      }));
+    }else if (isError) {
+      console.log(error.data);
+      let errToastMessage = "";
+      if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [data, isError, isLoading, error, status]);
 
   const handleChange = (e) => {
     if (!isLoading) {
@@ -164,7 +222,6 @@ const NewEventPage = () => {
     // console.log(tempImgs);//blob version with water mark //TODO
     // console.log(filesFinale);//file version without watermark
     newEventCompany(newEvent);
-    navigate("/");
   };
 
   return (

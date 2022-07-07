@@ -1,0 +1,16 @@
+.Overview-TopFilters-external {
+  background: #ffffff;
+  border-radius: 5px;
+  /* box-shadow: 0px -1px 12px 10px rgb(0 0 0 / 4%); */
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 1090px;
+  padding: 15px 0;
+  gap: 60px;
+  /* cursor: pointer; */
+}
+.Overview-MyFilter-txt-outter span.material-icons-outlined {
+  cursor: pointer;
+}

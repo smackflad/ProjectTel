@@ -1,0 +1,65 @@
+/* .Overview-MyFilter-txt-top > span {
+    font-size: 12px;
+    font-weight: 600;
+} */
+#star {
+    color: #be0000;
+
+}
+.Overview-MyFilter-txt-outter{
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.Overview-MyFilter-txt-external {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    position: relative;
+}
+.Overview-MyFilter-txt-internal {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    border: none;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    border-radius: 5px;
+}
+
+.Overview-MyFilter-txt-span {
+    padding: 0px;
+    font-size: 14px;
+    /* line-height: 1px; */
+    font-weight: bold;
+    color: rgb(145, 145, 145);
+    outline: none;
+    /* width: 200px; /*fixed initial size */
+}
+
+.Overview-MyFilter-txt-internal-spans{
+    /* margin: 00px 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 39px;
+    /* line-height: 1px; */
+}
+
+
+.Overview-MyFilter-txt-span-small{
+    font-size: 14px;
+}
+
+.Overview-MyFilter-txt-span-items {
+    font-size: 14px;
+}
+
+.Overview-MyFilter-txt-icon{
+    color: rgb(145, 145, 145);
+
+}
