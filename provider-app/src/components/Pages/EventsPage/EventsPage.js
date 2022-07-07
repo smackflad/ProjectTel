@@ -58,6 +58,16 @@ const EventsPage = () => {
   );
   const userID = useSelector((state) => state.persistedReducer.global.userId);
 
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
+
   useEffect(() => {
     fetchData(page, perPage, search);
   }, [perPage, page, search]);
