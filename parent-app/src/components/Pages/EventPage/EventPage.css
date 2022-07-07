@@ -88,7 +88,7 @@
 .EventPage-bot{
     display: flex;
     flex-direction: column;
-    max-width: 65%;
+    width: 65%;
     gap: 25px;
 }
 

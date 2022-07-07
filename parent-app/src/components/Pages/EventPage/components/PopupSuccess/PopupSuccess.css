@@ -47,6 +47,8 @@
 
 .EventPage-PopupSuccess-internal-items-bot-inner-item{
     display: flex;
+    width: 115px;
+
 }
 
 .EventPage-PopupSuccess-bottom {

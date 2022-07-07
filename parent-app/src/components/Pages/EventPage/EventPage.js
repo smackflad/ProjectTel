@@ -243,6 +243,8 @@ const items = [{
   }];
 
 const EventPage = () => {	
+    const userState = useSelector((state) => state.persistedReducer.global);
+
 	const params = useParams();
 	let navigate = useNavigate();
 	const [getEvent, { data, isError, isLoading, error, status }] =
@@ -388,9 +390,10 @@ const EventPage = () => {
 						/>
 						{/* <span className="EventPage-top-right-time">Ώρα: {startDate.getHours()}:{startDate.getMinutes()}</span> */}
 						<span className="EventPage-top-right-time">Ώρα: TODO</span>
+						{!userState.isLoggedIn && <span className="EventPage-top-right-time">Πρεπεί να κανετε συνδεσή για να κάνετε κράτηση</span>}
 						<div className="EventPage-top-right-btns">
 							<span className="EventPage-top-right-btns-price">από <span className="EventPage-top-right-btns-price-num">{currItem.price}€</span></span>
-							<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
+							<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup} disabled={!userState.isLoggedIn}/>
 						</div>
 					</div>
 

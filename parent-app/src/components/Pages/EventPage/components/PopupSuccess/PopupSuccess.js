@@ -18,7 +18,7 @@ const PopupSuccess = ({}) => {
                         </span>
                     </div>
                     <div className="EventPage-PopupSuccess-internal-items-bot-inner">
-                        <span>Ημερομηνία </span>
+                        <span>Ημερομηνία/Ώρα </span>
                         <span className="EventPage-PopupSuccess-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
                                 calendar_month
