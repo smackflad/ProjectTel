@@ -8,9 +8,22 @@
 }
 
 .AboutUsPage-title{
-  margin-bottom: 30px;
+  margin-bottom: 3em;
+  font-size: 2em;
+}
+
+.AboutUsPage-paragraph{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 1.5em;
 }
 
 .AboutUsPage-text{
-  margin-top: 50px;
+  margin-bottom: 3em;
 }
+
+.AboutUsPage-image{
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
