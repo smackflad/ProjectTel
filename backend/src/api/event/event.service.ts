@@ -51,9 +51,13 @@ export class EventService {
       whereQuery = { title: Like(`%${query.eventName}%`), ...whereQuery };
     }
 
+    if (typeof query.active !== 'undefined') {
+      whereQuery = { active: query.active, ...whereQuery };
+    }
+
     const [result, total] = await this.eventRepository.findAndCount({
       relations: ['location', 'company'],
-      where: { ...whereQuery, active: false },
+      where: { ...whereQuery },
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
@@ -71,9 +75,6 @@ export class EventService {
   }
 
   async update(id: string, updateEventDto: UpdateEventDto) {
-    // await this.eventRepository.update(id, updateEventDto);
-    // return this.findOne(id);
-
     const eventToBeUpdated = await this.eventRepository.findOne(id);
     const updatedLocation = {
       ...eventToBeUpdated.location,

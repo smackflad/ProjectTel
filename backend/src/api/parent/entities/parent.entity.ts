@@ -23,7 +23,7 @@ export class Parent extends BaseWithoutId {
   @Column({ nullable: true })
   card: string;
 
-  @Column({ nullable: true, default: 0 })
+  @Column({ nullable: true, default: 0, type: 'double precision' })
   balance: number;
 
   @OneToMany(() => Order, (order) => order.parent)
