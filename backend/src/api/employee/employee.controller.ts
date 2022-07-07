@@ -19,30 +19,30 @@ export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeeService.create(createEmployeeDto);
+  async create(@Body() createEmployeeDto: CreateEmployeeDto) {
+    return await this.employeeService.create(createEmployeeDto);
   }
 
   @Get()
-  findAll(@Query() query: EmployeePaginationQueryDto) {
-    return this.employeeService.findAll(query);
+  async findAll(@Query() query: EmployeePaginationQueryDto) {
+    return await this.employeeService.findAll(query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employeeService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return await this.employeeService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateEmployeeDto: UpdateEmployeeDto,
   ) {
-    return this.employeeService.update(id, updateEmployeeDto);
+    return await this.employeeService.update(id, updateEmployeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.employeeService.remove(id);
+  async remove(@Param('id') id: string) {
+    return await this.employeeService.remove(id);
   }
 }

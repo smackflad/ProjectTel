@@ -17,6 +17,7 @@ import { EventsPaginationQueryDto } from './dto/events-pagination.dto';
 import { EmployeeService } from '../employee/employee.service';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
 import { Console } from 'console';
+import { EventsStatisticsQueryDto } from './dto/stats-events-pagination.dto';
 
 @ApiTags('events')
 @Controller('companies/:companyId/events')
@@ -57,7 +58,15 @@ export class EventController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.eventService.findOne(id);
+    return await this.eventService.findOne(id);
+  }
+
+  @Get(':id/statistics')
+  async findOneStatistics(
+    @Param('id') id: string,
+    @Query() query: EventsStatisticsQueryDto,
+  ) {
+    return await this.eventService.findOneStatistics(id, query);
   }
 
   @Patch(':id')

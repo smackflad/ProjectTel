@@ -89,7 +89,6 @@ export class Mapper {
     company: Company,
   ): CompanyResponseModel {
     const res: CompanyResponseModel = new CompanyResponseModel();
-    console.log(company);
     res.name = company.name;
     res.email = company.email;
     res.phone = company.phone;
@@ -105,7 +104,6 @@ export class Mapper {
     res.location.country = company.location.country;
     res.location.latitude = company.location.latitude;
     res.location.longtitude = company.location.longtitude;
-    console.log(res);
 
     return res;
   }
@@ -191,7 +189,7 @@ export class Mapper {
   ): EmployeeWithCompanyDetailsResponseModel {
     const res: EmployeeWithCompanyDetailsResponseModel =
       new EmployeeWithCompanyDetailsResponseModel();
-    console.log(employee);
+
     res.email = employee.user.email;
     res.firstName = employee.user.firstName;
     res.lastName = employee.user.lastName;

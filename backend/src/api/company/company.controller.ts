@@ -21,17 +21,17 @@ export class CompanyController {
 
   @Post()
   async create(@Body() createCompanyDto: CreateCompanyDto) {
-    return this.companyService.create(createCompanyDto);
+    return await this.companyService.create(createCompanyDto);
   }
 
   @Get()
   async findAll(@Query() query: PaginationQueryDto) {
-    return this.companyService.findAll(query);
+    return await this.companyService.findAll(query);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.companyService.findOne(id);
+    return await this.companyService.findOne(id);
   }
 
   @Patch(':id')
@@ -39,11 +39,11 @@ export class CompanyController {
     @Param('id') id: string,
     @Body() updateCompanyDto: UpdateCompanyDto,
   ) {
-    return this.companyService.update(id, updateCompanyDto);
+    return await this.companyService.update(id, updateCompanyDto);
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return this.companyService.remove(id);
+    return await this.companyService.remove(id);
   }
 }

@@ -1,6 +1,6 @@
 import { Company } from './../company/entities/company.entity';
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Mapper } from 'src/infastructure/helpers/mapper.helper';
 import { Like, Repository } from 'typeorm';
@@ -10,6 +10,7 @@ import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { EmployeePaginationQueryDto } from './dto/get-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { Employee } from './entities/employee.entity';
+import { CompanyService } from '../company/company.service';
 
 @Injectable()
 export class EmployeeService {
@@ -18,12 +19,13 @@ export class EmployeeService {
     private readonly employeeRepository: Repository<Employee>,
     @InjectRepository(User)
     private readonly companyRepository: Repository<Company>,
+    @Inject(forwardRef(() => CompanyService))
+    private companyService: CompanyService,
   ) {}
 
   async create(createEmployeeDto: CreateEmployeeDto) {
     const { companyId, ...event } = createEmployeeDto;
-
-    const company = await this.companyRepository.findOne(companyId);
+    const company = await this.companyService.findOne(companyId);
 
     const employee = this.employeeRepository.create({ ...event, company });
 

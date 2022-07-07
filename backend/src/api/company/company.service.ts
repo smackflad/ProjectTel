@@ -1,5 +1,5 @@
 import { Mapper } from './../../infastructure/helpers/mapper.helper';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/infastructure/dtos/paginationQuery.dto';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
@@ -17,6 +17,7 @@ export class CompanyService {
     private readonly companyRepository: Repository<Company>,
     @InjectRepository(Employee)
     private readonly employeeRepository: Repository<Employee>,
+    @Inject(forwardRef(() => EmployeeService))
     private readonly employeeService: EmployeeService,
   ) {}
 
