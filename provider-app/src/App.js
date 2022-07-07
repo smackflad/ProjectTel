@@ -19,6 +19,7 @@ import Register from "./components/Pages/Register-Login-Pages/Register/Register"
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import RegisterStep3 from "./components/Pages/Register-Login-Pages/Register/RegisterStep3";
 import Logout from "../src/components/Pages/Register-Login-Pages/Logout/Logout";
+import AboutUs from "./components/Pages/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
               path="/eventsOverviewPage"
               element={<EventsOverviewPage />}
             />
+            <Route path="/AboutUs" element={<AboutUs />} />
           </Routes>
         </div>
         <div className="Footer">Footer</div>
