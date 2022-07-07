@@ -70,7 +70,6 @@
 .ProviderProfilePage-password {
   display: flex;
   flex-direction: column;
-  margin-left: 70px;
 }
 .password-change {
   display: flex;

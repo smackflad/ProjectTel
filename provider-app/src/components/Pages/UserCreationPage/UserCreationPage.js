@@ -1,6 +1,7 @@
 import "./UserCreationPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { useCreateUserMutation } from "/Users/yannispapadopoulos/Documents/GitHub/ProjectTel/provider-app/src/store/api/createUserApi.js";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +10,20 @@ const UserCreationPage = ({ changeLoadingState }) => {
   const [passVisibility, setPassVisibility] = useState(false);
 
   const [form, setForm] = useState({ firstName: "", lastName: "", password: "",passwordVer: "" });
+
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { userId } = useSelector((state) => state.persistedReducer.global);
+
+  const [createUser, { data, isError, isLoading, error, status }] =
+  useCreateUserMutation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+    createUser({ ...form, id: userId });
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -20,7 +35,7 @@ const UserCreationPage = ({ changeLoadingState }) => {
       <div className="container-selection">
 
         <h1>Εισαγωγή Νέου Χρήστη</h1>
-        <form className="New-User-form" >
+        <form className="New-User-form" onSubmit={handleSubmit}>
         <input
           className="UserCreationPage-inputs"
           type="text"
@@ -88,7 +103,8 @@ const UserCreationPage = ({ changeLoadingState }) => {
         
           <div className="password-wrap">
            
-            <input
+        <input className="password-wrap-inputs"
+           
               type={passVisibility ? "text" : "passwordVer"}
               id="passwordVer"
               name="passwordVer"
