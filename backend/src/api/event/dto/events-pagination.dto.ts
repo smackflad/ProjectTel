@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsString, IsOptional, IsBoolean } from 'class-validator';
 import { PaginationQueryDto } from '../../../infastructure/dtos/paginationQuery.dto';
 
 export class EventsPaginationQueryDto extends PaginationQueryDto {
@@ -16,4 +17,10 @@ export class EventsPaginationQueryDto extends PaginationQueryDto {
   @ApiProperty()
   @IsString()
   employeeId: string;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsBoolean()
+  @Transform(({ value }) => value === 'true')
+  active: boolean;
 }
