@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api/api";
 import searchReducer from "./searchSlice";
 import globalReducer from "./globalSlice";
+import eventReducer from "./eventSlice";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -18,7 +19,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 const store = configureStore({
-  reducer: {persistedReducer, search: searchReducer, [api.reducerPath]: api.reducer},
+  reducer: {persistedReducer, search: searchReducer, event: eventReducer, [api.reducerPath]: api.reducer},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

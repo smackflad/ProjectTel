@@ -153,7 +153,7 @@ const ProviderProfilePage = () => {
     statusE === QueryStatus.uninitialized
   ) {
     return (
-      <div className="Account-external">
+      <div className="Circle-Loader-Global">
         <CircleLoader />
       </div>
     );

@@ -1,64 +1,76 @@
-import MyButton from "../../../../SharedComponents/MyButton/MyButton";
 import "./PopupComplete.css";
 
+import MyButton from "../../../../SharedComponents/MyButton/MyButton";
+import { setEvent } from "../../../../../store/eventSlice";
+import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate  } from "react-router-dom";
+
+
 const PopupComplete = ({nextStep}) => {	
+    const state = useSelector((state) => state.event);
+    console.log(state)
+    useEffect(() => {
+    //   console.log(state.eventID)
+    }, [state])
+    const navigate = useNavigate()
 	return (
         <div className="EventPage-PopupComplete-internal">
             <span className="EventPage-PopupComplete-internal-title">Complete Payment</span>
             <div className="EventPage-PopupComplete-internal-items">
                 <div className="EventPage-PopupComplete-internal-items-bot">
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Location </span>
+                        <span>Τοποθεσία </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
                                 location_on
                             </span>
-                            Δημοτικό Θέατρο
+                            {state.eventLocation}
                         </span>
                     </div>
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Date </span>
+                        <span>Ημερομηνία </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
-                                location_on
+                            calendar_month
                             </span>
-                            Δημοτικό Θέατρο
+                            {state.eventDate}
                         </span>
                     </div>
                 </div>
                 <div className="EventPage-PopupComplete-internal-items-bot">
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Wallet Balance </span>
+                        <span>Υπόλοιπο Πορτοφολιού </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
-                                location_on
+                            account_balance_wallet
                             </span>
                             Δημοτικό Θέατρο
                         </span>
                     </div>
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Price </span>
+                        <span>Κόστος </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
-                            <span className="material-icons-outlined">
-                                location_on
+                            <span className="material-symbols-outlined">
+                            payments
                             </span>
-                            Δημοτικό Θέατρο
+                            {state.eventPrice}
                         </span>
                     </div>
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Service fee </span>
+                        <span>Κόστος Υπηρεσίας </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
-                                location_on
+                            price_change
                             </span>
-                            Δημοτικό Θέατρο
+                            10%
                         </span>
                     </div>
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
-                        <span>Balance after transaction </span>
+                        <span>Υπόλοιπο μετά απο πληρωμή </span>
                         <span className="EventPage-PopupComplete-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
-                                location_on
+                                payments
                             </span>
                             Δημοτικό Θέατρο
                         </span>
@@ -66,8 +78,10 @@ const PopupComplete = ({nextStep}) => {
                 </div>
             </div>
             <div className="EventPage-PopupComplete-bottom">
-                <span className="EventPage-PopupComplete-bottom-recharge">Recharge Wallet</span>
-                <MyButton labelTxt={"Pay Now!"} bgColor={"#a8ffaa"} clicked={nextStep} />
+                <span className="EventPage-PopupComplete-bottom-recharge" onClick={()=>{
+                    navigate("/my-profile")
+                }}>Επαναφόρτιση Πορτοφολιού</span>
+                <MyButton labelTxt={"Πληρωμή!"} bgColor={"#a8ffaa"} clicked={nextStep} />
             </div>
         </div>
 	);

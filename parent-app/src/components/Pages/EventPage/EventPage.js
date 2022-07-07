@@ -14,7 +14,8 @@ import EventMap from "./components/maps/EventMap";
 import { useGetEventMutation } from "../../../store/api/eventApi";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import CircleLoader from "react-spinners/CircleLoader";
-
+import { setEvent } from "../../../store/eventSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const items = [{
 	"id": "6cedf051-1fcc-4875-a3a3-1582061c336a",
@@ -257,7 +258,7 @@ const EventPage = () => {
 			latitude: "",
 			longtitude: ""
 		},
-		// id: "6cedf051-1fcc-4875-a3a3-1582061c336a",
+		id: "",
 		title: "",
 		description: "",
 		price: "",
@@ -270,7 +271,10 @@ const EventPage = () => {
 	const [dates, setDates] = useState([]);
 
 	const [startDate, setStartDate] = useState();
-	const [time, setTime] = useState();
+	const [dateFin, setDateFin] = useState();
+
+	const dispatch = useDispatch();
+
 
 	useEffect(() => {
 		if (status === QueryStatus.uninitialized) {
@@ -317,6 +321,13 @@ const EventPage = () => {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const togglePopup = () => {
+		console.log({ eventID: currItem.id, eventPrice: currItem.price, eventLocation: currItem.location, eventDate: dateFin})
+		dispatch(setEvent((state)=> { 
+			state.eventID= currItem.id;
+			state.eventPrice= currItem.price;
+			state.eventLocation= currItem.location.address;
+			state.eventDate= dateFin;
+		}));
 		setIsOpen(!isOpen);
 		if(isOpen){
 			document.body.style.overflow = 'unset';
@@ -327,8 +338,8 @@ const EventPage = () => {
 
 	if (
 		isLoading ||
-		!dates.length
-		// status === QueryStatus.uninitialized
+		!dates.length 
+		// || status === QueryStatus.fulfilled
 	  ) {
 		return (
 		  <div className="Account-external">

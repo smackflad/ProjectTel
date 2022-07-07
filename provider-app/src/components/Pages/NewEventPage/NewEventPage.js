@@ -131,11 +131,10 @@ const NewEventPage = () => {
   }
 
   if (
-    isLoading// ||
-    // status === QueryStatus.uninitialized
+    isLoading
   ) {
     return (
-      <div className="Account-external">
+      <div className="Circle-Loader-Global">
         <CircleLoader />
       </div>
     );

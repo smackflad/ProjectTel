@@ -1,27 +1,29 @@
 import "./PopupSuccess.css";
+import { useSelector } from "react-redux";
 
 const PopupSuccess = ({}) => {	
+    const state = useSelector((state) => state.event);
 	return (
         <div className="EventPage-PopupSuccess-internal">
-            <span className="EventPage-PopupSuccess-internal-title">Successful Payment!</span>
+            <span className="EventPage-PopupSuccess-internal-title">Η πληρωμή έγινε επιτυχώς!</span>
             <div className="EventPage-PopupSuccess-internal-items">
                 <div className="EventPage-PopupSuccess-internal-items-bot">
                     <div className="EventPage-PopupSuccess-internal-items-bot-inner">
-                        <span>Location </span>
+                        <span>Τοποθεσία </span>
                         <span className="EventPage-PopupSuccess-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
                                 location_on
                             </span>
-                            Δημοτικό Θέατρο
+                            {state.eventLocation}
                         </span>
                     </div>
                     <div className="EventPage-PopupSuccess-internal-items-bot-inner">
-                        <span>Date </span>
+                        <span>Ημερομηνία </span>
                         <span className="EventPage-PopupSuccess-internal-items-bot-inner-item"> 
                             <span className="material-icons-outlined">
-                                location_on
+                                calendar_month
                             </span>
-                            Δημοτικό Θέατρο
+                            {state.eventDate}
                         </span>
                     </div>
                 </div>
