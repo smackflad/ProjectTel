@@ -1,6 +1,11 @@
 import "./EventsOverviewPage.css";
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
+import { useNavigate } from "react-router-dom";
+import { useUpdateActiveMutation, useDeleteEventMutation } from "../../../store/api/adminApi";
+import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
 
 // const [showCreate, setShowCreate] = useState(false);s
 const paginationComponentOptions = {
@@ -9,6 +14,92 @@ const paginationComponentOptions = {
 };
 
 const EventsOverviewPage = () => {
+  let navigate = useNavigate();
+
+  const companyID = useSelector(
+    (state) => state.persistedReducer.global.companyId
+  );
+  const userID = useSelector(
+    (state) => state.persistedReducer.global.userID
+  );
+
+  const [updateActive, { data, isError, isLoading, error: errorU, status }] =
+  useUpdateActiveMutation();
+
+  const [deleteEvent, { data: dataD, isError: isErrorD, isLoading: isLoadingD, error: errorD, status: statusD }] =
+  useDeleteEventMutation();
+
+  useEffect(() => {
+    if(status === QueryStatus.uninitialized){
+      
+    }else if(status === QueryStatus.fulfilled){
+      navigate(0);
+      toast.success("Η δραστηριότητα δημιουργήθηκε επιτυχώς", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }else if (isError) {
+      console.log(error.data);
+      let errToastMessage = "";
+      if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [dataD, isErrorD, isLoadingD, errorD, statusD]);
+
+  useEffect(() => {
+    if(status === QueryStatus.uninitialized){
+      
+    }else if(status === QueryStatus.fulfilled){
+      navigate(0);
+      toast.success("Η δραστηριότητα δημιουργήθηκε επιτυχώς", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }else if (isError) {
+      console.log(error.data);
+      let errToastMessage = "";
+      if (error.status === 400) {
+        errToastMessage = `ERROR: 400 BAD REQUEST`;
+      } else if (error.status === 500) {
+        errToastMessage = `ERROR: 500 INTERNAL SERVER ERROR`;
+      }
+      if (errToastMessage !== "")
+        toast.error(errToastMessage, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+    }
+  }, [data, isError, isLoading, errorU, status]);
+
+
   const columns = [
     {
       name: "Δρραστηριότητα",
@@ -32,8 +123,9 @@ const EventsOverviewPage = () => {
             type="submit"
             value="accept"
             onClick={(e) => {
+              console.log("Test");
+              updateActive({active: true, userID: userID, companyID: companyID})
               setActive(true);
-              window.location.reload();
             }}
           >
             Accept{" "}
@@ -45,8 +137,9 @@ const EventsOverviewPage = () => {
             type="submit"
             value="decline"
             onClick={(e) => {
+              console.log("Test2");
+              deleteEvent({active: true, userID: userID, companyID: companyID})
               setActive(false);
-              window.location.reload();
             }}
           >
             Decline{" "}
