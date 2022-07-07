@@ -8,6 +8,7 @@ import Logout from "./components/Pages/Register-Login-Pages/Logout/Logout";
 import RegisterStep2 from "./components/Pages/Register-Login-Pages/Register/RegisterStep2";
 import ParentProfilePage from "./components/Pages/ParentProfilePage/ParentProfilePage";
 import ErrorPage from "./components/Pages/ErrorPage/ErrorPage";
+import AboutUsPage from "./components/Pages/AboutUs/AboutUs";
 import { ToastContainer } from "react-toastify";
 import { useSelectovr } from "react-redux";
 // import './App.css';
@@ -16,6 +17,7 @@ import EventPage from "./components/Pages/EventPage/EventPage";
 // import MyNav from './components/generalComponents/MyNav/MyNav';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AboutUs from "./components/Pages/AboutUs/AboutUs";
 
 function App() {
   // const { loggedIn } = useSelector((state) => state.persistedReducer.global);
@@ -61,6 +63,7 @@ function App() {
             />
             <Route path="/event/:id" element={<EventPage />} />
             <Route path="/my-profile" element={<ParentProfilePage />} />
+            <Route path="/aboutUs" element={<AboutUsPage />} />
             <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </div>
