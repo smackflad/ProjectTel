@@ -56,7 +56,7 @@ const UserCreationPage = ({ changeLoadingState }) => {
           />
         <datalist id="roles">
           <option value="companyAdmin">Χρήστης Διαχείρισης</option>
-          <option value="companyupport">Χρήστης Υποστήριξης</option>
+          <option value="companySupport">Χρήστης Υποστήριξης</option>
         </datalist>
 
 

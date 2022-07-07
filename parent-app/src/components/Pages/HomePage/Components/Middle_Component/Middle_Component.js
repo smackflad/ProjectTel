@@ -12,7 +12,7 @@ import { QueryStatus } from "@reduxjs/toolkit/query/react";
 import SearchFilters from "./SearchFilters/SearchFilters";
 
 const items = [{
-  "id": "6cedf051-1fcc-4875-a3a3-1582061c336a",
+  "id": "ced2dcf9-0e11-4630-9940-a6d78dbe9338",
   "title": "Nothing to Lose",
   "description": "blandit non interdum in ante vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec ut dolor morbi vel lectus in quam fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue",
   "eventDate": "6/7/2022",

@@ -228,3 +228,9 @@
         margin: 0 40px 10px 0;
     }
 }
+
+.EventPage-top-right-time{
+    font-size: 22px;
+    font-style: italic;
+    font-weight: bold;
+}

@@ -269,6 +269,9 @@ const EventPage = () => {
 	});
 	const [dates, setDates] = useState([]);
 
+	const [startDate, setStartDate] = useState();
+	const [time, setTime] = useState();
+
 	useEffect(() => {
 		if (status === QueryStatus.uninitialized) {
 			getEvent(params.id);
@@ -276,10 +279,21 @@ const EventPage = () => {
 			// console.log(data);
 			setCurrItem(data);
 			var tempDates = [];
-			data.eventDate.map((item)=>{
-				tempDates.push(new Date(item.slice(0, -1)));
-			})
+			// data.eventDate.map((item)=>{
+			// 	tempDates.push(new Date(item.slice(0, -1)));
+			// })
+
+			console.log("2022-07-10T20:59:59.000Z")
+			tempDates.push(new Date("2022-07-10T20:59:59.000Z"));
+			// console.log(tempDates[0].toISOString());
+			tempDates.push(new Date());
+			tempDates[1].setDate(tempDates[0].getDate()+7);
+			tempDates.push(new Date());
+			tempDates[2].setDate(tempDates[1].getDate()+7);
+			tempDates.push(new Date());
+			tempDates[3].setDate(tempDates[2].getDate()+7);
 			setDates(tempDates);
+			setStartDate(new Date(tempDates[0]));
 			// console.log(data.eventDate, tempDates)
 		}else if (isError) {
 			// console.log(error.data);
@@ -296,7 +310,11 @@ const EventPage = () => {
 		  }
 	  }, [params, status, isError, error]);
 
-	const [startDate, setStartDate] = useState(new Date());
+	useEffect(() => {
+		console.log(startDate)
+	}, [startDate]);
+
+
 	const [isOpen, setIsOpen] = useState(false);
 	const togglePopup = () => {
 		setIsOpen(!isOpen);
@@ -345,12 +363,20 @@ const EventPage = () => {
 					</div>
 					<div className="EventPage-top-right-other">
 						<DatePicker
+						// selected={startDate}
+						onChange={(date) => {
+							let temp = date.toISOString();
+						}}
 						minDate={dates[0]}
 						monthsShown={2}
-						includeDateIntervals={[{start: new Date(dates[0].getDate()-1), end: dates[dates.length-1]}]}
+						includeDates={dates}
+						// includeDateIntervals={[{start: new Date(dates[0].getDate()-1), end: dates[0]}]}
 						highlightDates={dates}
 						inline
+						// disabledKeyboardNavigation
 						/>
+						{/* <span className="EventPage-top-right-time">Ώρα: {startDate.getHours()}:{startDate.getMinutes()}</span> */}
+						<span className="EventPage-top-right-time">Ώρα: TODO</span>
 						<div className="EventPage-top-right-btns">
 							<span className="EventPage-top-right-btns-price">από <span className="EventPage-top-right-btns-price-num">{currItem.price}€</span></span>
 							<MyButton labelTxt={"Κράτηση"} bgColor={"#a8ffaa"} clicked={togglePopup}/>
@@ -383,13 +409,14 @@ const EventPage = () => {
 				<div className="EventPage-top-mobile-right">
 					{/* {dates.length > 0 &&  */}
 						<div className="EventPage-top-mobile-datepicker">
-							<DatePicker
+							{/* TODO */}
+							{/* <DatePicker
 								minDate={dates[0]}
 								monthsShown={1}
 								includeDateIntervals={[{start: new Date(dates[0].getDate()-1), end: dates[dates.length-1]}]}
 								highlightDates={dates}
 								inline
-							/>
+							/> */}
 						</div>
 					{/* } */}
 					<div className="EventPage-top-mobile-right-btns">
