@@ -1,6 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsString, IsOptional, IsBoolean } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsBooleanString,
+} from 'class-validator';
 import { PaginationQueryDto } from '../../../infastructure/dtos/paginationQuery.dto';
 
 export class EventsPaginationQueryDto extends PaginationQueryDto {
@@ -20,7 +25,10 @@ export class EventsPaginationQueryDto extends PaginationQueryDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  @IsBoolean()
-  @Transform(({ value }) => value === 'true')
-  active: boolean;
+  @IsBooleanString()
+  // @Transform(({ value }) => {
+  //   console.log(value);
+  //   return [true, 'enabled', 'true', 1, '1'].indexOf(value) > -1;
+  // })
+  active: string;
 }
