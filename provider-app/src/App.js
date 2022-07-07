@@ -77,14 +77,10 @@ function App() {
             <Route path="/profile" element={<ProviderProfilePage />} />
             <Route path="/*" element={<ErrorPage />} />
             <Route path="/userCreationPage" element={<UserCreationPage />} />
-            <Route
-              path="/eventsOverviewPage"
-              element={<EventsOverviewPage />}
-            />
             <Route path="/AboutUs" element={<AboutUs />} />
           </Routes>
         </div>
-        <div className="Footer">Footer</div>
+        <div className="Footer">© TEL</div>
       </Router>
       <ToastContainer
         position="top-center"
