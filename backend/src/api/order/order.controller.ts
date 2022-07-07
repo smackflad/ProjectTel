@@ -26,7 +26,7 @@ export class OrderController {
     await this.orderService.create(parentId, createOrderDto);
   }
 
-  @Get()
+  @Get('history')
   async findAll(
     @Param('parentId') parentId: string,
     @Query() query: PaginationQueryDto,

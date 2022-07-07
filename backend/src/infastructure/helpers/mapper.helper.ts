@@ -16,6 +16,8 @@ import {
   EventStatisticsModel,
   EventStatisticsSegmentModel,
 } from 'src/models/event/events-stats.response.model';
+import { Order } from 'src/api/order/entities/order.entity';
+import { OrderResponseModel } from 'src/models/orders/order.response.model';
 
 export class Mapper {
   static mapParentEntityToUnitializedParentResponseModel(
@@ -245,6 +247,19 @@ export class Mapper {
     res.totalOrders = segments
       .map((segment) => segment.revenue)
       .reduce((partialSum, a) => partialSum + a, 0);
+
+    return res;
+  }
+
+  static mapOrdersToOrderHistoryResponseModel(
+    order: Order,
+  ): OrderResponseModel {
+    const res: OrderResponseModel = new OrderResponseModel();
+
+    res.date = order.createdAt.toISOString();
+    res.ammount = order.ammount;
+    res.pricePaid = order.ammount * order.event.price;
+    res.eventTitle = order.event.title;
 
     return res;
   }
