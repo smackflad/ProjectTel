@@ -22,6 +22,16 @@ const UserCreationPage = ({ changeLoadingState }) => {
   useCreateUserMutation();
 
 
+  const loggedin = useSelector(
+    (state) => state.persistedReducer.global.isLoggedIn
+  );
+  useEffect(() => {
+    if (!loggedin) {
+      navigate("/");
+    }
+  }, [loggedin]);
+
+
   useEffect(() => {
     if(status === QueryStatus.uninitialized){
       
