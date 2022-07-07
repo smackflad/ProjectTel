@@ -12,6 +12,10 @@ import { UnitializedParentReponseModel } from 'src/models/parent/unitializedPare
 import { EventCreatedResponseModel } from 'src/models/event/event-created.response.model';
 import { EmployeeResponseModel } from 'src/models/employee/Employee.response.model';
 import { EmployeeWithCompanyDetailsResponseModel } from 'src/models/employee/EmployeeWithCompanyDetails.eesponse.model';
+import {
+  EventStatisticsModel,
+  EventStatisticsSegmentModel,
+} from 'src/models/event/events-stats.response.model';
 
 export class Mapper {
   static mapParentEntityToUnitializedParentResponseModel(
@@ -199,6 +203,48 @@ export class Mapper {
       res.companyId = employee.company.id;
       res.companyName = employee.company.name;
     }
+
+    return res;
+  }
+
+  static mapEventToEventStatisticsSegmentModel(
+    event: Event,
+    startDate: string,
+    endDate: string,
+    price: number,
+  ): EventStatisticsSegmentModel {
+    const res: EventStatisticsSegmentModel = new EventStatisticsSegmentModel();
+
+    res.startSegmentDate = startDate;
+    res.endSegmentDate = endDate;
+    res.endSegmentDate = endDate;
+    if (event !== undefined) {
+      res.orders =
+        event.orders.length > 0
+          ? event.orders
+              .map((order) => order.ammount)
+              .reduce((partialSum, a) => partialSum + a, 0)
+          : 0;
+      res.revenue = price * res.orders;
+    } else {
+      res.orders = 0;
+      res.revenue = 0;
+    }
+    return res;
+  }
+
+  static mapStatisticsSegmentsToEventStatisticsModel(
+    segments: EventStatisticsSegmentModel[],
+  ): EventStatisticsModel {
+    const res: EventStatisticsModel = new EventStatisticsModel();
+
+    res.segments = segments;
+    res.totalOrders = segments
+      .map((segment) => segment.orders)
+      .reduce((partialSum, a) => partialSum + a, 0);
+    res.totalOrders = segments
+      .map((segment) => segment.revenue)
+      .reduce((partialSum, a) => partialSum + a, 0);
 
     return res;
   }

@@ -10,6 +10,7 @@ import { Event } from './entities/event.entity';
 import { EventsPaginationQueryDto } from './dto/events-pagination.dto';
 import { UserRole } from 'src/infastructure/enums/roles.enum';
 import { EventsStatisticsQueryDto } from './dto/stats-events-pagination.dto';
+import { EventStatisticsSegmentModel } from 'src/models/event/events-stats.response.model';
 
 @Injectable()
 export class EventService {
@@ -84,7 +85,9 @@ export class EventService {
       // 60 * 60 * 24,
     );
 
-    const res = [];
+    const { price } = await this.eventRepository.findOne(id);
+
+    const segments: EventStatisticsSegmentModel[] = [];
     let index = 0;
     for await (const searchDate of searchDatesPairs) {
       try {
@@ -93,33 +96,25 @@ export class EventService {
           let end = searchDate.toISOString();
           start = start.substring(0, start.length - 1);
           end = end.substring(0, end.length - 1);
-          console.log(start, end);
-          // const start = '7-7-2022';
-          // const end = '7-7-2022';
-          const order = await this.eventRepository
+
+          const event = await this.eventRepository
             .createQueryBuilder('events')
+            .select('event_orders.id')
+            .select('event_orders.ammount')
             .innerJoin('events.orders', 'event_orders')
-            // .innerJoin(
-            //   'orders',
-            //   'event_orders',
-            //   'event.location_id = order.eventLocation',
-            // )
             .where('event_orders.createdAt BETWEEN :start AND :end', {
               start,
               end,
             })
-            .getMany();
-          res.push(order);
-          // res.push(
-          //   await this.eventRepository.findOne(id, {
-          //     relations: ['orders'],
-          //     where: {
-          //       orders: {
-          //         updatedAt: Between(searchDatesPairs[index - 1], searchDate),
-          //       },
-          //     },
-          //   }),
-          // );
+            .getOne();
+          segments.push(
+            Mapper.mapEventToEventStatisticsSegmentModel(
+              event,
+              start,
+              end,
+              price,
+            ),
+          );
         }
       } catch (err) {
         console.error(err);
@@ -127,9 +122,8 @@ export class EventService {
       }
       index++;
     }
-    // console.log(res);
-    return res;
-    // return Mapper.mapEventEntityToEventResponseModel(event);
+
+    return Mapper.mapStatisticsSegmentsToEventStatisticsModel(segments);
   }
 
   async update(id: string, updateEventDto: UpdateEventDto) {

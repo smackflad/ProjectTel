@@ -13,6 +13,7 @@ export class UpdateEventDto extends PartialType(
   location: UpdateLocationDto;
 
   @ApiPropertyOptional()
+  @IsOptional()
   @IsBoolean()
   active: boolean;
 }
