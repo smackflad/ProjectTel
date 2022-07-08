@@ -54,7 +54,9 @@ const EventCategoryFilter = () => {
   const handleChange = (id) => {
     const updatedAgeCat = eventCategories.map((a) => {
       if (a.id === id) {
-        a.checked = !a.checked;
+        a.checked = true;
+      } else {
+        a.checked = false;
       }
       return a;
     });
@@ -144,7 +146,8 @@ const EventCategoryFilter = () => {
                       <li key={uuidv4()}>
                         <label>
                           <input
-                            type="checkbox"
+                            type="radio"
+                            name="event-category"
                             value={item.name}
                             onChange={() => handleChange(item.id)}
                             checked={item.checked}

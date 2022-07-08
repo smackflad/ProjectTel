@@ -15,8 +15,17 @@ const ageCategoriesArr = [
 
 const AgeCategoryFilter = () => {
   const dispatch = useDispatch();
-  const prev = useSelector((state) => state.persistedReducer.newEvent.ageCategory);
-  const [ageCategories, setAgeCategories] = useState(ageCategoriesArr.map(x =>{if(prev.includes(x.db)){x.checked = true;} return x}));
+  const prev = useSelector(
+    (state) => state.persistedReducer.newEvent.ageCategory
+  );
+  const [ageCategories, setAgeCategories] = useState(
+    ageCategoriesArr.map((x) => {
+      if (prev.includes(x.db)) {
+        x.checked = true;
+      }
+      return x;
+    })
+  );
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -42,13 +51,17 @@ const AgeCategoryFilter = () => {
   const handleChange = (id) => {
     const updatedAgeCat = ageCategories.map((a) => {
       if (a.id === id) {
-        a.checked = !a.checked;
+        a.checked = true;
+      } else {
+        a.checked = false;
       }
       return a;
     });
     setAgeCategories(updatedAgeCat);
     // console.log(ageCategories.filter(x => x.checked).map(x => x.db))
-    dispatch(ageUpdate(ageCategories.filter(x => x.checked).map(x => x.db)));
+    dispatch(
+      ageUpdate(ageCategories.filter((x) => x.checked).map((x) => x.db))
+    );
   };
 
   useEffect(() => {
@@ -105,7 +118,8 @@ const AgeCategoryFilter = () => {
                     <li key={uuidv4()}>
                       <label>
                         <input
-                          type="checkbox"
+                          type="radio"
+                          name="age-category"
                           value={item.name}
                           onChange={() => handleChange(item.id)}
                           checked={item.checked}

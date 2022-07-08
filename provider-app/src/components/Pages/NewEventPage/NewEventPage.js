@@ -11,7 +11,11 @@ import { useNewEventCompanyMutation } from "../../../store/api/newEventApi";
 import mergeImages from "merge-images";
 import WaterMarkImage from "../../../images/Watermark.png";
 import SearchFilters from "./SearchFilters/SearchFilters";
-import { fromUpdate, locationUpdate, dateUpdate } from "../../../store/providerNewEventSlice";
+import {
+  fromUpdate,
+  locationUpdate,
+  dateUpdate,
+} from "../../../store/providerNewEventSlice";
 import { useSelector, useDispatch } from "react-redux";
 import uploadImage from "../../../util/azureUploader";
 import CircleLoader from "react-spinners/CircleLoader";
@@ -76,11 +80,9 @@ const NewEventPage = () => {
   const [newEventCompany, { data, isError, isLoading, error, status }] =
     useNewEventCompanyMutation();
 
-
   useEffect(() => {
-    if(status === QueryStatus.uninitialized){
-      
-    }else if(status === QueryStatus.fulfilled){
+    if (status === QueryStatus.uninitialized) {
+    } else if (status === QueryStatus.fulfilled) {
       navigate("/");
       toast.success("Η δραστηριότητα δημιουργήθηκε επιτυχώς", {
         position: "top-center",
@@ -91,28 +93,34 @@ const NewEventPage = () => {
         draggable: true,
         progress: undefined,
       });
-      dispatch(fromUpdate({
-        ageCategory: [],
-        eventCategory: [],
-        title: "",
-        description: "",
-        price: "",
-        ammount: "",
-      }));
-      dispatch(locationUpdate({
-        location: {
-          address: "",
-          addressNum: "",
-          city: "",
-          state: "",
-          country: "",
-          postalCode: ""
-        }
-      }));
-      dispatch(dateUpdate({
-        eventDate: [],
-      }));
-    }else if (isError) {
+      dispatch(
+        fromUpdate({
+          ageCategory: [],
+          eventCategory: [],
+          title: "",
+          description: "",
+          price: "",
+          ammount: "",
+        })
+      );
+      dispatch(
+        locationUpdate({
+          location: {
+            address: "",
+            addressNum: "",
+            city: "",
+            state: "",
+            country: "",
+            postalCode: "",
+          },
+        })
+      );
+      dispatch(
+        dateUpdate({
+          eventDate: [],
+        })
+      );
+    } else if (isError) {
       console.log(error.data);
       let errToastMessage = "";
       if (error.status === 400) {
@@ -188,9 +196,7 @@ const NewEventPage = () => {
     );
   }
 
-  if (
-    isLoading
-  ) {
+  if (isLoading) {
     return (
       <div className="Circle-Loader-Global">
         <CircleLoader />
@@ -200,7 +206,7 @@ const NewEventPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("hey");
     const isoDates = dates.map((item) => {
       const unixTimestamp = typeof item == "object" ? item.unix : item;
       return new Date(unixTimestamp).toISOString();
@@ -214,13 +220,14 @@ const NewEventPage = () => {
 
     const newEvent = {
       ...prev,
-      eventDate: isoDates,
+      eventCategory: prev.eventCategory[0],
+      ageCategory: prev.ageCategory[0],
+      eventDate: isoDates[0],
+      multipleEventDates: isoDates,
       id: companyId,
       images: imagesUrls,
     };
-    console.log(newEvent);
-    // console.log(tempImgs);//blob version with water mark //TODO
-    // console.log(filesFinale);//file version without watermark
+
     newEventCompany(newEvent);
   };
 
