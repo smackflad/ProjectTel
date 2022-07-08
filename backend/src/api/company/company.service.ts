@@ -38,6 +38,23 @@ export class CompanyService {
     );
   }
 
+  async createSystemAdmin(createCompanyDto: CreateCompanyDto) {
+    // create admin
+    const { admin, ...company } = createCompanyDto;
+    const companyCreated = await this.companyRepository.save(company);
+
+    const adminCreated = await this.employeeService.createAdmin({
+      company: companyCreated,
+      user: admin,
+      role: UserRole.ADMIN,
+    });
+
+    return Mapper.mapCompanyEntityToCompanyCreatedResponseModel(
+      companyCreated,
+      adminCreated,
+    );
+  }
+
   async findAll(query: PaginationQueryDto) {
     const [result, total] = await this.companyRepository.findAndCount({
       where: {},

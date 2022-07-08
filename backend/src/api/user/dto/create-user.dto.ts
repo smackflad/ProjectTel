@@ -5,17 +5,17 @@ export class CreateUserDto {
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  readonly firstName: string;
+  firstName: string;
 
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
-  readonly lastName: string;
+  lastName: string;
 
   @ApiProperty()
   @IsString()
   @IsEmail()
-  readonly email: string;
+  email: string;
 
   @ApiProperty()
   @IsString()
