@@ -3,8 +3,9 @@ import "../MyFilter.css";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import { useGetEventsMutation } from "../../../../../store/api/providerApi";
+import { useGetEventsMutation, useGetStatisticsMutation } from "../../../../../store/api/providerApi";
 import { QueryStatus } from "@reduxjs/toolkit/query/react";
+import {updateStats} from "../../../../../store/statsSlice";
 
 const ageCategoriesArr = [
   { id: 0, name: "Όλα", checked: true, db: "all" },
@@ -18,17 +19,32 @@ const ageCategoriesArr = [
 const AgeCategoryFilter = () => {
   const dispatch = useDispatch();
   const {companyId, userId} = useSelector((state) => state.persistedReducer.global);
+  const stats = useSelector((state) => state.statistics);
   
   
   const [getEvents, { data, isError, isLoading, error, status }] =
   useGetEventsMutation();
-  const [ageCategories, setAgeCategories] = useState(ageCategoriesArr);
+
+
+
+  const [ageCategories, setAgeCategories] = useState([]);
   useEffect(() => {
     if(status === QueryStatus.uninitialized){
       getEvents({cID: companyId, eID: userId});
     }else if(status === QueryStatus.fulfilled){
-      // console.log(data);
-      // setAgeCategories(data);//TODO when takis fixes get company events
+      console.log(data);
+      // setAgeCategories(data.items);
+      let iTemp = []
+      data.items.map((item)=>{
+        iTemp.push({name: item.title, id: item.id, checked: false});
+      })
+      if(iTemp[0]){
+        iTemp[0].checked = true;
+      }
+      setAgeCategories(iTemp);
+      // getStatistics({cID: companyId, eID: iTemp[0].id, sD: , eD: });
+      console.log(iTemp);
+      dispatch(updateStats((state)=>{state.event = iTemp[0]}));
     }else if (isError) {
       console.log(error.data);
       let errToastMessage = "";
@@ -43,7 +59,7 @@ const AgeCategoryFilter = () => {
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
-  var checkedItems = () => {
+  var checkedItems = () => {//TODO USE THIS
     const selected = ageCategories.filter((c) => c.checked).length;
     if (selected === 1) {
       return ageCategories.find((c) => c.checked).name;
@@ -60,15 +76,10 @@ const AgeCategoryFilter = () => {
   };
 
   const handleChange = (id) => {
-    const updatedAgeCat = ageCategories.map((a) => {
-      if (a.id === id) {
-        a.checked = true;
-      }else{
-        a.checked = false;
-      }
-      return a;
+    let temp = ageCategories.map((a) => {
+      return {...a, checked: a.id === id};
     });
-    setAgeCategories(updatedAgeCat);
+    setAgeCategories(temp);
   };
 
   useEffect(() => {
@@ -84,8 +95,8 @@ const AgeCategoryFilter = () => {
   }, [onClickOutside]);
 
   useEffect(() => {
+    dispatch(updateStats((state)=>{state.event = ageCategories.find((c) => c.checked)}));
     setDisplayTxt(checkedItems());
-
   }, [ageCategories]);
 
   return (
@@ -126,7 +137,7 @@ const AgeCategoryFilter = () => {
                         <input
                           type="radio"
                           name="overview-events"
-                          value={item.name}
+                          value={item.id}
                           onChange={() => handleChange(item.id)}
                           checked={item.checked}
                         />
