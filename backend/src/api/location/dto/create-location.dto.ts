@@ -28,7 +28,7 @@ export class CreateLocationDto {
 
   @ApiProperty()
   @IsOptional()
-  longtitude: string;
+  longtitude?: string;
 
   @ApiProperty()
   @IsOptional()
