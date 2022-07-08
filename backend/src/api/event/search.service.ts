@@ -75,7 +75,6 @@ export class SearchService {
         eventDate: MoreThanOrEqual(search.startDate),
       };
     }
-    console.log(whereQuery);
     return { ...whereQuery, active: true };
   }
 }

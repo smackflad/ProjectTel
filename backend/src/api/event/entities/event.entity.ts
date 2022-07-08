@@ -30,6 +30,9 @@ export class Event extends BaseWithoutId {
   @Column({ type: 'date', nullable: true })
   eventDate: string;
 
+  @Column({ type: 'date', nullable: true, array: true })
+  multipleEventDates: string[];
+
   @Column({
     type: 'enum',
     enum: EventCategory,

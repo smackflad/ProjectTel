@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -9,6 +9,7 @@ import {
   IsNotEmptyObject,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -36,6 +37,12 @@ export class CreateEventDto {
   @ApiProperty({ type: 'datestring' })
   @IsDateString()
   eventDate: string;
+
+  @ApiPropertyOptional({ type: 'datestring', isArray: true })
+  @IsOptional()
+  // @IsDateString({ each: true })
+  @IsArray()
+  multipleEventDates: string[];
 
   @ApiProperty()
   @IsArray()

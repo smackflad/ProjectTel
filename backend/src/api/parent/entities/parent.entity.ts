@@ -26,8 +26,8 @@ export class Parent extends BaseWithoutId {
   @Column({ nullable: true, default: 0, type: 'double precision' })
   balance: number;
 
-  @OneToMany(() => Order, (order) => order.parent)
-  orders: Order[];
+  // @OneToMany(() => Order, (order) => order.parent)
+  // orders: Order[];
 
   @OneToOne(() => User, {
     primary: true,

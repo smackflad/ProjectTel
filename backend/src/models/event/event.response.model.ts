@@ -11,6 +11,8 @@ export class EventResponseModel {
 
   eventDate: string;
 
+  multipleEventDates: string[];
+
   price: number;
 
   ammount: number;

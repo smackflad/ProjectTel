@@ -1,3 +1,4 @@
+import { Mapper } from 'src/infastructure/helpers/mapper.helper';
 import { Event } from 'src/api/event/entities/event.entity';
 import { Order } from 'src/api/order/entities/order.entity';
 import {
@@ -29,7 +30,6 @@ export class OrderService {
     let event = await this.eventRepository.findOne(createOrderDto.eventId);
     const askedAmmount = createOrderDto.ammount;
     const availableAmmount = event.ammount;
-    console.log(availableAmmount, askedAmmount, parent.balance, event.price);
     if (
       askedAmmount > availableAmmount ||
       parent.balance < askedAmmount * event.price
@@ -42,31 +42,29 @@ export class OrderService {
     parent = await this.parentRepository.save(parent);
 
     return await this.orderRepository.save({
-      parent,
+      parentId: parent.user.id,
       event,
       ammount: createOrderDto.ammount,
     });
   }
 
   async findAll(parentId: string, query: PaginationQueryDto) {
-    const parent = await this.parentRepository.findOne(parentId, {
-      relations: ['order'],
-    });
-    console.log(parent);
-    console.log(query);
-    if (parent === undefined) {
-      throw new NotFoundException();
-    }
-
     const [result, total] = await this.orderRepository.findAndCount({
-      // relations: ['parent'],
-      // where: {
-      //   parent: { user: parent.user },
-      // },
+      relations: ['event'],
+      where: {
+        parentId,
+      },
       take: query.pageSize || 25, //? DefaultValues.PAGINATION_LIMIT,
       skip: query.pageNumber * query.pageSize || 0, //? DefaultValues.PAGINATION_OFFSET,
     });
-    return { result, total };
+
+    console.log(result);
+
+    const mappedOrders = result.map((order) =>
+      Mapper.mapOrdersToOrderHistoryResponseModel(order),
+    );
+
+    return { items: mappedOrders, total };
   }
 
   async findOne(id: string) {

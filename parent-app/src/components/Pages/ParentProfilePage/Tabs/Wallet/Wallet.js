@@ -141,7 +141,10 @@ const Wallet = () => {
     <div className="Wallet-external">
       <div className="Wallet-balance-container">
         <h4>Διαθέσιμο υπόλοιπο :</h4>
-        <span className="Wallet-balance-text">{`$${balance}`}</span>
+        <span className="Wallet-balance-text">
+          <span className="my-coin-icon"></span>
+          {`${balance}`}
+        </span>
         {/* get value from db  */}
       </div>
       <div className="Wallet-recharge">
@@ -150,7 +153,10 @@ const Wallet = () => {
         {rechargePrices.map((rechargePrice) => {
           return (
             <div className="Wallet-wrap-amounts" key={uuidv4()}>
-              <span>{`$${rechargePrice}`}</span>
+              <span className="add-token-icon">
+                <span className="my-coin-icon"></span>
+                {`${rechargePrice}`}
+              </span>
               <div className="Wallet-plus-minus-wrap">
                 <button onClick={() => decreaseRechargeAmmount(rechargePrice)}>
                   <span className="material-icons-outlined">remove</span>
@@ -165,7 +171,10 @@ const Wallet = () => {
         <div className="Wallet-recharge-total">
           <div>
             <h4>Σύνολο :</h4>
-            <span className="total-amount">{`$${rechargeAmmount}`}</span>
+            <span className="total-amount">
+              <span className="my-coin-icon"></span>
+              {`${rechargeAmmount}`}
+            </span>
           </div>
           <button className="Wallet-card-button" onClick={rechargeWallet}>
             Προσθήκη χρημάτων

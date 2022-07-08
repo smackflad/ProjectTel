@@ -25,8 +25,17 @@ const eventCategoriesArr = [
 
 const EventCategoryFilter = () => {
   const dispatch = useDispatch();
-  const prev = useSelector((state) => state.persistedReducer.newEvent.eventCategory);
-  const [eventCategories, setEventCategories] = useState(eventCategoriesArr.map(x =>{if(prev.includes(x.db)){x.checked = true;} return x}));
+  const prev = useSelector(
+    (state) => state.persistedReducer.newEvent.eventCategory
+  );
+  const [eventCategories, setEventCategories] = useState(
+    eventCategoriesArr.map((x) => {
+      if (prev.includes(x.db)) {
+        x.checked = true;
+      }
+      return x;
+    })
+  );
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -50,8 +59,9 @@ const EventCategoryFilter = () => {
       return a;
     });
     setEventCategories(updatedAgeCat);
-    dispatch(catUpdate(eventCategories.filter(x => x.checked).map(x => x.db)));
-
+    dispatch(
+      catUpdate(eventCategories.filter((x) => x.checked).map((x) => x.db))
+    );
   };
 
   const ref = useRef(null);
@@ -116,7 +126,8 @@ const EventCategoryFilter = () => {
                       <li key={uuidv4()}>
                         <label>
                           <input
-                            type="checkbox"
+                            type="radio"
+                            name="event-category"
                             value={item.name}
                             onChange={() => handleChange(item.id)}
                             checked={item.checked}

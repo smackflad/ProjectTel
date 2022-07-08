@@ -14,6 +14,7 @@ import { UpdateCardDto } from './dto/update-card.dto';
 import { CreateUnitializedParentDto } from './dto/createUnitialized.dto';
 import { UpdateParentDto } from './dto/update-parent.dto';
 import { Parent } from './entities/parent.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class ParentService {
@@ -32,6 +33,12 @@ export class ParentService {
     createUnitializedParentDto: CreateUnitializedParentDto,
   ) {
     try {
+      const salt = await bcrypt.genSalt();
+      createUnitializedParentDto.user.password = await bcrypt.hash(
+        createUnitializedParentDto.user.password,
+        salt,
+      );
+
       const parent: Parent = this.parentRepository.create(
         createUnitializedParentDto,
       );

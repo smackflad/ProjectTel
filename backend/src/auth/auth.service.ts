@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/api/user/user.service';
 import { ResetPasswordDto } from './dtos/reset-password.dto';
 import { UnauthorizedException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,9 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.userService.findOneByEmail(email);
-    if (user && user.password === pass) {
+
+    const isMatch = await bcrypt.compare(pass, user.password);
+    if (user && isMatch) {
       const { password, ...result } = user;
       return result;
     }
@@ -29,11 +32,13 @@ export class AuthService {
 
   async resetPassword(id: string, resetDto: ResetPasswordDto) {
     const user = await this.userService.findOne(id);
-    if (
-      resetDto.email === user.email &&
-      resetDto.oldPassword === user.password
-    ) {
-      user.password = resetDto.newPassword;
+    if (typeof user === 'undefined')
+      throw new BadRequestException('user id not found');
+
+    const isMatch = await bcrypt.compare(resetDto.oldPassword, user.password);
+    if (resetDto.email === user.email && isMatch) {
+      const salt = await bcrypt.genSalt();
+      user.password = await bcrypt.hash(resetDto.newPassword, salt);
       await this.userService.saveUser(user);
       return { passwordReset: true };
     } else {
