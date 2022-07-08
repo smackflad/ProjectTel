@@ -248,7 +248,7 @@ export class Mapper {
     res.totalOrders = segments
       .map((segment) => segment.orders)
       .reduce((partialSum, a) => partialSum + a, 0);
-    res.totalOrders = segments
+    res.totalRevenue = segments
       .map((segment) => segment.revenue)
       .reduce((partialSum, a) => partialSum + a, 0);
 
