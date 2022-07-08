@@ -14,7 +14,6 @@ const eventSlice = createSlice({
   reducers: {
     setEvent(state, action) {
       // state = action.payload
-      console.log(state)
       action.payload(state);
     },
   },

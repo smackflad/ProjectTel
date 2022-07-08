@@ -28,17 +28,18 @@ function FilterMap(lat) {
     center = coords;
   }
   const [position, setPosition] = useState(center);
-  useEffect(() => {
-    if(position){
-      dispatch(
-        update((state) => {
-          state.long = position.lng;
-          state.lat = position.lat;
-        })
-      )
-      console.log({...searchState, long: position.lng, lat: position.lat});
-    }
-  }, [position]);
+  
+  // useEffect(() => {
+  //   if(position){
+  //     dispatch(
+  //       update((state) => {
+  //         state.long = position.lng;
+  //         state.lat = position.lat;
+  //       })
+  //     )
+  //     // console.log({...searchState, long: position.lng, lat: position.lat});
+  //   }
+  // }, [position]);
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',

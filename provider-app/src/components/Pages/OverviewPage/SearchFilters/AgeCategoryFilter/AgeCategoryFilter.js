@@ -59,7 +59,7 @@ const AgeCategoryFilter = () => {
   const [displayTxt, setDisplayTxt] = useState("");
   const [open, setOpen] = useState(false);
 
-  var checkedItems = () => {//TODO USE THIS
+  var checkedItems = () => {
     const selected = ageCategories.filter((c) => c.checked).length;
     if (selected === 1) {
       return ageCategories.find((c) => c.checked).name;

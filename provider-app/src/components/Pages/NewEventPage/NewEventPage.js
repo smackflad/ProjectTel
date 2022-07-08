@@ -208,8 +208,10 @@ const NewEventPage = () => {
     e.preventDefault();
     console.log("hey");
     const isoDates = dates.map((item) => {
-      const unixTimestamp = typeof item == "object" ? item.unix : item;
-      return new Date(unixTimestamp).toISOString();
+      // const unixTimestamp = typeof item == "object" ? item.unix : item;
+      const temp = new Date(item);
+      temp.setHours(temp.getHours()+3);
+      return temp.toISOString();
     });
 
     const imagesUrls = [];
@@ -374,7 +376,7 @@ const NewEventPage = () => {
                 {tempImgs.map(
                   (
                     item,
-                    index //TODO fix key
+                    index
                   ) => (
                     <div className="NewEventPage-fifth-right-imgs" key={index}>
                       <img

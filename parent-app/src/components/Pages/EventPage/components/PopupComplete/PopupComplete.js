@@ -116,7 +116,8 @@ const PopupComplete = ({nextStep}) => {
                             <span className="material-icons-outlined">
                             account_balance_wallet
                             </span>
-                            {wallet.balance}
+                            {wallet.balance && wallet.balance}
+                            {!wallet.balance && 0}
                         </span>
                     </div>
                     <div className="EventPage-PopupComplete-internal-items-bot-inner">
@@ -143,12 +144,13 @@ const PopupComplete = ({nextStep}) => {
                             <span className="material-icons-outlined">
                                 payments
                             </span>
-                            {wallet.balance-state.eventPrice}
+                            {wallet.balance && wallet.balance-state.eventPrice}
+                            {!wallet.balance && 0}
                         </span>
                     </div>
                 </div>
             </div>
-            {wallet.balance-state.eventPrice < 0 && <span>Δεν εχετε αρκετό υπόλοιπο στον λογαριασμό σας</span>}
+            {(wallet.balance-state.eventPrice < 0 || !wallet.balance)  && <span>Δεν εχετε αρκετό υπόλοιπο στον λογαριασμό σας</span>}
             <div className="EventPage-PopupComplete-bottom">
                 <span className="EventPage-PopupComplete-bottom-recharge" onClick={()=>{
                     navigate("/my-profile")
