@@ -13,6 +13,13 @@ const paginationComponentOptions = {
 };
 const EventsPageAdmin = () => {
   let navigate = useNavigate();
+  const { role } = useSelector((state) => state.persistedReducer.global);
+  useEffect(() => {
+    if(role !== "admin"){
+      navigate("/")
+    }
+  }, [role])
+  
 
   const companyID = useSelector(
     (state) => state.persistedReducer.global.companyId
@@ -20,6 +27,7 @@ const EventsPageAdmin = () => {
   const userID = useSelector(
     (state) => state.persistedReducer.global.userId
   );
+  
 
   const [updateActive, { data, isError, isLoading, error: errorU, status }] =
   useUpdateActiveMutation();

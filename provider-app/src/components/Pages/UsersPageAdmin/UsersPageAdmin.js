@@ -1,6 +1,8 @@
 import "./UsersPageAdmin.css";
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const paginationComponentOptions = {
   rowsPerPageText: "Αποτελέσματα ανά σελίδα",
@@ -54,6 +56,13 @@ const columns = [
 ];
 
 const UsersPageAdmin = () => {
+  let navigate = useNavigate();
+  const { role } = useSelector((state) => state.persistedReducer.global);
+  useEffect(() => {
+    if(role !== "admin"){
+      navigate("/")
+    }
+  }, [role])
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
