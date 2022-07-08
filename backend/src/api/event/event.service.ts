@@ -81,8 +81,8 @@ export class EventService {
     const searchDatesPairs = this.getDatesPerInterval(
       new Date(query.startDate),
       new Date(query.endDate),
-      30,
-      // 60 * 60 * 24,
+      // 30,
+      60 * 60 * 24,
     );
 
     const { price } = await this.eventRepository.findOne(id);

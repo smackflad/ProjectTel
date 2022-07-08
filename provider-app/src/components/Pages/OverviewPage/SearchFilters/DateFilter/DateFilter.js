@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker, { Calendar } from "react-multi-date-picker";
+import {updateStats} from "../../../../../store/statsSlice";
 
 const DateCategories = [
   { item: "Οποτεδήποτε", value: 0 },
@@ -49,7 +50,11 @@ const DateFilter = ({}) => {
     setFinalStartDate(start);
     setFinalEndDate(endTemp);
     setCurr(1);
-    //TODO start, end has the dates we need to send to takis
+    const tempSD = new Date(start)
+    tempSD.setHours(3, 0, 0, 0);
+    const tempED = new Date(end)
+    tempED.setHours(3, 0, 0, 0);
+    dispatch(updateStats((state)=>{state.sD = tempSD.toISOString(); state.eD = tempED.toISOString();}));
   };
 
   var checkedItems = () => {
